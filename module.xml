@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Module name="wireless_system_pic32mzw1_wfi32e01" id="5bf6a160-7ce7-11eb-9439-0242ac130002" version="3.4.0">
+<Module name="wireless_system_pic32mzw1_wfi32e01" id="5bf6a160-7ce7-11eb-9439-0242ac130002" version="3.4.1">
     <ConfigRoot path="config/module.py"/>
 </Module>
