@@ -761,7 +761,7 @@ uint8_t SYS_WIFI_Tasks (SYS_MODULE_OBJ object);
             memcpy(wifiSrvcConfig.staConfig.psk, WIFI_DEV_PSK, sizeof(WIFI_DEV_PSK));
 
             // sysObj.syswifi return from SYS_WIFI_Initialize() 
-            if (SYS_WIFI_OBJ_INVALID != SYS_WIFI_CtrlMsg (sysObj.syswifi, SYS_WIFI_CONNECT, wifiSrvcConfig, sizeof(SYS_WIFI_CONFIG)))
+            if (SYS_WIFI_OBJ_INVALID != SYS_WIFI_CtrlMsg (sysObj.syswifi, SYS_WIFI_CONNECT, &wifiSrvcConfig, sizeof(SYS_WIFI_CONFIG)))
             {
             
             }
