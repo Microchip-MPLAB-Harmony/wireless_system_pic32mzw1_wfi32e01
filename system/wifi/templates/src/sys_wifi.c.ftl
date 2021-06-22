@@ -214,7 +214,7 @@ static inline void SYS_WIFI_InitConfig
            Copy the MHC configuration into Wi-Fi Service structure */
         g_wifiSrvcConfig.mode = SYS_WIFI_DEVMODE;
         g_wifiSrvcConfig.saveConfig = 0;
-        memcpy(g_wifiSrvcConfig.countrycode, SYS_WIFI_COUNTRYCODE, strlen(SYS_WIFI_COUNTRYCODE));
+        memcpy(g_wifiSrvcConfig.countryCode, SYS_WIFI_COUNTRYCODE, strlen(SYS_WIFI_COUNTRYCODE));
 <#if SYS_WIFI_STA_ENABLE == true>
 
         /* STA Mode Configuration */
@@ -1108,12 +1108,22 @@ static uint32_t SYS_WIFI_ExecuteBlock
 ) 
 {
     SYS_STATUS                   tcpIpStat;
+<#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
+     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true)>
     static TCPIP_NET_HANDLE      netHdl;
+</#if>
     SYS_WIFI_OBJ *               wifiSrvcObj = (SYS_WIFI_OBJ *) object;
+<#if SYS_WIFI_PROVISION_ENABLE == true>
     uint8_t                      ret =  SYS_WIFIPROV_OBJ_INVALID;
+<#else>
+    uint8_t                      ret =  SYS_WIFI_OBJ_INVALID;
+</#if>
+
 <#if SYS_WIFI_AP_ENABLE == true>
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
     IPV4_ADDR                    apLastIp = {-1};
     IPV4_ADDR                    apIpAddr;
+</#if>
 </#if>
  
     if (&g_wifiSrvcObj == (SYS_WIFI_OBJ*) wifiSrvcObj)
@@ -1207,9 +1217,12 @@ static uint32_t SYS_WIFI_ExecuteBlock
                     } 
                     else if (tcpIpStat == SYS_STATUS_READY) 
                     {
+<#if (SYS_WIFI_STA_ENABLE == true) && (SYS_WIFI_AP_ENABLE == true)>                  
+<#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
+     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true)>
                         /* PIC32MZW1 network handle*/
                         netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
-<#if (SYS_WIFI_STA_ENABLE == true) && (SYS_WIFI_AP_ENABLE == true)>                  
+</#if>
 <#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
 <#if (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true>
                         /* STA Mode */
@@ -1236,6 +1249,11 @@ static uint32_t SYS_WIFI_ExecuteBlock
 </#if>
 </#if>
 <#elseif SYS_WIFI_STA_ENABLE == true>
+<#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
+     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true)>
+                        /* PIC32MZW1 network handle*/
+                        netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
+</#if>
 <#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
                         /* STA Mode*/
                         if (true == TCPIP_DHCPS_IsEnabled(netHdl)) 
@@ -1249,6 +1267,11 @@ static uint32_t SYS_WIFI_ExecuteBlock
                             g_wifiSrvcDhcpHdl= TCPIP_DHCP_HandlerRegister (netHdl, SYS_WIFI_TCPIP_DHCP_EventHandler, NULL);
                         }
 <#elseif SYS_WIFI_AP_ENABLE == true>
+<#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
+     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true)>
+                        /* PIC32MZW1 network handle*/
+                        netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
+</#if>
 <#if (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true>
                         /* AP Mode*/
                         if (true == TCPIP_DHCP_IsEnabled(netHdl)) 
@@ -1256,8 +1279,10 @@ static uint32_t SYS_WIFI_ExecuteBlock
                             TCPIP_DHCP_Disable(netHdl);
                         }
 </#if>
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
                         /* Enable DHCP Server in AP mode */
                         TCPIP_DHCPS_Enable(netHdl);
+</#if>
 </#if>
                     }                
                     wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_CONNECT_REQ;
@@ -1281,7 +1306,11 @@ static uint32_t SYS_WIFI_ExecuteBlock
 <#elseif SYS_WIFI_STA_ENABLE == true>
                                 wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_TCPIP_READY;
 <#elseif SYS_WIFI_AP_ENABLE == true>
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
                                 wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_WAIT_FOR_AP_IP;
+<#else>
+                                wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_TCPIP_READY;
+</#if>
 </#if>
                             }
                         }
@@ -1291,7 +1320,7 @@ static uint32_t SYS_WIFI_ExecuteBlock
                 break;
             }
 <#if SYS_WIFI_AP_ENABLE == true>
-
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
             case SYS_WIFI_STATUS_WAIT_FOR_AP_IP:
             {
                 apIpAddr.Val = TCPIP_STACK_NetAddress(netHdl);
@@ -1344,6 +1373,7 @@ static uint32_t SYS_WIFI_ExecuteBlock
                 }
                 break;
             }
+</#if>
 </#if>
 
             case SYS_WIFI_STATUS_TCPIP_READY:
