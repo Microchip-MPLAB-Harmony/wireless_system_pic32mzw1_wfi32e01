@@ -1,6 +1,6 @@
 # coding: utf-8
 """*****************************************************************************
-Copyright (C) 2020 released Microchip Technology Inc.  All rights reserved.
+Copyright (C) 2020-2021 released Microchip Technology Inc.  All rights reserved.
 
 Microchip licenses to you the right to use, modify, copy and distribute
 Software only when embedded on a Microchip microcontroller or digital signal
@@ -263,6 +263,26 @@ def instantiateComponent(mqttComponent):
 
     print("Mqtt Service Component Header Path %s", mqttHeaderFile.getProjectPath())
 	
+    mqttAppSourceFile = mqttComponent.createFileSymbol("APP_MQTT_SOURCE", None)
+    mqttAppSourceFile.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app_mqtt.c.ftl")
+    mqttAppSourceFile.setOutputName("app_mqtt.c")
+    mqttAppSourceFile.setDestPath("../../")
+    mqttAppSourceFile.setProjectPath("")
+    mqttAppSourceFile.setType("SOURCE")
+    mqttAppSourceFile.setMarkup(True)
+    mqttAppSourceFile.setEnabled(True)
+    mqttAppSourceFile.setOverwrite(True)
+
+    mqttAppHeaderFile = mqttComponent.createFileSymbol("APP_MQTT_HEADER", None)
+    mqttAppHeaderFile.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app_mqtt.h.ftl")
+    mqttAppHeaderFile.setOutputName("app_mqtt.h")
+    mqttAppHeaderFile.setDestPath("../../")
+    mqttAppHeaderFile.setProjectPath("")
+    mqttAppHeaderFile.setType("HEADER")
+    mqttAppHeaderFile.setMarkup(True)
+    mqttAppHeaderFile.setEnabled(True)
+    mqttAppHeaderFile.setOverwrite(True)
+
     mqttSourceFile = mqttComponent.createFileSymbol("SYS_MQTT_SOURCE", None)
     mqttSourceFile.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/src/sys_mqtt.c")
     mqttSourceFile.setOutputName("sys_mqtt.c")
@@ -357,6 +377,9 @@ def mqttIntfAutoMenu(symbol, event):
 def finalizeComponent(mqttComponent):
     res = Database.activateComponents(["sysNetPic32mzw1"])
     res = Database.activateComponents(["lib_pahomqtt"],"System Component", True)
+    Hccomponent = Database.getComponentByID("HarmonyCore")
+    fileSymb = Hccomponent.getSymbolByID("APP0_C")
+    fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
 #    res = Database.activateComponents(["sysAppDebugPic32mzw1"],"System Component", True)
 	
 #    if(Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_APPDEBUG_ENABLE") == True):
