@@ -1188,6 +1188,7 @@ static SYS_WIFI_RESULT SYS_WIFI_ConfigReq(void)
 
     if (SYS_WIFI_CONFIG_FAILURE == ret) 
     {
+        SYS_CONSOLE_MESSAGE("Error:Enter valid Wi-Fi configuration\r\n");
         SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_CONFIG_ERROR);
     }
 

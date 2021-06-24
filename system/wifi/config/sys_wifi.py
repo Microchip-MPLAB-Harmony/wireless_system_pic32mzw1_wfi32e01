@@ -58,7 +58,7 @@ def instantiateComponent(syswifiComponent):
     syswifistaSsid = syswifiComponent.createStringSymbol("SYS_WIFI_STA_SSID_NAME", syswifistaEnable)
     syswifistaSsid.setLabel("SSID")
     syswifistaSsid.setVisible(True)
-    syswifistaSsid.setDescription("Enter STA Mode SSID")
+    syswifistaSsid.setDescription("Enter STA Mode SSID.The maximum length is 32 characters.")
     syswifistaSsid.setDefaultValue("DEMO_AP")
 
     syswifistaAuth = syswifiComponent.createComboSymbol("SYS_WIFI_STA_AUTH", syswifistaEnable, ["OPEN", "WPA2","WPA2WPA3","WPA3"])
@@ -69,7 +69,7 @@ def instantiateComponent(syswifiComponent):
     syswifistaPwd = syswifiComponent.createStringSymbol("SYS_WIFI_STA_PWD_NAME", syswifistaEnable)
     syswifistaPwd.setLabel("Password")
     syswifistaPwd.setVisible(True)
-    syswifistaPwd.setDescription("Enter STA Mode Password")
+    syswifistaPwd.setDescription("Enter STA Mode Password.WPA2/WPA3 - Maximum key length is 63 characters.Minimum key length is 8 characters.")
     syswifistaPwd.setDefaultValue("password")
     syswifistaPwd.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_STA_AUTH"])
 
@@ -89,7 +89,7 @@ def instantiateComponent(syswifiComponent):
     syswifiapSsid = syswifiComponent.createStringSymbol("SYS_WIFI_AP_SSID_NAME", syswifiapEnable)
     syswifiapSsid.setLabel("SSID")
     syswifiapSsid.setVisible(True)
-    syswifiapSsid.setDescription("Enter AP Mode SSID")
+    syswifiapSsid.setDescription("Enter AP Mode SSID.The maximum length is 32 characters")
     syswifiapSsid.setDefaultValue("DEMO_AP_SOFTAP")
 
     syswifiapAuth = syswifiComponent.createComboSymbol("SYS_WIFI_AP_AUTH", syswifiapEnable, ["OPEN", "WPA2","WPAWPA2(Mixed)","WPA2WPA3","WPA3"])
@@ -100,7 +100,7 @@ def instantiateComponent(syswifiComponent):
     syswifiapPwd = syswifiComponent.createStringSymbol("SYS_WIFI_AP_PWD_NAME", syswifiapEnable)
     syswifiapPwd.setLabel("Password")
     syswifiapPwd.setVisible(True)
-    syswifiapPwd.setDescription("Enter AP Mode Password")
+    syswifiapPwd.setDescription("Enter AP Mode Password.WPA2/WPA3 - Maximum key length is 63 characters.Minimum key length is 8 characters.")
     syswifiapPwd.setDefaultValue("password")
     syswifiapPwd.setDependencies(syswifiAPSecurityMenu, ["SYS_WIFI_AP_AUTH"])
 
@@ -202,7 +202,7 @@ def instantiateComponent(syswifiComponent):
     syswifiDebugConnectFlow.setLabel("Enable WiFi Connect Flow")
     syswifiDebugConnectFlow.setDefaultValue(False)
     syswifiDebugConnectFlow.setVisible(True)
-	
+
     syswifiDebugProvFlow = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_PROVISIONING_FLOW", syswifiDebugFlowBasicMenu)
     syswifiDebugProvFlow.setLabel("Enable WiFi Provisioning Flow")
     syswifiDebugProvFlow.setDefaultValue(False)
