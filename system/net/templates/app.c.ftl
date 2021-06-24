@@ -23,44 +23,14 @@
     files.
  *******************************************************************************/
 
-/*******************************************************************************
-Copyright (C) 2021 released Microchip Technology Inc.  All rights reserved.
-
-Microchip licenses to you the right to use, modify, copy and distribute
-Software only when embedded on a Microchip microcontroller or digital signal
-controller that is integrated into your product or third party product
-(pursuant to the sublicense terms in the accompanying license agreement).
-
-You should refer to the license agreement accompanying this Software for
-additional information regarding your rights and obligations.
-
-SOFTWARE AND DOCUMENTATION ARE PROVIDED AS IS WITHOUT WARRANTY OF ANY KIND,
-EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION, ANY WARRANTY OF
-MERCHANTABILITY, TITLE, NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
-IN NO EVENT SHALL MICROCHIP OR ITS LICENSORS BE LIABLE OR OBLIGATED UNDER
-CONTRACT, NEGLIGENCE, STRICT LIABILITY, CONTRIBUTION, BREACH OF WARRANTY, OR
-OTHER LEGAL EQUITABLE THEORY ANY DIRECT OR INDIRECT DAMAGES OR EXPENSES
-INCLUDING BUT NOT LIMITED TO ANY INCIDENTAL, SPECIAL, INDIRECT, PUNITIVE OR
-CONSEQUENTIAL DAMAGES, LOST PROFITS OR LOST DATA, COST OF PROCUREMENT OF
-SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
-(INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF), OR OTHER SIMILAR COSTS.
- *******************************************************************************/
-
 // *****************************************************************************
 // *****************************************************************************
 // Section: Included Files
 // *****************************************************************************
 // *****************************************************************************
 
-#include "definitions.h"
 #include "${APP_TASK_NAME?lower_case}.h"
-#include "app_mqtt.h"
-
-#ifdef SYS_MQTT_DEF_PUB_TOPIC_NAME
-#include "system/mqtt/sys_mqtt.h"
-#include "system/sys_time_h2_adapter.h"
-#include "string.h"
-#endif
+#include "system/net/sys_net.h"
 
 // *****************************************************************************
 // *****************************************************************************
@@ -68,12 +38,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-#ifdef SYS_MQTT_DEF_PUB_TOPIC_NAME
-static uint32_t     g_lastPubTimeout = 0;
-#define MQTT_PERIOIDC_PUB_TIMEOUT   30 //Sec ; if the value is 0, Periodic Publish will disable
-#define MQTT_PUB_TIMEOUT_CONST (MQTT_PERIOIDC_PUB_TIMEOUT * SYS_TMR_TickCounterFrequencyGet())
-#endif
-
+SYS_MODULE_OBJ      g_netSysServHandle = SYS_MODULE_OBJ_INVALID;
 
 // *****************************************************************************
 /* Application Data
@@ -100,52 +65,73 @@ ${APP_TASK_NAME?upper_case}_DATA ${APP_TASK_NAME?lower_case}Data;
 
 /* TODO:  Add any necessary callback functions.
 */
+void netSysServCallback(uint32_t event, void *data, void* cookie)
+{
+    switch(event)
+    {
+        case SYS_NET_EVNT_CONNECTED:
+        {
+			/*
+            ** SYS_CONSOLE_PRINT("netSysServCallback(): Status UP\r\n");
+			*/
+            break;
+        }
+
+        case SYS_NET_EVNT_DISCONNECTED:
+        {
+			/*
+            ** SYS_CONSOLE_PRINT("netSysServCallback(): Status DOWN\r\n");
+			*/
+            break;
+        }
+
+        case SYS_NET_EVNT_RCVD_DATA:
+        {
+			/*
+            ** char networkBuffer[256];
+            ** memset(networkBuffer, 0, sizeof (networkBuffer));
+            ** SYS_NET_RecvMsg(g_tcpSrvcHandle, (uint8_t*) networkBuffer, sizeof (networkBuffer));
+			*/
+            break;
+        }
+
+        case SYS_NET_EVNT_SSL_FAILED:
+        {
+			/*
+            ** SYS_CONSOLE_PRINT("netSysServCallback(): SSL Negotiation Failed\r\n");
+            */
+			break;
+        }
+
+        case SYS_NET_EVNT_DNS_RESOLVE_FAILED:
+        {
+            /*
+			** SYS_CONSOLE_PRINT("netSysServCallback(): DNS Resolution Failed\r\n");
+            */
+			break;
+        }
+
+        case SYS_NET_EVNT_SOCK_OPEN_FAILED:
+        {
+            /*
+			** SYS_CONSOLE_PRINT("netSysServCallback(): Socket Open Failed\r\n");
+			*/
+            break;
+        }
+    }
+}
+
 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Application Local Functions
 // *****************************************************************************
 // *****************************************************************************
-#ifdef SYS_MQTT_DEF_PUB_TOPIC_NAME
-
-void ${APP_TASK_NAME?upper_case}_CheckTimeOut(uint32_t timeOutValue, uint32_t lastTimeOut)
-{
-    if(timeOutValue == 0)
-	{
-        return ;
-	}
-    
-	if(SYS_MQTT_STATUS_MQTT_CONNECTED != APP_MQTT_GetStatus(NULL))
-	{
-		return;
-	}
-	
-	if(lastTimeOut == 0)
-	{
-		g_lastPubTimeout = SYS_TMR_TickCountGet();
-		return;
-	}
-	
-    if (SYS_TMR_TickCountGet() - lastTimeOut > timeOutValue)
-	{
-		char message[32] = {0};
-		static uint32_t     PubMsgCnt = 0;
-		
-		sprintf(message, "message_%d\r\n", PubMsgCnt);
-		if (APP_MQTT_PublishMsg(message)== SYS_MQTT_SUCCESS)
-		{
-            SYS_CONSOLE_PRINT("\nPublished Msg(%d) to Topic\r\n", PubMsgCnt); 
-			PubMsgCnt++;
-		}
-		
-		g_lastPubTimeout = SYS_TMR_TickCountGet(); 
-	}
-}
-#endif
 
 
 /* TODO:  Add any necessary local functions.
 */
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -164,14 +150,16 @@ void ${APP_TASK_NAME?upper_case}_CheckTimeOut(uint32_t timeOutValue, uint32_t la
 void ${APP_TASK_NAME?upper_case}_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_INIT_DONE;
+    ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_INIT;
 
 
 
     /* TODO: Initialize your application's state machine and other
      * parameters.
      */
-	 APP_MQTT_Initialize();
+    g_netSysServHandle = SYS_NET_Open(NULL, netSysServCallback, 0); 
+    if(g_netSysServHandle != SYS_MODULE_OBJ_INVALID)
+        SYS_CONSOLE_PRINT("TCP Service Initialized Successfully\r\n");
 }
 
 
@@ -185,20 +173,28 @@ void ${APP_TASK_NAME?upper_case}_Initialize ( void )
 
 void ${APP_TASK_NAME?upper_case}_Tasks ( void )
 {
+
     /* Check the application's current state. */
     switch ( ${APP_TASK_NAME?lower_case}Data.state )
     {
         /* Application's initial state. */
-        case ${APP_TASK_NAME?upper_case}_STATE_INIT_DONE:
+        case ${APP_TASK_NAME?upper_case}_STATE_INIT:
         {
-			${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS;
+			/*
+			** TODO: Implement the Task State Machine
+			** ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS;
+			*/
             break;
         }
 
+		/*
+		** TODO: Implement various cases/ states for the Application
         case ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS:
         {
+
             break;
         }
+		*/
 
         /* TODO: implement your application state machine.*/
 
@@ -211,10 +207,8 @@ void ${APP_TASK_NAME?upper_case}_Tasks ( void )
         }
     }
 
-	APP_MQTT_Tasks(); 
-#ifdef SYS_MQTT_DEF_PUB_TOPIC_NAME		
-	${APP_TASK_NAME?upper_case}_CheckTimeOut(MQTT_PUB_TIMEOUT_CONST, g_lastPubTimeout);
-#endif
+	SYS_CMD_READY_TO_READ();
+	SYS_NET_Task(g_netSysServHandle);
 }
 
 

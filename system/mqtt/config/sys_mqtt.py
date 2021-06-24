@@ -380,6 +380,8 @@ def finalizeComponent(mqttComponent):
     Hccomponent = Database.getComponentByID("HarmonyCore")
     fileSymb = Hccomponent.getSymbolByID("APP0_C")
     fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
+    fileSymb = Hccomponent.getSymbolByID("APP0_H")
+    fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.h.ftl")
 #    res = Database.activateComponents(["sysAppDebugPic32mzw1"],"System Component", True)
 	
 #    if(Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_APPDEBUG_ENABLE") == True):

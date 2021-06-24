@@ -353,6 +353,9 @@ def finalizeComponent(netComponent):
 
     res = Database.activateComponents(["sysWifiPic32mzw1"])
     res = Database.activateComponents(["netPres"],"System Component", True)
+    Hccomponent = Database.getComponentByID("HarmonyCore")
+    fileSymb = Hccomponent.getSymbolByID("APP0_C")
+    fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/net/templates/app.c.ftl")
 
     # Enable dependent Harmony core components
     if (Database.getSymbolValue("HarmonyCore", "ENABLE_SYS_COMMON") == False):

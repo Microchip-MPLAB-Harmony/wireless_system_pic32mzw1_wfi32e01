@@ -8,11 +8,11 @@
     app.c
 
   Summary:
-    This file contains the source code for the MPLAB Harmony application.
+    This file contains the source code for the MPLAB Harmony MQTT application.
 
   Description:
-    This file contains the source code for the MPLAB Harmony application.  It
-    implements the logic of the application's state machine and it may call
+    This file contains the source code for the MPLAB Harmony MQTT application.
+    It implements the logic of the application's state machine and it may call
     API routines of other MPLAB Harmony modules in the system, such as drivers,
     system services, and middleware.  However, it does not call any of the
     system interfaces (such as the "Initialize" and "Tasks" functions) of any of
