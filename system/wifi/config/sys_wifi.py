@@ -127,7 +127,7 @@ def instantiateComponent(syswifiComponent):
     syswificountrycode = syswifiComponent.createComboSymbol("SYS_WIFI_COUNTRYCODE", syswifiAdvMenu, ["GEN", "USA", "EMEA", "CUST1", "CUST2"])
     syswificountrycode.setLabel("Country Code")
     syswificountrycode.setDefaultValue("GEN")
-    syswificountrycode.setDescription("Enable Country Code")
+    syswificountrycode.setDescription("Enable Country Code. \n Support channels per Country code: \n GEN - 1 to 13, \n USA - 1 to 11, \n EMEA - 1 to 11, \n CUST1,CUST2 - Dependent on user configuration")
     syswificountrycode.setDependencies(syswifiMenuVisible, ["SYS_WIFI_ENABLE"])
 
     syswifiCB = syswifiComponent.createIntegerSymbol("SYS_WIFI_MAX_CBS", syswifiAdvMenu)
