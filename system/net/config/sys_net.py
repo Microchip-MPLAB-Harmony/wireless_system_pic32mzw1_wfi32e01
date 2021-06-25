@@ -247,7 +247,15 @@ def instantiateComponent(netComponent):
 	############################################################################
 #### Dependency ####
 ############################################################################
-
+#Set symbols of other components
+def setVal(component, symbol, value):
+    triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
+    if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
+        print "Set Symbol Failure" + component + ":" + symbol + ":" + str(value)
+        return False
+    else:
+        return True
+        
 def netDebugMenuVisible(symbol, event):
     if (event["value"] == True):
         print("Debug Log Menu Visible")
@@ -294,24 +302,12 @@ def netIntfAutoMenu(symbol, event):
 def netTLSautoMenu(symbol, event):
     if (event["value"] == True):
         res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
-        res = Database.activateComponents(["tcpipSntp"],"System Component", True)
-        autoConnectTableWolfSSLcrypto = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
-        res = Database.connectDependencies(autoConnectTableWolfSSLcrypto)
-        Database.setSymbolValue("netPres_0", "NET_PRES_SUPPORT_ENCRYPTION0", True)
-        Database.setSymbolValue("netPres_0", "NET_PRES_ENC_PROVIDE_IDX0", 0)
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_CERT", 0)
-        Database.setSymbolValue("netPres", "NET_PRES_RTOS_STACK_SIZE", 20480)
-        Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_SUPPORT", True)
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_CERT_FILENAME", "wolfssl/certs_test.h")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_CERT_VARIABLE", "client_cert_der_2048")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_CERT_LEN_VARIABLE", "sizeof_client_cert_der_2048")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_SUPPORT", True)
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_CERT_FILENAME", "wolfssl/certs_test.h")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_CERT_VARIABLE", "server_cert_der_2048")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_CERT_LEN_VARIABLE", "sizeof_server_cert_der_2048")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_KEY_FILENAME", "wolfssl/certs_test.h")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_KEY_VARIABLE", "server_key_der_2048")
-        # Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_KEY_LEN_VARIABLE", "sizeof_server_key_der_2048")
+#        res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
+#        res = Database.activateComponents(["tcpipSntp"],"System Component", True)
+#        autoConnectTableWolfSSLcrypto = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
+#        res = Database.connectDependencies(autoConnectTableWolfSSLcrypto)
+        setVal("net_Pres", "NET_PRES_SUPPORT_ENCRYPTION", True)
+        setVal("net_Pres", "NET_PRES_ENC_PROVIDE", 0)
         Database.setSymbolValue("lib_wolfssl", "wolfsslDTLS", False)
         Database.setSymbolValue("lib_wolfssl", "wolfsslTLS13", True)
         Database.setSymbolValue("lib_wolfssl", "wolfsslHkdf", True)
@@ -334,17 +330,24 @@ def netTLSautoMenu(symbol, event):
         Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_rsaPss", True)
         Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_dh", True)
         Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_keygen", False)
+        systemComponentGroup = Database.findGroup("System Component")
+        if (systemComponentGroup != None):
+            res=systemComponentGroup.addComponent("lib_wolfssl")
+            autoConnectTableWolfSSLcrypto = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
+            res = Database.connectDependencies(autoConnectTableWolfSSLcrypto)
+                
         # Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_errorstrings", True)
         # Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_debug", True)
-        if (Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):
-            Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "FreeRTOS")
-        else:
-            Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "Single Threaded")
+#        if (Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):
+#            Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "FreeRTOS")
+#        else:
+#            Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "Single Threaded")
     else:
-        Database.setSymbolValue("netPres_0", "NET_PRES_SUPPORT_ENCRYPTION0", False)
-        Database.setSymbolValue("netPres_0", "NET_PRES_ENC_PROVIDE_IDX0", 0)
-        res = Database.deactivateComponents(["lib_wolfssl"])
-        res = Database.deactivateComponents(["tcpipSntp"])
+#        Database.setSymbolValue("net_Pres", "NET_PRES_SUPPORT_ENCRYPTION", False)
+#        res = Database.deactivateComponents(["lib_wolfssl"])
+        setVal("net_Pres", "NET_PRES_SUPPORT_ENCRYPTION", False)
+#        res = Database.deactivateComponents(["tcpipSntp"])
+
 
 def finalizeComponent(netComponent):
     #Database.setSymbolValue("core", "XC32_HEAP_SIZE", 160000)
@@ -352,7 +355,7 @@ def finalizeComponent(netComponent):
     triggerDict = Database.sendMessage("core", "HEAP_SIZE", {"heap_size" : 160000})
 
     res = Database.activateComponents(["sysWifiPic32mzw1"])
-    res = Database.activateComponents(["netPres"],"System Component", True)
+    res = Database.activateComponents(["net_Pres"],"System Component", True)
     Hccomponent = Database.getComponentByID("HarmonyCore")
     fileSymb = Hccomponent.getSymbolByID("APP0_C")
     fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/net/templates/app.c.ftl")
@@ -368,12 +371,22 @@ def finalizeComponent(netComponent):
 
     if (Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):
         Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "FreeRTOS")
+        setVal("net_Pres", "NET_PRES_RTOS_STACK_SIZE", 20480)
         #Database.setSymbolValue("sys_command", "SYS_COMMAND_RTOS_STACK_SIZE", 4096)
         #Database.setSymbolValue("FreeRTOS", "FREERTOS_MEMORY_MANAGEMENT_CHOICE", "Heap_3")
     else:
         Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "Single Threaded")
 		
-#    Database.setSymbolValue("tcpipStack", "TCPIP_STACK_DRAM_SIZE", 80000)
-#    Database.setSymbolValue("core", "RNG_CLOCK_ENABLE", True)
-#    Database.setSymbolValue("core", "CRYPTO_CLOCK_ENABLE", True)
-
+    
+    
+#Handle messages from other components
+def handleMessage(messageID, args):
+    retDict= {}
+    if (messageID == "SET_SYMBOL"):
+        print "handleMessage: Set Symbol"
+        retDict= {"Return": "Success"}
+        Database.setSymbolValue(args["Component"], args["Id"], args["Value"])
+    else:
+        retDict= {"Return": "UnImplemented Command"}
+    return retDict
+    
