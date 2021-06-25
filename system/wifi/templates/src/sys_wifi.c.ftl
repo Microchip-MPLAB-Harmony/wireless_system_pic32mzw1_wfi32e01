@@ -229,6 +229,7 @@ static WDRV_PIC32MZW_ASSOC_HANDLE SYS_WIFI_StaConnAssocIdFromMAC(uint8_t *macAdd
     }
     return WDRV_PIC32MZW_ASSOC_HANDLE_INVALID;
 }
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
 static uint8_t SYS_WIFI_StaConnIdx()
 {
     uint8_t idx = 0;
@@ -243,6 +244,7 @@ static uint8_t SYS_WIFI_StaConnIdx()
     }
     return SYS_WIFI_OBJ_INVALID;
 }
+</#if>
 </#if>
 
 static inline void SYS_WIFI_CallBackFun
@@ -532,7 +534,7 @@ static inline void SYS_WIFI_PrintConfig(void)
 
 }
 <#if SYS_WIFI_AP_ENABLE == true>
-
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
 static void SYS_WIFI_WaitForConnSTAIP(uintptr_t context)
 {
     TCPIP_NET_HANDLE netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
@@ -558,7 +560,7 @@ static void SYS_WIFI_WaitForConnSTAIP(uintptr_t context)
 
     SYS_TIME_CallbackRegisterMS(SYS_WIFI_WaitForConnSTAIP, context, 500, SYS_TIME_SINGLE);
 }
-
+</#if>
 static void SYS_WIFI_APConnCallBack
 (
     DRV_HANDLE handle, 
@@ -586,7 +588,9 @@ static void SYS_WIFI_APConnCallBack
                     {
                         g_wifiSrvcStaConnInfo[idx].wifiSrvcAssocHandle = assocHandle;
                         memcpy(&g_wifiSrvcStaConnInfo[idx].wifiSrvcStaAppInfo.macAddr, wifiSrvcStaConnMac.addr, WDRV_PIC32MZW_MAC_ADDR_LEN);
+<#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
                         SYS_TIME_CallbackRegisterMS(SYS_WIFI_WaitForConnSTAIP, (uintptr_t)&g_wifiSrvcStaConnInfo[idx], 500, SYS_TIME_SINGLE);
+</#if>
                         break;
                     }
                 }
