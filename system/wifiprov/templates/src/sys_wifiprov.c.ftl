@@ -644,6 +644,7 @@ static int SYS_WIFIPROV_CMDProcess
             wifiProvSrvcConfig.apConfig.channel = strtol(argv[5], NULL, 0);
             wifiProvSrvcConfig.apConfig.ssidVisibility = strtol(argv[6], NULL, 0);
             wifiProvSrvcConfig.apConfig.authType = strtol(argv[7], NULL, 0);
+            len = strlen((const char *) argv[8])+1;
             if (len <= sizeof (wifiProvSrvcConfig.apConfig.ssid)) 
             {
                 strncpy((char *)wifiProvSrvcConfig.apConfig.ssid,argv[8],len);
@@ -761,6 +762,7 @@ static int SYS_WIFIPROV_CMDProcess
             wifiProvSrvcConfig.apConfig.channel = strtol(argv[5], NULL, 0);
             wifiProvSrvcConfig.apConfig.ssidVisibility = strtol(argv[6], NULL, 0);
             wifiProvSrvcConfig.apConfig.authType = strtol(argv[7], NULL, 0);
+            len = strlen((const char *) argv[8])+1;
             if (len <= sizeof (wifiProvSrvcConfig.apConfig.ssid)) 
             {
                 strncpy((char *)wifiProvSrvcConfig.apConfig.ssid,argv[8],len);
