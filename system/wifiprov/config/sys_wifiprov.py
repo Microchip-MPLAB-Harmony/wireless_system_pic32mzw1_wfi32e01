@@ -484,6 +484,10 @@ def syswifiprovHTTPMenuVisible(symbol, event):
           res = Database.deactivateComponents(["lib_wolfssl"])
         symbol.setValue(False,2)
 
+def finalizeComponent(component):
+    if(Database.getComponentByID("sys_command") != None):
+       Database.setSymbolValue("sys_command", "SYS_COMMAND_MAX_CMD_ARGS", 10)
+
 def destroyComponent(component):
     setVal("sysWifiPic32mzw1", "SYS_WIFI_PROVISION_ENABLE", False)
     if(Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_HTTP") == True):
