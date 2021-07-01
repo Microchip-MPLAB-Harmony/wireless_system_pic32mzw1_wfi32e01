@@ -345,6 +345,25 @@ def instantiateComponent(syswifiComponent):
 ############################################################################
 #### Dependency ####
 ############################################################################
+#Set symbols of other components
+def setVal(component, symbol, value):
+    triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
+    if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
+        print "Set Symbol Failure" + component + ":" + symbol + ":" + str(value)
+        return False
+    else:
+        return True
+
+#Handle messages from other components
+def handleMessage(messageID, args):
+    retDict= {}
+    if (messageID == "SET_SYMBOL"):
+        print "handleMessage: Set Symbol"
+        retDict= {"Return": "Success"}
+        Database.setSymbolValue(args["Component"], args["Id"], args["Value"])
+    else:
+        retDict= {"Return": "UnImplemented Command"}
+    return retDict
 
 def onAttachmentConnected(source, target):
     localComponent = source["component"]
@@ -487,9 +506,12 @@ def syswifiAPautoMenu(symbol, event):
 def syswifiprovMenuVisible(symbol, event):
     if (event["value"] == True):
         if(Database.getComponentByID("sysWifiProvPic32mzw1") == None):    
-                res = Database.activateComponents(["sysWifiProvPic32mzw1"])
+            res = Database.activateComponents(["sysWifiProvPic32mzw1"])
+            setVal("sysWifiPic32mzw1", "SYS_WIFI_PROVISION_ENABLE", True)
     else:
-        res = Database.deactivateComponents(["sysWifiProvPic32mzw1"])
+        if(Database.getComponentByID("sysWifiProvPic32mzw1") != None):
+            res = Database.deactivateComponents(["sysWifiProvPic32mzw1"])
+            setVal("sysWifiPic32mzw1", "SYS_WIFI_PROVISION_ENABLE", False)
 
 def syswifiRTOSTaskDelayMenu(symbol, event):
     sysWiFiRtos = Database.getSymbolValue("sysWifiPic32mzw1","SYS_WIFI_RTOS")

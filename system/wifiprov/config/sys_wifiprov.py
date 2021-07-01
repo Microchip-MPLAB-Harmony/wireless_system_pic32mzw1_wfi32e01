@@ -260,6 +260,25 @@ def instantiateComponent(syswifiprovComponent):
 #### Dependency ####
 ############################################################################
 
+def setVal(component, symbol, value):
+    triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
+    if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
+        print "Set Symbol Failure" + component + ":" + symbol + ":" + str(value)
+        return False
+    else:
+        return True
+
+#Handle messages from other components
+def handleMessage(messageID, args):
+    retDict= {}
+    if (messageID == "SET_SYMBOL"):
+        print "handleMessage: Set Symbol"
+        retDict= {"Return": "Success"}
+        Database.setSymbolValue(args["Component"], args["Id"], args["Value"])
+    else:
+        retDict= {"Return": "UnImplemented Command"}
+    return retDict
+
 def onAttachmentConnected(source, target):
     localComponent = source["component"]
     remoteComponent = target["component"]
@@ -466,6 +485,7 @@ def syswifiprovHTTPMenuVisible(symbol, event):
         symbol.setValue(False,2)
 
 def destroyComponent(component):
+    setVal("sysWifiPic32mzw1", "SYS_WIFI_PROVISION_ENABLE", False)
     if(Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_HTTP") == True):
       res = Database.deactivateComponents(["drv_memory"])
       res = Database.deactivateComponents(["sys_fs"])
@@ -476,3 +496,4 @@ def destroyComponent(component):
         res = Database.deactivateComponents(["netPres"])
         res = Database.deactivateComponents(["lib_wolfssl"])
         res = Database.deactivateComponents(["tcpipHttpNet"])
+    
