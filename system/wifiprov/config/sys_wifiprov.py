@@ -51,7 +51,7 @@ def instantiateComponent(syswifiprovComponent):
     syswifiprovNvmAdd.setLabel("WiFi Configuration Stored At NVM Address")
     syswifiprovNvmAdd.setVisible(True)
     syswifiprovNvmAdd.setDescription("Enter 4KB Aligned NVM Address for storing WiFi Configuration")
-    syswifiprovNvmAdd.setDefaultValue("0x900F0000")
+    syswifiprovNvmAdd.setDefaultValue("90010000")
 
     syswifiprovstaEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_STA_ENABLE", None)
     syswifiprovstaEnable.setVisible(False)
@@ -394,7 +394,7 @@ def syswifiprovHTTPMenuVisible(symbol, event):
         if(Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_ENABLE_HTTPNET") == False and (Database.getComponentByID("tcpipHttp") == None)):
             if (Database.getComponentByID("tcpipHttpNet") != None):
               res = Database.deactivateComponents(["tcpipSntp"])
-              res = Database.deactivateComponents(["netPres"])
+              res = Database.deactivateComponents(["net_Pres"])
               res = Database.deactivateComponents(["lib_wolfssl"])
               res = Database.deactivateComponents(["tcpipHttpNet"])
             res = Database.activateComponents(["tcpipHttp"],"APPLICATION LAYER", False) 
@@ -408,80 +408,78 @@ def syswifiprovHTTPMenuVisible(symbol, event):
         
         ###HTTPNET
         if((Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_ENABLE_HTTPNET") == True) and Database.getComponentByID("tcpipHttpNet") == None):
-          if (Database.getComponentByID("tcpipHttp") != None):
-            res = Database.deactivateComponents(["tcpipHttp"])
-          if(Database.getComponentByID("tcpipHttpNet") == None):
-            syswifiprovtcpipAutoConfigAppsGroup = Database.findGroup("APPLICATION LAYER")
-            res = Database.activateComponents(["tcpipHttpNet"],"APPLICATION LAYER", True)
-            Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_MAX_DATA_LEN", 200)
-            #Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_LISTEN_PORT", Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_HTTPPORT"))
-            syswifiprovtcpipAutoConfigAppsGroup.setAttachmentVisible("tcpipHttpNet", "libtcpipHttpNet")
-            #Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_CUSTOM_TEMPLATE", False)
-            if(Database.getComponentByID("netPres") == None):
-              syswifiprovHTTPAutoConfigGroup = Database.findGroup("System Component")
-              res = Database.activateComponents(["netPres"],"System Component", True)
-            if(Database.getComponentByID("lib_wolfssl") == None):
-              res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
-              autoConnectTableWolfSslNetPres = [["lib_wolfssl", "lib_wolfssl", "netPres_0","NetPres_Crypto_Dependency"]]
-              autoConnectTableWolfCryptWolfSsl = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
-              res = Database.connectDependencies(autoConnectTableWolfCryptWolfSsl)
-              res = Database.connectDependencies(autoConnectTableWolfSslNetPres)
-            Database.setSymbolValue("netPres", "NET_PRES_CERT_STORE_STUBS_SERVER", False)
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_CERT", 0)
-            Database.setSymbolValue("netPres_0", "NET_PRES_SUPPORT_ENCRYPTION0", True)
-            Database.setSymbolValue("netPres_0", "NET_PRES_ENC_PROVIDE_IDX0", 0)
-            Database.setSymbolValue("netPres_0", "NET_PRES_SUPPORT_SERVER_ENC_IDX0", True)
-            Database.setSymbolValue("netPres", "NET_PRES_RTOS_STACK_SIZE", 20480)
-            Database.setSymbolValue("netPres", "NET_PRES_CERT_STORE_STUBS_CLIENT", False)
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_CERT_FILENAME", "wolfssl/certs_test.h")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_CERT_VARIABLE", "client_cert_der_2048")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_CLIENT_CERT_LEN_VARIABLE", "sizeof_client_cert_der_2048")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_SUPPORT", True)
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_CERT_FILENAME", "wolfssl/certs_test.h")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_CERT_VARIABLE", "server_cert_der_2048")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_CERT_LEN_VARIABLE", "sizeof_server_cert_der_2048")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_KEY_FILENAME", "wolfssl/certs_test.h")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_KEY_VARIABLE", "server_key_der_2048")
-            Database.setSymbolValue("netPres", "NET_PRES_BLOB_SERVER_KEY_LEN_VARIABLE", "sizeof_server_key_der_2048")
-            if(Database.getComponentByID("tcpipSntp") == None):
-               res = Database.activateComponents(["tcpipSntp"],"APPLICATION LAYER", True)
-            autoConnectTableWolfSslNetPres = [["lib_wolfssl", "TLS Provider", "NetPres_Crypto_Dependency","TLS Provider"]]
-            autoConnectTableWolfCryptWolfSsl = [["lib_wolfcrypt", "LIB_WOLFCRYPT", "WolfSSL_Crypto_Dependency","LIB_WOLFCRYPT"]]
-            res = Database.connectDependencies(autoConnectTableWolfSslNetPres)
-            res = Database.connectDependencies(autoConnectTableWolfCryptWolfSsl)
-
+            if(Database.getComponentByID("tcpipHttp") != None):
+              res = Database.deactivateComponents(["tcpipHttp"])
+            if(Database.getComponentByID("tcpipHttpNet") == None):
+              syswifiprovtcpipAutoConfigAppsGroup = Database.findGroup("APPLICATION LAYER")
+              res = Database.activateComponents(["tcpipHttpNet"],"APPLICATION LAYER", True)
+              Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_MAX_DATA_LEN", 200)
+              syswifiprovtcpipAutoConfigAppsGroup.setAttachmentVisible("tcpipHttpNet", "libtcpipHttpNet")
+            if(Database.getComponentByID("net_Pres") == None):
+                syswifiprovHTTPAutoConfigGroup = Database.findGroup("System Component")
+                if(syswifiprovHTTPAutoConfigGroup != None):
+                    res = Database.activateComponents(["net_Pres"],"System Component", True)
+                if(Database.getComponentByID("lib_wolfssl") == None):
+                    res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
+                    autoConnectTableWolfCryptWolfSsl = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
+                    res = Database.connectDependencies(autoConnectTableWolfCryptWolfSsl)
+                    #setVal("net_Pres", "NET_PRES_GENERATE_ENC_STUBS", False)
+                    setVal("net_Pres", "NET_PRES_SUPPORT_ENCRYPTION", True)
+                    setVal("net_Pres", "NET_PRES_SUPPORT_SERVER_ENC", True)
+                    setVal("net_Pres", "NET_PRES_SUPPORT_CLIENT", False)
+                    setVal("net_Pres", "NET_PRES_CERT_STORE_STUBS_SERVER", True)
+                    setVal("net_Pres", "NET_PRES_CERT_STORE_STUBS_CLIENT", False)
+                    setVal("net_Pres", "NET_PRES_RTOS_STACK_SIZE", 20480)
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_SUPPORT", True)
+                    setVal("net_Pres", "NET_PRES_SUPPORT_SERVER_IDX", True)
+                    setVal("net_Pres", "NET_PRES_SUPPORT_SERVER_ENC_IDX", True)
+                    setVal("net_Pres", "NET_PRES_ENC_PROVIDE_IDX", 0)
+                    setVal("net_Pres", "NET_PRES_ENC_PROVIDE", 0)
+                    setVal("net_Pres", "NET_PRES_BLOB_CERT", 0)
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_CERT_FORMAT", 1)
+                    setVal("net_Pres", "NET_PRES_BLOB_CLIENT_CERT_FILENAME", "wolfssl/certs_test.h")
+                    setVal("net_Pres", "NET_PRES_BLOB_CLIENT_CERT_VARIABLE", "client_cert_der_2048")
+                    setVal("net_Pres", "NET_PRES_BLOB_CLIENT_CERT_LEN_VARIABLE", "sizeof_client_cert_der_2048")
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_CERT_FILENAME", "wolfssl/certs_test.h")
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_CERT_VARIABLE", "server_cert_der_2048")
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_CERT_LEN_VARIABLE", "sizeof_server_cert_der_2048")
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_KEY_FILENAME", "wolfssl/certs_test.h")
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_KEY_VARIABLE", "server_key_der_2048")
+                    setVal("net_Pres", "NET_PRES_BLOB_SERVER_KEY_LEN_VARIABLE", "sizeof_server_key_der_2048")
+                    if(Database.getComponentByID("tcpipSntp") == None):
+                        res = Database.activateComponents(["tcpipSntp"],"APPLICATION LAYER", True)
         if(Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_HTTP_SECURE") == True):
-          Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_ON", True)
-          Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_OFF", False)
-          Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_DEFAULT", False)
+            Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_ON", True)
+            Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_OFF", False)
+            Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_DEFAULT", False)
         else:
-          Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_OFF", True)
-          Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_DEFAULT", False)
-          Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_ON", False)
+            Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_OFF", True)
+            Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_DEFAULT", False)
+            Database.setSymbolValue("tcpipHttpNet","TCPIP_HTTP_NET_CONFIG_FLAG_SECURE_ON", False)
         Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_LISTEN_PORT", Database.getSymbolValue("sysWifiProvPic32mzw1", "SYS_WIFIPROV_HTTPPORT"))
         Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_CUSTOM_TEMPLATE", False)
         Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_CUSTOM_TEMPLATE_SL", False)
         Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_WEBPAGE_DIRECTORY_PATH", Module.getPath()+"system/wifiprov/web_pages_net")
         if(Database.getComponentByID("drv_memory") == None):
-          res = Database.activateComponents(["drv_memory"],"System Component", True)
-          autoConnectTableconmem = [["drv_memory_0", "drv_memory_MEMORY_dependency", "nvm","NVM_MEMORY"]]
-          autoConnectTableconfs = [["drv_memory_0", "drv_media", "sys_fs","sys_fs_DRV_MEDIA_dependency"]]
-          res = Database.connectDependencies(autoConnectTableconmem)
-          res = Database.connectDependencies(autoConnectTableconfs)
-          Database.setSymbolValue("drv_memory_0", "DRV_MEMORY_DEVICE_TYPE", "SYS_FS_MEDIA_TYPE_NVM")
-          Database.setSymbolValue("nvm", "MEMORY_MEDIA_SIZE", 64)
-          Database.setSymbolValue("nvm", "START_ADDRESS", "90010000")
+            res = Database.activateComponents(["drv_memory"],"System Component", True)
+            autoConnectTableconmem = [["drv_memory_0", "drv_memory_MEMORY_dependency", "nvm","NVM_MEMORY"]]
+            autoConnectTableconfs = [["drv_memory_0", "drv_media", "sys_fs","sys_fs_DRV_MEDIA_dependency"]]
+            res = Database.connectDependencies(autoConnectTableconmem)
+            res = Database.connectDependencies(autoConnectTableconfs)
+            Database.setSymbolValue("drv_memory_0", "DRV_MEMORY_DEVICE_TYPE", "SYS_FS_MEDIA_TYPE_NVM")
+            Database.setSymbolValue("nvm", "MEMORY_MEDIA_SIZE", 32)
+            Database.setSymbolValue("nvm", "START_ADDRESS",90010000)
         symbol.setValue(True,2)
     else:
-        res = Database.deactivateComponents(["drv_memory"])
         res = Database.deactivateComponents(["sys_fs"])
-        if (Database.getComponentByID("tcpipHttp") != None):
-          res = Database.deactivateComponents(["tcpipHttp"])
+        res = Database.deactivateComponents(["drv_memory"])
+        if(Database.getComponentByID("tcpipHttp") != None):
+            res = Database.deactivateComponents(["tcpipHttp"])
         if (Database.getComponentByID("tcpipHttpNet") != None):
-          res = Database.deactivateComponents(["tcpipHttpNet"])
-          res = Database.deactivateComponents(["tcpipSntp"])
-          res = Database.deactivateComponents(["netPres"])
-          res = Database.deactivateComponents(["lib_wolfssl"])
+            res = Database.deactivateComponents(["tcpipHttpNet"])
+            res = Database.deactivateComponents(["tcpipSntp"])
+            res = Database.deactivateComponents(["net_Pres"])
+            res = Database.deactivateComponents(["lib_wolfssl"])
         symbol.setValue(False,2)
 
 def finalizeComponent(component):
@@ -497,7 +495,6 @@ def destroyComponent(component):
         res = Database.deactivateComponents(["tcpipHttp"])
       if (Database.getComponentByID("tcpipHttpNet") != None):
         res = Database.deactivateComponents(["tcpipSntp"])
-        res = Database.deactivateComponents(["netPres"])
+        res = Database.deactivateComponents(["net_Pres"])
         res = Database.deactivateComponents(["lib_wolfssl"])
         res = Database.deactivateComponents(["tcpipHttpNet"])
-    
