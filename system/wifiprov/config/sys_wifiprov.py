@@ -29,6 +29,7 @@
 ################################################################################
 #### Business Logic ####
 ################################################################################
+import re
 
 ################################################################################
 #### Component ####
@@ -51,7 +52,19 @@ def instantiateComponent(syswifiprovComponent):
     syswifiprovNvmAdd.setLabel("WiFi Configuration Stored At NVM Address")
     syswifiprovNvmAdd.setVisible(True)
     syswifiprovNvmAdd.setDescription("Enter 4KB Aligned NVM Address for storing WiFi Configuration")
-    syswifiprovNvmAdd.setDefaultValue("90010000")
+    syswifiprovNvmAdd.setDefaultValue("0x900F0000")
+
+    syswifiprovNvmErrMsg = syswifiprovComponent.createCommentSymbol("SYS_WIFIPROV_NVMADDR_ERR", None)
+    syswifiprovNvmErrMsg.setLabel("**Placeholder for NVM adress error")
+    syswifiprovNvmErrMsg.setVisible(False)
+
+    # set XC32-LD additional driver option to reserve memory
+    xc32LdMemReserve = syswifiprovComponent.createSettingSymbol("XC32_LD_MEM_RESRV", None)
+    xc32LdMemReserve.setCategory("C32-LD")
+    xc32LdMemReserve.setKey("oXC32ld-extra-opts")
+    xc32LdMemReserve.setAppend(True, ";")
+    xc32LdMemReserve.setValue("-mreserve=prog@0x100F0000:0x100F0FFF")
+    xc32LdMemReserve.setDependencies(syswifiprovManageNvmAddr, ["SYS_WIFIPROV_NVMADDR", "SYS_WIFIPROV_SAVECONFIG"])
 
     syswifiprovstaEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_STA_ENABLE", None)
     syswifiprovstaEnable.setVisible(False)
@@ -498,3 +511,38 @@ def destroyComponent(component):
         res = Database.deactivateComponents(["net_Pres"])
         res = Database.deactivateComponents(["lib_wolfssl"])
         res = Database.deactivateComponents(["tcpipHttpNet"])
+
+def syswifiprovManageNvmAddr(symbol, event):
+    data = symbol.getComponent()
+    next_val = ""
+    ld_cmd = ""
+    nvmErrCommSymbol = data.getSymbolByID("SYS_WIFIPROV_NVMADDR_ERR")
+    curr_val = symbol.getValue()
+    start_addr = int(data.getSymbolValue("SYS_WIFIPROV_NVMADDR"), 16)
+    start_addr = ((start_addr & 0x0FFFFFFF)| 0x10000000)
+    saveConfigNvm = bool(data.getSymbolValue("SYS_WIFIPROV_SAVECONFIG"))
+    setNvmErrCommLabel = "**NVM Address Info**"
+    setNvmErrCommVisible = False
+
+    if (((start_addr % 0x1000) == 0) and (start_addr >= 0x10000000) and (start_addr <= 0x100FF000)):
+        end_addr = start_addr + 0xFFF
+        ld_cmd = '-mreserve=prog@'+hex(start_addr).rstrip('L')+':'+hex(end_addr).rstrip('L')
+    else:
+        setNvmErrCommLabel = "**** Address Error!! (Hint: use 4KB aligned NVM address)"
+        setNvmErrCommVisible = True
+
+    if (saveConfigNvm == False):
+        next_val = re.sub('-mreserve=prog@[0-9a-fA-Fx:]*', '', curr_val)
+    else:
+        if (curr_val):
+            if (re.search('-mreserve=prog@', curr_val)):
+                next_val = re.sub('-mreserve=prog@[0-9a-fA-Fx:]*', ld_cmd, curr_val)
+            else:
+                next_val = curr_val + ";" + ld_cmd
+        else:
+            next_val = ld_cmd
+        print("SysWifiProv: Preserving NVM range using:" + ld_cmd)
+
+    symbol.setValue(next_val)
+    nvmErrCommSymbol.setLabel(setNvmErrCommLabel)
+    nvmErrCommSymbol.setVisible(setNvmErrCommVisible)
