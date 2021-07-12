@@ -40,11 +40,14 @@ def instantiateComponent(syswifiComponent):
     syswifiEnable.setVisible(False)
     syswifiEnable.setDefaultValue(True)
 
+    syswifiEnableErrMsg = syswifiComponent.createCommentSymbol("SYS_WIFI_ERR", None)
+    syswifiEnableErrMsg.setLabel("**Placeholder for error display")
+    syswifiEnableErrMsg.setVisible(False)
+
     syswifiMode = syswifiComponent.createComboSymbol("SYS_WIFI_MODE", None, ["STA", "AP"])
     syswifiMode.setLabel("Device Mode")
     syswifiMode.setDescription("Select the Device Boot Mode ")
     syswifiMode.setDefaultValue("STA")
-
 
     syswifistaEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_STA_ENABLE", syswifiMode)
     syswifistaEnable.setLabel("STA Mode")
@@ -53,7 +56,6 @@ def instantiateComponent(syswifiComponent):
 #    syswifistaEnable.setDependencies(syswifiSTAMenu, ["SYS_WIFI_MODE"])
     syswifistaEnable.setDescription("Enable STA mode Configuration ")
     syswifistaEnable.setDependencies(syswifiSTAautoMenu, ["SYS_WIFI_STA_ENABLE"])
-
 
     syswifistaSsid = syswifiComponent.createStringSymbol("SYS_WIFI_STA_SSID_NAME", syswifistaEnable)
     syswifistaSsid.setLabel("SSID")
@@ -71,7 +73,7 @@ def instantiateComponent(syswifiComponent):
     syswifistaPwd.setVisible(True)
     syswifistaPwd.setDescription("Enter STA Mode Password.WPA2/WPA3 - Maximum key length is 63 characters.Minimum key length is 8 characters.")
     syswifistaPwd.setDefaultValue("password")
-    syswifistaPwd.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_STA_AUTH"])
+    syswifistaPwd.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_STA_AUTH","SYS_WIFI_STA_PWD_NAME"])
 
     syswifistaAuto = syswifiComponent.createBooleanSymbol("SYS_WIFI_STA_AUTOCONNECT", syswifistaEnable)
     syswifistaAuto.setLabel("Auto Connect")
@@ -102,7 +104,7 @@ def instantiateComponent(syswifiComponent):
     syswifiapPwd.setVisible(True)
     syswifiapPwd.setDescription("Enter AP Mode Password.WPA2/WPA3 - Maximum key length is 63 characters.Minimum key length is 8 characters.")
     syswifiapPwd.setDefaultValue("password")
-    syswifiapPwd.setDependencies(syswifiAPSecurityMenu, ["SYS_WIFI_AP_AUTH"])
+    syswifiapPwd.setDependencies(syswifiAPSecurityMenu, ["SYS_WIFI_AP_AUTH","SYS_WIFI_AP_PWD_NAME"])
 
     syswifiapSsidv = syswifiComponent.createBooleanSymbol("SYS_WIFI_AP_SSIDVISIBILE", syswifiapEnable)
     syswifiapSsidv.setLabel("SSID Visibility")
@@ -117,6 +119,7 @@ def instantiateComponent(syswifiComponent):
     syswifiapChannel.setMax(13)
     syswifiapChannel.setDescription("Enable AP Mode Channel")
     syswifiapChannel.setDefaultValue(1)
+    syswifiapChannel.setDependencies(syswifiChannelErr, ["SYS_WIFI_AP_CHANNEL","SYS_WIFI_COUNTRYCODE"])
 
     # Advanced Configuration
     syswifiAdvMenu = syswifiComponent.createCommentSymbol("SYS_WIFI_ADVANCED_CONFIG_MENU", None)
@@ -127,7 +130,7 @@ def instantiateComponent(syswifiComponent):
     syswificountrycode = syswifiComponent.createComboSymbol("SYS_WIFI_COUNTRYCODE", syswifiAdvMenu, ["GEN", "USA", "EMEA", "CUST1", "CUST2"])
     syswificountrycode.setLabel("Country Code")
     syswificountrycode.setDefaultValue("GEN")
-    syswificountrycode.setDescription("Enable Country Code. \n Support channels per Country code: \n GEN - 1 to 13, \n USA - 1 to 11, \n EMEA - 1 to 11, \n CUST1,CUST2 - Dependent on user configuration")
+    syswificountrycode.setDescription("Enable Country Code. \n Support channels per Country code: \n GEN - 1 to 13, \n USA - 1 to 11, \n EMEA - 1 to 13, \n CUST1,CUST2 - Dependent on user configuration")
     syswificountrycode.setDependencies(syswifiMenuVisible, ["SYS_WIFI_ENABLE"])
 
     syswifiCB = syswifiComponent.createIntegerSymbol("SYS_WIFI_MAX_CBS", syswifiAdvMenu)
@@ -167,19 +170,19 @@ def instantiateComponent(syswifiComponent):
     syswifiDebugDbgLevel.setVisible(True)
     syswifiDebugDbgLevel.setDefaultValue(False)
     #syswifiDebugDbgLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
-	
+
     syswifiDebugInfoLevel = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_INFO_LEVEL", syswifiDebugBasicMenu)
     syswifiDebugInfoLevel.setLabel("Enable Info Level")
     syswifiDebugInfoLevel.setVisible(True)
     syswifiDebugInfoLevel.setDefaultValue(False)
     #syswifiDebugInfoLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
-	
+
     syswifiDebugFuncLevel = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_FUNC_LEVEL", syswifiDebugBasicMenu)
     syswifiDebugFuncLevel.setLabel("Enable Function Entry/Exit Level")
     syswifiDebugFuncLevel.setVisible(True)
     syswifiDebugFuncLevel.setDefaultValue(False)
     #syswifiDebugFuncLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
-	
+
     #syswifiDebugFlow = syswifiComponent.createIntegerSymbol("SYS_WIFI_APPDEBUG_FLOW", syswifiDebugLogEnable)
     #syswifiDebugFlow.setLabel("Flow")
     #syswifiDebugFlow.setMin(1)
@@ -441,18 +444,60 @@ def syswifiRTOSStandaloneMenu(symbol, event):
         symbol.setVisible(False)
         print("SYS WIFI Combined")
 def syswifiSTASecurityMenu(symbol, event):
-    sysWiFisecurity = Database.getSymbolValue("sysWifiPic32mzw1","SYS_WIFI_STA_AUTH")
+    data = symbol.getComponent()
+    sysWiFisecurity = data.getSymbolValue("SYS_WIFI_STA_AUTH")
+    sysWiFiWPAPwdlen = len(data.getSymbolValue("SYS_WIFI_STA_PWD_NAME"))
+    ErrCommSymbol = data.getSymbolByID("SYS_WIFI_ERR")
     if(sysWiFisecurity == "OPEN"):        
         symbol.setVisible(False)
     else:
+        if(sysWiFiWPAPwdlen < 8):
+            ErrCommSymbol.setLabel("****Error:Minimum STA Password length is 8 characters.")
+            ErrCommSymbol.setVisible(True)
+        elif(sysWiFiWPAPwdlen > 63):
+            ErrCommSymbol.setLabel("****Error:Maximum STA Password length is 63 characters.")
+            ErrCommSymbol.setVisible(True)
+        else:
+            ErrCommSymbol.setLabel("")
+            ErrCommSymbol.setVisible(False)
         symbol.setVisible(True)
 
 def syswifiAPSecurityMenu(symbol, event):
-    sysWiFisecurity = Database.getSymbolValue("sysWifiPic32mzw1","SYS_WIFI_AP_AUTH")
+    data = symbol.getComponent()
+    sysWiFisecurity = data.getSymbolValue("SYS_WIFI_AP_AUTH")
+    sysWiFiWPAPwdlen = len(data.getSymbolValue("SYS_WIFI_AP_PWD_NAME"))
+    ErrCommSymbol = data.getSymbolByID("SYS_WIFI_ERR")
     if(sysWiFisecurity == "OPEN"):        
         symbol.setVisible(False)
+        ErrCommSymbol.setVisible(False)
     else:
+        if(sysWiFiWPAPwdlen < 8):
+            ErrCommSymbol.setLabel("****Error:Minimum AP Password length is 8 characters.")
+            ErrCommSymbol.setVisible(True)
+        elif(sysWiFiWPAPwdlen > 63):
+            ErrCommSymbol.setLabel("****Error:Maximum AP Password length is 63 characters.")
+            ErrCommSymbol.setVisible(True)
+        else:
+            ErrCommSymbol.setLabel("")
+            ErrCommSymbol.setVisible(False)
         symbol.setVisible(True)
+
+def syswifiChannelErr(symbol, event):
+    data = symbol.getComponent()
+    sysWiFiChannelno = data.getSymbolValue("SYS_WIFI_AP_CHANNEL")
+    sysWiFiCountrycode = data.getSymbolValue("SYS_WIFI_COUNTRYCODE")
+    ErrCommSymbol = data.getSymbolByID("SYS_WIFI_ERR")
+    if(sysWiFiCountrycode == "USA"):
+        if(sysWiFiChannelno > 11):
+            ErrCommSymbol.setLabel("****Error:USA Supported Channels : 1 to 11")
+            ErrCommSymbol.setVisible(True)
+        else:
+            ErrCommSymbol.setLabel("")
+            ErrCommSymbol.setVisible(False)
+    else:
+        ErrCommSymbol.setLabel("")
+        ErrCommSymbol.setVisible(False)
+    symbol.setVisible(True)
 
 def syswifiSTAMenu(symbol, event):
 
