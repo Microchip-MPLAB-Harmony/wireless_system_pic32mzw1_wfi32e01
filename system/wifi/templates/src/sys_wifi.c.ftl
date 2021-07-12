@@ -1610,9 +1610,13 @@ static void SYS_WIFI_WIFIPROVCallBack
                     } 
                     else 
                     {
-                        SYS_CONSOLE_MESSAGE("######################################Rebooting the Device ###############################\r\n");
-                        /* reboot the device */
-                        SYS_RESET_SoftwareReset();
+                        SYS_CONSOLE_PRINT("## Switch WiFi Mode From %s To %s ##\r\n", \
+                                           ((SYS_WIFIPROV_STA == (SYS_WIFIPROV_MODE) SYS_WIFI_GetMode()) ? "STA" : "AP"),\
+                                           ((SYS_WIFIPROV_STA == wifiConfig->mode)?"STA":"AP"));
+                        /* Copy received configuration into Wi-Fi service structure */
+                        memcpy(&g_wifiSrvcConfig, wifiConfig, sizeof (SYS_WIFIPROV_CONFIG));
+                        WDRV_PIC32MZW_Close(g_wifiSrvcObj.wifiSrvcDrvHdl);
+                        SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_INIT);
                     }
                     if (data) 
                     {
