@@ -52,7 +52,7 @@ def instantiateComponent(syswifiprovComponent):
     syswifiprovNvmAdd.setLabel("WiFi Configuration Stored At NVM Address")
     syswifiprovNvmAdd.setVisible(True)
     syswifiprovNvmAdd.setDescription("Enter 4KB Aligned NVM Address for storing WiFi Configuration")
-    syswifiprovNvmAdd.setDefaultValue("0x900F0000")
+    syswifiprovNvmAdd.setDefaultValue("0x900FF000")
 
     syswifiprovNvmErrMsg = syswifiprovComponent.createCommentSymbol("SYS_WIFIPROV_NVMADDR_ERR", None)
     syswifiprovNvmErrMsg.setLabel("**Placeholder for NVM adress error")
@@ -63,7 +63,7 @@ def instantiateComponent(syswifiprovComponent):
     xc32LdMemReserve.setCategory("C32-LD")
     xc32LdMemReserve.setKey("oXC32ld-extra-opts")
     xc32LdMemReserve.setAppend(True, ";")
-    xc32LdMemReserve.setValue("-mreserve=prog@0x100F0000:0x100F0FFF")
+    xc32LdMemReserve.setValue("-mreserve=prog@0x100FF000:0x100FFFFF")
     xc32LdMemReserve.setDependencies(syswifiprovManageNvmAddr, ["SYS_WIFIPROV_NVMADDR", "SYS_WIFIPROV_SAVECONFIG"])
 
     syswifiprovstaEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_STA_ENABLE", None)
