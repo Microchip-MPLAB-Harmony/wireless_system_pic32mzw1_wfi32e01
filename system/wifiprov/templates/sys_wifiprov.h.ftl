@@ -292,14 +292,12 @@ typedef enum
 {
 <#if SYS_WIFIPROV_HTTP == true>
     /* Wi-Fi Provisioning system service is in MPFS filesystem mount state */
-    SYS_WIFIPROV_STATUS_MPFS_MOUNT=1,
-            
+    SYS_WIFIPROV_STATUS_MPFS_MOUNT,
+</#if>
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
     /* Wi-Fi Provisioning system service is in NVM read state */
     SYS_WIFIPROV_STATUS_NVM_READ,
-<#else>
-    /* Wi-Fi Provisioning system service is in NVM read state */
-    SYS_WIFIPROV_STATUS_NVM_READ=1,
-</#if>
+
     /* Wi-Fi Provisioning system service is in NVM read Wi-Fi Configuration 
       checking state */
     SYS_WIFIPROV_STATUS_CONFIG_CHECK,
@@ -313,7 +311,7 @@ typedef enum
     /* Wi-Fi Provisioning system service is in wait for NVM write to 
        complate state */
     SYS_WIFIPROV_STATUS_WAITFORWRITE,
-
+</#if>
     /* Wi-Fi Provisioning system service is in client request state */
     SYS_WIFIPROV_STATUS_WAITFORREQ,
 

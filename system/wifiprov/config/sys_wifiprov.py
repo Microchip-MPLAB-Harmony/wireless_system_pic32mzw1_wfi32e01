@@ -47,12 +47,17 @@ def instantiateComponent(syswifiprovComponent):
         Database.clearSymbolValue("HarmonyCore", "ENABLE_DRV_COMMON")
         Database.setSymbolValue("HarmonyCore", "ENABLE_DRV_COMMON", True)
 
+    syswifiprovConfigMenu = syswifiprovComponent.createComboSymbol("SYS_WIFIPROV_CONFIG_MENU", None, ["NVM", "External"])
+    syswifiprovConfigMenu.setLabel("WiFi Configuration Stored At?")
+    syswifiprovConfigMenu.setDescription("Select the Wi-Fi Configuration storing method")
+    syswifiprovConfigMenu.setDefaultValue("NVM")
 
-    syswifiprovNvmAdd = syswifiprovComponent.createStringSymbol("SYS_WIFIPROV_NVMADDR", None)
+    syswifiprovNvmAdd = syswifiprovComponent.createStringSymbol("SYS_WIFIPROV_NVMADDR", syswifiprovConfigMenu)
     syswifiprovNvmAdd.setLabel("WiFi Configuration Stored At NVM Address")
     syswifiprovNvmAdd.setVisible(True)
     syswifiprovNvmAdd.setDescription("Enter 4KB Aligned NVM Address for storing WiFi Configuration")
     syswifiprovNvmAdd.setDefaultValue("0x900FF000")
+    syswifiprovNvmAdd.setDependencies(syswifiprovNvmCheck, ["SYS_WIFIPROV_CONFIG_MENU"])
 
     syswifiprovNvmErrMsg = syswifiprovComponent.createCommentSymbol("SYS_WIFIPROV_NVMADDR_ERR", None)
     syswifiprovNvmErrMsg.setLabel("**Placeholder for NVM adress error")
@@ -64,7 +69,7 @@ def instantiateComponent(syswifiprovComponent):
     xc32LdMemReserve.setKey("oXC32ld-extra-opts")
     xc32LdMemReserve.setAppend(True, ";")
     xc32LdMemReserve.setValue("-mreserve=prog@0x100FF000:0x100FFFFF")
-    xc32LdMemReserve.setDependencies(syswifiprovManageNvmAddr, ["SYS_WIFIPROV_NVMADDR", "SYS_WIFIPROV_SAVECONFIG"])
+    xc32LdMemReserve.setDependencies(syswifiprovManageNvmAddr, ["SYS_WIFIPROV_NVMADDR", "SYS_WIFIPROV_SAVECONFIG","SYS_WIFIPROV_CONFIG_MENU"])
 
     syswifiprovstaEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_STA_ENABLE", None)
     syswifiprovstaEnable.setVisible(False)
@@ -82,11 +87,11 @@ def instantiateComponent(syswifiprovComponent):
     syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_APPDEBUG_ENABLE"])
     syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_PROVISION_ENABLE"])
 
-    syswifiprovSave = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_SAVECONFIG", None)
+    syswifiprovSave = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_SAVECONFIG", syswifiprovConfigMenu)
     syswifiprovSave.setLabel("Save Configuration in NVM")
     syswifiprovSave.setDefaultValue(True)
     syswifiprovSave.setDescription("Enable Option to store Wi-Fi Configuration to NVM")
-    syswifiprovSave.setDependencies(syswifiprovMenuVisible, ["SYS_WIFIPROV_ENABLE"])
+    syswifiprovSave.setDependencies(syswifiprovNvmCheck, ["SYS_WIFIPROV_CONFIG_MENU"])
 
     syswifiprovMethod = syswifiprovComponent.createMenuSymbol("SYS_WIFIPROV_METHOD", None)
     syswifiprovMethod.setLabel("WiFi Provisioning Methods")
@@ -303,6 +308,12 @@ def onAttachmentConnected(source, target):
         plibUsed = localComponent.getSymbolByID("SYS_WIFI_SYS")
         plibUsed.clearValue()
         plibUsed.setValue(remoteID.upper())
+
+def syswifiprovNvmCheck(symbol, event):
+    if (event["value"] == "NVM"):
+        symbol.setVisible(True)
+    else:
+        symbol.setVisible(False)
 
 def syswifiprovCustomSet(symbol, event):
     symbol.clearValue()
@@ -521,6 +532,7 @@ def syswifiprovManageNvmAddr(symbol, event):
     start_addr = int(data.getSymbolValue("SYS_WIFIPROV_NVMADDR"), 16)
     start_addr = ((start_addr & 0x0FFFFFFF)| 0x10000000)
     saveConfigNvm = bool(data.getSymbolValue("SYS_WIFIPROV_SAVECONFIG"))
+    NvmStoreConfig = data.getSymbolValue("SYS_WIFIPROV_CONFIG_MENU")
     setNvmErrCommLabel = "**NVM Address Info**"
     setNvmErrCommVisible = False
 
@@ -531,7 +543,7 @@ def syswifiprovManageNvmAddr(symbol, event):
         setNvmErrCommLabel = "**** Address Error!! (Hint: use 4KB aligned NVM address)"
         setNvmErrCommVisible = True
 
-    if (saveConfigNvm == False):
+    if ((saveConfigNvm == False) or (NvmStoreConfig != "NVM")):
         next_val = re.sub('-mreserve=prog@[0-9a-fA-Fx:]*', '', curr_val)
     else:
         if (curr_val):

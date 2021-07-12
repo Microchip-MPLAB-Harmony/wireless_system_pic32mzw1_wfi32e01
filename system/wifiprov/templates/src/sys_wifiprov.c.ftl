@@ -63,6 +63,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 typedef enum 
 {
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
     /* Wi-Fi Provisioning service NVM write state */
     SYS_WIFIPROV_NVM_WRITE = 0,
 
@@ -71,7 +72,7 @@ typedef enum
 
     /* Wi-Fi Provisioning service NVM read state */
     SYS_WIFIPROV_NVM_READ,
-
+</#if>
     /* Wi-Fi Provisioning service invalid state */
     SYS_WIFIPROV_NONE = 255
 } SYS_WIFIPROV_NVMTYPEOPER; //NVM Operation
@@ -81,8 +82,10 @@ typedef struct
     /* The WiFi service current status */
     SYS_WIFIPROV_STATUS status;
 
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
     /* The WiFi service NVM type operation  */
     SYS_WIFIPROV_NVMTYPEOPER nvmTypeOfOperation;
+</#if>
 } SYS_WIFIPROV_OBJ; /*Wi-Fi Provision system service Object*/
 
 // *****************************************************************************
@@ -90,9 +93,13 @@ typedef struct
 // Section: Global Data
 // *****************************************************************************
 // *****************************************************************************
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
 /*Wi-Fi Provisioning Object */
 static  SYS_WIFIPROV_OBJ      g_wifiProvSrvcObj = {SYS_WIFIPROV_STATUS_NONE, SYS_WIFIPROV_NONE};
-
+<#else>
+/*Wi-Fi Provisioning Object */
+static  SYS_WIFIPROV_OBJ      g_wifiProvSrvcObj = {SYS_WIFIPROV_STATUS_NONE};
+</#if>
 /* Wi-Fi Provisioning Configuration */
 static  SYS_WIFIPROV_CONFIG   g_wifiProvSrvcConfig CACHE_ALIGN;
 
@@ -214,8 +221,13 @@ static void inline SYS_WIFIPROV_InitConfig(SYS_WIFIPROV_CONFIG *config)
 </#if>
 <#if SYS_WIFIPROV_HTTP == true>
         SYS_WIFIPROV_SetTaskstatus(SYS_WIFIPROV_STATUS_MPFS_MOUNT);
-<#else>	
+<#else>
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
         SYS_WIFIPROV_SetTaskstatus(SYS_WIFIPROV_STATUS_NVM_READ);
+<#else>
+        SYS_WIFIPROV_WriteConfig();
+        SYS_WIFIPROV_SetTaskstatus(SYS_WIFIPROV_STATUS_WAITFORREQ);
+</#if>
 </#if>
     } 
     else 
@@ -228,6 +240,7 @@ static void inline SYS_WIFIPROV_InitConfig(SYS_WIFIPROV_CONFIG *config)
     }
 }
 
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
 static void SYS_WIFIPROV_CheckConfig(void) 
 {
     /* when NVM read provide empty data, the save config value will be 0xFF */
@@ -280,7 +293,7 @@ static inline void SYS_WIFIPROV_NVMErase(void)
     g_wifiProvSrvcObj.nvmTypeOfOperation = SYS_WIFIPROV_NVM_ERASE;
     NVM_PageErase(SYS_WIFIPROV_NVMADDR);
 }
-
+</#if>
 <#if SYS_WIFIPROV_CMD == true>
 static void SYS_WIFIPROV_PrintConfig(void) 
 {
@@ -295,6 +308,7 @@ static void SYS_WIFIPROV_PrintConfig(void)
 </#if>
 static void SYS_WIFIPROV_WriteConfig(void) 
 {
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
     if (true == g_wifiProvSrvcConfig.saveConfig) 
     {
         /* User has enabled Save Config,
@@ -308,6 +322,10 @@ static void SYS_WIFIPROV_WriteConfig(void)
         /* Just generate the callback to Wi-Fi service for connection request */
         SYS_WIFIPROV_CallBackFun(SYS_WIFIPROV_SETCONFIG, &g_wifiProvSrvcConfig, g_wifiProvSrvcCookie);
     }
+<#else>
+    /* Just generate the callback to Wi-Fi service for connection request */
+    SYS_WIFIPROV_CallBackFun(SYS_WIFIPROV_SETCONFIG, &g_wifiProvSrvcConfig, g_wifiProvSrvcCookie);
+</#if>
 }
 
 static SYS_WIFIPROV_STATUS SYS_WIFIPROV_ExecuteBlock
@@ -338,7 +356,11 @@ static SYS_WIFIPROV_STATUS SYS_WIFIPROV_ExecuteBlock
 <#if SYS_WIFIPROV_APPDEBUG_ENABLE  == true>
                     SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_PROVISIONING, "The %s File System is mounted \r\n","MPFS2");
 </#if>
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
                     wifiProvSrvcObj->status = SYS_WIFIPROV_STATUS_NVM_READ;
+<#else>
+                    wifiProvSrvcObj->status = SYS_WIFIPROV_STATUS_WAITFORREQ;
+</#if>
 <#if SYS_WIFIPROV_APPDEBUG_ENABLE  == true>
                 } 
                 else 
@@ -349,7 +371,7 @@ static SYS_WIFIPROV_STATUS SYS_WIFIPROV_ExecuteBlock
                 break;
             }
 </#if>
-
+<#if SYS_WIFIPROV_CONFIG_MENU  == "NVM">
            case SYS_WIFIPROV_STATUS_NVM_READ:
             {
                 /* Check if NVM flash performing any operation */
@@ -434,7 +456,7 @@ static SYS_WIFIPROV_STATUS SYS_WIFIPROV_ExecuteBlock
                 }
                 break;
             }
-
+</#if>
             case SYS_WIFIPROV_STATUS_WAITFORREQ:
             default:
             {
