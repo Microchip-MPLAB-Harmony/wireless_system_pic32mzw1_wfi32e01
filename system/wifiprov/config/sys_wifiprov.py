@@ -47,7 +47,7 @@ def instantiateComponent(syswifiprovComponent):
         Database.clearSymbolValue("HarmonyCore", "ENABLE_DRV_COMMON")
         Database.setSymbolValue("HarmonyCore", "ENABLE_DRV_COMMON", True)
 
-    syswifiprovConfigMenu = syswifiprovComponent.createComboSymbol("SYS_WIFIPROV_CONFIG_MENU", None, ["NVM", "External"])
+    syswifiprovConfigMenu = syswifiprovComponent.createComboSymbol("SYS_WIFIPROV_CONFIG_MENU", None, ["NVM", "User"])
     syswifiprovConfigMenu.setLabel("WiFi Configuration Stored At?")
     syswifiprovConfigMenu.setDescription("Select the Wi-Fi Configuration storing method")
     syswifiprovConfigMenu.setDefaultValue("NVM")
