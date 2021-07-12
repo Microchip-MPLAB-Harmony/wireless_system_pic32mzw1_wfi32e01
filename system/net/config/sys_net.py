@@ -243,8 +243,30 @@ def instantiateComponent(netComponent):
     netSystemInitFile.setOutputName("core.LIST_SYSTEM_INIT_C_INITIALIZE_SYSTEM_SERVICES")
     netSystemInitFile.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/net/templates/system/system_initialize.c.ftl")
     netSystemInitFile.setMarkup(True)
-	
-	############################################################################
+
+    tngtlsPortHdr = netComponent.createFileSymbol("WOLFSSL_PORT_HEADER", None)
+    tngtlsPortHdr.setSourcePath("./system/net/patch/atmel.h")
+    tngtlsPortHdr.setOutputName("atmel.h")
+    tngtlsPortHdr.setDestPath("../../third_party/wolfssl/wolfssl/wolfcrypt/port/atmel/")
+    tngtlsPortHdr.setOutputName("atmel.h")
+    tngtlsPortHdr.setProjectPath("wolfcrypt/port/atmel")
+    tngtlsPortHdr.setType("HEADER")
+    tngtlsPortHdr.setMarkup(False)
+    tngtlsPortHdr.setEnabled(True)
+    tngtlsPortHdr.setOverwrite(True)
+
+    tngtlsPortSrc = netComponent.createFileSymbol("WOLFSSL_PORT_SOURCE", None)
+    tngtlsPortSrc.setSourcePath("./system/net/patch/atmel.c")
+    tngtlsPortSrc.setOutputName("atmel.c")
+    tngtlsPortSrc.setDestPath("../../third_party/wolfssl/wolfssl/wolfcrypt/src/port/atmel/")
+    tngtlsPortSrc.setOutputName("atmel.c")
+    tngtlsPortSrc.setProjectPath("wolfcrypt/port/atmel")
+    tngtlsPortSrc.setType("SOURCE")
+    tngtlsPortSrc.setMarkup(False)
+    tngtlsPortSrc.setEnabled(True)
+    tngtlsPortSrc.setOverwrite(True)
+
+############################################################################
 #### Dependency ####
 ############################################################################
 #Set symbols of other components
@@ -377,7 +399,6 @@ def finalizeComponent(netComponent):
     else:
         Database.setSymbolValue("lib_wolfcrypt", "wolfSslRTOSSupport", "Single Threaded")
 		
-    
     
 #Handle messages from other components
 def handleMessage(messageID, args):
