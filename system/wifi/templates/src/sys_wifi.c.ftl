@@ -590,6 +590,9 @@ static void SYS_WIFI_APConnCallBack
                         memcpy(&g_wifiSrvcStaConnInfo[idx].wifiSrvcStaAppInfo.macAddr, wifiSrvcStaConnMac.addr, WDRV_PIC32MZW_MAC_ADDR_LEN);
 <#if (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true>
                         SYS_TIME_CallbackRegisterMS(SYS_WIFI_WaitForConnSTAIP, (uintptr_t)&g_wifiSrvcStaConnInfo[idx], 500, SYS_TIME_SINGLE);
+<#else>
+                        g_wifiSrvcStaConnInfo[idx].wifiSrvcStaAppInfo.ipAddr = 0;
+                        SYS_WIFI_CallBackFun(SYS_WIFI_CONNECT,&g_wifiSrvcStaConnInfo[idx].wifiSrvcStaAppInfo,g_wifiSrvcCookie);
 </#if>
                         break;
                     }
