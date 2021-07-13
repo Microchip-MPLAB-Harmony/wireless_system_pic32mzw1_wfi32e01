@@ -313,6 +313,8 @@ def syswifiprovNvmCheck(symbol, event):
     if (event["value"] == "NVM"):
         symbol.setVisible(True)
     else:
+        if(Database.getComponentByID("nvm") != None):
+            res = Database.deactivateComponents(["nvm"])
         symbol.setVisible(False)
 
 def syswifiprovCustomSet(symbol, event):
@@ -402,14 +404,14 @@ def syswifiprovHTTPNETGenSourceFile(sourceFile, event):
       sourceFile.setEnabled(False)
 
 def syswifiprovHTTPMenuVisible(symbol, event):
-    syswifiprovHTTPAutoConfigGroup = Database.findGroup("System Component")
+    syswifiprovHTTPAutoConfigGroup = Database.findGroup("System Configuration")
     syswifiprovtcpipAutoConfigAppsGroup = Database.findGroup("APPLICATION LAYER")
     syswifiprovtcpipAutoConfigStackGroup = Database.findGroup("TCP/IP STACK")
     enableTcpipAutoConfigApps(True)
     
     if (event["value"] == True):
         if(Database.getComponentByID("sys_fs") == None):    
-            res = Database.activateComponents(["sys_fs"],"System Component", True)
+            res = Database.activateComponents(["sys_fs"],"System Configuration", True)
             syswifiprovHTTPAutoConfigGroup.setAttachmentVisible("sys_fs", "SYS_FS")
             Database.setSymbolValue("sys_fs", "SYS_FS_FAT", False)
             Database.setSymbolValue("sys_fs", "SYS_FS_MPFS", True)
@@ -440,11 +442,11 @@ def syswifiprovHTTPMenuVisible(symbol, event):
               Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_MAX_DATA_LEN", 200)
               syswifiprovtcpipAutoConfigAppsGroup.setAttachmentVisible("tcpipHttpNet", "libtcpipHttpNet")
             if(Database.getComponentByID("net_Pres") == None):
-                syswifiprovHTTPAutoConfigGroup = Database.findGroup("System Component")
+                syswifiprovHTTPAutoConfigGroup = Database.findGroup("System Configuration")
                 if(syswifiprovHTTPAutoConfigGroup != None):
-                    res = Database.activateComponents(["net_Pres"],"System Component", True)
+                    res = Database.activateComponents(["net_Pres"],"System Configuration", True)
                 if(Database.getComponentByID("lib_wolfssl") == None):
-                    res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
+                    res = Database.activateComponents(["lib_wolfssl"],"System Configuration", True)
                     autoConnectTableWolfCryptWolfSsl = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
                     res = Database.connectDependencies(autoConnectTableWolfCryptWolfSsl)
                     #setVal("net_Pres", "NET_PRES_GENERATE_ENC_STUBS", False)
@@ -485,7 +487,7 @@ def syswifiprovHTTPMenuVisible(symbol, event):
         Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_CUSTOM_TEMPLATE_SL", False)
         Database.setSymbolValue("tcpipHttpNet", "TCPIP_HTTP_NET_WEBPAGE_DIRECTORY_PATH", Module.getPath()+"system/wifiprov/web_pages_net")
         if(Database.getComponentByID("drv_memory") == None):
-            res = Database.activateComponents(["drv_memory"],"System Component", True)
+            res = Database.activateComponents(["drv_memory"],"System Configuration", True)
             autoConnectTableconmem = [["drv_memory_0", "drv_memory_MEMORY_dependency", "nvm","NVM_MEMORY"]]
             autoConnectTableconfs = [["drv_memory_0", "drv_media", "sys_fs","sys_fs_DRV_MEDIA_dependency"]]
             res = Database.connectDependencies(autoConnectTableconmem)

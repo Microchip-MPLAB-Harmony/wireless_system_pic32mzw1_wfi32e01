@@ -570,31 +570,31 @@ def genRtosTask(symbol, event):
 ########################################################################################################
 def finalizeComponent(syswifiComponent):
     res = Database.activateComponents(["Root"])
-    syswifisysComponent = Database.createGroup(None,"System Component")
-    res = Database.activateComponents(["dfp"],"System Component", True)
-    res = Database.activateComponents(["system"],"System Component", True)
-    res = Database.activateComponents(["core"],"System Component", True)
+    syswifisysComponent = Database.createGroup(None,"System Configuration")
+    res = Database.activateComponents(["dfp"],"System Configuration", True)
+    res = Database.activateComponents(["system"],"System Configuration", True)
+    res = Database.activateComponents(["core"],"System Configuration", True)
     if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_PROVISION_ENABLE") == True):
-       res = Database.activateComponents(["nvm"],"System Component", True)
-    res = Database.activateComponents(["core_timer"],"System Component", True)
-    res = Database.activateComponents(["uart1"],"System Component", True)
-    res = Database.activateComponents(["lib_crypto"],"System Component", True)
-    res = Database.activateComponents(["lib_wolfcrypt"],"System Component", True)
-    res = Database.activateComponents(["sys_time"],"System Component", True)
-    res = Database.activateComponents(["sys_console"],"System Component", True)
-    res = Database.activateComponents(["sys_command"],"System Component", True)
-    res = Database.activateComponents(["sys_debug"],"System Component", True)
+       res = Database.activateComponents(["nvm"],"System Configuration", True)
+    res = Database.activateComponents(["core_timer"],"System Configuration", True)
+    res = Database.activateComponents(["uart1"],"System Configuration", True)
+    res = Database.activateComponents(["lib_crypto"],"System Configuration", True)
+    res = Database.activateComponents(["lib_wolfcrypt"],"System Configuration", True)
+    res = Database.activateComponents(["sys_time"],"System Configuration", True)
+    res = Database.activateComponents(["sys_console"],"System Configuration", True)
+    res = Database.activateComponents(["sys_command"],"System Configuration", True)
+    res = Database.activateComponents(["sys_debug"],"System Configuration", True)
     #Driver layer
-    res = Database.activateComponents(["tcpipAutoConfigApps"],"System Component", True)
-    res = Database.activateComponents(["tcpipAutoConfigBasic"],"System Component", True)
-    res = Database.activateComponents(["tcpipAutoConfigDriver"],"System Component", True)
-    res = Database.activateComponents(["tcpipAutoConfigNetwork"],"System Component", True)
-    res = Database.activateComponents(["drvWifiPic32mzw1"],"System Component", True)
+    res = Database.activateComponents(["tcpipAutoConfigApps"],"System Configuration", True)
+    res = Database.activateComponents(["tcpipAutoConfigBasic"],"System Configuration", True)
+    res = Database.activateComponents(["tcpipAutoConfigDriver"],"System Configuration", True)
+    res = Database.activateComponents(["tcpipAutoConfigNetwork"],"System Configuration", True)
+    res = Database.activateComponents(["drvWifiPic32mzw1"],"System Configuration", True)
     if(Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):
-       res = Database.activateComponents(["drv_ba414e"],"System Component", True)    
+       res = Database.activateComponents(["drv_ba414e"],"System Configuration", True)    
 
 #Application layer
-    res = Database.activateComponents(["tcpip_apps_config"],"System Component", True)
+    res = Database.activateComponents(["tcpip_apps_config"],"System Configuration", True)
     if(Database.getSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DHCP_CLIENT") != True):
         Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DHCP_CLIENT", True)
         if ( syswifisysComponent != None ):
@@ -727,4 +727,4 @@ def destroyComponent(component):
         Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DNS_SERVER", False)
     if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_APPDEBUG_ENABLE") == True):
        res = Database.deactivateComponents(["sysAppDebugPic32mzw1"])
-    res = Database.deactivateComponents(["System Component"])
+    res = Database.deactivateComponents(["System Configuration"])
