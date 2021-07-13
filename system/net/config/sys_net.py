@@ -312,10 +312,10 @@ def onAttachmentDisconnected(source, target):
 def netIntfAutoMenu(symbol, event):
 #    if (event["value"] == "WIFI_ETHERNET"):
     if (event["value"] == 1):
-        res = Database.activateComponents(["drvPic32mEthmac"],"System Component", True)
-        res = Database.activateComponents(["drvMiim"],"System Component", True)
-        res = Database.activateComponents(["drvExtPhyLan8740"],"System Component", True)
-#        res = Database.activateComponents(["tcpipNetConfig"],"System Component", True)
+        res = Database.activateComponents(["drvPic32mEthmac"],"System Configuration", True)
+        res = Database.activateComponents(["drvMiim"],"System Configuration", True)
+        res = Database.activateComponents(["drvExtPhyLan8740"],"System Configuration", True)
+#        res = Database.activateComponents(["tcpipNetConfig"],"System Configuration", True)
     else:
         res = Database.deactivateComponents(["drvExtPhyLan8740"])
         res = Database.deactivateComponents(["drvMiim"])
@@ -323,9 +323,9 @@ def netIntfAutoMenu(symbol, event):
 
 def netTLSautoMenu(symbol, event):
     if (event["value"] == True):
-        res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
-#        res = Database.activateComponents(["lib_wolfssl"],"System Component", True)
-#        res = Database.activateComponents(["tcpipSntp"],"System Component", True)
+        res = Database.activateComponents(["lib_wolfssl"],"System Configuration", True)
+#        res = Database.activateComponents(["lib_wolfssl"],"System Configuration", True)
+#        res = Database.activateComponents(["tcpipSntp"],"System Configuration", True)
 #        autoConnectTableWolfSSLcrypto = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
 #        res = Database.connectDependencies(autoConnectTableWolfSSLcrypto)
         setVal("net_Pres", "NET_PRES_SUPPORT_ENCRYPTION", True)
@@ -352,7 +352,7 @@ def netTLSautoMenu(symbol, event):
         Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_rsaPss", True)
         Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_dh", True)
         Database.setSymbolValue("lib_wolfcrypt", "wolfcrypt_keygen", False)
-        systemComponentGroup = Database.findGroup("System Component")
+        systemComponentGroup = Database.findGroup("System Configuration")
         if (systemComponentGroup != None):
             res=systemComponentGroup.addComponent("lib_wolfssl")
             autoConnectTableWolfSSLcrypto = [["lib_wolfssl", "WolfSSL_Crypto_Dependency", "lib_wolfcrypt","lib_wolfcrypt"]]
@@ -377,7 +377,7 @@ def finalizeComponent(netComponent):
     triggerDict = Database.sendMessage("core", "HEAP_SIZE", {"heap_size" : 160000})
 
     res = Database.activateComponents(["sysWifiPic32mzw1"])
-    res = Database.activateComponents(["net_Pres"],"System Component", True)
+    res = Database.activateComponents(["net_Pres"],"System Configuration", True)
     Hccomponent = Database.getComponentByID("HarmonyCore")
     fileSymb = Hccomponent.getSymbolByID("APP0_C")
     fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/net/templates/app.c.ftl")
