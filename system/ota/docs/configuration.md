@@ -97,4 +97,4 @@ User can build custom logic required for own design, using configrable parameter
 
 ## Easily registering user callbacks
 
-For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  **ota_app.c** file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in [Library interface](interface.md)
+For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  **app_ota.c** file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in [Library interface](interface.md)

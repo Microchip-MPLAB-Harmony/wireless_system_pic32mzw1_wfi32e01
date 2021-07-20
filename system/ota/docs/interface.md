@@ -406,7 +406,7 @@ Registering OTA service callback function.
 **Description**
 
 This function can be used for easy registering of user callback function. It can be called from application layer.
-The definition of the callback function is already present in `ota_app.c` file.  
+The definition of the callback function is already present in `app_ota.c` file.  
 
 **Returns**
 
@@ -419,7 +419,7 @@ none
 
 **Remarks**
 
-This function definition is present in "ota_app.c" file. Initialization must be done before calling this function. 
+This function definition is present in "app_ota.c" file. Initialization must be done before calling this function. 
 
 
 

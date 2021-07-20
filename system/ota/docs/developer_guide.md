@@ -26,7 +26,7 @@ Developer may register a callback function to receive callback from the OTA syst
 
 For registering callback developer may follow any one of below mentioned methods.
 
-a. Using the built-in function `ota_app_reg_cb()` wrapper, defined in `ota_app.c` . Please see the code snippet below for reference:
+a. Using the built-in function `ota_app_reg_cb()` wrapper, defined in `app_ota.c` . Please see the code snippet below for reference:
 
 ```C
      /* Check the application's current state. */
@@ -54,7 +54,7 @@ a. Using the built-in function `ota_app_reg_cb()` wrapper, defined in `ota_app.c
     }
 ```   
 
-The template of a callback handler function, `sys_ota_cb()` is implemented in `ota_app.c` with all the potential events from the OTA system service. Developer can modify this template to build their own custom logic as per system/application requirements.
+The template of a callback handler function, `sys_ota_cb()` is implemented in `app_ota.c` with all the potential events from the OTA system service. Developer can modify this template to build their own custom logic as per system/application requirements.
 
 ```c
     void sys_ota_cb(uint32_t event, void * data, void *cookie) {
