@@ -118,6 +118,22 @@ void netSysServCallback(uint32_t event, void *data, void* cookie)
 			*/
             break;
         }
+
+        case SYS_NET_EVNT_LL_INTF_DOWN:
+        {
+            /*
+			** SYS_CONSOLE_PRINT("netSysServCallback(): Lower Layer went Down\r\n");
+			*/
+            break;
+        }
+
+        case SYS_NET_EVNT_LL_INTF_UP:
+        {
+            /*
+			** SYS_CONSOLE_PRINT("netSysServCallback(): Lower Layer came Up\r\n");
+			*/
+            break;
+        }
     }
 }
 
@@ -180,21 +196,22 @@ void ${APP_TASK_NAME?upper_case}_Tasks ( void )
         /* Application's initial state. */
         case ${APP_TASK_NAME?upper_case}_STATE_INIT:
         {
-			/*
-			** TODO: Implement the Task State Machine
-			** ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS;
-			*/
+            bool appInitialized = true;
+
+
+            if (appInitialized)
+            {
+
+                ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS;
+            }
             break;
         }
 
-		/*
-		** TODO: Implement various cases/ states for the Application
         case ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS:
         {
 
             break;
         }
-		*/
 
         /* TODO: implement your application state machine.*/
 

@@ -52,7 +52,6 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 // *****************************************************************************
 // *****************************************************************************
 
-#include "definitions.h"
 #include "${APP_TASK_NAME?lower_case}.h"
 #include "app_mqtt.h"
 
@@ -164,7 +163,7 @@ void ${APP_TASK_NAME?upper_case}_CheckTimeOut(uint32_t timeOutValue, uint32_t la
 void ${APP_TASK_NAME?upper_case}_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_INIT_DONE;
+    ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_INIT;
 
 
 
@@ -189,14 +188,22 @@ void ${APP_TASK_NAME?upper_case}_Tasks ( void )
     switch ( ${APP_TASK_NAME?lower_case}Data.state )
     {
         /* Application's initial state. */
-        case ${APP_TASK_NAME?upper_case}_STATE_INIT_DONE:
+        case ${APP_TASK_NAME?upper_case}_STATE_INIT:
         {
-			${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS;
+            bool appInitialized = true;
+
+
+            if (appInitialized)
+            {
+
+                ${APP_TASK_NAME?lower_case}Data.state = ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS;
+            }
             break;
         }
 
         case ${APP_TASK_NAME?upper_case}_STATE_SERVICE_TASKS:
         {
+
             break;
         }
 

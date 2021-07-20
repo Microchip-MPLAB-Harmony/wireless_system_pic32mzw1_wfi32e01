@@ -10,7 +10,7 @@ def loadModule():
     sysWifiProvPic32mzw1Component = Module.CreateComponent('sysWifiProvPic32mzw1', 'WIFI PROVISIONING SERVICE', '/Wireless/System Services/', 'system/wifiprov/config/sys_wifiprov.py')
     #sysWifiProvPic32mzw1Component.setDisplayType("WiFi Provision System Service")
 	########################## Harmony Network Net Service #################################    
-    netComponent = Module.CreateComponent("sysNetPic32mzw1", "Net Service", '/Wireless/System Services/',"system/net/config/sys_net.py")
+    netComponent = Module.CreateComponent("sysNetPic32mzw1", "Net Service", "/Wireless/System Services/","system/net/config/sys_net.py")
     #netComponent.addCapability("libNet","net",True)    
     #netComponent.addDependency("Net_Crypto_Dependency", "TLS Provider", None, False, False)
 

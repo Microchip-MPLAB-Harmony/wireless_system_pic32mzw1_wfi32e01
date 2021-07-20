@@ -922,13 +922,14 @@ static void SYS_WIFIPROV_DataUpdate(uint8_t buffer[])
 <#if SYS_WIFIPROV_APPDEBUG_ENABLE  == true>
     SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_PROVISIONINGSOCKET, "received JSON data=%s \r\n",buffer);
 </#if>
-   
+
+    memset(&wifiProvSrvcConfig, 0, sizeof (SYS_WIFIPROV_CONFIG));
+
     if (buffer) 
     {
         /* Creating JSON object to parse incoming JSON data */
         if (!json_create(&root, (const char*) buffer, strlen((const char*) buffer))) 
         {
-            memset(&wifiProvSrvcConfig, 0, sizeof (SYS_WIFIPROV_CONFIG));
             /* Verifying JSON  "mode" field */
             if (!json_find(&root, "mode", &child)) 
             {

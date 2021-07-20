@@ -128,7 +128,7 @@ typedef enum
     SYS_WIFI_DISCONNECT,
     
     /* Control message type for requesting a Wi-Fi configuration information */
-    SYS_WIFI_GETCONFIG,
+    SYS_WIFI_GETWIFICONFIG,
 
 <#if SYS_WIFI_PROVISION_ENABLE == true>            
     /* Control message type for updating a Provisioning Wi-Fi configuration 
@@ -139,10 +139,19 @@ typedef enum
     /* Control message type for registering a Wi-Fi system service 
        client callback */
     SYS_WIFI_REGCALLBACK,
+
+<#if SYS_WIFI_SCAN_ENABLE == true>            
+    /* Control message type for requesting a Wi-Fi Scan configuration 
+        information */
+    SYS_WIFI_GETSCANCONFIG,
     
-    /* Control message type for requesting a Wi-Fi scan.In Scan request, 
-       client can set channel number and type of scan(active/passive). */
-    SYS_WIFI_SCANREQ
+    /* Control message type for requesting a Wi-Fi scan. In Scan request, 
+       client can include Scan configuration strucure if desired*/
+    SYS_WIFI_SCANREQ,
+</#if>
+            
+    /*Control message type for requesting a Wi-Fi driver handle */
+    SYS_WIFI_GETDRVHANDLE,
 
 } SYS_WIFI_CTRLMSG ;
 
@@ -177,6 +186,29 @@ typedef enum
 </#if>
 } SYS_WIFI_MODE ;
 
+<#if SYS_WIFI_SCAN_ENABLE == true>
+// *****************************************************************************
+/* System Wi-Fi service scanning  modes
+
+  Summary:
+    Identifies the Wi-Fi scanning mode.
+
+  Description:
+    Identifies the Wi-Fi scanning mode.
+
+  Remarks:
+    None
+*/
+
+typedef enum 
+{
+    /* Requesting a operating mode a station */
+    SYS_WIFI_SCAN_MODE_PASSIVE = 0,
+
+    /* Requesting a operating mode a AP access point. */
+    SYS_WIFI_SCAN_MODE_ACTIVE
+} SYS_WIFI_SCAN_MODES ;
+</#if>
 
 <#if SYS_WIFI_STA_ENABLE == true>
 // *****************************************************************************
@@ -322,6 +354,61 @@ typedef struct
 
 }SYS_WIFI_CONFIG;
 
+<#if SYS_WIFI_SCAN_ENABLE == true>
+// *****************************************************************************
+/* System Wi-Fi service scan configuration structure.
+
+  Summary:
+    Configuration of ssid scan parameters.
+
+  Description:
+    Configuration of ssid scan parameters.
+
+  Remarks:
+   None.
+*/
+
+typedef struct 
+{
+    /* Wi-Fi station mode channel number.
+        values of channel:  
+        0 - scan all the channels
+        1 to 13 - - scan on specified channel */
+    uint8_t channel;
+    
+    /* Scanning mode of the device */
+    SYS_WIFI_SCAN_MODES mode;
+    
+    /* List of SSIDs for scanning */
+    char * pSsidList;
+
+    /* Delimiter used for separating names in the "pSsidList" */
+    char delimChar;
+    
+    /* bitwise scanning masks*/
+    uint16_t chan24Mask;
+    
+    /* Number of slots (minimum is 2). */
+    uint8_t numSlots;
+    
+    /* Time spent on each active channel probing for BSS's. */
+    uint16_t activeSlotTime;
+    
+    /* Time spent on each passive channel listening for beacons. */
+    uint16_t passiveSlotTime;
+    
+    /* Number of probes per slot. */
+    uint8_t numProbes;
+    
+    /* The scan matching mode can be to stop on first match or match all. */
+    uint8_t matchMode;
+    
+    /* Scan callback handler that gets triggered from PIC32MZW1 driver */
+    void * pNotifyCallback;
+    
+} SYS_WIFI_SCAN_CONFIG;
+
+</#if>
 
 // *****************************************************************************
 /* System Wi-Fi service Status .
@@ -798,19 +885,46 @@ uint8_t SYS_WIFI_Tasks (SYS_MODULE_OBJ object);
             
             }
 
+<#if SYS_WIFI_SCAN_ENABLE == true>
+        Details of SYS_WIFI_GETSCANCONFIG:
+            
+            // Get Wi-Fi Scan Configuration using control message request.
+            // The information of configuration is updated in the wifiSrvcScanConfig.
+            
+            SYS_WIFI_SCAN_CONFIG wifiSrvcScanConfig;
+            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETSCANCONFIG, &wifiSrvcScanConfig, sizeof(SYS_WIFI_SCAN_CONFIG)))
+            {
+                  //Received the wifiSrvcScanConfig data
+            }
+
         Details of SYS_WIFI_SCANREQ:
             
-            // In Scan request, user can set channel number and type of scan.
-            uint8_t buff[2];
+            // In Scan request, 
+            // user can request Wi-Fi scan with default values:
+            SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_SCANREQ, NULL, 0);
 
-            // Scan all the channels 
-            buff[0] = 0 ;
+            // OR 
+            // user can request Wi-Fi scan with custom values:
+            // step 1: get current structure "wifiSrvcScanConfig" from the service using SYS_WIFI_GETSCANCONFIG
+            // step 2: update desired parameters
+            char myAPlist[] = "openAP,SecuredAP,DEMO_AP,my_cell_hotspot";
+            char delimiter  = ',';
+            wifiSrvcScanConfig.channel    =  6;
+            wifiSrvcScanConfig.mode       =  SYS_WIFI_SCAN_MODE_ACTIVE;
+            wifiSrvcScanConfig.pSsidList  =  myAPlist;
+            wifiSrvcScanConfig.delimChar  =  delimiter;
+            // step 3: pass structure in scan request
+            SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_SCANREQ, &wifiSrvcScanConfig, sizeof(SYS_WIFI_SCAN_CONFIG));
+</#if>
 
-            // Set the Scan type as passive: 
-            //  false- passive scan,
-            //  true -active scan) 
-            buff[1] = false;
-            SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_SCANREQ, buff, 2);
+        Details of SYS_WIFI_GETDRVHANDLE:
+
+            // Get Wi-Fi Driver handle using control message request.
+            DRV_HANDLE myWifiDrvHandle;
+            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETDRVHANDLE, &myWifiDrvHandle, sizeof(DRV_HANDLE)))
+            {
+                  //Received the handle
+            }
 
         Details of SYS_WIFI_REGCALLBACK:
 
@@ -818,13 +932,13 @@ uint8_t SYS_WIFI_Tasks (SYS_MODULE_OBJ object);
             // callback registration is a MHC configuration.
             SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_REGCALLBACK, WiFiServCallback, sizeof(uint8_t *));
 
-        Details of SYS_WIFI_GETCONFIG:
+        Details of SYS_WIFI_GETWIFICONFIG:
             
             // Get Wi-Fi Configuration using control message request.
             // The information of configuration is updated in the wifiSrvcConfig.
             
             SYS_WIFI_CONFIG wifiSrvcConfig;
-            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETCONFIG, &wifiSrvcConfig, sizeof(SYS_WIFI_CONFIG)))
+            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETWIFICONFIG, &wifiSrvcConfig, sizeof(SYS_WIFI_CONFIG)))
             {
                   //Received the wifiSrvcConfig data
             } 
