@@ -1030,16 +1030,25 @@ static SYS_WIFI_RESULT SYS_WIFI_SetScan (void)
         {
             if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindSetEnabledChannels24(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.chan24Mask))
             {
-                if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindFirst(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.channel, g_wifiSrvcScanConfig.mode, pSSIDList, (WDRV_PIC32MZW_BSSFIND_NOTIFY_CALLBACK) g_wifiSrvcScanConfig.pNotifyCallback))   
+                if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindSetScanParameters(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.numSlots, g_wifiSrvcScanConfig.activeSlotTime, g_wifiSrvcScanConfig.passiveSlotTime, g_wifiSrvcScanConfig.numProbes))
                 {
-                    ret = SYS_WIFI_SUCCESS ;
+                    if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindFirst(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.channel, g_wifiSrvcScanConfig.mode, pSSIDList, (WDRV_PIC32MZW_BSSFIND_NOTIFY_CALLBACK) g_wifiSrvcScanConfig.pNotifyCallback))   
+                    {
+                        ret = SYS_WIFI_SUCCESS ;
+                    }
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                    else
+                    {
+                        SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_SCAN, "Set Scan Find First failed!\r\n");
+                    }
+</#if>
                 }
 <#if SYS_WIFI_APPDEBUG_ENABLE  == true>
                 else
                 {
-                    SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_SCAN, "Set Scan Find First failed!\r\n");
+                    SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_SCAN, "Set Scan Parameters failed!\r\n");
                 }
-</#if>
+</#if>                
             }
 <#if SYS_WIFI_APPDEBUG_ENABLE  == true>
             else
