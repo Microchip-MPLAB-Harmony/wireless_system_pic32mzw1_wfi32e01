@@ -18,3 +18,5 @@ def loadModule():
     pahomqttComponent = Module.CreateComponent('lib_pahomqtt', 'Paho MQTT Library', '/Third Party Libraries/PahoMqtt/', 'config/pahomqtt.py')
 
     mqttComponent = Module.CreateComponent('sysMqttPic32mzw1', 'MQTT Service', '/Wireless/System Services/', 'system/mqtt/config/sys_mqtt.py')
+    
+    sysOTAPic32mzw1Component = Module.CreateComponent('sysOtaPic32mzw1', 'OTA SERVICE', '/Wireless/System Services/', 'system/ota/config/sys_ota.py')
