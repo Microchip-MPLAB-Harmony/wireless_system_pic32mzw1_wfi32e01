@@ -362,7 +362,7 @@ uint8_t TCPIP_HTTP_NET_ConnectionFileAuthenticate(TCPIP_HTTP_NET_CONN_HANDLE con
     if(memcmp(cFile, "index.htm", 9) == 0)
     {
         memset((void *)&g_wifiConfigHTTPNet,0,sizeof(g_wifiConfigHTTPNet));
-        SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETCONFIG, &g_wifiConfigHTTPNet, sizeof(SYS_WIFI_CONFIG));
+        SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETWIFICONFIG, &g_wifiConfigHTTPNet, sizeof(SYS_WIFI_CONFIG));
     }
     return 0x80; // No authentication required
 }
