@@ -253,7 +253,7 @@ SYS_WIFIPROV_MODE mode;
 uint8_t saveConfig;
 
 /* Country Code configuration */
-uint8_t countryCode[5];
+uint8_t countryCode[6];
 
 /* Wi-Fi station mode configuration */
 SYS_WIFIPROV_STA_CONFIG staConfig;
