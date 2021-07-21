@@ -235,7 +235,7 @@ Default Values for Interface - 0 (Wifi)
 None. 
 
 ```c
-#define SYS_NET_DEFAULT_NET_INTF 0	// Interface 0 by default
+#define SYS_NET_DEFAULT_NET_INTF SYS_NET_INTF_WIFI	// Interface 0 by default
 ```
 
 ### NET_CFG
@@ -357,6 +357,9 @@ SYS_NET_STATUS_DISCONNECTED,
 
 // Net Instance received FIN from peer
 SYS_NET_STATUS_PEER_SENT_FIN,
+
+// Net Instance connected to the peer but the lower layer is down
+SYS_NET_STATUS_CONNECTED_LL_DOWN,
 } SYS_NET_STATUS;
 ```
 
@@ -390,6 +393,12 @@ SYS_NET_EVNT_DNS_RESOLVE_FAILED,
 
 // Socket Open Failed
 SYS_NET_EVNT_SOCK_OPEN_FAILED,
+
+// Received only in Connected State - Lower Layer Down
+SYS_NET_EVNT_LL_INTF_DOWN,
+
+// Received only in Connected State - Lower Layer Up
+SYS_NET_EVNT_LL_INTF_UP,
 } SYS_NET_EVENT;
 ```
 
@@ -609,7 +618,7 @@ if (g_NetServHandle == SYS_MODULE_OBJ_INVALID)
 
 **Remarks**
 
-This routine should be called everytime a user wants to open a new NET socket 
+This routine should be called everytime a user wants to open a new NET socket. Also, in case the user is opening a Client Socket, and the under lying network interface is Wifi in AP Mode, it is recommended that the call be made only after the STA running the server connects to the AP on the Wifi interface. 
 
 ### SYS_NET_Close
 
