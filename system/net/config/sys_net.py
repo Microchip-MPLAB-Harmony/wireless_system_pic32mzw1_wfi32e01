@@ -381,7 +381,9 @@ def finalizeComponent(netComponent):
     Hccomponent = Database.getComponentByID("HarmonyCore")
     fileSymb = Hccomponent.getSymbolByID("APP0_C")
     fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/net/templates/app.c.ftl")
-
+    
+    setVal("tcpipUdp", "TCPIP_UDP_SOCKET_DEFAULT_RX_QUEUE_LIMIT", 16)
+    
     # Enable dependent Harmony core components
     if (Database.getSymbolValue("HarmonyCore", "ENABLE_SYS_COMMON") == False):
         Database.clearSymbolValue("HarmonyCore", "ENABLE_SYS_COMMON")
