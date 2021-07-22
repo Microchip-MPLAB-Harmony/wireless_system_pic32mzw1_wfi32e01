@@ -26,3 +26,5 @@ Wi-Fi Provisioning System Service Library is used to enable Wi-Fi provisioning m
 * [Using the library](usage.md/#using-the-library)
 
 * [Library interface](interface.md)
+
+* [Developer guide](developer_guide.md)

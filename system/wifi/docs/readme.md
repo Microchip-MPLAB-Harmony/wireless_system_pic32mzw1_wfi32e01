@@ -39,3 +39,5 @@ The Wi-Fi System Service provides simple API's to enable Station(STA) or Access 
 * [Configuring the library](configuration.md/#configuring-the-library)
 
 * [Library interface](interface.md)
+
+* [Developer guide](developer_guide.md)
