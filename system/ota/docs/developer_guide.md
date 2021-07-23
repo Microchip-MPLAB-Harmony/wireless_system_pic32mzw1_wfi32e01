@@ -28,7 +28,7 @@ For registering callback developer may follow any one of below mentioned methods
 
 a. Using the built-in function `ota_app_reg_cb()` wrapper, defined in `app_ota.c` . Please see the code snippet below for reference:
 
-```C
+```c
      /* Check the application's current state. */
     switch ( appData.state )
     {

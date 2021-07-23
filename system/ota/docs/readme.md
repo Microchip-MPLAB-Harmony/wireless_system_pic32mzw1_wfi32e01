@@ -1,5 +1,5 @@
 ---
-grand_parent: Harmony 3 PIC32MZW1 wireless system services package
+parent: Harmony 3 PIC32MZW1 wireless system services package
 title: OTA Service
 has_children: true
 has_toc: false
@@ -45,6 +45,8 @@ The OTA System Service provides simple APIs to enable OTA functionality. More in
 * [Configuring the library](configuration.md/#configuring-the-library)
 
 * [Library interface](interface.md)
+
+* [Developer guide](developer_guide.md)
 
 
 
