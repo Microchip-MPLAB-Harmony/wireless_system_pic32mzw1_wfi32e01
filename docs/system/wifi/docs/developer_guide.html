@@ -1,0 +1,191 @@
+<!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon"> <link rel="stylesheet" href="../../../assets/css/just-the-docs-default.css"> <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-16"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'UA-2724382-16'); </script> <script type="text/javascript" src="../../../assets/js/vendor/lunr.min.js"></script> <script type="text/javascript" src="../../../assets/js/just-the-docs.js"></script> <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Begin Jekyll SEO tag v2.7.1 --> <title>Wi-Fi System Service developer guide | Microchip MPLAB Harmony PIC32MZW1 wireless system services help</title> <meta name="generator" content="Jekyll v3.9.0" /> <meta property="og:title" content="Wi-Fi System Service developer guide" /> <meta property="og:locale" content="en_US" /> <meta name="description" content="Harmony 3 PIC32MZW1/WFI32 wireless system services" /> <meta property="og:description" content="Harmony 3 PIC32MZW1/WFI32 wireless system services" /> <link rel="canonical" href="../../../system/wifi/docs/developer_guide.html" /> <meta property="og:url" content="../../../system/wifi/docs/developer_guide.html" /> <meta property="og:site_name" content="Microchip MPLAB Harmony PIC32MZW1 wireless system services help" /> <meta name="twitter:card" content="summary" /> <meta property="twitter:title" content="Wi-Fi System Service developer guide" /> <script type="application/ld+json"> {"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"../../assets/images/vendor/microchip_mplab_harmony_logo_150_transparent.png"}},"@type":"WebPage","url":"../../../system/wifi/docs/developer_guide.html","headline":"Wi-Fi System Service developer guide","description":"Harmony 3 PIC32MZW1/WFI32 wireless system services","@context":"https://schema.org"}</script> <!-- End Jekyll SEO tag --> </head> <body> <svg xmlns="http://www.w3.org/2000/svg" style="display: none;"> <symbol id="svg-link" viewBox="0 0 24 24"> <title>Link</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"> <title>Search</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"> <title>Menu</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"> <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"> <title>Expand</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"> <polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"> <title>Document</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"> <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> </svg> <div class="side-bar"> <div class="site-header"> <a href="../../../index.html" class="site-title lh-tight"> <div class="site-logo"></div> </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a> </div> <nav role="navigation" aria-label="Main" id="site-nav" class="site-nav"> <ul class="nav-list"><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../" class="nav-list-link">Harmony 3 PIC32MZW1 wireless system services package</a><ul class="nav-list "><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../system/wifiprov/docs/readme.html" class="nav-list-link">Wi-Fi provisioning Service</a><ul class="nav-list"><li class="nav-list-item "> <a href="../../../system/wifiprov/docs/configuration.html" class="nav-list-link">Wi-Fi provisioning System Service Configuration</a> </li><li class="nav-list-item "> <a href="../../../system/wifiprov/docs/developer_guide.html" class="nav-list-link">Wi-Fi provisioning System Service developer guide</a> </li><li class="nav-list-item "> <a href="../../../system/wifiprov/docs/usage.html" class="nav-list-link">Wi-Fi provisioning System Service Usage</a> </li><li class="nav-list-item "> <a href="../../../system/wifiprov/docs/interface.html" class="nav-list-link">Wi-Fi provisioning System Service Interface</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../system/mqtt/docs/readme.html" class="nav-list-link">MQTT Service</a><ul class="nav-list"><li class="nav-list-item "> <a href="../../../system/mqtt/docs/configuration.html" class="nav-list-link">MQTT System Service Configuration</a> </li><li class="nav-list-item "> <a href="../../../system/mqtt/docs/usage.html" class="nav-list-link">MQTT System Service Usage</a> </li><li class="nav-list-item "> <a href="../../../system/mqtt/docs/interface.html" class="nav-list-link">MQTT System Service Interface</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../system/net/docs/readme.html" class="nav-list-link">Net Service</a><ul class="nav-list"><li class="nav-list-item "> <a href="../../../system/net/docs/configuration.html" class="nav-list-link">Net System Service Configuration</a> </li><li class="nav-list-item "> <a href="../../../system/net/docs/usage.html" class="nav-list-link">Net System Service Usage</a> </li><li class="nav-list-item "> <a href="../../../system/net/docs/interface.html" class="nav-list-link">Net System Service Interface</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../system/ota/docs/readme.html" class="nav-list-link">OTA Service</a><ul class="nav-list"><li class="nav-list-item "> <a href="../../../system/ota/docs/configuration.html" class="nav-list-link">OTA System Service Configuration</a> </li><li class="nav-list-item "> <a href="../../../system/ota/docs/developer_guide.html" class="nav-list-link">OTA System Developer's guide</a> </li><li class="nav-list-item "> <a href="../../../system/ota/docs/usage.html" class="nav-list-link">OTA System Service Usage</a> </li><li class="nav-list-item "> <a href="../../../system/ota/docs/interface.html" class="nav-list-link">OTA System Service Interface</a> </li></ul></li><li class="nav-list-item "><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../system/appdebug/docs/readme.html" class="nav-list-link">App Debug Service</a><ul class="nav-list"><li class="nav-list-item "> <a href="../../../system/appdebug/docs/configuration.html" class="nav-list-link">App Debug System Service Configuration</a> </li><li class="nav-list-item "> <a href="../../../system/appdebug/docs/usage.html" class="nav-list-link">App Debug System Service Usage</a> </li><li class="nav-list-item "> <a href="../../../system/appdebug/docs/interface.html" class="nav-list-link">App Debug System Service Interface</a> </li></ul></li><li class="nav-list-item active"><a href="#" class="nav-list-expander"><svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg></a><a href="../../../system/wifi/docs/readme.html" class="nav-list-link">Wi-Fi Service</a><ul class="nav-list"><li class="nav-list-item "> <a href="../../../system/wifi/docs/configuration.html" class="nav-list-link">Wi-Fi System Service Configuration</a> </li><li class="nav-list-item active"> <a href="../../../system/wifi/docs/developer_guide.html" class="nav-list-link active">Wi-Fi System Service developer guide</a> </li><li class="nav-list-item "> <a href="../../../system/wifi/docs/usage.html" class="nav-list-link">Wi-Fi System Service Usage</a> </li><li class="nav-list-item "> <a href="../../../system/wifi/docs/interface.html" class="nav-list-link">Wi-Fi System Service Interface</a> </li></ul></li></ul></li><li class="nav-list-item"><a href="../../../release_notes.html" class="nav-list-link">Release notes</a></li><li class="nav-list-item"><a href="../../../mplab_harmony_license.html" class="nav-list-link">License</a></li></ul> </nav> <footer class="site-footer"> This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll. </footer> </div> <div class="main" id="top"> <div id="main-header" class="main-header"> <div class="search"> <div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search Microchip MPLAB Harmony PIC32MZW1 wireless system services help" aria-label="Search Microchip MPLAB Harmony PIC32MZW1 wireless system services help" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label> </div> <div id="search-results" class="search-results"></div> </div> <nav aria-label="Auxiliary" class="aux-nav"> <ul class="aux-nav-list"> <li class="aux-nav-list-item"> <a href="https://support.microchip.com" class="site-button" > Obtain Support from Microchip </a> </li> </ul> </nav> </div> <div id="main-content-wrap" class="main-content-wrap"> <nav aria-label="Breadcrumb" class="breadcrumb-nav"> <ol class="breadcrumb-nav-list"> <li class="breadcrumb-nav-list-item"><a href="../../../">Harmony 3 PIC32MZW1 wireless system services package</a></li> <li class="breadcrumb-nav-list-item"><a href="../../../system/wifi/docs/readme.html">Wi-Fi Service</a></li> <li class="breadcrumb-nav-list-item"><span>Wi-Fi System Service developer guide</span></li> </ol> </nav> <div id="main-content" class="main-content" role="main"> <h1 id="wi-fi-system-service-developers-guide"> <a href="#wi-fi-system-service-developers-guide" aria-labelledby="wi-fi-system-service-developers-guide" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Wi-Fi System Service Developer’s Guide </h1> <h2 id="code-modificationimplementation-guide-for-common-use-cases"> <a href="#code-modificationimplementation-guide-for-common-use-cases" aria-labelledby="code-modificationimplementation-guide-for-common-use-cases" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Code modification/implementation guide for common use cases</strong> </h2> <h3 id="wi-fi-system-service-auto-connect"> <a href="#wi-fi-system-service-auto-connect" aria-labelledby="wi-fi-system-service-auto-connect" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Wi-Fi System Service Auto Connect</strong> </h3> <p>When user enables the auto connect features using Wi-Fi service system MHC menu, the default auto connect retry count is configured to 5. User can modify the macro MAX_AUTO_CONNECT_RETRY in generated file <code class="language-plaintext highlighter-rouge">sys_wifi.c</code> as per their choice. PIC32MZW1 device stops the connection request to AP after retry count reaches to zero and successful connections with AP is not established.</p><pre><code class="language-C">/* Wi-Fi STA Mode, maximum auto connect retry */
+#define MAX_AUTO_CONNECT_RETRY                5
+</code></pre><h3 id="wi-fi-system-service-scan-example"> <a href="#wi-fi-system-service-scan-example" aria-labelledby="wi-fi-system-service-scan-example" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>Wi-Fi System Service Scan Example</strong> </h3> <p>Wi-Fi System Service support scan functinality both in STA and AP mode. In case, user want to overwrite MHC configuration of the scan parameter,please find the below snippet code that need to be added in the application.</p><pre><code class="language-C">#include "wdrv_pic32mzw_bssfind.h"
+
+APP_DATA             appData;
+SYS_WIFI_SCAN_CONFIG scanConfig;
+
+/* Wi-Fi driver triggers a callback to update each Scan result one-by-one*/
+bool APP_ScanHandler (DRV_HANDLE handle, uint8_t index, uint8_t ofTotal, WDRV_PIC32MZW_BSS_INFO *pBSSInfo)
+{
+    if (0 == ofTotal) 
+    {
+        SYS_CONSOLE_MESSAGE("No AP Found... Rescan\r\n");
+    } 
+    else 
+    {
+        if (index == 1)
+        {
+            SYS_CONSOLE_PRINT("Scan Results: #%02d\r\n", ofTotal);
+        }
+        SYS_CONSOLE_PRINT("[%02d] %s\r\n", index, pBSSInfo-&gt;ctx.ssid.name);
+    }
+    // return true to receive further results; otherwise return false if desired
+    return true;
+}
+
+void APP_Initialize(void) {
+    appData.state = APP_STATE_INIT;
+}
+
+void APP_Tasks(void) {
+    
+    SYS_WIFI_RESULT res;
+    SYS_WIFI_STATUS wifiStatus;
+    
+    switch (appData.state) 
+    {
+        case APP_STATE_INIT:
+        {
+            appData.state = APP_STATE_TRIGGER_SCAN;
+            break;
+        }
+        
+        case APP_STATE_TRIGGER_SCAN:
+        {
+            wifiStatus = SYS_WIFI_GetStatus (sysObj.syswifi);
+            if (wifiStatus &gt; SYS_WIFI_STATUS_WDRV_OPEN_REQ)
+            {
+                memset(&amp;scanConfig, 0, sizeof(scanConfig));
+                res = SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETSCANCONFIG, &amp;scanConfig, sizeof(SYS_WIFI_SCAN_CONFIG));
+                if(SYS_WIFI_SUCCESS == res)
+                {
+                    //Received the wifiSrvcScanConfig data
+                    char myAPlist[] = ""; // e.g. "myAP*OPENAP*Hello World!"
+                    char delimiter  = '*';
+                    scanConfig.channel         = 0;
+                    scanConfig.mode            = SYS_WIFI_SCAN_MODE_ACTIVE;
+                    scanConfig.pSsidList       = myAPlist;
+                    scanConfig.delimChar       = delimiter;
+                    scanConfig.pNotifyCallback = (void *)APP_ScanHandler;
+                    scanConfig.matchMode       = WDRV_PIC32MZW_SCAN_MATCH_MODE_FIND_ALL;
+                    
+                    SYS_CONSOLE_PRINT("\r\nStarting Custom Scan ...\r\n");
+                    
+                    res = SYS_WIFI_CtrlMsg(sysObj.syswifi,SYS_WIFI_SCANREQ,&amp;scanConfig,sizeof(SYS_WIFI_SCAN_CONFIG));
+                    if(SYS_WIFI_SUCCESS != res)
+                    {
+                        SYS_CONSOLE_PRINT("Error Starting scan: %d\r\n", res);
+                        appData.state = APP_STATE_ERROR;
+                        break;
+                    }
+                    appData.state = APP_STATE_DONE;
+                }
+                else
+                {
+                    SYS_CONSOLE_PRINT("Error retrieving scan config: %d\r\n", res);
+                    appData.state = APP_STATE_ERROR;
+                }
+            }
+            
+            break;
+        }
+        
+        case APP_STATE_DONE:
+        {
+            // wait for custom scan to complete and do nothing later
+            break;
+        }
+        
+        case APP_STATE_ERROR:
+        {
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+</code></pre><p>User can initiate the Scan request with default Wi-Fi System service MHC menu configuration with below code snippet. <img src="../../../system/wifi/docs/images/Wi-Fi_service_SCAN_MHC.png" alt="" /></p><pre><code class="language-C">SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_SCANREQ, NULL, 0);
+</code></pre><h3 id="how-to-disconnect-connected-sta-in-ap-mode-using-wi-fi-system-service"> <a href="#how-to-disconnect-connected-sta-in-ap-mode-using-wi-fi-system-service" aria-labelledby="how-to-disconnect-connected-sta-in-ap-mode-using-wi-fi-system-service" class="anchor-heading"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> <strong>How to Disconnect Connected STA in AP Mode Using Wi-Fi System Service</strong> </h3> <p>Please see the code snippet below for reference.</p><pre><code class="language-C">#include "app.h"
+#include "definitions.h"
+
+APP_DATA appData;
+static SYS_WIFI_CONFIG wificonfig;
+
+void WiFiServCallback(uint32_t event, void * data, void *cookie) 
+{
+    IPV4_ADDR *IPAddr;
+    switch (event) 
+    {
+        case SYS_WIFI_CONNECT:
+        {
+            IPAddr = (IPV4_ADDR *) data;
+            if (SYS_WIFI_STA == wificonfig.mode) 
+            {
+                SYS_CONSOLE_PRINT("Connected to AP. Got IP address = %d.%d.%d.%d \r\n", IPAddr-&gt;v[0], IPAddr-&gt;v[1], IPAddr-&gt;v[2], IPAddr-&gt;v[3]);
+            } 
+            else 
+            {
+                SYS_WIFI_STA_APP_INFO    *psStaConnInfo = (SYS_WIFI_STA_APP_INFO *)data;
+                SYS_CONSOLE_PRINT("STA Connected to AP. Got IP address = %d.%d.%d.%d \r\n", 
+                        psStaConnInfo-&gt;ipAddr.v[0], psStaConnInfo-&gt;ipAddr.v[1], psStaConnInfo-&gt;ipAddr.v[2], psStaConnInfo-&gt;ipAddr.v[3]);                
+                SYS_CONSOLE_PRINT("STA Connected to AP. Got MAC address = %x:%x:%x:%x:%x:%x \r\n", 
+                        psStaConnInfo-&gt;macAddr[0], psStaConnInfo-&gt;macAddr[1], psStaConnInfo-&gt;macAddr[2],
+                        psStaConnInfo-&gt;macAddr[3], psStaConnInfo-&gt;macAddr[4], psStaConnInfo-&gt;macAddr[5]);
+                SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_DISCONNECT, psStaConnInfo-&gt;macAddr, 6);
+            }
+            break;
+        }
+        case SYS_WIFI_DISCONNECT:
+        {
+            SYS_CONSOLE_PRINT("Device DISCONNECTED \r\n");
+            break;
+        }
+        case SYS_WIFI_PROVCONFIG:
+        {
+            memcpy(&amp;wificonfig,data,sizeof(SYS_WIFI_CONFIG));
+            SYS_CONSOLE_PRINT("%s:%d Received Provisioning Data : \r\n Device mode=%s \r\n", __func__, __LINE__, (wificonfig.mode == SYS_WIFI_STA) ? "STA" : "AP");
+            if (SYS_WIFI_STA == wificonfig.mode) 
+            {
+                SYS_CONSOLE_PRINT(" ssid=%s password=%s \r\n",wificonfig.staConfig.ssid,wificonfig.staConfig.psk);
+            } 
+            else if (SYS_WIFI_AP == wificonfig.mode) 
+            {
+                SYS_CONSOLE_PRINT(" ssid=%s password=%s \r\n",wificonfig.apConfig.ssid,wificonfig.apConfig.psk);
+            }            
+            break;
+        }
+    }
+}
+
+void APP_Initialize(void) 
+{
+    appData.state = APP_STATE_INIT;
+}
+
+void APP_Tasks(void) 
+{
+
+    switch (appData.state) 
+    {
+        case APP_STATE_INIT:
+        {
+            SYS_CONSOLE_PRINT("Application: wifi_easy_config \r\n");
+            SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_REGCALLBACK, WiFiServCallback, sizeof (uint8_t *));
+
+            appData.state = APP_STATE_GETCONFIG;
+            break;
+        }
+        case APP_STATE_GETCONFIG:
+        {
+            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETWIFICONFIG, &amp;wificonfig, sizeof(SYS_WIFI_CONFIG)))
+            {
+                SYS_CONSOLE_PRINT("%s:%d Device mode=%s \r\n", __func__, __LINE__, (wificonfig.mode == SYS_WIFI_STA) ? "STA" : "AP");
+                appData.state = APP_STATE_SERVICE_TASKS;
+
+            }            
+            break;
+        }
+        case APP_STATE_SERVICE_TASKS:
+        {
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}
+</code></pre><hr> <footer> <p class="text-small text-grey-dk-000 mb-0"><img src='https://raw.githubusercontent.com/wiki/Microchip-MPLAB-Harmony/Microchip-MPLAB-Harmony.github.io/images/microchip_logo.png' /><br />Copyright &copy; 2020 Microchip Technology.</p> <!-- <p class="text-small text-grey-dk-000 mb-0"><img src='../../../assets/images/vendor/microchip_logo.png' /><br /> Copyright &copy; 2021 Microchip Technology.</p> --> </footer> </div> </div> <div class="search-overlay"></div> </div> </body> </html>
