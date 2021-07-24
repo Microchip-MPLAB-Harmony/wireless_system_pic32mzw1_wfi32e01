@@ -190,7 +190,12 @@ def instantiateComponent(netComponent):
     netHostName1.setDefaultValue("192.168.1.1")
     netHostName1.setVisible(False)
     netHostName1.setDependencies(netInst1MenuVisible, ["SYS_NET_IDX1"])
-	
+
+    netEnableTNGTLS = netComponent.createBooleanSymbol("SYS_NET_TNGTLS", None)
+    netEnableTNGTLS.setLabel("Trust&Go client certificate")
+    netEnableTNGTLS.setDefaultValue(False)
+    netEnableTNGTLS.setDependencies(netTLSTNGTLS, ["SYS_NET_TNGTLS"])
+
     ############################################################################
     #### Code Generation ####
     ############################################################################
@@ -370,6 +375,21 @@ def netTLSautoMenu(symbol, event):
         setVal("net_Pres", "NET_PRES_SUPPORT_ENCRYPTION", False)
 #        res = Database.deactivateComponents(["tcpipSntp"])
 
+def netTLSTNGTLS(symbol, event):
+    if (event["value"] == True):
+        setVal("net_Pres", "NET_PRES_BLOB_ENABLE_ATECC_TNGTLS", True)
+        Database.activateComponents(["atecc608","i2c2"],"System Configuration", True)
+        Database.setSymbolValue("atecc608_0","PART_TYPE",2)
+        systemComponentGroup = Database.findGroup("System Configuration")
+        if (systemComponentGroup != None):
+            systemComponentGroup.addComponent("cryptoauthlib")
+            systemComponentGroup.addComponent("cryptoauthlib_tng")
+            Database.connectDependencies([["atecc608_0","ATECC608_DEP_PLIB_I2C","i2c2","I2C2_I2C"]])
+            #Database.connectDependencies([["lib_wolfcrypt","lib_wolfcrypt","cryptoauthlib","WolfSSL_Crypto_Dependency"]])
+    else:
+        setVal("net_Pres", "NET_PRES_BLOB_ENABLE_ATECC_TNGTLS", False)
+        Database.deactivateComponents(["atecc608","cryptoauthlib","i2c2","cryptoauthlib_tng"])
+    
 
 def finalizeComponent(netComponent):
     #Database.setSymbolValue("core", "XC32_HEAP_SIZE", 160000)
