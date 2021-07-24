@@ -21,6 +21,7 @@ nav_order: 99
 - [WIFI] Scan support in AP mode (feature enabled in from underlying wireless library.)
 - [WIFIPROV] User storage option for Wi-Fi provisioning credentials.
 - [WIFIPROV] Provisioning data will be stored in last 4 KB of NVM. This region will be reserved by the compiler.
+- [NET] One click configuration to use TNGTLS client certificates.
 - [MQTT] Includes MQTT callback template and intialization in generated code.
 
 > **Note:** All system components are now available under the `wireless` component tree in MHC. 
