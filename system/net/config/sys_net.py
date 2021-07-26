@@ -194,7 +194,6 @@ def instantiateComponent(netComponent):
     netEnableTNGTLS = netComponent.createBooleanSymbol("SYS_NET_TNGTLS", None)
     netEnableTNGTLS.setLabel("Trust&Go client certificate")
     netEnableTNGTLS.setDefaultValue(False)
-    netEnableTNGTLS.setDependencies(netTLSautoMenu, ["SYS_NET_TNGTLS"])
     netEnableTNGTLS.setDependencies(netTLSTNGTLS, ["SYS_NET_TNGTLS"])
 
     ############################################################################

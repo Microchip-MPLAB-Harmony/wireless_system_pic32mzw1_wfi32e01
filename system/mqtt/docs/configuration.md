@@ -69,7 +69,7 @@ The following figure shows the MHC configuration window for configuring the MQTT
 
 
 
-To use the device certificates stored in [ATECC608A-TNGTLS](https://www.microchip.com/wwwproducts/en/ATECC608A-TNGTLS), enable the "Trust&Go client certificate" option under the net configurations. 
+To use the device certificates stored in [ATECC608A-TNGTLS](https://www.microchip.com/wwwproducts/en/ATECC608A-TNGTLS), enable the "Trust&Go client certificate" option under the net service configurations. Make sure that you enable TLS in the MQTT configuration to use the client certificate during the TLS handshake.
 
 ![](./images/TNGTLS_ClientCert.png)
 
