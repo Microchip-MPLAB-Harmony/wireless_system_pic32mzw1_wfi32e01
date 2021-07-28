@@ -57,6 +57,7 @@ nav_order: 99
 ### Known Issues
 - When 2 network interfaces are present in the project, compiler optimization should be turned off. (Issue arising from DHCP module in underlying net repo)
 - While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.
+- Enabling ECC608 support results in a compilation error due to an underlying issue in WolfSSL
 
 
 ### Development Tools
