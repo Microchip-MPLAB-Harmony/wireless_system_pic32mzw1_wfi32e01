@@ -223,6 +223,9 @@ bool tlsEnabled;
 
 // AutoConnect is Enabled
 bool autoConnect;
+
+// Clean Session is Enabled
+bool cleanSession;
 } SYS_MQTT_BrokerConfig;
 ```
 

@@ -336,6 +336,8 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
         connectData.clientID.cstring = (char *) &(hdl->sCfgInfo.sBrokerConfig.clientId);
 
         connectData.keepAliveInterval = hdl->sCfgInfo.sBrokerConfig.keepAliveInterval;
+		
+        connectData.cleansession = hdl->sCfgInfo.sBrokerConfig.cleanSession;
 
         if (strlen(hdl->sCfgInfo.sBrokerConfig.username))
         {
