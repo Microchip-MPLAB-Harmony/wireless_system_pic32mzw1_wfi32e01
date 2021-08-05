@@ -150,6 +150,7 @@ def instantiateComponent(mqttComponent):
     sysMqttSubEnable.setLabel("Subscribe Topic")
     sysMqttSubEnable.setVisible(True)
     sysMqttSubEnable.setDefaultValue(False)
+    sysMqttSubEnable.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_CLEAN_SESSION"])
 
 	# Topic Name
     sysSubTopicName = mqttComponent.createStringSymbol("SYS_MQTT_SUB_TOPIC_NAME", sysMqttSubEnable)
@@ -201,32 +202,32 @@ def instantiateComponent(mqttComponent):
     sysMqttDebugBasicMenu = mqttComponent.createMenuSymbol("SYS_MQTT_APPDEBUG_LEVEL_CONFIG_MENU", sysMqttDebugLogEnable)
     sysMqttDebugBasicMenu.setLabel("Debug Level Configuration")
     sysMqttDebugBasicMenu.setVisible(False)
-    sysMqttDebugBasicMenu.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+    sysMqttDebugBasicMenu.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 		
     sysMqttDebugErrLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_ERR_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugErrLevel.setLabel("Enable Error Level")
     sysMqttDebugErrLevel.setDefaultValue(True)
-#    sysMqttDebugErrLevel.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+#    sysMqttDebugErrLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 
     sysMqttDebugDbgLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_DBG_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugDbgLevel.setLabel("Enable Debug Level")
     sysMqttDebugDbgLevel.setDefaultValue(False)
-#    sysMqttDebugDbgLevel.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+#    sysMqttDebugDbgLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 	
     sysMqttDebugInfoLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_INFO_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugInfoLevel.setLabel("Enable Info Level")
     sysMqttDebugInfoLevel.setDefaultValue(False)
-#    sysMqttDebugInfoLevel.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+#    sysMqttDebugInfoLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 	
     sysMqttDebugFuncLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_FUNC_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugFuncLevel.setLabel("Enable Function Entry/Exit Level")
     sysMqttDebugFuncLevel.setDefaultValue(False)
-#    sysMqttDebugFuncLevel.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+#    sysMqttDebugFuncLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 	
     sysMqttDebugFlowBasicMenu = mqttComponent.createMenuSymbol("SYS_MQTT_APPDEBUG_FLOW_CONFIG_MENU", sysMqttDebugLogEnable)
     sysMqttDebugFlowBasicMenu.setLabel("Debug Flow Configuration")
     sysMqttDebugFlowBasicMenu.setVisible(True)
-    sysMqttDebugFlowBasicMenu.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+    sysMqttDebugFlowBasicMenu.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 		
     sysMqttDebugCfgFlow = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_CFG_FLOW", sysMqttDebugFlowBasicMenu)
     sysMqttDebugCfgFlow.setLabel("Enable MQTT Cfg Flow")
@@ -245,7 +246,7 @@ def instantiateComponent(mqttComponent):
     sysMqttDebugPreStr.setVisible(True)
     sysMqttDebugPreStr.setDescription("Prefix String")
     sysMqttDebugPreStr.setDefaultValue("MQTT_SRVC")
-    sysMqttDebugPreStr.setDependencies(sysMqttDebugMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
+    sysMqttDebugPreStr.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 
 	
     ############################################################################
@@ -337,12 +338,10 @@ def instantiateComponent(mqttComponent):
 #### Dependency ####
 ############################################################################
 
-def sysMqttDebugMenuVisible(symbol, event):
+def sysMqttSubMenuVisible(symbol, event):
     if (event["value"] == True):
-        print("Debug Log Menu Visible")
         symbol.setVisible(True)
     else:
-        print("Debug Log Menu Invisible")
         symbol.setVisible(False)
 
 

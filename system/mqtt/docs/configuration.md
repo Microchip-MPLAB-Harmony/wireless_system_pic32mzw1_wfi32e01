@@ -49,7 +49,7 @@ The following figure shows the MHC configuration window for configuring the MQTT
 | Parameter Name | Default   Value | Description |
 |-|-|-|
 | Enable   Auto Reconnect | TRUE | If TRUE, the MQTT Service will auto reconnect to the Broker if   connection is broken. If FALSE, the customer application needs to take care   of triggering the connection process again. |
-| Enable   Clean Session | TRUE | If TRUE, the MQTT Client shall tell the Broker that the session is   clean, else it will let the Broker know that the Session is a continuation of   the previous session |
+| Enable   Clean Session | TRUE | If TRUE, the MQTT Client shall tell the Broker that the session is clean; else, it will let the Broker know that the session is a continuation of the previous session. Also, if “clean session” is disabled, it is valid only within a single boot session in the Client (i.e. reconnecting before the next power-on reset) and not across boots  |
 | KeepAlive Interval | 60 sec | If no   data flows over an open connection for a certain KeepAliveInterval then the   client will generate a PINGREQ and expect to receive a PINGRESP from the   broker. This message exchange confirms that the connection is open and   working |
 | Username/   Password | Disabled | In case   the connection to Broker needs a Username and Password |
 | Last   Will and testament | Disabled | LWT   Configuration has the following parameters – <br>         1. Topic, <br>         2. QoS, <br>         3. Retain, and <br>         4. Message <br>This   ‘Message’ will be sent on the ‘Topic’ whenever the Broker finds that there is   an ungraceful disconnection with the Client. |
