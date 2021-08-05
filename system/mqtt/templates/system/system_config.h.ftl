@@ -9,6 +9,7 @@
 #define SYS_MQTT_INDEX0_KEEPALIVE_INTERVAL 				${SYS_MQTT_KEEPALIVE_INTERVAL}
 #define SYS_MQTT_INDEX0_MQTT_INTF        				SYS_MQTT_INTF_${SYS_MQTT_SUPP_INTF}
 
+<#if SYS_MQTT_CLEAN_SESSION == true>
 <#if SYS_MQTT_SUB_ENABLE == true>
 <#if SYS_MQTT_SUB_QOS == "At most once (0)">
 #define SYS_MQTT_INDEX0_SUB_QOS							0
@@ -20,6 +21,12 @@
 #define SYS_MQTT_INDEX0_SUB_TOPIC_COUNT					1
 #define SYS_MQTT_INDEX0_TOPIC_NAME        				"${SYS_MQTT_SUB_TOPIC_NAME}"
 #define SYS_MQTT_INDEX0_ENTRY_VALID        				true
+<#else>
+#define SYS_MQTT_INDEX0_SUB_TOPIC_COUNT					0
+#define SYS_MQTT_INDEX0_TOPIC_NAME        				" "
+#define SYS_MQTT_INDEX0_SUB_QOS							0
+#define SYS_MQTT_INDEX0_ENTRY_VALID        				false
+</#if>
 <#else>
 #define SYS_MQTT_INDEX0_SUB_TOPIC_COUNT					0
 #define SYS_MQTT_INDEX0_TOPIC_NAME        				" "
