@@ -8,6 +8,25 @@ nav_order: 99
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+## Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  **v3.5.1**
+
+**Note** : This is an incremental release. All notes under the `v3.5.0` release are applicable to this release as well.
+### New Features
+- [NET] One click configuration to use TNGTLS client certificates.
+### Bug fixes and Improvements
+- [MQTT] Improved handling of MQTT Clean session.
+
+### Known Issues
+- When 2 network interfaces are present in the project, compiler optimization should be turned off. (Issue arising from DHCP module in underlying net repo)
+- While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.
+
+### Development Tools
+
+- [MPLAB® X IDE v5.50](https://www.microchip.com/mplab/mplab-x-ide)
+- MPLAB® X IDE plug-ins:
+  - MPLAB® Harmony Configurator (MHC) v3.8.0
+- [MPLAB® XC32 C/C++ Compiler v3.01](https://www.microchip.com/mplab/compilers)
+
 ## Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  **v3.5.0**
 
 ### New Features
