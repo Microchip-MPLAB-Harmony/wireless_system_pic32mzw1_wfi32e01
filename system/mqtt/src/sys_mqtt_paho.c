@@ -379,9 +379,12 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
 
         if ((rc = MQTTConnect(&(hdl->uVendorInfo.sPahoInfo.sPahoClient), &connectData)) != 0)
         {
-            SYS_MQTTDEBUG_ERR_PRINT(g_AppDebugHdl, MQTT_CFG, "MQTTConnect() failed (%d)\r\n", rc);
+            if(hdl->sCfgInfo.sBrokerConfig.autoConnect == false)
+            {
+                SYS_MQTTDEBUG_ERR_PRINT(g_AppDebugHdl, MQTT_CFG, "MQTTConnect() failed (%d)\r\n", rc);
 
-            SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_CONN_FAILED);
+                SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_CONN_FAILED);
+            }
 
             return;
         }
@@ -464,7 +467,15 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
         }
         else
         {
-            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_CONNACK_TO, SYS_MQTT_STATUS_MQTT_CONN_FAILED);
+            if(hdl->sCfgInfo.sBrokerConfig.autoConnect == false)
+            {
+                SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_CONNACK_TO, SYS_MQTT_STATUS_MQTT_CONN_FAILED);
+            }
+            else
+            {
+                SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_CONNACK_TO, SYS_MQTT_STATUS_SOCK_CONNECTED);
+            }
+            
         }
     }
         break;
