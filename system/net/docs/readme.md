@@ -26,3 +26,5 @@ The Net System Service provides simple API's to enable network stack functionali
 * [Configuring the library](configuration.md/#configuring-the-library)
 
 * [Library interface](interface.md)
+
+* [Developer's Guide](developer.md)
