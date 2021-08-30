@@ -81,10 +81,13 @@ void SYS_MQTT_TcpClientCallback(uint32_t event, void *data, void* cookie)
     case SYS_NET_EVNT_SSL_FAILED:
     case SYS_NET_EVNT_DNS_RESOLVE_FAILED:
     {
-        /* TCP Socket got disconnected */
-        SYS_MQTTDEBUG_DBG_PRINT(g_AppDebugHdl, MQTT_CFG, "Status DOWN\r\n");
+        if(hdl->eStatus != SYS_MQTT_STATUS_MQTT_DISCONNECTED)
+        {
+            /* TCP Socket got disconnected */
+            SYS_MQTTDEBUG_DBG_PRINT(g_AppDebugHdl, MQTT_CFG, "Status DOWN\r\n");
 
-        SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
+            SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
+        }
     }
         break;
         
@@ -146,7 +149,7 @@ void SYS_MQTT_ProcessTimeout(SYS_MQTT_Handle *hdl, SYS_MQTT_EVENT_TYPE cbEvent, 
             return;
         }
         
-        SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
+        SYS_MQTT_SetInstStatus(hdl, nextStatus);
     }
 }
 
@@ -467,15 +470,7 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
         }
         else
         {
-            if(hdl->sCfgInfo.sBrokerConfig.autoConnect == false)
-            {
-                SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_CONNACK_TO, SYS_MQTT_STATUS_MQTT_CONN_FAILED);
-            }
-            else
-            {
-                SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_CONNACK_TO, SYS_MQTT_STATUS_SOCK_CONNECTED);
-            }
-            
+            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_CONNACK_TO, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
         }
     }
         break;
@@ -535,7 +530,7 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
         }
         else
         {
-            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_SUBACK_TO, SYS_MQTT_STATUS_MQTT_CONNECTED);
+            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_SUBACK_TO, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
         }
     }
         break;
@@ -577,7 +572,7 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
         }
         else
         {
-            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_UNSUBACK_TO, SYS_MQTT_STATUS_MQTT_CONNECTED);
+            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_UNSUBACK_TO, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
         }
     }
         break;
@@ -613,7 +608,7 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
         }
         else
         {
-            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_PUBACK_TO, SYS_MQTT_STATUS_MQTT_CONNECTED);
+            SYS_MQTT_ProcessTimeout(hdl, SYS_MQTT_EVENT_MSG_PUBACK_TO, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
         }
     }
         break;
