@@ -25,3 +25,5 @@ The MQTT System Service provides simple API's to enable MQTT functionalities lik
 * [Configuring the library](configuration.md/#configuring-the-library)
 
 * [Library interface](interface.md)
+
+* [Developer's Guide](developer.md)
