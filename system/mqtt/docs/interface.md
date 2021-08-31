@@ -132,14 +132,8 @@ SYS_MQTT_STATUS_MQTT_DISCONNECTING,
 // Net Instance in disconnected state
 SYS_MQTT_STATUS_MQTT_DISCONNECTED,
 
-// Lower Layer is DOWN
-SYS_MQTT_STATUS_MQTT_CONN_FAILED,
-
 // Wait for Connect Ack from Broker
 SYS_MQTT_STATUS_WAIT_FOR_MQTT_CONACK,
-
-// Send Mqtt Connect to Broker
-SYS_MQTT_STATUS_SEND_MQTT_CONN,
 
 // Wait for Subscribe Ack from Broker
 SYS_MQTT_STATUS_WAIT_FOR_MQTT_SUBACK,

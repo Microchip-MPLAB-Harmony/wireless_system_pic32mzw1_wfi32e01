@@ -68,17 +68,17 @@ The MQTT system service runs a finite state machine with the following states:
 
     3.  Failure in case of publishing a message or subscribing to a topic. In this state, the client reinitializes the data w.r.t subscriptions topics.
 
+    4. Paho API to connect to MQTT server failed.
+
 8.  *SYS_MQTT_STATUS_MQTT_DISCONNECTED*: Client disconnected from the server. ‘Disconnection’ is conveyed to the application via the registered callback.
 
-9.  *SYS_MQTT_STATUS_MQTT_CONN_FAILED*: Client failed to connect to MQTT server as Paho API failed or ‘CONACK’ message not received by the client after waiting for a specific time period.
+9.  *SYS_MQTT_STATUS_WAIT_FOR_MQTT_CONACK*: Client waits for the reply ‘CONACK’ from the MQTT server in response to his ‘CONNECT’ message, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
 
-10. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_CONACK*: Client waits for the reply ‘CONACK’ from the MQTT server in response to his ‘CONNECT’ message, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
+10. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_SUBACK*: Client waits for the reply ‘SUBACK’ from the MQTT server in response to his ‘SUBSCRIBE’ message, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
 
-11. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_SUBACK*: Client waits for the reply ‘SUBACK’ from the MQTT server in response to his ‘SUBSCRIBE’ message, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
+11. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_PUBACK*: Client waits for the reply ‘PUBACK’ from the MQTT server in response to his ‘PUBLISH’ message in case it was sent with Qos as 1 or 2, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
 
-12. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_PUBACK*: Client waits for the reply ‘PUBACK’ from the MQTT server in response to his ‘PUBLISH’ message in case it was sent with Qos as 1 or 2, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
-
-13. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_UNSUBACK*: Client waits for the reply ‘UNSUBACK’ from the MQTT server in response to his ‘UNSUBSCRIBE’ message, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
+12. *SYS_MQTT_STATUS_WAIT_FOR_MQTT_UNSUBACK*: Client waits for the reply ‘UNSUBACK’ from the MQTT server in response to his ‘UNSUBSCRIBE’ message, for SYS_MQTT_PERIOIDC_TIMEOUT seconds.
 
 <p align="center">
 <img src="./images/StateMachine.png" style="width:6.5in;height:6.73958in" />
