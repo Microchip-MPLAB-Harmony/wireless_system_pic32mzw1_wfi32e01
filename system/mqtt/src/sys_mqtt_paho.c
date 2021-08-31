@@ -382,11 +382,17 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
 
         if ((rc = MQTTConnect(&(hdl->uVendorInfo.sPahoInfo.sPahoClient), &connectData)) != 0)
         {
-            if(hdl->sCfgInfo.sBrokerConfig.autoConnect == false)
-            {
-                SYS_MQTTDEBUG_ERR_PRINT(g_AppDebugHdl, MQTT_CFG, "MQTTConnect() failed (%d)\r\n", rc);
+            SYS_MQTTDEBUG_ERR_PRINT(g_AppDebugHdl, MQTT_CFG, "MQTTConnect() failed (%d)\r\n", rc);
+            
+            SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_DISCONNECTING);
 
-                SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_CONN_FAILED);
+            if ((rc = SYS_NET_CtrlMsg(hdl->netSrvcHdl,
+                                      SYS_NET_CTRL_MSG_DISCONNECT,
+                                      NULL, 0)) != SYS_NET_SUCCESS)
+            {
+                SYS_MQTTDEBUG_ERR_PRINT(g_AppDebugHdl, MQTT_DATA, "SYS_NET_CtrlMsg() Failed (%d)\r\n", rc);
+
+                return;
             }
 
             return;
@@ -664,9 +670,7 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
     case SYS_MQTT_STATUS_IDLE:
     case SYS_MQTT_STATUS_SOCK_CLIENT_CONNECTING:
     case SYS_MQTT_STATUS_SOCK_OPEN_FAILED:
-    case SYS_MQTT_STATUS_SEND_MQTT_CONN:
     case SYS_MQTT_STATUS_MQTT_DISCONNECTED:
-    case SYS_MQTT_STATUS_MQTT_CONN_FAILED:
     {
     }
         break;
