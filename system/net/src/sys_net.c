@@ -891,6 +891,16 @@ SYS_MODULE_OBJ SYS_NET_Open(SYS_NET_Config *cfg, SYS_NET_CALLBACK net_cb, void *
 
 static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
 {
+    if ((SYS_MODULE_OBJ)hdl == SYS_MODULE_OBJ_INVALID)
+    {
+        return;
+    }
+    
+    if (hdl->status == SYS_NET_STATUS_IDLE)
+    {
+        return;
+    }
+    
     if (SYS_NET_TakeSemaphore(hdl) == 0)
     {
         return;
@@ -1180,6 +1190,16 @@ static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
             {
                 SYS_NET_SetInstStatus(hdl, SYS_NET_STATUS_LOWER_LAYER_DOWN);
             }
+            else
+            {
+                /* Delete Semaphore */
+                OSAL_SEM_Delete(&hdl->InstSemaphore);
+
+                /* Free the handle */
+                SYS_NET_FreeHandle(hdl);
+                
+                return;
+            }
 
             break;
         }
@@ -1336,6 +1356,16 @@ static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
                 SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "Handler Registration failed!\r\n");
             }
         }
+        else
+        {
+            /* Delete Semaphore */
+            OSAL_SEM_Delete(&hdl->InstSemaphore);
+
+            /* Free the handle */
+            SYS_NET_FreeHandle(hdl);
+
+            return;
+        }
     }
         break;
 
@@ -1350,6 +1380,16 @@ static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
 
 static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
 {
+    if ((SYS_MODULE_OBJ)hdl == SYS_MODULE_OBJ_INVALID)
+    {
+        return;
+    }
+    
+    if (hdl->status == SYS_NET_STATUS_IDLE)
+    {
+        return;
+    }
+    
     if (SYS_NET_TakeSemaphore(hdl) == 0)
     {
         return;
@@ -1579,6 +1619,17 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
                     SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "Handler Registration failed!\r\n");
                 }
             }
+            else
+            {
+                /* Delete Semaphore */
+                OSAL_SEM_Delete(&hdl->InstSemaphore);
+
+                /* Free the handle */
+                SYS_NET_FreeHandle(hdl);
+                
+                return;
+            }
+
             SYS_NET_GiveSemaphore(hdl);
             return;
         }
@@ -1664,6 +1715,16 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
             {
                 SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "Handler Registration failed!\r\n");
             }
+        }
+        else
+        {
+            /* Delete Semaphore */
+            OSAL_SEM_Delete(&hdl->InstSemaphore);
+
+            /* Free the handle */
+            SYS_NET_FreeHandle(hdl);
+
+            return;
         }
 
         SYS_NET_GiveSemaphore(hdl);
@@ -1831,6 +1892,16 @@ int32_t SYS_NET_CtrlMsg(SYS_MODULE_OBJ obj,
                 /* Changing the status to lower layer down as 
                  * DNS needs to be resolved */
                 SYS_NET_SetInstStatus(hdl, SYS_NET_STATUS_LOWER_LAYER_DOWN);
+            }
+            else
+            {
+                /* Delete Semaphore */
+                OSAL_SEM_Delete(&hdl->InstSemaphore);
+
+                /* Free the handle */
+                SYS_NET_FreeHandle(hdl);
+                
+                return SYS_NET_SUCCESS;
             }
 
             ret_val = SYS_NET_SUCCESS;
