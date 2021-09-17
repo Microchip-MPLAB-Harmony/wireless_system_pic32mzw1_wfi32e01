@@ -506,6 +506,9 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
 
             SYS_MQTTDEBUG_DBG_PRINT(g_AppDebugHdl, MQTT_DATA, "Suback received for Topic (%s)\r\n", hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress.topicName);
 
+            memset(&hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress, 0,
+                   sizeof (hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress));
+
             SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_CONNECTED);
 
             if (connCbSent == 0)
@@ -530,9 +533,6 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
                                  sizeof (sMqttSubCfg),
                                  hdl->vCookie);
             }
-
-            memset(&hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress, 0,
-                   sizeof (hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress));
         }
         else
         {
