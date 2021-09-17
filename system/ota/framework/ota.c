@@ -1549,31 +1549,7 @@ SYS_STATUS OTA_Start(OTA_PARAMS *param) {
     ota.task.param.abort = 0;
     return SYS_STATUS_READY;
 }
-//---------------------------------------------------------------------------
 
-SYS_STATUS OTA_Abort(void) {
-
-
-    /*************************implementation is not completed********************/
-    SYS_STATUS status;
-
-    do {
-        if (ota.current_task == OTA_TASK_ALLOCATE_SLOT
-                || ota.current_task == OTA_TASK_DOWNLOAD_IMAGE
-                || ota.current_task == OTA_TASK_VERIFY_IMAGE_DIGEST
-                || ota.current_task == OTA_TASK_SET_IMAGE_STATUS) {
-            ota.task.param.abort = 1;
-            status = SYS_STATUS_BUSY;
-            break;
-        }
-        // OTA was not kicked off or already completed.
-        status = SYS_STATUS_READY;
-    } while (0);
-
-
-
-    return status;
-}
 //---------------------------------------------------------------------------
 
 // *****************************************************************************
