@@ -508,6 +508,9 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
 
             SYS_MQTT_SetInstStatus(hdl, SYS_MQTT_STATUS_MQTT_CONNECTED);
 
+            memset(&hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress, 0,
+                   sizeof (hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress));
+
             if (connCbSent == 0)
             {
                 connCbSent = 1;
@@ -530,9 +533,6 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
                                  sizeof (sMqttSubCfg),
                                  hdl->vCookie);
             }
-
-            memset(&hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress, 0,
-                   sizeof (hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress));
         }
         else
         {
