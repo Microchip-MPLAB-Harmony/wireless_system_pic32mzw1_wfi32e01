@@ -886,6 +886,12 @@ SYS_MODULE_OBJ SYS_NET_Open(SYS_NET_Config *cfg, SYS_NET_CALLBACK net_cb, void *
     /* Wait for Connection */
     SYS_NET_SetInstStatus(hdl, SYS_NET_STATUS_SERVER_AWAITING_CONNECTION);
 
+    /* Call the Application CB to give 'Server Awaiting Connection' event */
+    if (hdl->callback_fn)
+    {
+        hdl->callback_fn(SYS_NET_EVNT_SERVER_AWAITING_CONNECTION, hdl, hdl->cookie);
+    }
+    
     return (SYS_MODULE_OBJ) hdl;
 }
 
@@ -1448,6 +1454,12 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
 
         SYS_NET_GiveSemaphore(hdl);
 
+        /* Call the Application CB to give 'Server Awaiting Connection' event */
+        if (hdl->callback_fn)
+        {
+            hdl->callback_fn(SYS_NET_EVNT_SERVER_AWAITING_CONNECTION, hdl, hdl->cookie);
+        }
+
         return;
     }
         break;
@@ -1598,6 +1610,10 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
                 if (hdl->socket == INVALID_SOCKET)
                 {
                     SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "SYS_NET_TCPIP_ServerOpen failed!\r\n");
+
+                    SYS_NET_GiveSemaphore(hdl);
+
+                    return;
                 }
                 else
                     SYS_NET_SetInstStatus(hdl, SYS_NET_STATUS_SERVER_AWAITING_CONNECTION);
@@ -1618,6 +1634,16 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
                 {
                     SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "Handler Registration failed!\r\n");
                 }
+
+                SYS_NET_GiveSemaphore(hdl);
+
+                /* Call the Application CB to give 'Server Awaiting Connection' event */
+                if (hdl->callback_fn)
+                {
+                    hdl->callback_fn(SYS_NET_EVNT_SERVER_AWAITING_CONNECTION, hdl, hdl->cookie);
+                }
+
+                return;
             }
             else
             {
@@ -1693,6 +1719,10 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
             if (hdl->socket == INVALID_SOCKET)
             {
                 SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "SYS_NET_TCPIP_ServerOpen failed!\r\n");
+
+                SYS_NET_GiveSemaphore(hdl);
+
+                return;
             }
             else
             {
@@ -1715,6 +1745,16 @@ static void SYS_NET_Server_Task(SYS_NET_Handle *hdl)
             {
                 SYS_NETDEBUG_ERR_PRINT(g_NetAppDbgHdl, NET_CFG, "Handler Registration failed!\r\n");
             }
+
+            SYS_NET_GiveSemaphore(hdl);
+
+            /* Call the Application CB to give 'Server Awaiting Connection' event */
+            if (hdl->callback_fn)
+            {
+                hdl->callback_fn(SYS_NET_EVNT_SERVER_AWAITING_CONNECTION, hdl, hdl->cookie);
+            }
+
+            return;
         }
         else
         {
