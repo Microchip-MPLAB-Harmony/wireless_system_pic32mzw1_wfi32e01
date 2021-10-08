@@ -54,6 +54,7 @@ def instantiateComponent(mqttComponent):
     mqttBrokerName.setVisible(True)
     mqttBrokerName.setDescription("MQTT Broker Name")
     mqttBrokerName.setDefaultValue("test.mosquitto.org")
+    mqttBrokerName.setDependencies(mqttSNIAutoMenu, ["SYS_MQTT_BROKER_NAME"])
 
     mqttPort = mqttComponent.createIntegerSymbol("SYS_MQTT_MQTT_PORT", sysMqttBasicMenu)
     mqttPort.setLabel("Server Port")
@@ -392,7 +393,9 @@ def mqttTlsAutoMenu(symbol, event):
         Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", False)
 
 def mqttSNIAutoMenu(symbol, event):
-    if (event["value"] == True):
+    data = symbol.getComponent()
+    sysMqttSni = data.getSymbolValue("SYS_MQTT_ENABLE_SNI")
+    if(sysMqttSni == True):        
         setVal("net_Pres", "NET_PRES_SUPPORT_SNI", True)
         setVal("net_Pres", "NET_PRES_SUPPORT_SNI_HOST_NAME", Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_BROKER_NAME"))
     else:
