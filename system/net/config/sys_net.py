@@ -44,6 +44,12 @@ def instantiateComponent(netComponent):
     netSuppIntf.setDefaultValue(0)
     netSuppIntf.setDependencies(netIntfAutoMenu, ["SYS_NET_SUPP_INTF"])
 
+    netSuppNoOfSocks = netComponent.createIntegerSymbol("SYS_NET_SUPP_NO_OF_SOCKS", None)
+    netSuppNoOfSocks.setLabel("No Of Sockets Supported")
+    netSuppNoOfSocks.setMin(1)
+    netSuppNoOfSocks.setMax(8)
+    netSuppNoOfSocks.setDefaultValue(2)
+    
     netDebugEnable = netComponent.createBooleanSymbol("SYS_NET_ENABLE_DEBUG", None)
     netDebugEnable.setLabel("Debug")
     netDebugEnable.setDescription("Debug - Logs and CLI commands")
