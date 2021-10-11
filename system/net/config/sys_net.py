@@ -46,7 +46,7 @@ def instantiateComponent(netComponent):
 
     netSuppNoOfSocks = netComponent.createIntegerSymbol("SYS_NET_SUPP_NO_OF_SOCKS", None)
     netSuppNoOfSocks.setLabel("No Of Sockets Supported")
-    netSuppNoOfSocks.setMin(1)
+    netSuppNoOfSocks.setMin(2)
     netSuppNoOfSocks.setMax(8)
     netSuppNoOfSocks.setDefaultValue(2)
     

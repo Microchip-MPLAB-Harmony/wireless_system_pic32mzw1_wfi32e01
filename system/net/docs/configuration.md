@@ -27,7 +27,10 @@ The following figure shows the MHC configuration window for configuring the NET 
 
     ![](./images/Net_service_netconfig.png)
 
-4. Debug - Enabled by default - has 'CLI Commands' and 'Debug Logs' as sub parameters
+5. Configure the Number of Sockets Supported - 2 to 8, default sockets being 2.
+    ![](./images/Net_service_SuppSocks.png)
+
+6. Debug - Enabled by default - has 'CLI Commands' and 'Debug Logs' as sub parameters
 
     ![](./images/Net_service_config_debug.png)
 
@@ -35,9 +38,9 @@ The following figure shows the MHC configuration window for configuring the NET 
     1. Enable CLI Commands - This is enabled by default. This can be used by the user to give commands on the CLI to open/ close/ send message on a socket.
     9. Enable Debug Logs in case more prints are required for debugging. By Default, the parameter value is 'False'.<br>Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-> System Service-> App Debug Service.
 
-5. User can configure 2 instances of a Net Socket. By default, only the first one is enabled.
+7. User can configure 2 instances of a Net Socket. By default, only the first one is enabled.
 
-6. Instance 0:
+8. Instance 0:
 
     1. Configure the Network Interface as Wifi or Ethernet. Note that Ethernet as an interface can only be chosen if the 'Supported Intefaces' parameter is WIFI_ETHERNET.
 
@@ -64,9 +67,9 @@ The following figure shows the MHC configuration window for configuring the NET 
 
     7. Host Name/ IP Address: Can be a Host Name or an IP Address. By Default, the parameter value is '192.168.1.1'.
     
-7. Instance 1 - User can enable this to give a configuration for another socket. Also, once the user gives this config, SYS_NET_Open() API will return error if it is passed NULL as config since now more than one instance is defined in the MHC. 
+9. Instance 1 - User can enable this to give a configuration for another socket. Also, once the user gives this config, SYS_NET_Open() API will return error if it is passed NULL as config since now more than one instance is defined in the MHC. 
 
-8. To use the device certificates stored in [ATECC608A-TNGTLS](https://www.microchip.com/wwwproducts/en/ATECC608A-TNGTLS), enable the "Trust&Go client certificate" option under the net configurations. 
+10. To use the device certificates stored in [ATECC608A-TNGTLS](https://www.microchip.com/wwwproducts/en/ATECC608A-TNGTLS), enable the "Trust&Go client certificate" option under the net configurations. 
 
      ![](./images/TNGTLS_ClientCert.png)
 

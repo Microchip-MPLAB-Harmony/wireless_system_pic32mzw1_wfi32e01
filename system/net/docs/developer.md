@@ -160,7 +160,7 @@ The above state machine has been implemented in the function *SYS_NET_Server_Tas
 
 ## Number of Sockets Supported
 
-The number of sockets supported by NET system service currently is 2. **The same can be increased by changing the value of the macro [*SYS_NET_MAX_NUM_OF_SOCKETS*](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/system/net/docs/interface.html#sys_net_max_num_of_sockets)**
+The number of sockets supported by NET system service currently is 2. **The same can be increased by changing the value of the macro [*SYS_NET_MAX_NUM_OF_SOCKETS*](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/system/net/docs/interface.html#sys_net_max_num_of_sockets)**. One can also configure the number of sockets via the MHC.
 
 ## External APIs
 
