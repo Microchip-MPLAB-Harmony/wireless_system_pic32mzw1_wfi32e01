@@ -71,19 +71,37 @@ typedef enum {
     
     /*Image downloading started*/
     OTA_RESULT_IMAGE_DOWNLOAD_START = 0,
+#ifdef SYS_OTA_PATCH_ENABLE            
+    /*For patch, Base version of image is not found in OTA DB */        
+    OTA_RESULT_PATCH_BASEVERSION_NOTFOUND,    
             
+    /*Patch event start*/
+    OTA_RESULT_PATCH_EVENT_START, 
+#endif            
     /*Image downloaded successfully*/
     OTA_RESULT_IMAGE_DOWNLOADED ,
 
     /*Image download failed*/        
     OTA_RESULT_IMAGE_DOWNLOAD_FAILED,        
-           
+#ifdef SYS_OTA_PATCH_ENABLE        
+    /*Image patch failed*/         
+    OTA_RESULT_PATCH_IMAGE_FAILED,
+#endif            
     /*Image Digest Verify Start*/ 
     OTA_RESULT_IMAGE_DIGEST_VERIFY_START,
-            
+#ifdef SYS_OTA_PATCH_ENABLE           
+    /*Patch Image Digest Verify Start*/        
+    OTA_RESULT_PATCH_IMAGE_DIGEST_VERIFY_START,        
+#endif
     /*Image Digest Verify Success*/        
     OTA_RESULT_IMAGE_DIGEST_VERIFY_SUCCESS,
+#ifdef SYS_OTA_PATCH_ENABLE     
+    /*Patch Image Digest Verify Success*/         
+    OTA_RESULT_PATCH_IMAGE_DIGEST_VERIFY_SUCCESS,
             
+    /*patch image digest verify failed*/        
+    OTA_RESULT_PATCH_IMAGE_DIGEST_VERIFY_FAILED,        
+#endif            
     /*Image verification Failed*/        
     OTA_RESULT_IMAGE_DIGEST_VERIFY_FAILED,
             
@@ -144,14 +162,26 @@ typedef struct
 typedef struct OTA_PARAMS {
         char    ota_server_url[OTA_URL_SIZE];
         char    serv_app_digest_string[66];
+#ifdef SYS_OTA_PATCH_ENABLE        
+        char    serv_app_patch_digest_string[66];
+        char    serv_app_base_digest_string[66];
+        char    serv_app_target_digest_string[66];
+#endif
         char    *image_name;
         char    *status;
         uint32_t version;
         char    *type;
         char    *digest;
+#ifdef SYS_OTA_PATCH_ENABLE        
+        bool    patch_request;
+        uint32_t patch_base_version;
+#endif
         uint32_t delete_img_version;
         uint32_t total_data_downloaded; 
         uint32_t server_image_length; 
+#ifdef SYS_OTA_PATCH_ENABLE        
+        uint8_t patch_progress_status;
+#endif
 } OTA_PARAMS;
 
 
@@ -174,6 +204,27 @@ typedef struct OTA_PARAMS {
 */
 // *****************************************************************************
 void OTA_GetDownloadStatus(OTA_PARAMS *result);
+// *****************************************************************************
+/*
+  Function:
+    OTA_GetPatchStatus(OTA_PARAMS *result)
+
+  Summary:
+    To get patch progress status.
+
+  Description:
+    To get patch progress status.
+
+  Parameters:
+    pointer of type ota_params.
+
+  Returns:
+    None.
+*/
+// *****************************************************************************
+#ifdef SYS_OTA_PATCH_ENABLE
+void OTA_GetPatchStatus(OTA_PARAMS *result);
+#endif
 // *****************************************************************************
 /*
   Function:
@@ -435,6 +486,7 @@ SYS_STATUS OTA_EraseImage(uint32_t version);
 SYS_STATUS OTA_CallBackReg(void *buffer, uint32_t length);
 
 bool OTA_IsIdle(void) ;
+SYS_STATUS OTA_Search_ImageVersion(uint32_t, char *);
 #ifdef  __cplusplus
 }
 #endif

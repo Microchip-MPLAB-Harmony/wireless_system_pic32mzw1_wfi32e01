@@ -38,3 +38,6 @@
 <#if SYS_OTA_FREE_SECTOR_CHECK_ENABLE == true>
 #define SYS_OTA_FREE_SECTOR_CHECK_ENABLE   	
 </#if>
+<#if SYS_OTA_PATCH_ENABLE == true>
+#define SYS_OTA_PATCH_ENABLE   	
+</#if>
