@@ -453,6 +453,8 @@ void SYS_MQTT_Paho_Task(SYS_MODULE_OBJ obj)
                 }
 
                 SYS_MQTT_StartTimer(hdl, SYS_MQTT_TIMEOUT_CONST);
+                
+                hdl->sCfgInfo.sSubscribeConfig[0].entryValid = 1;
 
                 hdl->uVendorInfo.sPahoInfo.sPubSubCfgInProgress.qos = hdl->sCfgInfo.sSubscribeConfig[0].qos;
 
