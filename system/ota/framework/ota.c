@@ -74,7 +74,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define OTA_DB_NAME             "image_database.csv"
 #define APP_DEVICE_NAME         "/dev/mtda1"
 #define APP_FS_TYPE             FAT
-
+#define FACTORY_IMAGE           "factory_reset.bin"
 
 
 #ifdef SYS_OTA_FREE_SECTOR_CHECK_ENABLE
@@ -790,37 +790,41 @@ static void OTA_CleanUp(void) {
 #endif
             SYS_FS_RESULT res;
             /*if no DB is present, remove the file(may bepartial image)*/
-            if (no_db == true) {
-                res = SYS_FS_FileDirectoryRemove(stat.fname);
-                if (res == SYS_FS_RES_FAILURE) {
-                    SYS_CONSOLE_PRINT("SYS OTA : File remove operation failed : clean up\r\n");
-                } else {
-                    /*Do nothing File is removed successfully*/
-                    SYS_CONSOLE_PRINT("SYS OTA : Removed file : %s\r\n", stat.fname);
-                }
-            } else {
-                /*initialize flag to false in every iteration*/
-                bool image_found = false;
-                /*search the image in the DB*/
-                for (i = 0; i < total_images; i++) {
-                    char image_name[100];
-                    /*Check for image name in the DB*/
-                    if (GetFieldString(imageDB, OTA_IMAGE_NAME, i, image_name) == 0) {
-                        if (!strncmp(image_name, stat.fname, strlen(stat.fname))) {
-                            /*if image is present in the DB set the flag and break from loop*/
-                            image_found = true;
-                            break;
+            if(strncmp(FACTORY_IMAGE,stat.fname,strlen(FACTORY_IMAGE)) != 0){
+                if (no_db == true) {
+                    if(strncmp(FACTORY_IMAGE,stat.fname,strlen(FACTORY_IMAGE)) != 0){    
+                        res = SYS_FS_FileDirectoryRemove(stat.fname);
+                        if (res == SYS_FS_RES_FAILURE) {
+                            SYS_CONSOLE_PRINT("SYS OTA : File remove operation failed : clean up\r\n");
+                        } else {
+                                /*Do nothing File is removed successfully*/
+                            SYS_CONSOLE_PRINT("SYS OTA : Removed file : %s\r\n", stat.fname);
                         }
                     }
-                }
-                /*if image not found remove file from directory*/
-                if (image_found == false) {
-                    res = SYS_FS_FileDirectoryRemove(stat.fname);
-                    if (res == SYS_FS_RES_FAILURE) {
-                        SYS_CONSOLE_PRINT("SYS OTA : File remove operation failed : clean up\r\n");
-                    } else {
-                        /*Do nothing File is removed successfully*/
-                        SYS_CONSOLE_PRINT("SYS OTA : Removed file : %s\r\n", stat.fname);
+                } else {
+                    /*initialize flag to false in every iteration*/
+                    bool image_found = false;
+                    /*search the image in the DB*/
+                    for (i = 0; i < total_images; i++) {
+                        char image_name[100];
+                        /*Check for image name in the DB*/
+                        if (GetFieldString(imageDB, OTA_IMAGE_NAME, i, image_name) == 0) {
+                            if (!strncmp(image_name, stat.fname, strlen(stat.fname))) {
+                                /*if image is present in the DB set the flag and break from loop*/
+                                image_found = true;
+                                break;
+                            }
+                        }
+                    }
+                    /*if image not found remove file from directory*/
+                    if (image_found == false) {
+                        res = SYS_FS_FileDirectoryRemove(stat.fname);
+                        if (res == SYS_FS_RES_FAILURE) {
+                            SYS_CONSOLE_PRINT("SYS OTA : File remove operation failed : clean up\r\n");
+                        } else {
+                            /*Do nothing File is removed successfully*/
+                            SYS_CONSOLE_PRINT("SYS OTA : Removed file : %s\r\n", stat.fname);
+                        }
                     }
                 }
             }
