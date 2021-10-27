@@ -70,7 +70,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #define OTA_DOWNLOADER_TIMEOUT 1000
 #define __woraround_unused_variable(x) ((void)x)
 #define APP_MOUNT_NAME          "/mnt/myDrive1"
-#define APP_DIR_NAME            "/mnt/myDrive1/"
+#define APP_DIR_NAME            "/mnt/myDrive1/ota"
 #define OTA_DB_NAME             "image_database.csv"
 #define APP_DEVICE_NAME         "/dev/mtda1"
 #define APP_FS_TYPE             FAT
@@ -347,7 +347,7 @@ void OTA_GetImageDbInfo(void)
     OTA_DB_BUFFER *otaimageDB;
     
     otaimageDB = OTA_GetDBBuffer();
-    int ret_db_status = OTAGetDb(otaimageDB, APP_MOUNT_NAME"/image_database.csv");
+    int ret_db_status = OTAGetDb(otaimageDB, APP_DIR_NAME"/image_database.csv");
     
     if(ret_db_status >= 1){
         SYS_CONSOLE_PRINT("NO info found\n\r");
@@ -444,7 +444,7 @@ static void mount_disk() {
 
 static bool create_image_file() {
 
-    strcpy(image_name, APP_MOUNT_NAME);
+    strcpy(image_name, APP_DIR_NAME);
     strcat(image_name, (strrchr(ota_params.ota_server_url, '/')));
     
 #ifdef SYS_OTA_PATCH_ENABLE    
@@ -508,7 +508,7 @@ static void OTA_patch_build_image_path() {
     SYS_CONSOLE_PRINT("OTA : patch_param.patch_file:%s\n\r",patch_param.patch_file);
 #endif
     
-    strcpy(patch_param.target_file, APP_MOUNT_NAME);
+    strcpy(patch_param.target_file, APP_DIR_NAME);
     strcat(patch_param.target_file, (strrchr(image_name, '/')));
     strcpy((strrchr(patch_param.target_file, '.') + 1), "bin");
 #if (SERVICE_TYPE == OTA_DEBUG)
@@ -692,7 +692,7 @@ static OTA_DB_STATUS OTA_Task_DbEntryCheck(void) {
 
     imageDB = OTA_GetDBBuffer();
     /*Check if max number of images defined by user reached*/
-    uint8_t ret = OTAGetDb(imageDB, APP_MOUNT_NAME"/image_database.csv");
+    uint8_t ret = OTAGetDb(imageDB, APP_DIR_NAME"/image_database.csv");
     if (ret > 0) {
         csv_destroy_buffer((CSV_BUFFER *) imageDB);
         return OTA_DB_ERROR;
@@ -748,7 +748,7 @@ static void OTA_CleanUp(void) {
     } else {
         imageDB = OTA_GetDBBuffer();
         /*Get DB to local buffer*/
-        uint8_t ret = OTAGetDb(imageDB, APP_MOUNT_NAME"/image_database.csv");
+        uint8_t ret = OTAGetDb(imageDB, APP_DIR_NAME"/image_database.csv");
         if (ret > 0) {
             /*error during opening of file*/
             csv_destroy_buffer((CSV_BUFFER *) imageDB);
@@ -1336,7 +1336,7 @@ static SYS_STATUS OTA_Task_SetImageStatus(void) {
                 return SYS_STATUS_ERROR;
             }
             imageDB = OTA_GetDBBuffer();
-            if (OTAGetDb(imageDB, APP_MOUNT_NAME"/image_database.csv") > 1)
+            if (OTAGetDb(imageDB, APP_DIR_NAME"/image_database.csv") > 1)
                 return SYS_STATUS_ERROR;
             if (ota.new_downloaded_img == false || ota.ota_rollback_initiated == true) {
                 selected_row = GetImageRow(ota.task.param.version, imageDB);
@@ -1374,7 +1374,7 @@ static SYS_STATUS OTA_Task_SetImageStatus(void) {
                 char status[10];
                 sprintf(status, "%x", param->img_status);
                 SetFieldValue(imageDB, OTA_IMAGE_STATUS, selected_row, status);
-                OTASaveDb(imageDB, APP_MOUNT_NAME"/image_database.csv");
+                OTASaveDb(imageDB, APP_DIR_NAME"/image_database.csv");
                 ota.task.state = TASK_STATE_S_WRITE_BOOT_CONTROL;
             } else {
                 ota.task.state = TASK_STATE_S_WRITE_BOOT_CONTROL;
@@ -1450,7 +1450,7 @@ static SYS_STATUS OTA_Task_DataEntry() {
         image_data.db_full = true;
     else
         image_data.db_full = false;
-    if (OTADbNewEntry(APP_MOUNT_NAME"/image_database.csv", &image_data) == -1) {
+    if (OTADbNewEntry(APP_DIR_NAME"/image_database.csv", &image_data) == -1) {
         return SYS_STATUS_ERROR;
     }
     return SYS_STATUS_READY;
@@ -1506,7 +1506,7 @@ static SYS_STATUS OTA_Task_FactoryReset(void) {
             SYS_CONSOLE_PRINT("Removing \r\n");
 #endif
             SYS_FS_RESULT res;
-            res = SYS_FS_FileDirectoryRemove(APP_MOUNT_NAME"/image_database.csv");
+            res = SYS_FS_FileDirectoryRemove(APP_DIR_NAME"/image_database.csv");
             if (res == SYS_FS_RES_FAILURE) {
                 // Directory remove operation failed
 #if (SERVICE_TYPE == OTA_DEBUG)
@@ -1597,7 +1597,7 @@ static bool OTA_IsDisk_Full(void){
     
   uint32_t totalSectors, freeSectors;
   SYS_FS_RESULT res;  
-  res = SYS_FS_DriveSectorGet(APP_MOUNT_NAME, &totalSectors, &freeSectors);
+  res = SYS_FS_DriveSectorGet(APP_DIR_NAME, &totalSectors, &freeSectors);
   if(res == SYS_FS_RES_FAILURE)
   {
         //Sector information get operation failed.
@@ -1839,7 +1839,7 @@ SYS_STATUS OTA_EraseImage(uint32_t version) {
 SYS_STATUS OTA_Task_EraseImage(uint32_t version) {
     selected_row = -1;
     imageDB = OTA_GetDBBuffer();
-    if (OTAGetDb(imageDB, APP_MOUNT_NAME"/image_database.csv") > 1) {
+    if (OTAGetDb(imageDB, APP_DIR_NAME"/image_database.csv") > 1) {
 #if (SERVICE_TYPE == OTA_DEBUG)
         SYS_CONSOLE_PRINT("SYS_OTA : DB load failed\r\n");
 #endif
@@ -1872,7 +1872,7 @@ SYS_STATUS OTA_Task_EraseImage(uint32_t version) {
         return SYS_STATUS_ERROR;
     }
 
-    OTASaveDb(imageDB, APP_MOUNT_NAME"/image_database.csv");
+    OTASaveDb(imageDB, APP_DIR_NAME"/image_database.csv");
     SYS_FS_RESULT res;
     res = SYS_FS_FileDirectoryRemove(image_name);
     if (res == SYS_FS_RES_FAILURE) {
@@ -1889,7 +1889,7 @@ SYS_STATUS OTA_Task_EraseImage(uint32_t version) {
  #if (SERVICE_TYPE == OTA_DEBUG)   
     csv_destroy_buffer((CSV_BUFFER *) imageDB);
     imageDB = OTA_GetDBBuffer();
-    if (OTAGetDb(imageDB, APP_MOUNT_NAME"/image_database.csv") > 1) {
+    if (OTAGetDb(imageDB, APP_DIR_NAME"/image_database.csv") > 1) {
         SYS_CONSOLE_PRINT("SYS_OTA : DB load failed\r\n");
     }
     size_t my_string_size = 30;
@@ -1939,7 +1939,7 @@ SYS_STATUS OTA_Search_ImageVersion(uint32_t version,char *base_ver_digest) {
     char server_base_ver_digest[500];
     int8_t selected_row = -1;
     imageDB = OTA_GetDBBuffer();
-    if (OTAGetDb(imageDB, APP_MOUNT_NAME"/image_database.csv") > 1) {
+    if (OTAGetDb(imageDB, APP_DIR_NAME"/image_database.csv") > 1) {
 #if (SERVICE_TYPE == OTA_DEBUG)
         SYS_CONSOLE_PRINT("SYS_OTA : DB load failed\r\n");
 #endif
@@ -1963,7 +1963,7 @@ SYS_STATUS OTA_Search_ImageVersion(uint32_t version,char *base_ver_digest) {
     SYS_CONSOLE_PRINT("\n\rserver_base_ver_digest : %s\n\r",server_base_ver_digest);
     if(strncmp(image_digest,server_base_ver_digest,64) != 0)
         return SYS_STATUS_ERROR;
-    strcpy(patch_param.source_file,APP_MOUNT_NAME);
+    strcpy(patch_param.source_file,APP_DIR_NAME);
     strcat(patch_param.source_file,"/");
     strcat(patch_param.source_file,source_file);
 #if (SERVICE_TYPE == OTA_DEBUG)
