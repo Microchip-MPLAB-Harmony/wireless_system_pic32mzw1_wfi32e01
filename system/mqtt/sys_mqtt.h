@@ -418,7 +418,7 @@ int32_t SYS_MQTT_Initialize();
 
 // *****************************************************************************
 /* Function:
-       void SYS_MQTT_Deinitialize()
+       int32_t SYS_MQTT_Deinitialize()
 
   Summary:
       Deinitialization of data structures of the MQTT service

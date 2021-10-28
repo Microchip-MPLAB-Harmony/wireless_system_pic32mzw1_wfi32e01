@@ -549,6 +549,23 @@ int32_t SYS_MQTT_Initialize()
     return SYS_MQTT_SUCCESS;
 }
 
+int32_t SYS_MQTT_Deinitialize()
+{
+    g_u32SysMqttInitDone = 0;
+
+    /* 
+     ** Delete the Semaphore created during initialization of the Service 
+     */
+    if (OSAL_SEM_Delete(&g_SysMqttSemaphore) != OSAL_RESULT_TRUE)
+    {
+        SYS_CONSOLE_MESSAGE("NET_SRVC: Failed to Deinitialize Service as Semaphore NOT deleted\r\n");
+
+        return SYS_MQTT_FAILURE;
+    }
+    
+    return SYS_MQTT_SUCCESS;
+}
+
 void* SYS_MQTT_AllocHandle()
 {
     uint8_t i = 0;
