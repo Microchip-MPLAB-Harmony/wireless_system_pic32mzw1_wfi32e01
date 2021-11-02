@@ -176,11 +176,12 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
      Manually : OTA can be triggerred by the application by calling an API. 
 
      Other sources : User may configure/implement any other means of source like MQTT server to trigger OTA. This is a subset of the manual triggers.
-
-
+ 
 - **Download JSON manifest file and check for version :** JSON file will be downloaded from server first , once OTA process is initiated. JSON file will have version number along with other details. Now system will try to compare the extracted version number from JSON file with currently running application version number and decide accordingly the next step :
   - If version number is same abort the OTA process because new image is not available.
-  - If version number is different and higher than the current application version number, then system will continue with OTA process.
+  - If version number is different and higher than the current application version number, then system will continue with OTA process.  
+
+- **Patch Functionality :** If patch functionality is enabled in the application , it will try fetch relative information from JSON manifest and proceed accordingly.
 
 - **Initiating image Download process :** Based on user configuration system will go for image downloading or will wait for download trigger by user.
 
@@ -229,6 +230,21 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
 3. If the image is not valid, the bootloader invalidates the image by setting “Invalidate” `0xF0` in `STATUS` field of image in OTA database present in the external flash and restarts the Image-Programming sequence.
 
 4. If image is verified successfully, bootloader updates `STATUS` field of boot control area in internal flash as `Unbooted (0xFC)`
+
+## Patch functionality
+
+OTA service provides facility of patch OTA . User can configure `PATCH` functionality using MHC menu ,for more details on configuration please follow - [Configuring the library](configuration.md/#configuring-the-library) section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility and follow instructions from http://jojodiff.sourceforge.net/ .
+User can provide required parameters for patch in JSON file ( Please follow `OTA server JSON manifest` section , for more details ) . OTA Service will follow below steps during while processing `patch functionality` : 
+  - Check if base version is present in OTA DB
+    - If not present, sysetm will try to download full image from server .
+    - If present, system will proceed with logic for patch functionality.
+  - During patching system will at first verify downloaded patch image using SHA-256 .
+  - If patch file is verified successfully , system will generate target binary image.
+  - After successful generation of target image , SHA-256 verification will be done against target image .
+  - If target image is verified successfully , same will be stored in OTA DB present in the external flash.
+  - Finally new image will be applied by bootloader as per application logic.
+
+![](images/patch_details.png)
 
 ## Configuration fuses
 
