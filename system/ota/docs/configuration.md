@@ -64,7 +64,10 @@ The following figure shows the MHC configuration window for configuring the OTA 
 
 9. configure **Advances Configuration**:
 
+   ![](./images/ota_advance_config.png)
+
    - **Number of images:**  This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot. 
+   
    - **Set JSON file size in bytes:** Maximum size (in bytes) of the `json` file present in the server.
 
    - **Enforce TLS:** By default this option will be disabled.
@@ -73,6 +76,8 @@ The following figure shows the MHC configuration window for configuring the OTA 
    **NOTE : If disabled service will automatically detect and go for http or https connection, by looking into server URL mentioned by user**
 
    - **Disk space check:** By default this option will be disabled. If enable, free sector check will be done, in ext flash before download starts.
+
+   -  **Enable/Disable Patch Functionality:** By default this option will be disabled. If enabled by user ,OTA service will enable code to support `patch` functionality. 
 
 
 
