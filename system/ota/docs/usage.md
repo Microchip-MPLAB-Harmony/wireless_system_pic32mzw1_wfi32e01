@@ -79,6 +79,12 @@ The OTA service expects the HTTP based OTA server to provide metadata of images 
 
   -  If user configures this field as "false", OTA service will follow image downwload logic.
 
+- **`Patch`** This ***optional*** field provides a facility to support patch functionality. If **patch** functionality-option is enabled in the project, application will try to fetch below fields
+  - **`BaseVersion`** This is base image version against which patch will be applied. Application will check the presence of this base image version, in OTA DB, present in external flash.
+  - **`BaseVerDigest`** Base image digest must be provided by user, which will be used by application to verify correct Base image. This digest will be compared against the digest (stored inside OTA DB) of base version.
+  - **`PatchURL`** URL-path of patch image.
+  - **`PatchDigest`** Digest of Patch image . This is used by the application in the device to verify downloaded patch image.  
+  - **`TargetDigest`** Digest of the Target image obtained after applying Patch . This is used by the application in the device to verify target image obtained after applying patch functionality.
 
 **Sample JSON**
 
@@ -90,7 +96,23 @@ The OTA service expects the HTTP based OTA server to provide metadata of images 
                 "Version": 3,
                 "URL": "http://192.168.43.173:8000/wifi_ota103.bin",
                 "Digest": "745189cbb24b752a0175de1f9d5d61433ba47d89aff5b5a3686f54ca2d5dfb22",
-                "EraseVer": false
+                "EraseVer": false,
+                "Patch" : [
+                              {
+                                "BaseVersion": 1,
+                                "BaseVerDigest": "aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d",
+                                "PatchURL": "http://192.168.0.101:8000/wifi_ota_app_upgrade_patch.patch",
+                                "PatchDigest": "266008c4a6150d7033e370a48621ecd44985b3d0418cdf13bbb6efa6fae43823",
+                                "TargetDigest": "beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"
+                              },
+                              {
+                                "BaseVersion": 1,
+                                "BaseVerDigest": "aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d",
+                                "PatchURL": "http://192.168.0.102:8000/wifi_ota_app_upgrade_patch.patch",
+                                "PatchDigest": "266008c4a6150d7033e370a48621ecd44985b3d0418cdf13bbb6efa6fae43823",
+                                "TargetDigest": "beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"
+                              }
+                          ]
             },
             {
                 "Version": 6,
