@@ -90,12 +90,11 @@ The OTA service expects the HTTP based OTA server to provide metadata of images 
 
 ```json
     {
-    
     "ota": [
             {
-                "Version": 3,
-                "URL": "http://192.168.43.173:8000/wifi_ota103.bin",
-                "Digest": "745189cbb24b752a0175de1f9d5d61433ba47d89aff5b5a3686f54ca2d5dfb22",
+                "Version": 5,
+                "URL": "http://192.168.0.101:8000/wifi_ota_app_upgrade_ver2.bin",
+                "Digest": "aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d",
                 "EraseVer": false,
                 "Patch" : [
                               {
@@ -113,12 +112,6 @@ The OTA service expects the HTTP based OTA server to provide metadata of images 
                                 "TargetDigest": "beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"
                               }
                           ]
-            },
-            {
-                "Version": 6,
-                "URL": "http://192.168.43.173:8000/wifi_ota100.bin",
-                "Digest": "885189cbb24b7b1a0175deef9d5d61f53c247d89a095b5a3686f54ca2d5dfbaa",
-                "EraseVer": false
             }
            ]
     }
@@ -174,7 +167,7 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
 
  **a. OTA Service:**
 
-   ![applicationheader](images/otaservice_flowchart.PNG)
+   ![applicationheader](images/otaservice_flowchart.png)
 
    - **OTA Start:** OTA process can be triggered using various methods :
 
