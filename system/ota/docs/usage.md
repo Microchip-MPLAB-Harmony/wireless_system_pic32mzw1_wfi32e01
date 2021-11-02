@@ -103,20 +103,12 @@ The OTA service expects the HTTP based OTA server to provide metadata of images 
                                 "PatchURL": "http://192.168.0.101:8000/wifi_ota_app_upgrade_patch.patch",
                                 "PatchDigest": "266008c4a6150d7033e370a48621ecd44985b3d0418cdf13bbb6efa6fae43823",
                                 "TargetDigest": "beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"
-                              },
-                              {
-                                "BaseVersion": 1,
-                                "BaseVerDigest": "aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d",
-                                "PatchURL": "http://192.168.0.102:8000/wifi_ota_app_upgrade_patch.patch",
-                                "PatchDigest": "266008c4a6150d7033e370a48621ecd44985b3d0418cdf13bbb6efa6fae43823",
-                                "TargetDigest": "beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"
                               }
                           ]
             }
            ]
     }
-```
-
+``` 
 OTA service will download json file from server first when OTA process is triggered, try to fetch information and proceed further as per below logic:
 
 ![](images/json_parse_logic.png)
