@@ -133,6 +133,12 @@ void sys_ota_cb(uint32_t event, void * data, void *cookie) {
             SYS_CONSOLE_PRINT("SYS_OTA_PATCH_EVENT_START\r\n");
             break;
         }
+        case SYS_OTA_PATCH_EVENT_COMPLETED:
+        {
+            /*Patch event completed. Developer can build their own custom logic*/
+            SYS_CONSOLE_PRINT("SYS_OTA_PATCH_EVENT_COMPLETED\r\n");
+            break;
+        }
         case SYS_OTA_DOWNLOAD_START:
         {
             /*OTA image download start . Developer can build their own custom logic*/

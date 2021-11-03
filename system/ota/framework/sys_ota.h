@@ -267,7 +267,10 @@ extern "C" {
                 
         /*Patch event initiated*/        
         SYS_OTA_PATCH_EVENT_START,        
-
+        
+        /*Patch event completed*/        
+        SYS_OTA_PATCH_EVENT_COMPLETED,
+                
         /*download start*/
         SYS_OTA_DOWNLOAD_START,
 

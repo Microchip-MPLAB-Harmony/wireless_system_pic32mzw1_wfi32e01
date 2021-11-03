@@ -2117,6 +2117,11 @@ void OTA_Tasks(void) {
                 ota.current_task = OTA_TASK_DOWNLOAD_IMAGE;
                 ota.task.state = OTA_TASK_INIT;
             }
+            
+            if (ota.ota_result == OTA_RESULT_PATCH_EVENT_COMPLETED){
+                ota.current_task = OTA_TASK_VERIFY_IMAGE_DIGEST;
+                ota.task.state = OTA_TASK_INIT;
+            }
 #endif
             OTA_Task_UpdateUser();
             break;
@@ -2219,7 +2224,8 @@ void OTA_Tasks(void) {
     #if (SERVICE_TYPE == OTA_DEBUG)
                 SYS_CONSOLE_PRINT("appFile.fileHandle1 : %d , %s\n\r",appFile.fileHandle1,patch_param.target_file);
     #endif
-                ota.current_task = OTA_TASK_VERIFY_IMAGE_DIGEST;
+                ota.ota_result = OTA_RESULT_PATCH_EVENT_COMPLETED;
+                ota.current_task = OTA_TASK_UPDATE_USER;
                 ota.task.state = OTA_TASK_INIT;
             }
             else if (ota.status == SYS_STATUS_ERROR) {

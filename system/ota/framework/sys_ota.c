@@ -250,6 +250,16 @@ void _OTACallback(uint32_t event, void * data, void *cookies) {
             sys_otaData.state = SYS_OTA_UPDATE_USER;
             break;
         }
+        
+        case OTA_RESULT_PATCH_EVENT_COMPLETED:
+        {
+#ifdef SYS_OTA_APPDEBUG_ENABLED
+            SYS_CONSOLE_PRINT("SYS OTA : OTA_RESULT_PATCH_EVENT_COMPLETED\r\n");
+#endif
+            SYS_OTA_SetOtaServicStatus(SYS_OTA_PATCH_EVENT_COMPLETED);
+            sys_otaData.state = SYS_OTA_UPDATE_USER;
+            break;
+        }
 #endif
         
         case OTA_RESULT_IMAGE_DOWNLOAD_START:

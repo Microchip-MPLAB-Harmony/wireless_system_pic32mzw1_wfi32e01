@@ -82,8 +82,11 @@ typedef enum {
     OTA_RESULT_IMAGE_DOWNLOADED ,
 
     /*Image download failed*/        
-    OTA_RESULT_IMAGE_DOWNLOAD_FAILED,        
-#ifdef SYS_OTA_PATCH_ENABLE        
+    OTA_RESULT_IMAGE_DOWNLOAD_FAILED,  
+#ifdef SYS_OTA_PATCH_ENABLE     
+    /*Image patching completed*/         
+    OTA_RESULT_PATCH_EVENT_COMPLETED,
+       
     /*Image patch failed*/         
     OTA_RESULT_PATCH_IMAGE_FAILED,
 #endif            
@@ -531,7 +534,7 @@ bool OTA_IsIdle(void) ;
     SYS_STATUS code.
 */
 // *****************************************************************************
-SYS_STATUS OTA_Search_ImageVersion(uint32_t, char *);
+SYS_STATUS OTA_Search_ImageVersion(uint32_t ver, char *digest);
 #ifdef  __cplusplus
 }
 #endif
