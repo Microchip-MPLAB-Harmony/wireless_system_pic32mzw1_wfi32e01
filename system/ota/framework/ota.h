@@ -485,7 +485,52 @@ SYS_STATUS OTA_EraseImage(uint32_t version);
 // *****************************************************************************
 SYS_STATUS OTA_CallBackReg(void *buffer, uint32_t length);
 
+// *****************************************************************************
+/*
+  Function:
+    bool OTA_IsIdle(void);
+
+  Summary:
+    To check if OTA Task is in idle state.
+
+  Description:
+    To check if OTA Task is in idle state.
+
+  Precondition:
+    None.
+
+  Parameters:
+    None.
+
+  Returns:
+    True - Idle
+    False - Not Idle
+*/
+// *****************************************************************************
 bool OTA_IsIdle(void) ;
+
+// *****************************************************************************
+/*
+  Function:
+    SYS_STATUS OTA_Search_ImageVersion(uint32_t ver, char *digest);
+
+  Summary:
+    To search a particular image version in OTA DB.
+
+  Description:
+    To check if a particular image version is present in OTA DB or not.
+
+  Precondition:
+    None.
+
+  Parameters:
+    ver - Base version
+    digest - digest of base image
+
+  Returns:
+    SYS_STATUS code.
+*/
+// *****************************************************************************
 SYS_STATUS OTA_Search_ImageVersion(uint32_t, char *);
 #ifdef  __cplusplus
 }
