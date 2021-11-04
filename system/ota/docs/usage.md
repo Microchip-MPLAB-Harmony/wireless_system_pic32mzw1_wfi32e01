@@ -225,7 +225,7 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
 
 ## Patch functionality
 
-OTA service provides facility of patch OTA . User can configure `PATCH` functionality using MHC menu ,for more details on configuration please follow - [Configuring the library](configuration.md/#configuring-the-library) section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility and follow instructions from http://jojodiff.sourceforge.net/ .
+OTA service provides facility of patch OTA . User can configure `PATCH` functionality using MHC menu ,for more details on configuration please follow - [Configuring the library](configuration.md/#configuring-the-library) section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility and follow instructions from https://github.com/MicrochipTech/jojodiff .
 User can provide required parameters for patch in JSON file ( Please follow `OTA server JSON manifest` section , for more details ) . OTA Service will follow below steps during while processing `patch functionality` : 
   - Check if base version is present in OTA DB
     - If not present, sysetm will try to download full image from server .
