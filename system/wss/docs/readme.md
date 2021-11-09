@@ -11,7 +11,7 @@ function: Web Socket Server System Service
 
 # Web Socket Server (WSS) System Service
 
-Web Socket Server System Service Library provides an application programming interface (API) for implementing a Web Socket Server functionalities. The WSS System Service uses the underlying Net system  Service APIs for achieving TCPIP network functionalities. 
+Web Socket Server System Service Library provides an application programming interface (API) for implementing a Web Socket Server functionalities as defined in rfc6455. The WSS System Service uses the underlying net system  service APIs for TCP/IP and network functionalities. 
 
 Key Features:
 - Implements the WSS protocol as a service

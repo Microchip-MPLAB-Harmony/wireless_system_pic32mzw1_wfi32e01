@@ -223,7 +223,7 @@ None.
 ```c
 typedef struct {
         unsigned int port;             //port used by the WSS service.
-        bool isTLSEnabled;            //TLS enabled?
+        bool isTLSEnabled;             //TLS enabled?
 } SYS_WSS_CONFIG;
 
 ```
@@ -242,11 +242,11 @@ None.
 ```c
 typedef struct {
         uint16_t http_version;    //HTTP version specified in the client handshake
-        uint8_t ws_version;      //Web socket version specified in the client handshake
-        bool upgradeWebSocket;   //If upgrade websocket field specified in the client handshake
-        bool origin;            //If origin field specified in the client handshake
-        bool connectionUpgrade; //If upgrade field present in the client handshake
-        bool connectionClose;  // Persistent connection support based on the HTTP version
+        uint8_t ws_version;       //Web socket version specified in the client handshake
+        bool upgradeWebSocket;    //If upgrade websocket field specified in the client handshake
+        bool origin;              //If origin field specified in the client handshake
+        bool connectionUpgrade;   //If upgrade field present in the client handshake
+        bool connectionClose;     // Persistent connection support based on the HTTP version
         char clientKey[SYS_WSS_CLIENT_KEY_SIZE + 1]; //Client key
         char serverKey[SYS_WSS_SERVER_KEY_SIZE + 1]; // Server key
 } SYS_WSS_HANDSHAKE_CTXT;
@@ -403,14 +403,14 @@ typedef enum {
         SYS_WSS_STATUS_CODE_GOING_AWAY = 1001,
         SYS_WSS_STATUS_CODE_PROTOCOL_ERROR = 1002,
         SYS_WSS_STATUS_CODE_UNSUPPORTED_DATA = 1003,
-        SYS_WSS_STATUS_CODE_NO_STATUS_RCVD = 1005, //reserved code, Not to be used in the close frames
+        SYS_WSS_STATUS_CODE_NO_STATUS_RCVD = 1005,   //reserved code, Not to be used in the close frames
         SYS_WSS_STATUS_CODE_ABNORMAL_CLOSURE = 1006, //reserved, Not to be used in the close frames
         SYS_WSS_STATUS_CODE_INVALID_PAYLOAD_DATA = 1007,
         SYS_WSS_STATUS_CODE_POLICY_VIOLATION = 1008,
         SYS_WSS_STATUS_CODE_MESSAGE_TOO_BIG = 1009,
         SYS_WSS_STATUS_CODE_MANDATORY_EXT = 1010,
         SYS_WSS_STATUS_CODE_INTERNAL_ERROR = 1011,
-        SYS_WSS_STATUS_CODE_TLS_HANDSHAKE = 1015 // reserved code, Not to be used in the close frames
+        SYS_WSS_STATUS_CODE_TLS_HANDSHAKE = 1015    // reserved code, Not to be used in the close frames
 } SYS_WSS_STATUS_CODE;
 ```
 ## Initialization functions
@@ -598,7 +598,7 @@ SYS_WSS_RESULT.
                 }
                 SYS_CONSOLE_PRINT("\r\n");
                 // Enable the below statement for echo server
-               //SYS_WSS_sendMessage(1, SYS_WSS_FRAME_TEXT, ((SYS_WSS_RXDATA*) data)->data, ((SYS_WSS_RXDATA *) data)->datalen, clientIndex);
+                //SYS_WSS_sendMessage(1, SYS_WSS_FRAME_TEXT, ((SYS_WSS_RXDATA*) data)->data, ((SYS_WSS_RXDATA *) data)->datalen, clientIndex);
 
                 break;
             }

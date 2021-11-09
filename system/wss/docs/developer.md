@@ -42,62 +42,64 @@ The various states of the WSS system service are of the enum type [*SYS_WSS_STAT
 
 The WSS system service runs a finite state machine with the following states:
 
-1.  *SYS_WSS_STATE_CLOSED*: Initial State of the WSS system service, at the initialization.
-2.  *SYS_WSS_STATE_CLOSING*: An intermediate state which handles the processing of the client closing handshake .
-3.  *SYS_WSS_STATE_CONNECTING*: An intermediate state which handles the processing of the client opening handshake.
-4.  *SYS_WSS_STATE_CONNECTED*: The state which  handles all the data transmissions.
+1.  *SYS_WSS_STATE_CLOSED*   : Initial State of the WSS system service, at the initialization.
+2.  *SYS_WSS_STATE_CLOSING*  : An intermediate state which handles the processing of the client closing handshake .
+3.  *SYS_WSS_STATE_CONNECTING*  : An intermediate state which handles the processing of the client opening handshake.
+4.  *SYS_WSS_STATE_CONNECTED*  : The state which  handles all the data transmissions.
 
 <p align="center">
-<img src="./images/StateMachine.png"/>
+<img src="./images/StateMachine.png" style="width:5in;"/>
 </p>
+
 ## Number of Clients Supported
 
-The maximum number of Clients supported by WSS system service currently is 8. The user can change the value via the MHC.By default the value is set to 2.
+The maximum number of Clients supported by WSS system service currently is 8. The user can change the value via the MHC. Default the value is set to 2.
 
 ## Client time out
 
 The user can configure a timeout value which will be considered as a maximum idle time for a client connection. The default timeout value is 30s. 
 
-## External APIs
+## API Implementation
 
-### [SYS_WSS_register_callback ()](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/system/wss/docs/interface.html#SYS_WSS_register_callback.png)
+This section describes the high level implementation details of the WSS APIs.
+### SYS_WSS_register_callback()
 
-Description: The API is used for registering the application callback function with the WSS service.
+The API is used for registering the application callback function with the WSS service.
 
 <p align="center">
-<img src="./images/SYS_WSS_register_callback.png" style="width:6.84375in;height:6.91667in" />
+<img src="./images/SYS_WSS_register_callback.png" style="width:4in;">
 </p>
 
-### [SYS_WSS_CloseConnection ()](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/system/wss/docs/interface.html#SYS_WSS_CloseConnection.png)
+### SYS_WSS_CloseConnection()
 
-Description: This API is used to closes the Web Socket connection to the client indicated by the parameter clientIndex. This will initiate the closing handshake from the server.
-
-<p align="center">
-<img src="./images/SYS_WSS_CloseConnection.png" style="width:6.48958in;height:2.63542in" />
-</p>
-
-
-### [SYS_WSS_PingClient ()](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/system/wss/docs/interface.html#SYS_WSS_PingClient.png)
-
-Description: This API is used to send a ping message to the client indicated by the parameter clientIndex.
-
+This API is used to close the Web Socket connection to the client indicated by the parameter `clientIndex`. This will initiate the closing handshake from the server.
 
 <p align="center">
-<img src="./images/SYS_WSS_PingClient.png" style="width:6.48958in;height:4in" />
-</p>
-
-### [SYS_WSS_sendMessage ()](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/system/wss/docs/interface.html#SYS_WSS_sendMessage.png)
-
-Description: This API is used to send a message to the client indicated by the parameter clientIndex.
-
-<p align="center">
-<img src="./images/SYS_WSS_sendMessage.png" />
+<img src="./images/SYS_WSS_CloseConnection.png" style="width:5in;" />
 </p>
 
 
-### [SYS_WSS_Initialize](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/docs/system/wss/docs/interface.html#SYS_WSS_Initialize)()/ [SYS_WSS_Deinitialize()](https://microchip-mplab-harmony.github.io/wireless_system_pic32mzw1_wfi32e01/docs/system/wss/docs/interface.html#SYS_WSS_Deinitialize)
+### SYS_WSS_PingClient()
 
-Description: These functions are used for initializing/ deinitializing the data structures of the WSS system service.
+This API is used to send a ping message to the client indicated by the parameter clientIndex.
+
+
+<p align="center">
+<img src="./images/SYS_WSS_PingClient.png" style="width:5in" />
+</p>
+
+### SYS_WSS_sendMessage()
+
+This API is used to send a message to the client indicated by the parameter `clientIndex`.
+
+<p align="center">
+<img src="./images/SYS_WSS_sendMessage.png" style="width:5in"/>
+</p>
+
+
+### SYS_WSS_Initialize() / SYS_WSS_Deinitialize()
+
+These functions are used for initializing/ deinitializing the data structures of the WSS system service.
 
 
 ## Code location
@@ -106,22 +108,29 @@ The base code for the WSS system service can be found in the *wireless_system_pi
 
 The same shall be copied to the following location after the code for the application is generated – *my_application\\firmware\\src\\config\\pic32mz_w1_curiosity\\system\\wss*
 
-The code has 2 files:
+The core includes two files:
 
 1.  Header file: *sys_wss.h*
 
 2.  Source file: *src/sys_wss.c*
 
-> Since the above files could see modifications across releases, hence the users would need to take care of merging the changes they did in these files with the ones which were done in the new release by Microchip Team. For this the user needs to take care of this while generating the code via the MHC:
->
+The WSS component can also optinoally generate two application template files. The template file includes a callback that can be modified as required by the end user application.
+
+1.  Header file: *app_wss.h*
+
+2.  Source file: *src/app_wss.c*
+
+
+> Since the above files could see modifications across releases,  the users should take care of merging the changes they did in these files with the ones which were done in the new release by Microchip Team. For this the user needs to take care of this while generating the code via the MHC:
+
 <p align="center">
-<img src="./images/MhcMergeStrategy.png" style="width:6.5in;height:6.67639in" />
+<img src="./images/MhcMergeStrategy.png" style="width:4in;" />
 </p>
 
-While generating the code the user should use the Merge Strategy as “USER_ALL”, and press “Generate”. In case there are changes done by user in any of the files, the MHC shall prompt the user about it:
+While generating the code the user should use the Merge Strategy as `USER_ALL`, and click `Generate`. In case there are changes done by user in any of the files, the MHC shall prompt the user about it:
 
 <p align="center">
-<img src="./images/MhcMergeWindow.png" style="width:6.5in;height:3.16528in" />
+<img src="./images/MhcMergeWindow.png" style="width:6in" />
 </p>
 
 The user can merge his changes with the the latest changes done in the services using the above window.
