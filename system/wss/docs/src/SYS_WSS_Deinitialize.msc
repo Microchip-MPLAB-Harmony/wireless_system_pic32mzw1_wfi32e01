@@ -1,0 +1,9 @@
+
+Application,WebSocketServerSystemService,NetSystemService;
+Application => WebSocketServerSystemService :"SYS_WSS_Deinitialize\n(&sysWssObj)";
+
+
+WebSocketServerSystemService note WebSocketServerSystemService : Deinitialization of the service object start;
+
+WebSocketServerSystemService => NetSystemService :"SYS_NET_Close\n(wssNetHandle)";
+WebSocketServerSystemService note WebSocketServerSystemService : Deinitialization of the service object end;
