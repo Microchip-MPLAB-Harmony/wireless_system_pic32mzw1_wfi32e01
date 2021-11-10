@@ -27,6 +27,7 @@ This repository contains the MPLAB® Harmony 3 Wireless wireless system services
 * [Net Service](system/net/docs/readme.md)
 * [Mqtt Service](system//mqtt/docs/readme.md)
 * [App Debug Service](system/appdebug/docs/readme.md)
+* [WebSocket Server Service](system/wss/docs/readme.md)
 
 Refer to the following links for release notes, training materials, and interface reference information.
 
