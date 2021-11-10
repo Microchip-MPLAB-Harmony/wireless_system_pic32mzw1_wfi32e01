@@ -647,11 +647,11 @@ SYS_MODULE_OBJ SYS_WSS_Initialize(SYS_WSS_CONFIG *config, SYS_WSS_CALLBACK callb
         g_wssSrvcObj[i].wssNetCfg.ip_prot = SYS_NET_IP_PROT_TCP;
         g_wssSrvcObj[i].wssNetCfg.enable_reconnect = SYS_NET_INDEX0_RECONNECT;
         memset(g_wssSrvcObj[i].sHandshake, 0, sizeof (g_wssSrvcObj[i].sHandshake));
-        g_wssSrvcObj[i].wssNetHandle=NULL;
+        g_wssSrvcObj[i].wssNetHandle=(uintptr_t)NULL;
         g_wssSrvcObj[i].kaTimerCount=0;
     }
     
-    kaTimerHandle = SYS_TIME_CallbackRegisterMS(wss_timer_callback, NULL,SYS_WSS_KA_TIMER_PERIOD, SYS_TIME_PERIODIC);
+    kaTimerHandle = SYS_TIME_CallbackRegisterMS(wss_timer_callback,(uintptr_t) NULL,SYS_WSS_KA_TIMER_PERIOD, SYS_TIME_PERIODIC);
     if (kaTimerHandle == SYS_TIME_HANDLE_INVALID)
     {
         SYS_CONSOLE_PRINT("ERROR: SYS_WSS Timer creation failed. KA will not be honored. \r\n");
@@ -698,16 +698,16 @@ void SYS_WSS_Deinitialize(SYS_MODULE_OBJ *sysWSSObj) {
     int i = 0;
 /*Deinit the wss service object for all clients*/
     for (i = 0; i < SYS_WSS_MAX_NUM_CLIENTS; i++) {
-    g_wssSrvcObj[i].wssState = NULL;
-    g_wssSrvcObj[i].wssNetCfg.mode = NULL;
-    g_wssSrvcObj[i].wssNetCfg.port = NULL;
-    g_wssSrvcObj[i].wssNetCfg.enable_tls = NULL;
-    g_wssSrvcObj[i].wssNetCfg.ip_prot = NULL;
-    g_wssSrvcObj[i].wssNetCfg.enable_reconnect = NULL;
+    g_wssSrvcObj[i].wssState = SYS_WSS_STATE_CLOSED;
+    g_wssSrvcObj[i].wssNetCfg.mode = 0;
+    g_wssSrvcObj[i].wssNetCfg.port = 0;
+    g_wssSrvcObj[i].wssNetCfg.enable_tls = 0;
+    g_wssSrvcObj[i].wssNetCfg.ip_prot = 0;
+    g_wssSrvcObj[i].wssNetCfg.enable_reconnect = 0;
     memset(g_wssSrvcObj[i].sHandshake, 0, sizeof (g_wssSrvcObj[i].sHandshake));
-    g_wssSrvcObj[i].kaTimerCount=NULL;
+    g_wssSrvcObj[i].kaTimerCount=0;
     SYS_NET_Close(g_wssSrvcObj[i].wssNetHandle);
-    g_wssSrvcObj[i].wssNetHandle=NULL;
+    g_wssSrvcObj[i].wssNetHandle=0;
 
     }
     WSS_DEBUG_PRINT("Web Socket Server de initialization completed");
@@ -728,7 +728,7 @@ uint8_t SYS_WSS_Task(SYS_MODULE_OBJ object) {
     int i = 0;
     SYS_CMD_READY_TO_READ();
     for (i = 0; i < SYS_WSS_MAX_NUM_CLIENTS; i++) {
-        if(NULL!=g_wssSrvcObj[i].wssNetHandle){
+        if((uintptr_t)NULL!=g_wssSrvcObj[i].wssNetHandle){
             SYS_NET_Task(g_wssSrvcObj[i].wssNetHandle);
         }
     }

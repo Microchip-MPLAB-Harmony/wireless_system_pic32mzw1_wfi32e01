@@ -120,13 +120,7 @@ void wss_user_callback(SYS_WSS_EVENTS event, void *data, int32_t clientIndex, vo
             SYS_CONSOLE_PRINT("wssSysServCallback(%d): SYS_WSS_EVENT_ERR\r\n",clientIndex);
             break;
         }
-#if 0   
-        case SYS_WSS_EVENT_DOWN:
-        {
-            SYS_CONSOLE_PRINT("wssSysServCallback(%d): SYS_WSS_EVENT_DOWN\r\n",clientIndex);
-            break;
-        }
-#endif
+
         case SYS_WSS_EVENT_CLIENT_TIMEOUT:
         {
             SYS_CONSOLE_PRINT("wssSysServCallback(%d): SYS_WSS_EVENT_CLIENT_TIMEOUT\r\n",clientIndex);
