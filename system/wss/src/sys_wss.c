@@ -170,7 +170,6 @@ static size_t wssFormatFrameHeader(bool fin, SYS_WSS_FRAME type, size_t payloadL
     return frameLen;
 }
 
-//TODO: will be called when application requests it via control message
 
 static SYS_WSS_RESULT wssCloseConnection(SYS_WSS_STATUS_CODE stausCode, uint8_t *data, size_t dataLen, int32_t clientIndex) {
     SYS_WSS_RESULT result = SYS_WSS_SUCCESS;
@@ -210,13 +209,13 @@ static SYS_WSS_RESULT wssSendPongMessage( uint8_t *data, size_t dataLen, int32_t
     frameLen = wssFormatFrameHeader(1, SYS_WSS_FRAME_PONG, dataLen, (uint8_t *) buffer);
     memcpy((buffer + frameLen), data, dataLen);
     WSS_DEBUG_PRINT("\r\nWSS: Pong Response %s , with length %d..\r\n", data, dataLen);
-    SYS_CONSOLE_PRINT("\r\nWSS: Pong Response %s , with length %d..\r\n", data, dataLen);
+    
     result = SYS_NET_SendMsg(g_wssSrvcObj[clientIndex].wssNetHandle, buffer, (dataLen + frameLen));
     if (0 > result){
         result = SYS_WSS_FAILURE;  
-        SYS_CONSOLE_PRINT("\r\nWSS: Sending Pong message failed \r\n" );
+        WSS_DEBUG_PRINT("\r\nWSS: Sending Pong message failed \r\n" );
     }
-    SYS_CONSOLE_PRINT("\r\nWSS: Pong message sent \r\n" );
+    
     return result;
 }
 
@@ -228,7 +227,6 @@ static SYS_WSS_RESULT wssSendPingMessage( uint8_t *data, size_t dataLen, int32_t
     frameLen = wssFormatFrameHeader(1, SYS_WSS_FRAME_PING, dataLen, (uint8_t *) buffer);
     memcpy((buffer + frameLen), data, dataLen);
     WSS_DEBUG_PRINT("\r\nWSS: Response %s , with length %d..\r\n", data, dataLen);
-    SYS_CONSOLE_PRINT("\r\nWSS: Response %s , with length %d..\r\n", data, dataLen);
     result = SYS_NET_SendMsg(g_wssSrvcObj[clientIndex].wssNetHandle, buffer, (dataLen + frameLen));
     if (0 > result){
         result = SYS_WSS_FAILURE;   
@@ -339,20 +337,15 @@ static SYS_WSS_RESULT parseHandshake(void *buffer, uint16_t length, int32_t clie
     if (token == NULL) {
         // version number is WS_HTTP_VERSION_0_9
         g_wssSrvcObj[clientIndex].wssHandshake.http_version = SYS_WSS_HTTP_VERSION_0_9;
-        //Persistent connections are not supported
-        g_wssSrvcObj[clientIndex].wssHandshake.connectionClose = true;
     }//HTTP version 1.0?
     else if (!strcasecmp(token, "HTTP/1.0")) {
         //Save version number
         g_wssSrvcObj[clientIndex].wssHandshake.http_version = SYS_WSS_HTTP_VERSION_1_0;
-        //By default connections are not persistent
-        g_wssSrvcObj[clientIndex].wssHandshake.connectionClose = true;
+
     }//HTTP version 1.1?
     else if (!strcasecmp(token, "HTTP/1.1")) {
         //Save version number
         g_wssSrvcObj[clientIndex].wssHandshake.http_version = SYS_WSS_HTTP_VERSION_1_1;
-        //HTTP 1.1 makes persistent connections the default
-        g_wssSrvcObj[clientIndex].wssHandshake.connectionClose = false;
     }//HTTP version not supported?
     else {
         //Report an error
@@ -521,7 +514,6 @@ void processData(void *buffer, uint16_t length, int32_t clientIndex) {
             } else {
                 /*Client message shall always  be masked*/
                 WSS_DEBUG_PRINT("\r\nClient message received without masking, invalid frame");
-                SYS_CONSOLE_PRINT("In processData: INVALID FRAME ,fragmented control message\r\n");
                 wssUserCallback(SYS_WSS_EVENT_ERR_INVALID_FRAME, NULL, clientIndex);
                 g_wssSrvcObj[clientIndex].wssState = SYS_WSS_STATE_CLOSING;
                 wssCloseConnection(SYS_WSS_STATUS_CODE_PROTOCOL_ERROR, NULL, 0, clientIndex);
@@ -581,7 +573,6 @@ static void wssNetCallback(uint32_t event, void *data, void *cookie) {
     switch (event) {
         case SYS_NET_EVNT_CONNECTED:
         {
-            //TODO: provide a callback to application
             wssUserCallback(SYS_WSS_EVENT_CLIENT_CONNECTING, NULL, clientIndex);
             g_wssSrvcObj[clientIndex].wssState = SYS_WSS_STATE_CONNECTING;
             break;
@@ -596,11 +587,8 @@ static void wssNetCallback(uint32_t event, void *data, void *cookie) {
         {
             len = SYS_NET_RecvMsg(g_wssSrvcObj[clientIndex].wssNetHandle, g_wssSrvcObj[clientIndex].recv_buffer, SYS_WSS_MAX_RX_BUFFER);
             if (len > 0) {
-                if (len < SYS_WSS_MAX_RX_BUFFER) {
-                    //TODO: Why? why? Why????? - dont consider this as a string.
-                   // g_wssSrvcObj[clientIndex].recv_buffer[len] = '\0';
-                    processData(g_wssSrvcObj[clientIndex].recv_buffer, len + 1, clientIndex);
-                }
+
+                    processData(g_wssSrvcObj[clientIndex].recv_buffer, len ,clientIndex);
             }
             break;
         }
