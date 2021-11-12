@@ -246,7 +246,7 @@ typedef struct {
         bool upgradeWebSocket;    //If upgrade websocket field specified in the client handshake
         bool origin;              //If origin field specified in the client handshake
         bool connectionUpgrade;   //If upgrade field present in the client handshake
-        bool connectionClose;     // Persistent connection support based on the HTTP version
+        bool iskey;             //If websocket key is present in the client handshake
         char clientKey[SYS_WSS_CLIENT_KEY_SIZE + 1]; //Client key
         char serverKey[SYS_WSS_SERVER_KEY_SIZE + 1]; // Server key
 } SYS_WSS_HANDSHAKE_CTXT;
@@ -637,13 +637,7 @@ SYS_WSS_RESULT.
                 SYS_CONSOLE_PRINT("wssSysServCallback(%d): SYS_WSS_EVENT_ERR\r\n",clientIndex);
                 break;
             }
-    #if 0   
-            case SYS_WSS_EVENT_DOWN:
-            {
-                SYS_CONSOLE_PRINT("wssSysServCallback(%d): SYS_WSS_EVENT_DOWN\r\n",clientIndex);
-                break;
-            }
-    #endif
+
             case SYS_WSS_EVENT_CLIENT_TIMEOUT:
             {
                 SYS_CONSOLE_PRINT("wssSysServCallback(%d): SYS_WSS_EVENT_CLIENT_TIMEOUT\r\n",clientIndex);

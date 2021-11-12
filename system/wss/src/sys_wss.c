@@ -56,9 +56,7 @@ typedef struct {
     SYS_WSS_CALLBACK userCallback;
     void * userCookie;
     SYS_WSS_HANDSHAKE_CTXT wssHandshake;
-    //TODO: move to malloc+Queue approach
     uint8_t recv_buffer[SYS_WSS_MAX_RX_BUFFER + 1];
-    //TODOD: dont use a global.
     char sHandshake[256];
     uint32_t kaTimerCount;
 } SYS_WSS_OBJ;
@@ -159,8 +157,9 @@ static size_t wssFormatFrameHeader(bool fin, SYS_WSS_FRAME type, size_t payloadL
     } else if (payloadLen <= 65535) {
         header->payloadLen = 126;
         frameLen += sizeof (uint16_t);
-        header->extPayloadLen[0] = payloadLen & 0xff;
-        header->extPayloadLen[1] = payloadLen >>8 ;
+        header->extPayloadLen[1] = payloadLen & 0xff;
+        header->extPayloadLen[0] = payloadLen >>8 ;
+        
     } else {
         header->payloadLen = 127;
         frameLen += sizeof (uint64_t);
@@ -178,7 +177,7 @@ static SYS_WSS_RESULT wssCloseConnection(SYS_WSS_STATUS_CODE stausCode, uint8_t 
     frameLen = wssFormatFrameHeader(1, SYS_WSS_FRAME_CLOSE, (dataLen+SYS_WSS_STATUS_CODE_LEN), (uint8_t *) buffer);
     *(buffer + frameLen) = (uint8_t) ((stausCode & 0xFF00) >> 8);
     *(buffer + frameLen + 1) = (uint8_t) (stausCode & 0x00FF);
-    WSS_DEBUG_PRINT("  close frame = %d %d\r\n", *(buffer + frameLen), *(buffer + frameLen + 1));
+    WSS_DEBUG_PRINT(" \r\n close frame = %d %d\r\n", *(buffer + frameLen), *(buffer + frameLen + 1));
    if((NULL!=data) && (0!=dataLen)){
         bufferOffset = (buffer + frameLen + sizeof (uint16_t));
         memcpy(bufferOffset, data, dataLen);
@@ -197,7 +196,8 @@ static SYS_WSS_RESULT wssSendResponse(bool fin, SYS_WSS_FRAME type, uint8_t *dat
 
     result=SYS_NET_SendMsg(g_wssSrvcObj[clientIndex].wssNetHandle, buffer, (dataLen + frameLen));
     if (0 > result){
-        result = SYS_WSS_FAILURE;   
+        result = SYS_WSS_FAILURE;  
+        WSS_DEBUG_PRINT("\r\nWSS:Sending response to the client failed\r\n");
     }
     return result;
 }
@@ -291,9 +291,8 @@ static SYS_WSS_RESULT validateClientHandshake(int32_t clientIndex) {
         WSS_DEBUG_PRINT(" Invalid connection upgrade field \r\n");
         result = SYS_WSS_ERROR_INVALID_REQUEST;
     }
-    /*TODO : What is this check*/
-    if (g_wssSrvcObj[clientIndex].wssHandshake.clientKey[0] == 0) {
-        WSS_DEBUG_PRINT(" Invalid clientkey[0] \r\n");
+    if (g_wssSrvcObj[clientIndex].wssHandshake.iskey != true) {
+        WSS_DEBUG_PRINT(" Invalid clientkey field \r\n");
         result = SYS_WSS_ERROR_INVALID_REQUEST;
     }
     if (SYS_WSS_SUCCESS == result) {
@@ -375,7 +374,7 @@ static SYS_WSS_RESULT parseHandshake(void *buffer, uint16_t length, int32_t clie
         } else if (!strcasecmp(token, "Sec-WebSocket-Key:")) {
             token = strtok(NULL, " \r\n");
             strcpy(g_wssSrvcObj[clientIndex].wssHandshake.clientKey, token);
-
+            g_wssSrvcObj[clientIndex].wssHandshake.iskey = true;
             WSS_DEBUG_PRINT("\r\nIn parseHandshake TOKEN7: %s", g_wssSrvcObj[clientIndex].wssHandshake.clientKey);
         } else if (!strcasecmp(token, "Sec-WebSocket-Version:")) {
             token = strtok(NULL, " \r\n");
@@ -586,6 +585,7 @@ static void wssNetCallback(uint32_t event, void *data, void *cookie) {
         case SYS_NET_EVNT_RCVD_DATA:
         {
             len = SYS_NET_RecvMsg(g_wssSrvcObj[clientIndex].wssNetHandle, g_wssSrvcObj[clientIndex].recv_buffer, SYS_WSS_MAX_RX_BUFFER);
+            WSS_DEBUG_PRINT("\r\n Data received from lower layer of length : %u ",len);
             if (len > 0) {
 
                     processData(g_wssSrvcObj[clientIndex].recv_buffer, len ,clientIndex);
@@ -665,8 +665,7 @@ SYS_WSS_RESULT SYS_WSS_PingClient( uint8_t *data, size_t dataLen, int32_t client
     return result;
 }
 SYS_WSS_RESULT SYS_WSS_sendMessage(bool fin, SYS_WSS_FRAME type, uint8_t *data, size_t dataLen, int32_t clientIndex){
-    //if clientIndex = -1, send this message to all connected clients. 
-    //call sendResponse only to clients in the correct connection state.
+
     SYS_WSS_RESULT result = SYS_WSS_SUCCESS;
    result= wssSendResponse(fin, type, data, dataLen, clientIndex);
    return result;
@@ -674,9 +673,7 @@ SYS_WSS_RESULT SYS_WSS_sendMessage(bool fin, SYS_WSS_FRAME type, uint8_t *data, 
 
 SYS_WSS_RESULT SYS_WSS_CloseConnection(SYS_WSS_STATUS_CODE code, uint8_t *data, size_t dataLen, int32_t clientIndex) {
     SYS_WSS_RESULT result =SYS_WSS_SUCCESS;
-    //if clientIndex = -1, send this message to all connected clients. 
-    //call sendResponse only to clients in the correct connection state.
-    
+   
     result = wssCloseConnection(code, data,  dataLen,clientIndex);
     return result;
 }
