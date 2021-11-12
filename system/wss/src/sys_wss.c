@@ -661,20 +661,58 @@ SYS_MODULE_OBJ SYS_WSS_Initialize(SYS_WSS_CONFIG *config, SYS_WSS_CALLBACK callb
 SYS_WSS_RESULT SYS_WSS_PingClient( uint8_t *data, size_t dataLen, int32_t clientIndex) {
     
     SYS_WSS_RESULT result = SYS_WSS_SUCCESS;
-    result = wssSendPingMessage( data, dataLen, clientIndex);
+    int i=0;
+    WSS_DEBUG_PRINT("\r\n ClientIndex %d",clientIndex);
+    if ( clientIndex < 0 ){
+	    WSS_DEBUG_PRINT("\r\n Send ping message to all clients");
+        for (i = 0; i < SYS_WSS_MAX_NUM_CLIENTS; i++) {
+            if(SYS_WSS_STATE_CONNECTED == g_wssSrvcObj[i].wssState){
+                result = wssSendPingMessage( data, dataLen, i);
+            }
+        }
+    }
+    else{
+        result = wssSendPingMessage( data, dataLen, clientIndex);
+    }
     return result;
 }
 SYS_WSS_RESULT SYS_WSS_sendMessage(bool fin, SYS_WSS_FRAME type, uint8_t *data, size_t dataLen, int32_t clientIndex){
 
     SYS_WSS_RESULT result = SYS_WSS_SUCCESS;
-   result= wssSendResponse(fin, type, data, dataLen, clientIndex);
+    int i=0;
+    WSS_DEBUG_PRINT("\r\n ClientIndex %d",clientIndex);
+    if ( clientIndex < 0 ){
+	    WSS_DEBUG_PRINT("\r\n Send message to all clients");
+        for (i = 0; i < SYS_WSS_MAX_NUM_CLIENTS; i++) {
+            if(SYS_WSS_STATE_CONNECTED == g_wssSrvcObj[i].wssState){
+                result= wssSendResponse(fin, type, data, dataLen, i);
+            }
+        }
+    }    
+    else{
+            result = wssSendResponse(fin, type, data, dataLen, clientIndex);
+    }   
    return result;
 }
 
 SYS_WSS_RESULT SYS_WSS_CloseConnection(SYS_WSS_STATUS_CODE code, uint8_t *data, size_t dataLen, int32_t clientIndex) {
     SYS_WSS_RESULT result =SYS_WSS_SUCCESS;
-   
-    result = wssCloseConnection(code, data,  dataLen,clientIndex);
+    int i=0;
+    WSS_DEBUG_PRINT("\r\n ClientIndex %d",clientIndex);
+    if ( clientIndex < 0 )    {
+	    WSS_DEBUG_PRINT("\r\n Close the connection to all clients");
+        for (i = 0; i < SYS_WSS_MAX_NUM_CLIENTS; i++) {
+            if(SYS_WSS_STATE_CONNECTED == g_wssSrvcObj[i].wssState){
+                g_wssSrvcObj[i].wssState = SYS_WSS_STATE_CLOSING;
+                result = wssCloseConnection(code, data,  dataLen,i);
+            }
+        }
+    }
+    else{
+        WSS_DEBUG_PRINT("\r\n Close the connection to the client %d",clientIndex);
+        g_wssSrvcObj[clientIndex].wssState = SYS_WSS_STATE_CLOSING;
+        result = wssCloseConnection(code, data,  dataLen,clientIndex);
+    }    
     return result;
 }
 
