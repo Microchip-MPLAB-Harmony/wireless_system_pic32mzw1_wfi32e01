@@ -19,7 +19,7 @@ The following figure shows the MHC configuration window for configuring the NET 
 
     ![](./images/Net_service_config.png)
 
-4. Configure the Supported Interface - 'WIFI_ONLY' (Wifi Only), or 'WIFI_ETHERNET' (Wifi and Ethernet Both). On choosing WIFI_ETHERNET, the MHC will add EthMAC, MIIM, and LAM8740 Components. 
+4. Configure the Supported Interface - 'WIFI_ONLY' (Wifi Only), or 'WIFI_ETHERNET' (Wifi and Ethernet Both) or 'ETHERNET_ONLY (Ethernet Only)'. On choosing WIFI_ETHERNET or ETHERNET_ONLY, the MHC will add EthMAC, MIIM, and LAM8740 Components. 
 
     ![](./images/Net_service_SuppIntf.png)
 
@@ -28,6 +28,7 @@ The following figure shows the MHC configuration window for configuring the NET 
     ![](./images/Net_service_netconfig.png)
 
 5. Configure the Number of Sockets Supported - 2 to 8, default sockets being 2.
+
     ![](./images/Net_service_SuppSocks.png)
 
 6. Debug - Enabled by default - has 'CLI Commands' and 'Debug Logs' as sub parameters
