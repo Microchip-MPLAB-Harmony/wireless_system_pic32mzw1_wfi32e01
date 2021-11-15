@@ -109,7 +109,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
         symbol.setLabel("RTOS Task Delay (ms)")
         symbol.setMin(0)
         symbol.setMax(100)
-        symbol.setDefaultValue(10)
+        symbol.setDefaultValue(1)
         symbol.setReadOnly(True)
         symbol.setVisible(False)
 
@@ -564,6 +564,8 @@ def finalizeComponent(sysOTAPic32mzw1Component):
     Database.setSymbolValue("rng", "RNGCON_TRNGEN", 1)
     Database.setSymbolValue("rng", "RNGCON_PRNGEN", 1)
     Database.setSymbolValue("rng", "RNGCON_CONT", 1)
+    Database.setSymbolValue("sys_fs", "SYS_FS_MAX_FILES", 5)
+    Database.setSymbolValue("sys_fs", "SYS_FS_RTOS_DELAY", 1)
     
     res = Database.activateComponents(["sysNetPic32mzw1"])
     Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", True)
