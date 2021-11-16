@@ -54,6 +54,7 @@ def instantiateComponent(mqttComponent):
     mqttBrokerName.setVisible(True)
     mqttBrokerName.setDescription("MQTT Broker Name")
     mqttBrokerName.setDefaultValue("test.mosquitto.org")
+    mqttBrokerName.setDependencies(mqttSNIAutoMenu, ["SYS_MQTT_BROKER_NAME"])
 
     mqttPort = mqttComponent.createIntegerSymbol("SYS_MQTT_MQTT_PORT", sysMqttBasicMenu)
     mqttPort.setLabel("Server Port")
@@ -68,6 +69,23 @@ def instantiateComponent(mqttComponent):
     mqttEnableTls.setDefaultValue(False)
     mqttEnableTls.setDependencies(mqttTlsAutoMenu, ["SYS_MQTT_ENABLE_TLS"])
 	
+    mqttEnableSNI = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_SNI", mqttEnableTls)
+    mqttEnableSNI.setLabel("Enable SNI")
+    mqttEnableSNI.setDescription("For SNI support in TLS MQTT Connection")
+    mqttEnableSNI.setDefaultValue(False)
+    mqttEnableSNI.setDependencies(mqttSNIAutoMenu, ["SYS_MQTT_ENABLE_SNI"])
+
+    mqttEnableALPN = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_ALPN", mqttEnableTls)
+    mqttEnableALPN.setLabel("Enable ALPN")
+    mqttEnableALPN.setDescription("For ALPN support in TLS MQTT Connection")
+    mqttEnableALPN.setDefaultValue(False)
+
+    mqttEnableALPNProtocolName = mqttComponent.createStringSymbol("SYS_MQTT_ENABLE_ALPN_PROTOCOL_NAME", mqttEnableALPN)
+    mqttEnableALPNProtocolName.setLabel("Enable ALPN Protocol Name List")
+    mqttEnableALPNProtocolName.setDescription("For ALPN support in TLS MQTT Connection")
+    mqttEnableALPNProtocolName.setDefaultValue("x-amzn-mqtt-ca")
+    mqttEnableALPNProtocolName.setDependencies(mqttALPNAutoMenu, ["SYS_MQTT_ENABLE_ALPN"])
+
     mqttClientId = mqttComponent.createStringSymbol("SYS_MQTT_CLIENT_ID", sysMqttBasicMenu)
     mqttClientId.setLabel("Client Id")
     mqttClientId.setVisible(True)
@@ -337,6 +355,14 @@ def instantiateComponent(mqttComponent):
 ############################################################################
 #### Dependency ####
 ############################################################################
+def setVal(component, symbol, value):
+    triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
+    if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
+        print "Set Symbol Failure" + component + ":" + symbol + ":" + str(value)
+        return False
+    else:
+        return True
+        
 
 def sysMqttSubMenuVisible(symbol, event):
     if (event["value"] == True):
@@ -365,6 +391,22 @@ def mqttTlsAutoMenu(symbol, event):
         Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", True)
     else:
         Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", False)
+
+def mqttSNIAutoMenu(symbol, event):
+    data = symbol.getComponent()
+    sysMqttSni = data.getSymbolValue("SYS_MQTT_ENABLE_SNI")
+    if(sysMqttSni == True):        
+        setVal("net_Pres", "NET_PRES_SUPPORT_SNI", True)
+        setVal("net_Pres", "NET_PRES_SUPPORT_SNI_HOST_NAME", Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_BROKER_NAME"))
+    else:
+        setVal("net_Pres", "NET_PRES_SUPPORT_SNI", False)
+
+def mqttALPNAutoMenu(symbol, event):
+    if (event["value"] == True):
+        setVal("net_Pres", "NET_PRES_SUPPORT_ALPN", True)
+        setVal("net_Pres", "NET_PRES_SUPPORT_ALPN_PROTOCOL_NAME", Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_ENABLE_ALPN_PROTOCOL_NAME"))
+    else:
+        setVal("net_Pres", "NET_PRES_SUPPORT_ALPN", False)
 
 def mqttIntfAutoMenu(symbol, event):
     if (event["value"] == "ETHERNET"):

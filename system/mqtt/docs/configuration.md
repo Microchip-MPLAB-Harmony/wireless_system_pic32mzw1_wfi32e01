@@ -28,6 +28,8 @@ The following figure shows the MHC configuration window for configuring the MQTT
 | Broker Name |  | Name of the MQTT   Broker<br>Note: User should ensure that the Broker is UP and running. In case the connection timesout often, the User can modify the value of SYS_MQTT_PERIOIDC_TIMEOUT as per his requirement.  |
 | Server Port |  | Port   number of the MQTT Broker at which the MQTT Client should connect |
 | Enable TLS | FALSE | If   TRUE, the MQTT connection should use TLS while connecting to the broker. If   FALSE, the MQTT connection should not use TLS.<br>Note: In case the TLS is enabled, the User needs to update the component 'Presentation Layer' with the CA Certificate format, location, name, and size. Other parameters can be updated as per the User's requirements. |
+| Enable SNI | FALSE | Server Name Indication ff   TRUE, enables a client device to specify the domain name it is trying to reach in the first step of the TLS handshake.<br>Note: In case the SNI is enabled, the Broker Name is taken as the Domain Name. |
+| Enable ALPN | FALSE | Application-Layer Protocol Negotiation (ALPN) is a TLS extension that allows the application layer to negotiate which protocol should be performed over a secure connection in a manner that avoids additional round trips and which is independent of the application-layer protocols|
 | Client Id |  | MQTT   Client Id should be unique for the Broker. If left empty, the Id will be   generated randomly |
 | Network Interface |  | Network Interface - Wifi or Ethernet on which the MQTT Client should run. On choosing Ethernet, the MHC will add EthMAC, MIIM, and LAM8740 Components. The User needs to attach the EthMAC to the NetConfig (in System Component Window) via the MAC parameter in Instance 1 |
 

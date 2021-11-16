@@ -35,15 +35,26 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 ################################################################################
 def instantiateComponent(netComponent):
 
+    sysnetEnableErrMsg = netComponent.createCommentSymbol("SYS_NET_ERR", None)
+    sysnetEnableErrMsg.setLabel("**Placeholder for error display")
+    sysnetEnableErrMsg.setVisible(False)
+
     netSuppIntf = netComponent.createKeyValueSetSymbol("SYS_NET_SUPP_INTF", None)
     netSuppIntf.setLabel("Supported Interfaces")
     netSuppIntf.addKey("WIFI_ONLY", "0", "Wifi Intf Supported")
     netSuppIntf.addKey("WIFI_ETHERNET", "1", "Wifi and Ethernet Intf Supported")
+    netSuppIntf.addKey("ETHERNET_ONLY", "2", "Ethernet Intf Supported")
     netSuppIntf.setDisplayMode("Key")
     netSuppIntf.setOutputMode("Key")
     netSuppIntf.setDefaultValue(0)
     netSuppIntf.setDependencies(netIntfAutoMenu, ["SYS_NET_SUPP_INTF"])
 
+    netSuppNoOfSocks = netComponent.createIntegerSymbol("SYS_NET_SUPP_NO_OF_SOCKS", None)
+    netSuppNoOfSocks.setLabel("No Of Sockets Supported")
+    netSuppNoOfSocks.setMin(2)
+    netSuppNoOfSocks.setMax(8)
+    netSuppNoOfSocks.setDefaultValue(2)
+    
     netDebugEnable = netComponent.createBooleanSymbol("SYS_NET_ENABLE_DEBUG", None)
     netDebugEnable.setLabel("Debug")
     netDebugEnable.setDescription("Debug - Logs and CLI commands")
@@ -320,11 +331,28 @@ def netIntfAutoMenu(symbol, event):
         res = Database.activateComponents(["drvPic32mEthmac"],"System Configuration", True)
         res = Database.activateComponents(["drvMiim"],"System Configuration", True)
         res = Database.activateComponents(["drvExtPhyLan8740"],"System Configuration", True)
+        data = symbol.getComponent()
+        ErrCommSymbol = data.getSymbolByID("SYS_NET_ERR")
+        ErrCommSymbol.setVisible(False)
 #        res = Database.activateComponents(["tcpipNetConfig"],"System Configuration", True)
     else:
-        res = Database.deactivateComponents(["drvExtPhyLan8740"])
-        res = Database.deactivateComponents(["drvMiim"])
-        res = Database.deactivateComponents(["drvPic32mEthmac"])
+        if (event["value"] == 2):
+            res = Database.activateComponents(["drvPic32mEthmac"],"System Configuration", True)
+            res = Database.activateComponents(["drvMiim"],"System Configuration", True)
+            res = Database.activateComponents(["drvExtPhyLan8740"],"System Configuration", True)
+            setVal("sysWifiPic32mzw1", "SYS_WIFI_STA_AUTOCONNECT", False)
+            data = symbol.getComponent()
+            ErrCommSymbol = data.getSymbolByID("SYS_NET_ERR")
+            ErrCommSymbol.setLabel("****Note: 'Intf' in Instance 0/ 1 should be ETHERNET when Supported Interface is ETHERNET_ONLY")
+            ErrCommSymbol.setVisible(True)
+        else:
+            res = Database.deactivateComponents(["drvExtPhyLan8740"])
+            res = Database.deactivateComponents(["drvMiim"])
+            res = Database.deactivateComponents(["drvPic32mEthmac"])
+            data = symbol.getComponent()
+            ErrCommSymbol = data.getSymbolByID("SYS_NET_ERR")
+            ErrCommSymbol.setLabel("****Note: 'Intf' in Instance 0/ 1 should be WIFI when Supported Interface is WIFI_ONLY")
+            ErrCommSymbol.setVisible(True)
 
 def netTLSautoMenu(symbol, event):
     if (event["value"] == True):

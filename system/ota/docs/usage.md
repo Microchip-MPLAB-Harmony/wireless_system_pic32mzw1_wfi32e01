@@ -79,29 +79,36 @@ The OTA service expects the HTTP based OTA server to provide metadata of images 
 
   -  If user configures this field as "false", OTA service will follow image downwload logic.
 
+- **`Patch`** This ***optional*** field provides a facility to support patch functionality. If **patch** functionality-option is enabled in the project, application will try to fetch below fields
+  - **`BaseVersion`** This is base image version against which patch will be applied. Application will check the presence of this base image version, in OTA DB, present in external flash.
+  - **`BaseVerDigest`** Base image digest must be provided by user, which will be used by application to verify correct Base image. This digest will be compared against the digest (stored inside OTA DB) of base version.
+  - **`PatchURL`** URL-path of patch image.
+  - **`PatchDigest`** Digest of Patch image . This is used by the application in the device to verify downloaded patch image.  
+  - **`TargetDigest`** Digest of the Target image obtained after applying Patch . This is used by the application in the device to verify target image obtained after applying patch functionality.
 
 **Sample JSON**
 
 ```json
     {
-    
     "ota": [
             {
-                "Version": 3,
-                "URL": "http://192.168.43.173:8000/wifi_ota103.bin",
-                "Digest": "745189cbb24b752a0175de1f9d5d61433ba47d89aff5b5a3686f54ca2d5dfb22",
-                "EraseVer": false
-            },
-            {
-                "Version": 6,
-                "URL": "http://192.168.43.173:8000/wifi_ota100.bin",
-                "Digest": "885189cbb24b7b1a0175deef9d5d61f53c247d89a095b5a3686f54ca2d5dfbaa",
-                "EraseVer": false
+                "Version": 5,
+                "URL": "http://192.168.0.101:8000/wifi_ota_app_upgrade_ver2.bin",
+                "Digest": "aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d",
+                "EraseVer": false,
+                "Patch" : [
+                              {
+                                "BaseVersion": 1,
+                                "BaseVerDigest": "aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d",
+                                "PatchURL": "http://192.168.0.101:8000/wifi_ota_app_upgrade_patch.patch",
+                                "PatchDigest": "266008c4a6150d7033e370a48621ecd44985b3d0418cdf13bbb6efa6fae43823",
+                                "TargetDigest": "beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"
+                              }
+                          ]
             }
            ]
     }
-```
-
+``` 
 OTA service will download json file from server first when OTA process is triggered, try to fetch information and proceed further as per below logic:
 
 ![](images/json_parse_logic.png)
@@ -152,7 +159,7 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
 
  **a. OTA Service:**
 
-   ![applicationheader](images/otaservice_flowchart.PNG)
+   ![applicationheader](images/otaservice_flowchart.png)
 
    - **OTA Start:** OTA process can be triggered using various methods :
 
@@ -161,11 +168,12 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
      Manually : OTA can be triggerred by the application by calling an API. 
 
      Other sources : User may configure/implement any other means of source like MQTT server to trigger OTA. This is a subset of the manual triggers.
-
-
+ 
 - **Download JSON manifest file and check for version :** JSON file will be downloaded from server first , once OTA process is initiated. JSON file will have version number along with other details. Now system will try to compare the extracted version number from JSON file with currently running application version number and decide accordingly the next step :
   - If version number is same abort the OTA process because new image is not available.
-  - If version number is different and higher than the current application version number, then system will continue with OTA process.
+  - If version number is different and higher than the current application version number, then system will continue with OTA process.  
+
+- **Patch Functionality :** If patch functionality is enabled in the application , it will try fetch relative information from JSON manifest and proceed accordingly.
 
 - **Initiating image Download process :** Based on user configuration system will go for image downloading or will wait for download trigger by user.
 
@@ -214,6 +222,21 @@ A boot control area of size 4 KB is maintained in internal flash area of device 
 3. If the image is not valid, the bootloader invalidates the image by setting “Invalidate” `0xF0` in `STATUS` field of image in OTA database present in the external flash and restarts the Image-Programming sequence.
 
 4. If image is verified successfully, bootloader updates `STATUS` field of boot control area in internal flash as `Unbooted (0xFC)`
+
+## Patch functionality
+
+OTA service provides facility of patch OTA . User can configure `PATCH` functionality using MHC menu ,for more details on configuration please follow - [Configuring the library](configuration.md/#configuring-the-library) section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility and follow instructions from https://github.com/MicrochipTech/jojodiff .
+User can provide required parameters for patch in JSON file ( Please follow `OTA server JSON manifest` section , for more details ) . OTA Service will follow below steps during while processing `patch functionality` : 
+  - Check if base version is present in OTA DB
+    - If not present, sysetm will try to download full image from server .
+    - If present, system will proceed with logic for patch functionality.
+  - During patching system will at first verify downloaded patch image using SHA-256 .
+  - If patch file is verified successfully , system will generate target binary image.
+  - After successful generation of target image , SHA-256 verification will be done against target image .
+  - If target image is verified successfully , same will be stored in OTA DB present in the external flash.
+  - Finally new image will be applied by bootloader as per application logic.
+
+![](images/patch_details.png)
 
 ## Configuration fuses
 

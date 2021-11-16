@@ -1,0 +1,10 @@
+
+Application,WebSocketServerSystemService,NetSystemService;
+
+Application => WebSocketServerSystemService : "SYS_WSS_PingClient\n(&data,\n dataLen,\nclientIndex)";
+
+WebSocketServerSystemService note WebSocketServerSystemService : Format the \nping frame ;
+
+WebSocketServerSystemService=>NetSystemService : "SYS_NET_SendMsg(wssNetHandle, &buffer, dataLen))";
+
+WebSocketServerSystemService >>Application : SYS_WSS_RESULT;

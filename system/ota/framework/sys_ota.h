@@ -261,7 +261,16 @@ extern "C" {
 
         /*rollback failed*/
         SYS_OTA_ROLLBACK_FAILED,
-
+                
+        /*base image version for patching is not found in OTA DB*/        
+        SYS_OTA_PATCH_BASEVERSION_NOTFOUND,      
+                
+        /*Patch event initiated*/        
+        SYS_OTA_PATCH_EVENT_START,        
+        
+        /*Patch event completed*/        
+        SYS_OTA_PATCH_EVENT_COMPLETED,
+                
         /*download start*/
         SYS_OTA_DOWNLOAD_START,
 
@@ -279,6 +288,15 @@ extern "C" {
 
         /*image digest verify failed*/
         SYS_OTA_IMAGE_DIGEST_VERIFY_FAILED,
+        
+        /*patch image digest verify start*/        
+        SYS_OTA_PATCH_IMAGE_DIGEST_VERIFY_START,        
+                
+        /*patch image digest verify success*/        
+        SYS_OTA_PATCH_IMAGE_DIGEST_VERIFY_SUCCESS,
+                
+        /*patch image digest verify failed*/        
+        SYS_OTA_PATCH_IMAGE_DIGEST_VERIFY_FAILED,        
         
         /*Database entry successful*/        
         SYS_OTA_DB_ENTRY_SUCCESS, 
@@ -341,6 +359,9 @@ extern "C" {
 
         /*to check if user requested for erase functionality*/
         bool erase_request;
+        
+        /*to check if user requested for patch functionality*/
+        bool patch_request;
 
         /*check if json contents are proper and required fields are present */
         bool json_content_parse_result;
@@ -404,7 +425,7 @@ extern "C" {
         uint32_t periodic_check_interval;
 
         /*Application version*/
-        uint8_t app_version;
+        uint32_t app_version;
 
         /*ota server url*/
         char *json_url;
@@ -660,7 +681,7 @@ extern "C" {
 
             if(ota_app_reg_cb() == true)
                 {
-                    uint8_t version = 2;
+                    uint32_t version = 2;
                     char *digest = "ef90bf8bf7fd96205c3240c31e1a378430e7a8f053a300e5c91ebe64fefea197";
                     SYS_OTA_SET_PARAMETERS("http://192.168.43.173:8000/wifi_ota_demo.bin", version , digest);
                     appData.state = APP_STATE_SERVICE_TASKS;
@@ -672,7 +693,7 @@ extern "C" {
         None
      */
 
-    void SYS_OTA_SET_PARAMETERS(char *url, uint8_t version, char *digest);
+    void SYS_OTA_SET_PARAMETERS(char *url, uint32_t version, char *digest);
 
     // *****************************************************************************
 

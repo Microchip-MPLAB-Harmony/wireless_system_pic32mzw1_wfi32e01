@@ -1,0 +1,54 @@
+
+
+Application;
+
+WebSocketServerSystemService note WebSocketServerSystemService : Initialization of the service object and \n timer;
+
+Application note Application :Initialization of  Application;
+
+Application => WebSocketServerSystemService : "SYS_WSS_register_callback\n(app_user_callback,cookie)";
+
+WebSocketClient => WebSocketServerSystemService : Opening Handshake\n(ConnectRequest);
+
+WebSocketServerSystemService note WebSocketServerSystemService : Verify the request;
+
+WebSocketServerSystemService => Application: "app_user_callback\n(SYS_WSS_EVENT_CLIENT_CONNECTING\n,NULL,clientIndex,cookie)";
+
+WebSocketServerSystemService=>WebSocketClient : Opening Handshake Response\n(ConnectResponse);
+
+WebSocketServerSystemService => Application : "app_user_callback\n(SYS_WSS_EVENT_CLIENT_CONNECTED\n,NULL,clientIndex,cookie)";
+
+WebSocketClient => WebSocketServerSystemService : TEXT Data Message;
+
+WebSocketServerSystemService note WebSocketServerSystemService : Verify \nand unmask the message ;
+
+WebSocketServerSystemService => Application: "app_user_callback\n(SYS_WSS_EVENT_CLIENT_TXT_DATA_RX\n,buffer,clientIndex,cookie)";
+
+Application note Application : Process the received data;
+
+Application => WebSocketServerSystemService : "SYS_WSS_sendMessage\n(fin,\nframetype, &data,\n dataLen,\nclientIndex)";
+
+WebSocketServerSystemService note WebSocketServerSystemService : Format the \ndata frame ;
+
+WebSocketServerSystemService=>WebSocketClient : Data response;
+
+WebSocketClient => WebSocketServerSystemService : Ping Message;
+
+WebSocketServerSystemService note WebSocketServerSystemService : Verify \nand unmask the message ;
+
+WebSocketServerSystemService => Application: "app_user_callback\n(SYS_WSS_EVENT_CLIENT_PING_RX\n,buffer,clientIndex,cookie)";
+
+WebSocketServerSystemService => WebSocketClient : Pong Message;
+
+Application => WebSocketServerSystemService : "SYS_WSS_CloseConnection\n(StatusCode, \n &data,\ndataLen,\nclientIndex)";
+
+WebSocketServerSystemService note WebSocketServerSystemService : Format the\n close frame ;
+
+WebSocketServerSystemService=>WebSocketClient : Closing handshake;
+
+WebSocketServerSystemService => Application: "app_user_callback\n(SYS_WSS_EVENT_CLIENT_CLOSING\n,NULL,clientIndex,cookie)";
+
+WebSocketClient => WebSocketServerSystemService : Closing handshake \n response;
+
+WebSocketServerSystemService => Application: "app_user_callback\n(SYS_WSS_EVENT_CLIENT_CLOSED\n,NULL,clientIndex,cookie)";
+

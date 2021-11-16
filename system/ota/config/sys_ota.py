@@ -109,7 +109,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
         symbol.setLabel("RTOS Task Delay (ms)")
         symbol.setMin(0)
         symbol.setMax(100)
-        symbol.setDefaultValue(10)
+        symbol.setDefaultValue(1)
         symbol.setReadOnly(True)
         symbol.setVisible(False)
 
@@ -162,6 +162,12 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     symbol_sector_check_enabling.setDefaultValue(False)
     symbol_sector_check_enabling.setDescription("To Enable free sector check in ext flash before download starts")
     
+    symbol_patch_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_PATCH_ENABLE", symbol)
+    symbol_patch_enabling.setLabel("Enable/Disable Patch Functionality")
+    symbol_patch_enabling.setVisible(True)
+    symbol_patch_enabling.setDefaultValue(False)
+    symbol_patch_enabling.setDescription("To Enable patch functionality support")
+
     ############################################################################
     #### Code Generation ####
     ############################################################################
@@ -296,6 +302,24 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     sysotaHeaderFile.setMarkup(True)
     sysotaHeaderFile.setEnabled(True)
     
+    sysotaSourceFile = sysOTAPic32mzw1Component.createFileSymbol("OTA_PATCH_SOURCE", None)
+    sysotaSourceFile.setSourcePath("system/ota/framework/ota_patch.c.ftl")
+    sysotaSourceFile.setOutputName("ota_patch.c")
+    sysotaSourceFile.setDestPath("system/ota/framework/")
+    sysotaSourceFile.setProjectPath("config/" + configName + "/system/ota/framework/")
+    sysotaSourceFile.setType("SOURCE")
+    sysotaSourceFile.setMarkup(True)
+    sysotaSourceFile.setEnabled(True)
+    
+    sysotaHeaderFile = sysOTAPic32mzw1Component.createFileSymbol("OTA_PATCH_HEADER", None)
+    sysotaHeaderFile.setSourcePath("system/ota/framework/ota_patch.h.ftl")
+    sysotaHeaderFile.setOutputName("ota_patch.h")
+    sysotaHeaderFile.setDestPath("system/ota/framework/")
+    sysotaHeaderFile.setProjectPath("config/" + configName + "/system/ota/framework/")
+    sysotaHeaderFile.setType("HEADER")
+    sysotaHeaderFile.setMarkup(True)
+    sysotaHeaderFile.setEnabled(True)
+    
     ################################### SYSTEM ######################################
     sysotaHeaderFile = sysOTAPic32mzw1Component.createFileSymbol("OTA_SYS_DEF", None)
     sysotaHeaderFile.setType("STRING")
@@ -379,6 +403,16 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     sysotaHeaderFile.setOutputName("csv.h")
     sysotaHeaderFile.setDestPath("system/ota/framework/csv/")
     sysotaHeaderFile.setProjectPath("config/" + configName + "/system/ota/framework/csv")
+    sysotaHeaderFile.setType("HEADER")
+    sysotaHeaderFile.setMarkup(True)
+    sysotaHeaderFile.setEnabled(True)
+    
+    ###################################  PATCH ######################################
+    sysotaHeaderFile = sysOTAPic32mzw1Component.createFileSymbol("SYS_PATCH_HEADER", None)
+    sysotaHeaderFile.setSourcePath("system/ota/framework//patch/janpatch.h.ftl")
+    sysotaHeaderFile.setOutputName("janpatch.h")
+    sysotaHeaderFile.setDestPath("system/ota/framework/patch/")
+    sysotaHeaderFile.setProjectPath("config/" + configName + "/system/ota/framework/patch")
     sysotaHeaderFile.setType("HEADER")
     sysotaHeaderFile.setMarkup(True)
     sysotaHeaderFile.setEnabled(True)
@@ -530,6 +564,8 @@ def finalizeComponent(sysOTAPic32mzw1Component):
     Database.setSymbolValue("rng", "RNGCON_TRNGEN", 1)
     Database.setSymbolValue("rng", "RNGCON_PRNGEN", 1)
     Database.setSymbolValue("rng", "RNGCON_CONT", 1)
+    Database.setSymbolValue("sys_fs", "SYS_FS_MAX_FILES", 5)
+    Database.setSymbolValue("sys_fs", "SYS_FS_RTOS_DELAY", 1)
     
     res = Database.activateComponents(["sysNetPic32mzw1"])
     Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", True)

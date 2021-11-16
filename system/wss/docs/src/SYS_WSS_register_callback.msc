@@ -1,0 +1,9 @@
+
+Application;
+
+WebSocketServerSystemService note WebSocketServerSystemService : Initialization of the service object and \n timer;
+
+Application note Application :Initialization of  Application;
+
+Application => WebSocketServerSystemService : "SYS_WSS_register_callback\n(app_user_callback,cookie)";
+WebSocketServerSystemService>>Application  : SYS_WSS_RESULT;

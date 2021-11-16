@@ -399,6 +399,9 @@ SYS_NET_EVNT_LL_INTF_DOWN,
 
 // Received only in Connected State - Lower Layer Up
 SYS_NET_EVNT_LL_INTF_UP,
+
+// TCP Server is awaiting connection
+SYS_NET_EVNT_SERVER_AWAITING_CONNECTION,
 } SYS_NET_EVENT;
 ```
 
