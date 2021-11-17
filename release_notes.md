@@ -30,9 +30,11 @@ nav_order: 99
 - [WiFi] Fix: saveConfig is not used in the SYS_WIFI_CtrlMSG Connect API
 
 
-### Known Issues
+### Known Issues and Limitations
 - Due to an underlying issue in the underlying `net` repo, you need to turn off `-Werror` for the `icmp.c` file in your projects.
 - While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.
+- Web socket server will support only upto 500 bytes in a single message. 
+- Web socket server will not honour additional header fields like `Sec-WebSocket-Protocol` and `Sec-WebSocket-Extensions`
 
 ### Development Tools
 
