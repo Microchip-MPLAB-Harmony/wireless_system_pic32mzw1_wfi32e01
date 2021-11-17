@@ -152,9 +152,10 @@ typedef enum
             
     /*Control message type for requesting a Wi-Fi driver handle */
     SYS_WIFI_GETDRVHANDLE,
-    
+<#if SYS_WIFI_STA_ENABLE == true>
     /*Control message type for requesting a Assoc handle */
     SYS_WIFI_GETDRVASSOCHANDLE,
+</#if>
 
 } SYS_WIFI_CTRLMSG ;
 

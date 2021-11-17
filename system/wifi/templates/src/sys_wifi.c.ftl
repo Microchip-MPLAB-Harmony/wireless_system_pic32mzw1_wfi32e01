@@ -2202,6 +2202,7 @@ SYS_WIFI_RESULT SYS_WIFI_CtrlMsg
                     }
                     break;
                 }
+<#if SYS_WIFI_STA_ENABLE == true>
                 case SYS_WIFI_GETDRVASSOCHANDLE:
                 {
                     if ((buffer) && (length == sizeof (WDRV_PIC32MZW_ASSOC_HANDLE))) 
@@ -2217,6 +2218,7 @@ SYS_WIFI_RESULT SYS_WIFI_CtrlMsg
                     }
                     break;
                 }
+</#if>
             }
         }
 <#if SYS_WIFI_APPDEBUG_ENABLE  == true>
