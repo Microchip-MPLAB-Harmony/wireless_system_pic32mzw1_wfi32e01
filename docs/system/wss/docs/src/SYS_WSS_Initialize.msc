@@ -1,0 +1,9 @@
+
+Application,WebSocketServerSystemService,NetSystemService,Timer;
+
+WebSocketServerSystemService note WebSocketServerSystemService : Initialization of the service object start;
+
+WebSocketServerSystemService => NetSystemService :"SYS_NET_Open\n(wssNetCfg,wssNetCallback,cookie)";
+
+WebSocketServerSystemService => Timer :"SYS_TIME_CallbackRegisterMS\n(wss_timer_callback,\nSYS_WSS_KA_TIMER_PERIOD,SYS_TIME_PERIODIC)";
+WebSocketServerSystemService note WebSocketServerSystemService : Initialization of the service object end;
