@@ -16,31 +16,29 @@ nav_order: 99
 - [MQTT] Support for ALPN in MQTT service.
 - [MQTT] Support for SNI in MQTT service. 
 - [MQTT] Design guide detailing more architecture and implementation details. 
-- [MQTT] Support for MQTT stack deinit.
 - [NET] Configurable multi-client support in NET service
 - [NET] User notification for `SERVER_AWAITING_CONNECTION`.
 - [NET] Support for "Ethernet only" mode in NET service.
 - [WIFI] Added capability to fetch association handle via control messages.
 - Catchup to latest dependencies.
 - Bug fixes and stabilty improvements. 
+
 ### Bug fixes and Improvements
 - [MQTT] Improved handling of MQTT Clean session.
 - [MQTT] Fixed multi-topic subscription via API.
-- [WIFI] Fix: WiFi connect from user won't work if default(MHC) config is set FALSE
-- [WiFi] Fix: saveConfig is not used in the SYS_WIFI_CtrlMSG Connect API
-
+- [WiFi] Improved config save flow in Wi-Fi service.
 
 ### Known Issues and Limitations
-- Due to an underlying issue in the underlying `net` repo, you need to turn off `-Werror` for the `icmp.c` file in your projects.
+- Due to an issue in the underlying `net` repo, you need to turn off `-Werror` for the `icmp.c` file in your projects.
 - While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.
 - Web socket server will support only upto 500 bytes in a single message. 
-- Web socket server will not honour additional header fields like `Sec-WebSocket-Protocol` and `Sec-WebSocket-Extensions`
+- Web socket server will not honour optional header fields like `Sec-WebSocket-Protocol` and `Sec-WebSocket-Extensions`
 
 ### Development Tools
 
 - [MPLAB® X IDE v5.50](https://www.microchip.com/mplab/mplab-x-ide)
 - MPLAB® X IDE plug-ins:
-  - MPLAB® Harmony Configurator (MHC) v3.8.0
+  - MPLAB® Harmony Configurator (MHC) `v3.8.0`
 - [MPLAB® XC32 C/C++ Compiler v3.01](https://www.microchip.com/mplab/compilers)
 - **DFP 1.5.203**
 
