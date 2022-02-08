@@ -1,7 +1,29 @@
 ~inc:header.inc~
 <div id="content">
 
-<h1>Wi-Fi Configuration:</h1>
+<h4>Scan and Connect to Wifi Network:</h4>
+
+<form method="post" name="neversend" action="">
+   <table id="scanTable" cellpadding="2" border="0">
+	<tbody>
+		<tr>
+			<td colspan="4">
+				<input id="rescan" type="button" style="width:18em" 
+				  value="Start Scan" onclick="rescanNetwork();"></input>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+
+<form method="post" name="kickoff" action="">
+	<input type="hidden" id="wlan" name="wlan"></input>
+	<input type="hidden" id="ssid" name="ssid"></input>
+	<input type="hidden" id="sec" name="sec"></input>
+	<input type="hidden" id="key" name="key"></input>
+</form>
+
+<h4>Static Wi-Fi Configuration:</h4>
 
 <form method="post" action="config.htm" name="config">
 <fieldset>
@@ -77,7 +99,6 @@
 <div><input type="submit" class="sm" value="Apply Wi-Fi Configuration" /></div>
 </fieldset>
 </form>
-
 
 <h4>Network Details:</h4> 
 <form method="post" action="config.htm" name="config">
