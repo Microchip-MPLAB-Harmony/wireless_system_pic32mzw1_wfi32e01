@@ -139,7 +139,6 @@ def instantiateComponent(netComponent):
     netEnableTls0.setDefaultValue(False)
     netEnableTls0.setDependencies(netTLSautoMenu, ["SYS_NET_ENABLE_TLS"])
 
-	
     netPort0 = netComponent.createIntegerSymbol("SYS_NET_PORT", netInstance0)
     netPort0.setLabel("Server Port")
     netPort0.setMin(1)
