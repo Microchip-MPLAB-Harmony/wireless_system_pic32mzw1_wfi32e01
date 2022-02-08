@@ -230,7 +230,7 @@ def instantiateComponent(syswifiprovComponent):
     syswifiprovmpfsSourceFile.setDestPath("system/wifiprov/")
     syswifiprovmpfsSourceFile.setProjectPath("config/" + configName + "/system/wifiprov/")
     syswifiprovmpfsSourceFile.setType("SOURCE")
-    syswifiprovmpfsSourceFile.setMarkup(True)
+    syswifiprovmpfsSourceFile.setMarkup(False)
     syswifiprovmpfsSourceFile.setEnabled(False)
     syswifiprovmpfsSourceFile.setDependencies(syswifiprovHTTPGenSourceFile, ["SYS_WIFIPROV_HTTP"])
 

@@ -248,6 +248,9 @@ typedef struct
       value 0- Don't connect to AP, wait for client request.
       value 1- Connect to AP immediately */
     bool autoConnect;
+    
+    /* Wi-Fi station mode IP address */
+    IPV4_ADDR ipAddr;
 
 } SYS_WIFI_STA_CONFIG;
 </#if>
@@ -447,6 +450,10 @@ typedef enum
     /* Wi-Fi system service is in Wi-Fi connect request status */
     SYS_WIFI_STATUS_CONNECT_REQ,
 
+<#if SYS_WIFI_STA_ENABLE == true>
+    /* Wi-Fi system service is in station mode IP address received status*/        
+    SYS_WIFI_STATUS_STA_IP_RECIEVED,
+</#if>
 <#if SYS_WIFI_AP_ENABLE == true>
     /* In AP mode,Wi-Fi system service is in wait for AP IP address */
     SYS_WIFI_STATUS_WAIT_FOR_AP_IP,

@@ -613,6 +613,21 @@ def syswifiSTAautoMenu(symbol, event):
            Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DHCP_CLIENT", True)
         if(Database.getSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DNS_CLIENT") != True):
            Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DNS_CLIENT", True)
+        if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_STA_ENABLE") == True):
+           if(Database.getSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE" == 1100 )):
+               Database.clearSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE")
+               Database.setSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE", 10)
+           if(Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):
+               Database.setSymbolValue("FreeRTOS", "FREERTOS_TICK_RATE_HZ", 250)
+               ret = Database.getSymbolValue("HarmonyCore", "GEN_APP_TASK_COUNT")
+               for count in range(0, ret):   
+                   Database.setSymbolValue("HarmonyCore", "GEN_APP_RTOS_TASK_" + str(count) + "_USE_DELAY" ,True)
+                   Database.setSymbolValue("HarmonyCore", "GEN_APP_RTOS_TASK_" + str(count) + "_DELAY" ,4000)
+               if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_RTOS_USE_DELAY") == True):
+                   Database.setSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_RTOS_DELAY", 4)
+               if(Database.getSymbolValue("tcpipStack", "TCPIP_STACK_RTOS_USE_DELAY") == True):
+                   Database.setSymbolValue("tcpipStack", "TCPIP_STACK_RTOS_DELAY", 4)
+
     else:
         Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DHCP_CLIENT", False)
         Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DNS_CLIENT", False)
@@ -736,7 +751,24 @@ def finalizeComponent(syswifiComponent):
 
 
     if(Database.getSymbolValue("tcpip_transport_config", "TCPIP_AUTOCONFIG_ENABLE_TCP") != True):
-        Database.setSymbolValue("tcpip_transport_config", "TCPIP_AUTOCONFIG_ENABLE_TCP", True)       
+        Database.setSymbolValue("tcpip_transport_config", "TCPIP_AUTOCONFIG_ENABLE_TCP", True)   
+    if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_STA_ENABLE") == True):
+        if(Database.getSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE") == 1100 ):
+           Database.clearSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE")
+           Database.setSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE", 10)
+           if(Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):
+               Database.setSymbolValue("FreeRTOS", "FREERTOS_TICK_RATE_HZ", 250)
+               Database.setSymbolValue("HarmonyCore", "GEN_APP_RTOS_TASK_USE_DELAY" ,True)
+               Database.setSymbolValue("HarmonyCore", "GEN_APP_RTOS_TASK_DELAY" ,4000)
+               ret = Database.getSymbolValue("HarmonyCore", "GEN_APP_TASK_COUNT")
+               for count in range(0, ret):   
+                   Database.setSymbolValue("HarmonyCore", "GEN_APP_RTOS_TASK_" + str(count) + "_USE_DELAY" ,True)
+                   Database.setSymbolValue("HarmonyCore", "GEN_APP_RTOS_TASK_" + str(count) + "_DELAY" ,4000)
+               if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_RTOS_USE_DELAY") == True):
+                   Database.setSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_RTOS_DELAY", 4)
+               if(Database.getSymbolValue("tcpipStack", "TCPIP_STACK_RTOS_USE_DELAY") == True):
+                   Database.setSymbolValue("tcpipStack", "TCPIP_STACK_RTOS_DELAY", 4)
+        
 
     # Enable dependent Harmony core components
     if (Database.getSymbolValue("HarmonyCore", "ENABLE_SYS_COMMON") == False):
