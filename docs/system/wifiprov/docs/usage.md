@@ -167,9 +167,24 @@ Follow below steps to provisioning the device using HTTP:
 
 ![](./images/SYS_Wi-Fi_Provision_HTTP_HOME.png)
 - Goto "Network Configuratio" page.
-- Update the Configuration details and click on "Apply Wi-Fi Configuration"
+- There are two ways of configuring a wifi network: "Scan and Connect to Wifi Network", and "Static Wifi Configuration".
 
-![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig.png)
+![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig_Scan.png)
+- In case of "Scan and Connect", one can scan (press the 'Start Scan' button) for the available APs in the vicinity and connect to the AP of one's choice.
+
+![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig_ScanResults.png)
+
+- Click on the AP from the list, you want to connect to. In case of secured AP, the user needs to give the password.
+
+![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig_Password.png)
+
+- In case of Hidden Networks, the SSID of the AP will not be visible. In this case, the user will need to give both SSID and the password.
+
+![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig_HiddenNw.png)
+
+- For "Static Wifi Configuration", update the Configuration details and click on "Apply Wi-Fi Configuration"
+
+![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig_http.png)
 
 - Device will reboot and apply configuration in the device.
 
@@ -198,6 +213,7 @@ Follow below steps to provisioning the device using HTTP:
 - Update the Configuration details and click on "Apply Wi-Fi Configuration"
 
 ![](./images/SYS_Wi-Fi_Provision_HTTP_Networkconfig.png)
+
 
 - Device will reboot and apply configuration in the device.
 

@@ -8,6 +8,29 @@ nav_order: 99
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+## Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  **v3.6.1**
+
+### New Features
+- [WIFI] Wi-Fi Connection time improvement.
+- [WIFIPROV] Support for Scan and Connect in HTTP Provisioning.
+
+### Bug fixes and Improvements
+
+### Known Issues and Limitations
+- Due to an issue in the underlying `net` repo, you need to turn off `-Werror` for the `icmp.c` file in your projects.
+- While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.
+- Web socket server will support only upto 500 bytes in a single message. 
+- Web socket server will not honour optional header fields like `Sec-WebSocket-Protocol` and `Sec-WebSocket-Extensions`
+
+### Development Tools
+
+- [MPLAB® X IDE v6.00](https://www.microchip.com/mplab/mplab-x-ide)
+- MPLAB® X IDE plug-ins:
+  - MPLAB® Harmony Configurator (MHC) `v3.8.2`
+- [MPLAB® XC32 C/C++ Compiler v3.01](https://www.microchip.com/mplab/compilers)
+- **DFP 1.5.203**
+
+
 ## Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  **v3.6.0**
 
 ### New Features
