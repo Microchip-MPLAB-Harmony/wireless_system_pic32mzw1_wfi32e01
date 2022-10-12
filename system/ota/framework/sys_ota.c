@@ -1212,6 +1212,7 @@ void SYS_OTA_Tasks(void) {
                 SYS_OTA_RTCset();
                 sys_otaData.state = SYS_OTA_WAIT_FOR_OTA_TIMER_TRIGGER;
             } else {
+#ifdef  SYS_OTA_TLS_ENABLED
                 if(sys_ota_tls == true){
                     uint32_t time = TCPIP_SNTP_UTCSecondsGet();
                     if (time == 0)
@@ -1220,6 +1221,7 @@ void SYS_OTA_Tasks(void) {
                         break;
                     }
                 }
+#endif
                 sys_otaData.state = SYS_OTA_STATE_IDLE;
             }
             break;
@@ -1312,12 +1314,14 @@ void SYS_OTA_Tasks(void) {
         }
         case SYS_OTA_TRIGGER_OTA:
         {
+#ifdef  SYS_OTA_TLS_ENABLED
             if(SYS_OTA_IsTls_Request(ota_params.ota_server_url) == true){
                 uint32_t time = TCPIP_SNTP_UTCSecondsGet();
                 if (time == 0){
                     break;
                 }
             }
+#endif
             SYS_STATUS status;
             /*start OTA only if device connected to network, OTA is not already in progress, new image is not already downloaded*/
             if ((SYS_OTA_ConnectedToNtwrk() == true) && (SYS_OTA_IsOtaInProgress() == false) && (SYS_OTA_IsDownloadSuccess() == false)) {

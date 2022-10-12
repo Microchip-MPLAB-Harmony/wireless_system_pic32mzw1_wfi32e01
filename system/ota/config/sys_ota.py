@@ -41,6 +41,17 @@ def dependencyOnValueChanged(symbol, event):
 def setVisible_OnValueChanged(symbol, event):
     symbol.setVisible(event['value'])
 
+def setVal(component, symbol, value):
+    triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
+    if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
+        print "Set Symbol Failure" + component + ":" + symbol + ":" + str(value)
+        return False
+    else:
+        return True
+def sysota_OnValueChanged(symbol, event):
+    if(event['value'] == True):
+        Database.activateComponents(["sysNetPic32mzw1"])
+        setVal("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", True)
 def instantiateComponent(sysOTAPic32mzw1Component):
     
     global ota_helpkeyword
@@ -149,6 +160,12 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     symbol.setHelp(ota_helpkeyword)
     symbol.setVisible(True)
     #syswifiAdvMenu.setDefaultValue(False)
+    symbol_secure_ota = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_HTTP_SECURE", symbol)
+    symbol_secure_ota.setLabel("Enable TLS")
+    symbol_secure_ota.setVisible(True)
+    symbol_secure_ota.setDescription("Enabling TLS for secure connection")
+    symbol_secure_ota.setDefaultValue(False)
+    symbol_secure_ota.setDependencies(sysota_OnValueChanged, ["SYS_OTA_HTTP_SECURE"])
         
     symbol_max_img = sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_NUM_IMGS", symbol)
     symbol_max_img.setLabel("Number of images")
@@ -605,7 +622,7 @@ def finalizeComponent(sysOTAPic32mzw1Component):
     Database.setSymbolValue("sys_fs", "SYS_FS_MAX_FILES", 5)
     Database.setSymbolValue("sys_fs", "SYS_FS_RTOS_DELAY", 1)
     
-    res = Database.activateComponents(["sysNetPic32mzw1"])
-    Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", True)
+    Database.activateComponents(["sysNetPic32mzw1"])
+    
 #-----------------------------------------------------------------------------#
     

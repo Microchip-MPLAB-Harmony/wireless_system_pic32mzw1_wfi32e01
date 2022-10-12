@@ -15,7 +15,7 @@ OTA System Service Library provides an application programming interface \(API\)
 
 -   **External Flash based OTA**
 
-    OTA images will be stored in a filesystem hosted on an External flash. An OTA database d MHC file system\) is maintained in the external flash to manage images.
+    OTA images will be stored in a filesystem hosted on an External flash.<br />An OTA database d MHC file system\) is maintained in the external flash to manage images.
 
 -   **OTA download during application execution**
 
@@ -32,6 +32,10 @@ OTA System Service Library provides an application programming interface \(API\)
 -   **Firmware update trigger from device or external sources**
 
     OTA update checks can be triggered via external source if not configured for periodic checks.
+
+-   **Opt for Secure OTA**
+
+    The user can opt to perform the OTA image download and update in a secure way using TLS connection and image signatures.
 
 
 The OTA System Service provides simple APIs to enable OTA functionality. More information is provided in the following sections.

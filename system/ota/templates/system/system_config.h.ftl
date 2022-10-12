@@ -44,3 +44,6 @@
 <#if SYS_OTA_SECURE_BOOT_ENABLED == true>
 #define SYS_OTA_SECURE_BOOT_ENABLED   	
 </#if>
+<#if SYS_OTA_HTTP_SECURE == true>
+#define SYS_OTA_TLS_ENABLED   	
+</#if>
