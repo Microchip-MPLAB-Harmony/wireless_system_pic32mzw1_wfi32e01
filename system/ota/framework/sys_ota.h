@@ -85,6 +85,7 @@ extern "C" {
     /*json url max length*/
     #define JSON_URL_MAX_LEN    1000
 #endif
+    #define FACTORY_IMAGE_SIGNATURE_MAX_LEN    1000
     // *****************************************************************************
 
     /* Application states
@@ -434,6 +435,8 @@ extern "C" {
         /*json url while taking input from CLI command*/
         char json_url_cli[JSON_URL_MAX_LEN];
 #endif
+        /*factory image signature*/
+        char factory_image_signature[FACTORY_IMAGE_SIGNATURE_MAX_LEN];
 
     } SYS_OTA_Config;
 
@@ -653,10 +656,10 @@ extern "C" {
     // *****************************************************************************
 
     /* Function:
-       SYS_OTA_RESULT SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length);
+       void SYS_OTA_SET_PARAMETERS(char *url, uint32_t version, char *digest)
 
       Summary:
-        Returns success/ failure for the update check/ota trigger/system reset operations asked by client. 
+        This function is used to set OTA server and image related parameters
 
       Description:
         This function is used to set OTA server and image related parameters

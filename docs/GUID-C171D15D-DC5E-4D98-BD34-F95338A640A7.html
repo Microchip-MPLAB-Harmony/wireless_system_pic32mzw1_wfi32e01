@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="Wi-Fi System Service Developer's Guide" />
+<meta name="DC.relation" scheme="URI" content="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="wi-fi-system-service-developers-guide" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>Wi-Fi System Service Developer's Guide</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-wi-fi-system-service-developers-guide" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-C171D15D-DC5E-4D98-BD34-F95338A640A7"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="wi-fi-system-service-developers-guide">
+<h1 class="title topictitle1" id="ariaid-title1">Wi-Fi System Service Developer's Guide</h1><div class="body"></div>
+<div class="related-links">
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html">Wi-Fi System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="code-modificationimplementation-guide-for-common-use-cases"><h2 class="title topictitle2" id="ariaid-title2"><strong class="ph b">Code modification/implementation guide for common use cases</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title3" id="wi-fi-system-service-auto-connect"><h3 class="title topictitle3" id="ariaid-title3"><strong class="ph b">Wi-Fi System Service Auto Connect</strong></h3><div class="body"><p class="p">When user enables the auto connect features using Wi-Fi service system MHC menu, the default auto connect retry count is configured to 5. User can modify the macro MAX_AUTO_CONNECT_RETRY in generated file <code class="ph codeph">sys_wifi.c</code> as per their choice. PIC32MZW1 device stops the connection request to AP after retry count reaches to zero and successful connections with AP is not established.</p>
+<pre class="pre codeblock C"><button title="Copy Code" class="copy-code" onclick="cpy('d7783e32', this);">Copy</button><code id="d7783e32" content="/* Wi-Fi STA Mode, maximum auto connect retry */&#xA;#define MAX_AUTO_CONNECT_RETRY                5">/* Wi-Fi STA Mode, maximum auto connect retry */
+#define MAX_AUTO_CONNECT_RETRY                5</code></pre></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title4" id="wi-fi-system-service-scan-example"><h3 class="title topictitle3" id="ariaid-title4"><strong class="ph b">Wi-Fi System Service Scan Example</strong></h3><div class="body"><p class="p">Wi-Fi System Service support scan functinality both in STA and AP mode.
+In case, user want to overwrite MHC configuration of the scan parameter,please find the below snippet code that need to be added in the application.</p>
+<pre class="pre codeblock C"><button title="Copy Code" class="copy-code" onclick="cpy('d7783e41', this);">Copy</button><code id="d7783e41" content="#include &#34;wdrv_pic32mzw_bssfind.h&#34;&#xA;&#xA;APP_DATA             appData;&#xA;SYS_WIFI_SCAN_CONFIG scanConfig;&#xA;&#xA;/* Wi-Fi driver triggers a callback to update each Scan result one-by-one*/&#xA;bool APP_ScanHandler (DRV_HANDLE handle, uint8_t index, uint8_t ofTotal, WDRV_PIC32MZW_BSS_INFO *pBSSInfo)&#xA;{&#xA;    if (0 == ofTotal) &#xA;    {&#xA;        SYS_CONSOLE_MESSAGE(&#34;No AP Found... Rescan\r\n&#34;);&#xA;    } &#xA;    else &#xA;    {&#xA;        if (index == 1)&#xA;        {&#xA;            SYS_CONSOLE_PRINT(&#34;Scan Results: #%02d\r\n&#34;, ofTotal);&#xA;        }&#xA;        SYS_CONSOLE_PRINT(&#34;[%02d] %s\r\n&#34;, index, pBSSInfo-&gt;ctx.ssid.name);&#xA;    }&#xA;    // return true to receive further results; otherwise return false if desired&#xA;    return true;&#xA;}&#xA;&#xA;void APP_Initialize(void) {&#xA;    appData.state = APP_STATE_INIT;&#xA;}&#xA;&#xA;void APP_Tasks(void) {&#xA;    &#xA;    SYS_WIFI_RESULT res;&#xA;    SYS_WIFI_STATUS wifiStatus;&#xA;    &#xA;    switch (appData.state) &#xA;    {&#xA;        case APP_STATE_INIT:&#xA;        {&#xA;            appData.state = APP_STATE_TRIGGER_SCAN;&#xA;            break;&#xA;        }&#xA;        &#xA;        case APP_STATE_TRIGGER_SCAN:&#xA;        {&#xA;            wifiStatus = SYS_WIFI_GetStatus (sysObj.syswifi);&#xA;            if (wifiStatus &gt; SYS_WIFI_STATUS_WDRV_OPEN_REQ)&#xA;            {&#xA;                memset(&amp;scanConfig, 0, sizeof(scanConfig));&#xA;                res = SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETSCANCONFIG, &amp;scanConfig, sizeof(SYS_WIFI_SCAN_CONFIG));&#xA;                if(SYS_WIFI_SUCCESS == res)&#xA;                {&#xA;                    //Received the wifiSrvcScanConfig data&#xA;                    char myAPlist[] = &#34;&#34;; // e.g. &#34;myAP*OPENAP*Hello World!&#34;&#xA;                    char delimiter  = '*';&#xA;                    scanConfig.channel         = 0;&#xA;                    scanConfig.mode            = SYS_WIFI_SCAN_MODE_ACTIVE;&#xA;                    scanConfig.pSsidList       = myAPlist;&#xA;                    scanConfig.delimChar       = delimiter;&#xA;                    scanConfig.pNotifyCallback = (void *)APP_ScanHandler;&#xA;                    scanConfig.matchMode       = WDRV_PIC32MZW_SCAN_MATCH_MODE_FIND_ALL;&#xA;                    &#xA;                    SYS_CONSOLE_PRINT(&#34;\r\nStarting Custom Scan ...\r\n&#34;);&#xA;                    &#xA;                    res = SYS_WIFI_CtrlMsg(sysObj.syswifi,SYS_WIFI_SCANREQ,&amp;scanConfig,sizeof(SYS_WIFI_SCAN_CONFIG));&#xA;                    if(SYS_WIFI_SUCCESS != res)&#xA;                    {&#xA;                        SYS_CONSOLE_PRINT(&#34;Error Starting scan: %d\r\n&#34;, res);&#xA;                        appData.state = APP_STATE_ERROR;&#xA;                        break;&#xA;                    }&#xA;                    appData.state = APP_STATE_DONE;&#xA;                }&#xA;                else&#xA;                {&#xA;                    SYS_CONSOLE_PRINT(&#34;Error retrieving scan config: %d\r\n&#34;, res);&#xA;                    appData.state = APP_STATE_ERROR;&#xA;                }&#xA;            }&#xA;            &#xA;            break;&#xA;        }&#xA;        &#xA;        case APP_STATE_DONE:&#xA;        {&#xA;            // wait for custom scan to complete and do nothing later&#xA;            break;&#xA;        }&#xA;        &#xA;        case APP_STATE_ERROR:&#xA;        {&#xA;            break;&#xA;        }&#xA;        default:&#xA;        {&#xA;            break;&#xA;        }&#xA;    }&#xA;}">#include "wdrv_pic32mzw_bssfind.h"
+
+APP_DATA             appData;
+SYS_WIFI_SCAN_CONFIG scanConfig;
+
+/* Wi-Fi driver triggers a callback to update each Scan result one-by-one*/
+bool APP_ScanHandler (DRV_HANDLE handle, uint8_t index, uint8_t ofTotal, WDRV_PIC32MZW_BSS_INFO *pBSSInfo)
+{
+    if (0 == ofTotal) 
+    {
+        SYS_CONSOLE_MESSAGE("No AP Found... Rescan\r\n");
+    } 
+    else 
+    {
+        if (index == 1)
+        {
+            SYS_CONSOLE_PRINT("Scan Results: #%02d\r\n", ofTotal);
+        }
+        SYS_CONSOLE_PRINT("[%02d] %s\r\n", index, pBSSInfo-&gt;ctx.ssid.name);
+    }
+    // return true to receive further results; otherwise return false if desired
+    return true;
+}
+
+void APP_Initialize(void) {
+    appData.state = APP_STATE_INIT;
+}
+
+void APP_Tasks(void) {
+    
+    SYS_WIFI_RESULT res;
+    SYS_WIFI_STATUS wifiStatus;
+    
+    switch (appData.state) 
+    {
+        case APP_STATE_INIT:
+        {
+            appData.state = APP_STATE_TRIGGER_SCAN;
+            break;
+        }
+        
+        case APP_STATE_TRIGGER_SCAN:
+        {
+            wifiStatus = SYS_WIFI_GetStatus (sysObj.syswifi);
+            if (wifiStatus &gt; SYS_WIFI_STATUS_WDRV_OPEN_REQ)
+            {
+                memset(&amp;scanConfig, 0, sizeof(scanConfig));
+                res = SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETSCANCONFIG, &amp;scanConfig, sizeof(SYS_WIFI_SCAN_CONFIG));
+                if(SYS_WIFI_SUCCESS == res)
+                {
+                    //Received the wifiSrvcScanConfig data
+                    char myAPlist[] = ""; // e.g. "myAP*OPENAP*Hello World!"
+                    char delimiter  = '*';
+                    scanConfig.channel         = 0;
+                    scanConfig.mode            = SYS_WIFI_SCAN_MODE_ACTIVE;
+                    scanConfig.pSsidList       = myAPlist;
+                    scanConfig.delimChar       = delimiter;
+                    scanConfig.pNotifyCallback = (void *)APP_ScanHandler;
+                    scanConfig.matchMode       = WDRV_PIC32MZW_SCAN_MATCH_MODE_FIND_ALL;
+                    
+                    SYS_CONSOLE_PRINT("\r\nStarting Custom Scan ...\r\n");
+                    
+                    res = SYS_WIFI_CtrlMsg(sysObj.syswifi,SYS_WIFI_SCANREQ,&amp;scanConfig,sizeof(SYS_WIFI_SCAN_CONFIG));
+                    if(SYS_WIFI_SUCCESS != res)
+                    {
+                        SYS_CONSOLE_PRINT("Error Starting scan: %d\r\n", res);
+                        appData.state = APP_STATE_ERROR;
+                        break;
+                    }
+                    appData.state = APP_STATE_DONE;
+                }
+                else
+                {
+                    SYS_CONSOLE_PRINT("Error retrieving scan config: %d\r\n", res);
+                    appData.state = APP_STATE_ERROR;
+                }
+            }
+            
+            break;
+        }
+        
+        case APP_STATE_DONE:
+        {
+            // wait for custom scan to complete and do nothing later
+            break;
+        }
+        
+        case APP_STATE_ERROR:
+        {
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}</code></pre><p class="p">User can initiate the Scan request with default Wi-Fi System service MHC menu configuration with below code snippet.
+<img class="image" src="GUID-9EA32460-F0D2-41DD-BE01-A04F171A5154-low.png" alt="Wi-Fi_service_SCAN_MHC" /><br /></p>
+<pre class="pre codeblock C"><button title="Copy Code" class="copy-code" onclick="cpy('d7783e48', this);">Copy</button><code id="d7783e48" content="SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_SCANREQ, NULL, 0);">SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_SCANREQ, NULL, 0);</code></pre></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title5" id="how-to-disconnect-connected-sta-in-ap-mode-using-wi-fi-system-service"><h3 class="title topictitle3" id="ariaid-title5"><strong class="ph b">How to Disconnect Connected STA in AP Mode Using Wi-Fi System Service</strong></h3><div class="body"><p class="p">Please see the code snippet below for reference.</p>
+<pre class="pre codeblock C"><button title="Copy Code" class="copy-code" onclick="cpy('d7783e57', this);">Copy</button><code id="d7783e57" content="#include &#34;app.h&#34;&#xA;#include &#34;definitions.h&#34;&#xA;&#xA;APP_DATA appData;&#xA;static SYS_WIFI_CONFIG wificonfig;&#xA;&#xA;void WiFiServCallback(uint32_t event, void * data, void *cookie) &#xA;{&#xA;    IPV4_ADDR *IPAddr;&#xA;    switch (event) &#xA;    {&#xA;        case SYS_WIFI_CONNECT:&#xA;        {&#xA;            IPAddr = (IPV4_ADDR *) data;&#xA;            if (SYS_WIFI_STA == wificonfig.mode) &#xA;            {&#xA;                SYS_CONSOLE_PRINT(&#34;Connected to AP. Got IP address = %d.%d.%d.%d \r\n&#34;, IPAddr-&gt;v[0], IPAddr-&gt;v[1], IPAddr-&gt;v[2], IPAddr-&gt;v[3]);&#xA;            } &#xA;            else &#xA;            {&#xA;                SYS_WIFI_STA_APP_INFO    *psStaConnInfo = (SYS_WIFI_STA_APP_INFO *)data;&#xA;                SYS_CONSOLE_PRINT(&#34;STA Connected to AP. Got IP address = %d.%d.%d.%d \r\n&#34;, &#xA;                        psStaConnInfo-&gt;ipAddr.v[0], psStaConnInfo-&gt;ipAddr.v[1], psStaConnInfo-&gt;ipAddr.v[2], psStaConnInfo-&gt;ipAddr.v[3]);                &#xA;                SYS_CONSOLE_PRINT(&#34;STA Connected to AP. Got MAC address = %x:%x:%x:%x:%x:%x \r\n&#34;, &#xA;                        psStaConnInfo-&gt;macAddr[0], psStaConnInfo-&gt;macAddr[1], psStaConnInfo-&gt;macAddr[2],&#xA;                        psStaConnInfo-&gt;macAddr[3], psStaConnInfo-&gt;macAddr[4], psStaConnInfo-&gt;macAddr[5]);&#xA;                SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_DISCONNECT, psStaConnInfo-&gt;macAddr, 6);&#xA;            }&#xA;            break;&#xA;        }&#xA;        case SYS_WIFI_DISCONNECT:&#xA;        {&#xA;            SYS_CONSOLE_PRINT(&#34;Device DISCONNECTED \r\n&#34;);&#xA;            break;&#xA;        }&#xA;        case SYS_WIFI_PROVCONFIG:&#xA;        {&#xA;            memcpy(&amp;wificonfig,data,sizeof(SYS_WIFI_CONFIG));&#xA;            SYS_CONSOLE_PRINT(&#34;%s:%d Received Provisioning Data : \r\n Device mode=%s \r\n&#34;, __func__, __LINE__, (wificonfig.mode == SYS_WIFI_STA) ? &#34;STA&#34; : &#34;AP&#34;);&#xA;            if (SYS_WIFI_STA == wificonfig.mode) &#xA;            {&#xA;                SYS_CONSOLE_PRINT(&#34; ssid=%s password=%s \r\n&#34;,wificonfig.staConfig.ssid,wificonfig.staConfig.psk);&#xA;            } &#xA;            else if (SYS_WIFI_AP == wificonfig.mode) &#xA;            {&#xA;                SYS_CONSOLE_PRINT(&#34; ssid=%s password=%s \r\n&#34;,wificonfig.apConfig.ssid,wificonfig.apConfig.psk);&#xA;            }            &#xA;            break;&#xA;        }&#xA;    }&#xA;}&#xA;&#xA;void APP_Initialize(void) &#xA;{&#xA;    appData.state = APP_STATE_INIT;&#xA;}&#xA;&#xA;void APP_Tasks(void) &#xA;{&#xA;&#xA;    switch (appData.state) &#xA;    {&#xA;        case APP_STATE_INIT:&#xA;        {&#xA;            SYS_CONSOLE_PRINT(&#34;Application: wifi_easy_config \r\n&#34;);&#xA;            SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_REGCALLBACK, WiFiServCallback, sizeof (uint8_t *));&#xA;&#xA;            appData.state = APP_STATE_GETCONFIG;&#xA;            break;&#xA;        }&#xA;        case APP_STATE_GETCONFIG:&#xA;        {&#xA;            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETWIFICONFIG, &amp;wificonfig, sizeof(SYS_WIFI_CONFIG)))&#xA;            {&#xA;                SYS_CONSOLE_PRINT(&#34;%s:%d Device mode=%s \r\n&#34;, __func__, __LINE__, (wificonfig.mode == SYS_WIFI_STA) ? &#34;STA&#34; : &#34;AP&#34;);&#xA;                appData.state = APP_STATE_SERVICE_TASKS;&#xA;&#xA;            }            &#xA;            break;&#xA;        }&#xA;        case APP_STATE_SERVICE_TASKS:&#xA;        {&#xA;            break;&#xA;        }&#xA;        default:&#xA;        {&#xA;            break;&#xA;        }&#xA;    }&#xA;}">#include "app.h"
+#include "definitions.h"
+
+APP_DATA appData;
+static SYS_WIFI_CONFIG wificonfig;
+
+void WiFiServCallback(uint32_t event, void * data, void *cookie) 
+{
+    IPV4_ADDR *IPAddr;
+    switch (event) 
+    {
+        case SYS_WIFI_CONNECT:
+        {
+            IPAddr = (IPV4_ADDR *) data;
+            if (SYS_WIFI_STA == wificonfig.mode) 
+            {
+                SYS_CONSOLE_PRINT("Connected to AP. Got IP address = %d.%d.%d.%d \r\n", IPAddr-&gt;v[0], IPAddr-&gt;v[1], IPAddr-&gt;v[2], IPAddr-&gt;v[3]);
+            } 
+            else 
+            {
+                SYS_WIFI_STA_APP_INFO    *psStaConnInfo = (SYS_WIFI_STA_APP_INFO *)data;
+                SYS_CONSOLE_PRINT("STA Connected to AP. Got IP address = %d.%d.%d.%d \r\n", 
+                        psStaConnInfo-&gt;ipAddr.v[0], psStaConnInfo-&gt;ipAddr.v[1], psStaConnInfo-&gt;ipAddr.v[2], psStaConnInfo-&gt;ipAddr.v[3]);                
+                SYS_CONSOLE_PRINT("STA Connected to AP. Got MAC address = %x:%x:%x:%x:%x:%x \r\n", 
+                        psStaConnInfo-&gt;macAddr[0], psStaConnInfo-&gt;macAddr[1], psStaConnInfo-&gt;macAddr[2],
+                        psStaConnInfo-&gt;macAddr[3], psStaConnInfo-&gt;macAddr[4], psStaConnInfo-&gt;macAddr[5]);
+                SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_DISCONNECT, psStaConnInfo-&gt;macAddr, 6);
+            }
+            break;
+        }
+        case SYS_WIFI_DISCONNECT:
+        {
+            SYS_CONSOLE_PRINT("Device DISCONNECTED \r\n");
+            break;
+        }
+        case SYS_WIFI_PROVCONFIG:
+        {
+            memcpy(&amp;wificonfig,data,sizeof(SYS_WIFI_CONFIG));
+            SYS_CONSOLE_PRINT("%s:%d Received Provisioning Data : \r\n Device mode=%s \r\n", __func__, __LINE__, (wificonfig.mode == SYS_WIFI_STA) ? "STA" : "AP");
+            if (SYS_WIFI_STA == wificonfig.mode) 
+            {
+                SYS_CONSOLE_PRINT(" ssid=%s password=%s \r\n",wificonfig.staConfig.ssid,wificonfig.staConfig.psk);
+            } 
+            else if (SYS_WIFI_AP == wificonfig.mode) 
+            {
+                SYS_CONSOLE_PRINT(" ssid=%s password=%s \r\n",wificonfig.apConfig.ssid,wificonfig.apConfig.psk);
+            }            
+            break;
+        }
+    }
+}
+
+void APP_Initialize(void) 
+{
+    appData.state = APP_STATE_INIT;
+}
+
+void APP_Tasks(void) 
+{
+
+    switch (appData.state) 
+    {
+        case APP_STATE_INIT:
+        {
+            SYS_CONSOLE_PRINT("Application: wifi_easy_config \r\n");
+            SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_REGCALLBACK, WiFiServCallback, sizeof (uint8_t *));
+
+            appData.state = APP_STATE_GETCONFIG;
+            break;
+        }
+        case APP_STATE_GETCONFIG:
+        {
+            if(SYS_WIFI_SUCCESS == SYS_WIFI_CtrlMsg(sysObj.syswifi, SYS_WIFI_GETWIFICONFIG, &amp;wificonfig, sizeof(SYS_WIFI_CONFIG)))
+            {
+                SYS_CONSOLE_PRINT("%s:%d Device mode=%s \r\n", __func__, __LINE__, (wificonfig.mode == SYS_WIFI_STA) ? "STA" : "AP");
+                appData.state = APP_STATE_SERVICE_TASKS;
+
+            }            
+            break;
+        }
+        case APP_STATE_SERVICE_TASKS:
+        {
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}</code></pre></div>
+</div>
+</div>
+</body>
+</html>

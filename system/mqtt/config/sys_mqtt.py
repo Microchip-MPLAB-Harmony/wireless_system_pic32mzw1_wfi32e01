@@ -25,7 +25,9 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 ################################################################################
 #### Global Variables ####
 ################################################################################
+global mqtt_helpkeyword
 
+mqtt_helpkeyword = "mcc_h3_pic32mzw1_mqtt_system_service_configurations"
 ################################################################################
 #### Business Logic ####
 ################################################################################
@@ -34,6 +36,7 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #### Component ####
 ################################################################################
 def instantiateComponent(mqttComponent):
+    global mqtt_helpkeyword
 
     # Enable dependent Harmony core components
     if (Database.getSymbolValue("HarmonyCore", "ENABLE_SYS_COMMON") == False):
@@ -47,10 +50,19 @@ def instantiateComponent(mqttComponent):
     # Basic Configuration
     sysMqttBasicMenu = mqttComponent.createMenuSymbol("SYS_MQTT_BASIC_CONFIG_MENU", None)
     sysMqttBasicMenu.setLabel("Basic Configuration")
+    sysMqttBasicMenu.setHelp(mqtt_helpkeyword)
     sysMqttBasicMenu.setVisible(True)
 		
+    mqttGenerateAppCode = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_APP_CODE_GENERATION", sysMqttBasicMenu)
+    mqttGenerateAppCode.setLabel("Enable App Code Generation")
+    mqttGenerateAppCode.setDescription("For Generating Application Code")
+    mqttGenerateAppCode.setDefaultValue(True)
+    mqttGenerateAppCode.setHelp(mqtt_helpkeyword)
+    mqttGenerateAppCode.setVisible(True)
+
     mqttBrokerName = mqttComponent.createStringSymbol("SYS_MQTT_BROKER_NAME", sysMqttBasicMenu)
     mqttBrokerName.setLabel("Broker Name")
+    mqttBrokerName.setHelp(mqtt_helpkeyword)
     mqttBrokerName.setVisible(True)
     mqttBrokerName.setDescription("MQTT Broker Name")
     mqttBrokerName.setDefaultValue("test.mosquitto.org")
@@ -58,6 +70,7 @@ def instantiateComponent(mqttComponent):
 
     mqttPort = mqttComponent.createIntegerSymbol("SYS_MQTT_MQTT_PORT", sysMqttBasicMenu)
     mqttPort.setLabel("Server Port")
+    mqttPort.setHelp(mqtt_helpkeyword)
     mqttPort.setMin(1)
     mqttPort.setMax(65535)
     mqttPort.setDescription("MQTT Broker Port")
@@ -65,34 +78,40 @@ def instantiateComponent(mqttComponent):
 
     mqttEnableTls = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_TLS", sysMqttBasicMenu)
     mqttEnableTls.setLabel("Enable TLS")
+    mqttEnableTls.setHelp(mqtt_helpkeyword)
     mqttEnableTls.setDescription("For TLS MQTT Connection")
     mqttEnableTls.setDefaultValue(False)
     mqttEnableTls.setDependencies(mqttTlsAutoMenu, ["SYS_MQTT_ENABLE_TLS"])
 	
     mqttEnableSNI = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_SNI", mqttEnableTls)
     mqttEnableSNI.setLabel("Enable SNI")
+    mqttEnableSNI.setHelp(mqtt_helpkeyword)
     mqttEnableSNI.setDescription("For SNI support in TLS MQTT Connection")
     mqttEnableSNI.setDefaultValue(False)
     mqttEnableSNI.setDependencies(mqttSNIAutoMenu, ["SYS_MQTT_ENABLE_SNI"])
 
     mqttEnableALPN = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_ALPN", mqttEnableTls)
     mqttEnableALPN.setLabel("Enable ALPN")
+    mqttEnableALPN.setHelp(mqtt_helpkeyword)
     mqttEnableALPN.setDescription("For ALPN support in TLS MQTT Connection")
     mqttEnableALPN.setDefaultValue(False)
 
     mqttEnableALPNProtocolName = mqttComponent.createStringSymbol("SYS_MQTT_ENABLE_ALPN_PROTOCOL_NAME", mqttEnableALPN)
     mqttEnableALPNProtocolName.setLabel("Enable ALPN Protocol Name List")
+    mqttEnableALPNProtocolName.setHelp(mqtt_helpkeyword)
     mqttEnableALPNProtocolName.setDescription("For ALPN support in TLS MQTT Connection")
     mqttEnableALPNProtocolName.setDefaultValue("x-amzn-mqtt-ca")
     mqttEnableALPNProtocolName.setDependencies(mqttALPNAutoMenu, ["SYS_MQTT_ENABLE_ALPN"])
 
     mqttClientId = mqttComponent.createStringSymbol("SYS_MQTT_CLIENT_ID", sysMqttBasicMenu)
     mqttClientId.setLabel("Client Id")
+    mqttClientId.setHelp(mqtt_helpkeyword)
     mqttClientId.setVisible(True)
     mqttClientId.setDescription("MQTT Client Id which should be unique for the MQTT Broker. If empty, the id will be randomly generated")
 
     mqttSuppIntf = mqttComponent.createComboSymbol("SYS_MQTT_SUPP_INTF", sysMqttBasicMenu, ["WIFI", "ETHERNET"])
     mqttSuppIntf.setLabel("Network Intferfaces")
+    mqttSuppIntf.setHelp(mqtt_helpkeyword)
     mqttEnableTls.setDescription("For Setting the Network Interface")
     mqttSuppIntf.setDefaultValue("WIFI")
     mqttSuppIntf.setDependencies(mqttIntfAutoMenu, ["SYS_MQTT_SUPP_INTF"])
@@ -100,20 +119,24 @@ def instantiateComponent(mqttComponent):
     # Advanced Configuration
     sysMqttAdvMenu = mqttComponent.createMenuSymbol("SYS_MQTT_ADVANCED_CONFIG_MENU", None)
     sysMqttAdvMenu.setLabel("Advanced Configuration")
+    sysMqttAdvMenu.setHelp(mqtt_helpkeyword)
     sysMqttAdvMenu.setVisible(True)
 		
     mqttReConnect = mqttComponent.createBooleanSymbol("SYS_MQTT_RECONNECT", sysMqttAdvMenu)
     mqttReConnect.setLabel("Enable Auto Reconnect")
+    mqttReConnect.setHelp(mqtt_helpkeyword)
     mqttReConnect.setDefaultValue(True)
     mqttReConnect.setDescription("In case of disconnection, enabling Auto Reconnect ensures that the Client reconnects to the MQTT Broker")
 	
     mqttEnableCleanSession = mqttComponent.createBooleanSymbol("SYS_MQTT_CLEAN_SESSION", sysMqttAdvMenu)
     mqttEnableCleanSession.setLabel("Enable Clean Sesison")
+    mqttEnableCleanSession.setHelp(mqtt_helpkeyword)
     mqttEnableCleanSession.setDescription("Enable Clean Sesison for non persistent connection")
     mqttEnableCleanSession.setDefaultValue(True)
 
     mqttKeepAliveInterval = mqttComponent.createIntegerSymbol("SYS_MQTT_KEEPALIVE_INTERVAL", sysMqttAdvMenu)
     mqttKeepAliveInterval.setLabel("KeepAlive Interval")
+    mqttKeepAliveInterval.setHelp(mqtt_helpkeyword)
     mqttKeepAliveInterval.setMin(0)
     mqttKeepAliveInterval.setMax(65535)
     mqttKeepAliveInterval.setDescription("KeepAlive Interval ensures that the broker and the client are aware of being connected")
@@ -121,21 +144,25 @@ def instantiateComponent(mqttComponent):
 
     mqttExtraCredentials = mqttComponent.createBooleanSymbol("SYS_MQTT_EXTRA_CRED", sysMqttAdvMenu)
     mqttExtraCredentials.setLabel("Extra Credentials")
+    mqttExtraCredentials.setHelp(mqtt_helpkeyword)
     mqttExtraCredentials.setVisible(True)
     mqttExtraCredentials.setDefaultValue(False)
 
     mqttUserName = mqttComponent.createStringSymbol("SYS_MQTT_USER_NAME", mqttExtraCredentials)
     mqttUserName.setLabel("Username")
+    mqttUserName.setHelp(mqtt_helpkeyword)
     mqttUserName.setVisible(True)
     mqttUserName.setDescription("Username")
 
     mqttPassword = mqttComponent.createStringSymbol("SYS_MQTT_PASSWORD", mqttExtraCredentials)
     mqttPassword.setLabel("Password")
+    mqttPassword.setHelp(mqtt_helpkeyword)
     mqttPassword.setVisible(True)
     mqttPassword.setDescription("Password")
 	
     sysMqttLwtEnable = mqttComponent.createBooleanSymbol("SYS_MQTT_LWT_ENABLE", sysMqttAdvMenu)
     sysMqttLwtEnable.setLabel("Last Will and Testament")
+    sysMqttLwtEnable.setHelp(mqtt_helpkeyword)
     sysMqttLwtEnable.setVisible(True)
     sysMqttLwtEnable.setDescription("Used by Broker to notify other clients about our ungracefully disconnection")
     sysMqttLwtEnable.setDefaultValue(False)
@@ -143,29 +170,34 @@ def instantiateComponent(mqttComponent):
 	# Topic Name
     sysLwtTopicName = mqttComponent.createStringSymbol("SYS_MQTT_LWT_TOPIC_NAME", sysMqttLwtEnable)
     sysLwtTopicName.setLabel("Lwt Topic")
+    sysLwtTopicName.setHelp(mqtt_helpkeyword)
     sysLwtTopicName.setVisible(True)
     sysLwtTopicName.setDescription("Topic Name")
 
     # Qos
     sysLwtTopicLen = mqttComponent.createComboSymbol("SYS_MQTT_LWT_QOS", sysMqttLwtEnable, ["At most once (0)", "At least once (1)", "Exactly once (2)"])
     sysLwtTopicLen.setLabel("Lwt QOS")
+    sysLwtTopicLen.setHelp(mqtt_helpkeyword)
     sysLwtTopicLen.setVisible(True)
     sysLwtTopicLen.setDefaultValue("At least once (1)")
     
 	#Retain
     sysLwtRetain = mqttComponent.createBooleanSymbol("SYS_MQTT_LWT_RETAIN", sysMqttLwtEnable)
     sysLwtRetain.setLabel("Lwt Retain Flag")
+    sysLwtRetain.setHelp(mqtt_helpkeyword)
     sysLwtRetain.setVisible(True)
     sysLwtRetain.setDefaultValue(False)
 	
 	#Message
     sysLwtMsg = mqttComponent.createStringSymbol("SYS_MQTT_LWT_MESSAGE", sysMqttLwtEnable)
     sysLwtMsg.setLabel("Lwt Message")
+    sysLwtMsg.setHelp(mqtt_helpkeyword)
     sysLwtMsg.setVisible(True)
     sysLwtTopicName.setDescription("Lwt Message")
 	
     sysMqttSubEnable = mqttComponent.createBooleanSymbol("SYS_MQTT_SUB_ENABLE", None)
     sysMqttSubEnable.setLabel("Subscribe Topic")
+    sysMqttSubEnable.setHelp(mqtt_helpkeyword)
     sysMqttSubEnable.setVisible(True)
     sysMqttSubEnable.setDefaultValue(False)
     sysMqttSubEnable.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_CLEAN_SESSION"])
@@ -173,94 +205,113 @@ def instantiateComponent(mqttComponent):
 	# Topic Name
     sysSubTopicName = mqttComponent.createStringSymbol("SYS_MQTT_SUB_TOPIC_NAME", sysMqttSubEnable)
     sysSubTopicName.setLabel("Topic Name")
+    sysSubTopicName.setHelp(mqtt_helpkeyword)
     sysSubTopicName.setVisible(True)
     sysSubTopicName.setDescription("Topic Name")
 
     # Qos
     sysSubTopicLen = mqttComponent.createComboSymbol("SYS_MQTT_SUB_QOS", sysMqttSubEnable, ["At most once (0)", "At least once (1)", "Exactly once (2)"])
     sysSubTopicLen.setLabel("QOS")
+    sysSubTopicLen.setHelp(mqtt_helpkeyword)
     sysSubTopicLen.setVisible(True)
     sysSubTopicLen.setDefaultValue("At least once (1)")
     
     sysMqttPubEnable = mqttComponent.createBooleanSymbol("SYS_MQTT_PUB_ENABLE", None)
     sysMqttPubEnable.setLabel("Publish to Topic")
+    sysMqttPubEnable.setHelp(mqtt_helpkeyword)
     sysMqttPubEnable.setVisible(True)
     sysMqttPubEnable.setDefaultValue(False)
 
 	# Topic Name
     sysPubTopicName = mqttComponent.createStringSymbol("SYS_MQTT_PUB_TOPIC_NAME", sysMqttPubEnable)
     sysPubTopicName.setLabel("Topic Name")
+    sysPubTopicName.setHelp(mqtt_helpkeyword)
     sysPubTopicName.setVisible(True)
     sysPubTopicName.setDescription("Topic Name")
 
     # Qos
     sysPubTopicLen = mqttComponent.createComboSymbol("SYS_MQTT_PUB_QOS", sysMqttPubEnable, ["At most once (0)", "At least once (1)", "Exactly once (2)"])
     sysPubTopicLen.setLabel("QOS")
+    sysPubTopicLen.setHelp(mqtt_helpkeyword)
     sysPubTopicLen.setVisible(True)
     sysPubTopicLen.setDefaultValue("At least once (1)")
         
     sysMqttPubRetain = mqttComponent.createBooleanSymbol("SYS_MQTT_PUB_RETAIN", sysMqttPubEnable)
     sysMqttPubRetain.setLabel("Retain Message")
+    sysMqttPubRetain.setHelp(mqtt_helpkeyword)
     sysMqttPubRetain.setVisible(True)
     sysMqttPubRetain.setDefaultValue(False)
 	
     sysMqttDebugEnable = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_DEBUG", None)
     sysMqttDebugEnable.setLabel("Debug")
+    sysMqttDebugEnable.setHelp(mqtt_helpkeyword)
     sysMqttDebugEnable.setDescription("Debug - Logs and CLI commands")
     sysMqttDebugEnable.setDefaultValue(True)
 	
     sysMqttCliCmdEnable = mqttComponent.createBooleanSymbol("SYS_MQTT_ENABLE_CLICMD", sysMqttDebugEnable)
     sysMqttCliCmdEnable.setLabel("Enable CLI Commands")
+    sysMqttCliCmdEnable.setHelp(mqtt_helpkeyword)
     sysMqttCliCmdEnable.setDefaultValue(True)
 
     sysMqttDebugLogEnable = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_ENABLE", sysMqttDebugEnable)
     sysMqttDebugLogEnable.setLabel("Enable Debug Logs")
+    sysMqttDebugLogEnable.setHelp(mqtt_helpkeyword)
     sysMqttDebugLogEnable.setDefaultValue(False)
     
     sysMqttDebugBasicMenu = mqttComponent.createMenuSymbol("SYS_MQTT_APPDEBUG_LEVEL_CONFIG_MENU", sysMqttDebugLogEnable)
     sysMqttDebugBasicMenu.setLabel("Debug Level Configuration")
+    sysMqttDebugBasicMenu.setHelp(mqtt_helpkeyword)
     sysMqttDebugBasicMenu.setVisible(False)
     sysMqttDebugBasicMenu.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 		
     sysMqttDebugErrLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_ERR_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugErrLevel.setLabel("Enable Error Level")
+    sysMqttDebugErrLevel.setHelp(mqtt_helpkeyword)
     sysMqttDebugErrLevel.setDefaultValue(True)
 #    sysMqttDebugErrLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 
     sysMqttDebugDbgLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_DBG_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugDbgLevel.setLabel("Enable Debug Level")
+    sysMqttDebugDbgLevel.setHelp(mqtt_helpkeyword)
     sysMqttDebugDbgLevel.setDefaultValue(False)
 #    sysMqttDebugDbgLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 	
     sysMqttDebugInfoLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_INFO_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugInfoLevel.setLabel("Enable Info Level")
+    sysMqttDebugInfoLevel.setHelp(mqtt_helpkeyword)
     sysMqttDebugInfoLevel.setDefaultValue(False)
 #    sysMqttDebugInfoLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 	
     sysMqttDebugFuncLevel = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_FUNC_LEVEL", sysMqttDebugBasicMenu)
     sysMqttDebugFuncLevel.setLabel("Enable Function Entry/Exit Level")
+    sysMqttDebugFuncLevel.setHelp(mqtt_helpkeyword)
     sysMqttDebugFuncLevel.setDefaultValue(False)
 #    sysMqttDebugFuncLevel.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 	
     sysMqttDebugFlowBasicMenu = mqttComponent.createMenuSymbol("SYS_MQTT_APPDEBUG_FLOW_CONFIG_MENU", sysMqttDebugLogEnable)
     sysMqttDebugFlowBasicMenu.setLabel("Debug Flow Configuration")
+    sysMqttDebugFlowBasicMenu.setHelp(mqtt_helpkeyword)
     sysMqttDebugFlowBasicMenu.setVisible(True)
     sysMqttDebugFlowBasicMenu.setDependencies(sysMqttSubMenuVisible, ["SYS_MQTT_APPDEBUG_ENABLE"])
 		
     sysMqttDebugCfgFlow = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_CFG_FLOW", sysMqttDebugFlowBasicMenu)
     sysMqttDebugCfgFlow.setLabel("Enable MQTT Cfg Flow")
+    sysMqttDebugCfgFlow.setHelp(mqtt_helpkeyword)
     sysMqttDebugCfgFlow.setDefaultValue(True)
 
     sysMqttDebugDataFlow = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_DATA_FLOW", sysMqttDebugFlowBasicMenu)
     sysMqttDebugDataFlow.setLabel("Enable MQTT Data Flow")
+    sysMqttDebugDataFlow.setHelp(mqtt_helpkeyword)
     sysMqttDebugDataFlow.setDefaultValue(True)
 	
     sysMqttDebugPahoFlow = mqttComponent.createBooleanSymbol("SYS_MQTT_APPDEBUG_PAHO_FLOW", sysMqttDebugFlowBasicMenu)
     sysMqttDebugPahoFlow.setLabel("Enable MQTT Paho Flow")
+    sysMqttDebugPahoFlow.setHelp(mqtt_helpkeyword)
     sysMqttDebugPahoFlow.setDefaultValue(True)
 	
     sysMqttDebugPreStr = mqttComponent.createStringSymbol("SYS_MQTT_APPDEBUG_PRESTR", sysMqttDebugLogEnable)
     sysMqttDebugPreStr.setLabel("Prefix String")
+    sysMqttDebugPreStr.setHelp(mqtt_helpkeyword)
     sysMqttDebugPreStr.setVisible(True)
     sysMqttDebugPreStr.setDescription("Prefix String")
     sysMqttDebugPreStr.setDefaultValue("MQTT_SRVC")
@@ -291,6 +342,7 @@ def instantiateComponent(mqttComponent):
     mqttAppSourceFile.setMarkup(True)
     mqttAppSourceFile.setEnabled(True)
     mqttAppSourceFile.setOverwrite(True)
+    mqttAppSourceFile.setDependencies(genAppCode, ["sysMqttPic32mzw1.SYS_MQTT_ENABLE_APP_CODE_GENERATION"])
 
     mqttAppHeaderFile = mqttComponent.createFileSymbol("APP_MQTT_HEADER", None)
     mqttAppHeaderFile.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app_mqtt.h.ftl")
@@ -301,6 +353,7 @@ def instantiateComponent(mqttComponent):
     mqttAppHeaderFile.setMarkup(True)
     mqttAppHeaderFile.setEnabled(True)
     mqttAppHeaderFile.setOverwrite(True)
+    mqttAppHeaderFile.setDependencies(genAppCode, ["sysMqttPic32mzw1.SYS_MQTT_ENABLE_APP_CODE_GENERATION"])
 
     mqttSourceFile = mqttComponent.createFileSymbol("SYS_MQTT_SOURCE", None)
     mqttSourceFile.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/src/sys_mqtt.c")
@@ -355,6 +408,14 @@ def instantiateComponent(mqttComponent):
 ############################################################################
 #### Dependency ####
 ############################################################################
+ 
+def genAppCode(symbol, event):
+    if event["value"] != True:
+        symbol.setEnabled(False)
+        Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_APP_CODE_GENERATION", False)
+    else:
+        Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_APP_CODE_GENERATION", True)
+        
 def setVal(component, symbol, value):
     triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
     if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
@@ -418,13 +479,8 @@ def mqttIntfAutoMenu(symbol, event):
 def finalizeComponent(mqttComponent):
     res = Database.activateComponents(["sysNetPic32mzw1"])
     res = Database.activateComponents(["lib_pahomqtt"],"System Configuration", True)
-    Hccomponent = Database.getComponentByID("HarmonyCore")
-    fileSymb = Hccomponent.getSymbolByID("APP0_C")
-    fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
-    #fileSymb = Hccomponent.getSymbolByID("APP0_H")
-    #fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.h.ftl")
-#    res = Database.activateComponents(["sysAppDebugPic32mzw1"],"System Configuration", True)
-	
-#    if(Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_APPDEBUG_ENABLE") == True):
-#       res = Database.activateComponents(["sysAppDebugPic32mzw1"])
-
+    if(sysMqttPic32mzw1.SYS_MQTT_ENABLE_APP_CODE_GENERATION == True):
+        Hccomponent = Database.getComponentByID("HarmonyCore")
+        fileSymb = Hccomponent.getSymbolByID("APP0_C")
+        fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
+        

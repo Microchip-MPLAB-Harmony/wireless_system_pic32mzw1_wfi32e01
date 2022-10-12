@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="OTA System Service Usage" />
+<meta name="DC.relation" scheme="URI" content="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="ota-system-service-usage" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>OTA System Service Usage</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-ota-system-service-usage" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-E13DC21B-3F94-455C-8DB3-48F8F7163844"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="ota-system-service-usage">
+<h1 class="title topictitle1" id="ariaid-title1">OTA System Service Usage</h1><div class="body"></div>
+<div class="related-links">
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html">Over The Air (OTA) firmware update System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="title topictitle2" id="ariaid-title2">Description</h2><div class="body"><p class="p">The OTA System Service provides simple APIs to enable Over the Air system firmware image upgrade. While using the service, the application does not have to handle low level states of a TCP/IP Connection, periodic update check triggers, file integrity checks etc. since the service internally takes care of that. The user also does not required extensive Security domain knowledge to establish a secured connection via the application using OTA System Service library.</p>
+<p class="p">The user would need to configure the Home AP credentials (like SSID and security items). The Wi-Fi service will use the credentials to connect to the Home AP and acquire an IP address. Once the IP address is obtained OTA service will perform OTA update process based on user configuration in MHC.</p>
+<br /><img class="image" src="GUID-65F5D2E9-64F2-4D9B-9542-BDD5DD323EC6-low.png" alt="resized_wifi_sta_http_server_1" /><br /><p class="p">The service state-machine will try to connect with a pre-defined OTA manifest server address and download the new image when a version higher than the version being currently executed is identified. The downloaded image will be stored in the external SPI flash initially. Upon reset, the image will be transferred to the internal flash (NVM) by the OTA bootloader.  Once the image is successfully programmed, the updated image from the server will be executed.</p>
+<p class="p">The OTA service has two major components:</p>
+<p class="p">1.The OTA service task state-machine that will be integrated into the customer application. This task is responsible for polling for an update image, downloading and verifying an image when an update is detected, and resetting the system to apply the newly downloaded image.</p>
+<p class="p">2.The OTA bootloader that is responsible for identifying the presence of an updated image in the external flash filesystem and transferring it to the program flash memory (NVM).</p>
+<p class="p">A <code class="ph codeph">factory image</code> is a unified application image that contains the bootloader and the application in a single file that can be programmed into the device using an external programmer. To create a factory image, it is required to load the <code class="ph codeph">ota_bootloader</code> project located in the <code class="ph codeph">apps</code> folder of <code class="ph codeph">wireless_apps_pic32mzw1_wfi32e01</code> repo into the application project. A unified hex file will be created at the end of the compilation process. Internally, this step uses the <code class="ph codeph">Hexmate</code> tool after compiling the application project and the bootloader project independently. More details about this can be found in <strong class="ph b">OTA System Service Configuration</strong> section of this manual.</p>
+<p class="p">OTA service uses the file system component from MHC (MPLAB® Harmony Configurator) and is configured to use an external SPI flash by default. However, this can be modified to use a different medium without major changes since the OTA service uses the file system abstraction to talk to the external storage medium.</p>
+<p class="p">An OTA image database is maintained by the service in the filesystem. It contains details about the downloaded images (image name, image status,image version, digest key), which will be used by bootloader and OTA service.</p>
+<br /><img class="image" src="GUID-71F4624D-82FD-4F4D-A93E-96C7D650E35A-low.png" alt="SPI_com" /><br /></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="ota-service-framework-architecture-overview"><h2 class="title topictitle2" id="ariaid-title3">OTA Service Framework Architecture Overview</h2><div class="body"><p class="p">Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process.</p>
+<ul class="ul"><li class="li"><p class="p">Image Downloading is processed by the OTA service.</p>
+</li>
+<li class="li"><p class="p">Image Programming is processed by the OTA bootloader.</p>
+</li>
+</ul>
+<p class="p"><strong class="ph b">OTA service</strong> is a Harmony component which includes the system level logic implementation and uses <code class="ph codeph">OTA core</code> APIs. This harmony component will provide some user configurable parameters, based on which service level code will be generated with the corresponding logic.  Please follow <code class="ph codeph">Figure-1</code> and <code class="ph codeph">Figure-2</code> for better understanding of this flow.</p>
+<br /><img class="image" src="GUID-6AC0F0AC-4BCC-4127-9824-FA380BF43526-low.png" alt="system_layers" /><br /><br /><img class="image" src="GUID-B35E3E1A-CF6F-4E22-B6EE-70E4FB9E1F2C-low.png" alt="top_to_bottom_layers" /><br /></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="abstraction-model"><h2 class="title topictitle2" id="ariaid-title4">Abstraction model</h2><div class="body"><br /><img class="image" src="GUID-C3774287-8825-420A-8CE8-44E839E49B4B-low.png" alt="abstraction_model" /><br /><p class="p"><strong class="ph b">User Application:</strong> This is where the customer application logic is built.</p>
+<p class="p"><strong class="ph b">OTA Service:</strong> This layer includes the service level logic implementation. This is a Harmony component which provides certain user configurable parameters(ex- Version, Periodic update check etc.) . Based on user configuration, generated code will be activated with required functionalities.</p>
+<br /><img class="image" src="GUID-8EE6C3F9-C5A7-48CB-8A10-8C5FD4F449EE-low.png" alt="ota_service_component" /><br /><br /><img class="image" src="GUID-AA5F6DB3-4183-4E04-BB42-3757E0704D58-low.png" alt="ota_service_conf" /><br /><p class="p"><strong class="ph b">OTA software platform / OTA Core :</strong> This is the platform layer that consist of the main OTA logic implementation. When OTA process is triggered , this layer will communicate with the transport layer to connect to OTA server. If new image is available , it will initiate download using transport layer. If successfully downloaded, it will store the new image into the File System .</p>
+<p class="p"><strong class="ph b">File System :</strong>  The architecture is designed to provide flexibility for the customer to choose the storage medium (ex- SST26 SPI flash, SD card, USB MSD in host mode etc.). Any medium supported by the Harmony3 file system can be used with the OTA service.</p>
+<p class="p"><strong class="ph b">Bootloader :</strong> This layer consists of the logic to safely program images from the file system (external) into the program memory (NVM) of the device. At device boot, the bootloader will check if a new image is available in the external image store and transfer it to the NVM.</p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title5" id="ota-server-json-manifest"><h2 class="title topictitle2" id="ariaid-title5">OTA server JSON manifest</h2><div class="body"><p class="p">The OTA service expects the HTTP based OTA server to provide metadata of images available in the server in <code class="ph codeph">json</code> format. During periodic update checks, the OTA service task will download and parse this manifest file. Each entry in the manifest file should include the following fields :</p>
+<ul class="ul"><li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">Version</code></strong> indicates the application version number. It is a integer value.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">URL</code></strong> contains the image path from which the application image can be downloaded. It is a string variable.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">Digest</code></strong>  contain the <code class="ph codeph">SHA256</code> digest of image to be downloaded. It is a 64 byte string variable and should not include whitespaces</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">EraseVer</code></strong> This <em class="ph i"><strong class="ph b">optional</strong></em> field provides a capability to trigger an erase of an version which was downloaded earlier. Customer may want to remove an image from the image store due to various reasons, application with bug, may be one of them. It is a bool variable.</p>
+<ul class="ul"><li class="li"><p class="p">If user configures this field as "true", OTA service will delete image version mentioned in "Version" field.</p>
+</li>
+<li class="li"><p class="p">If user configures this field as "false", OTA service will follow image downwload logic.</p>
+</li>
+</ul>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">Patch</code></strong> This <em class="ph i"><strong class="ph b">optional</strong></em> field provides a facility to support patch functionality. If <strong class="ph b">patch</strong> functionality-option is enabled in the project, application will try to fetch below fields</p>
+<ul class="ul"><li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">BaseVersion</code></strong> This is base image version against which patch will be applied. Application will check the presence of this base image version, in OTA DB, present in external flash.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">BaseVerDigest</code></strong> Base image digest must be provided by user, which will be used by application to verify correct Base image. This digest will be compared against the digest (stored inside OTA DB) of base version.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">PatchURL</code></strong> URL-path of patch image.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">PatchDigest</code></strong> Digest of Patch image . This is used by the application in the device to verify downloaded patch image.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b"><code class="ph codeph">TargetDigest</code></strong> Digest of the Target image obtained after applying Patch . This is used by the application in the device to verify target image obtained after applying patch functionality.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p class="p"><strong class="ph b">Sample JSON</strong></p>
+<pre class="pre codeblock json">    {
+    <span class="hl-json_key">"ota"</span>: [
+            {
+                <span class="hl-json_key">"Version"</span>: <span class="hl-number">5</span>,
+                <span class="hl-json_key">"URL"</span>: <span class="hl-string">"http://192.168.0.101:8000/wifi_ota_app_upgrade_ver2.bin"</span>,
+                <span class="hl-json_key">"Digest"</span>: <span class="hl-string">"aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d"</span>,
+                <span class="hl-json_key">"EraseVer"</span>: false,
+                <span class="hl-json_key">"Patch"</span> : [
+                              {
+                                <span class="hl-json_key">"BaseVersion"</span>: <span class="hl-number">1</span>,
+                                <span class="hl-json_key">"BaseVerDigest"</span>: <span class="hl-string">"aff0d6d02fabf6a8cc96f762eb71f54f3687ce7d8605dd814055c17eface0b1d"</span>,
+                                <span class="hl-json_key">"PatchURL"</span>: <span class="hl-string">"http://192.168.0.101:8000/wifi_ota_app_upgrade_patch.patch"</span>,
+                                <span class="hl-json_key">"PatchDigest"</span>: <span class="hl-string">"266008c4a6150d7033e370a48621ecd44985b3d0418cdf13bbb6efa6fae43823"</span>,
+                                <span class="hl-json_key">"TargetDigest"</span>: <span class="hl-string">"beac75ef53f0159cae0645c32f58a9705d237823607c6e65267ca61793dfcb08"</span>
+                              }
+                          ]
+            }
+           ]
+    }</pre><p class="p">OTA service will download json file from server first when OTA process is triggered, try to fetch information and proceed further as per below logic:</p>
+<br /><img class="image" src="GUID-53B6B309-A93C-4F7A-B4E1-55452A440E5D-low.png" alt="resized_json_parse_logic" /><br /></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title6" id="factory-image-structure"><h2 class="title topictitle2" id="ariaid-title6">Factory Image Structure</h2><div class="body"><p class="p">The program memory of an application that include the OTA service will be organized as shown in the image below.</p>
+<br /><img class="image" src="GUID-ECFFE880-ABC1-404E-99B3-B77DDDCD1E7A-low.png" alt="Application_Image3" /><br /></div>
+<div class="topic nested2" aria-labelledby="ariaid-title7" id="application-header-structure-boot-control-area"><h3 class="title topictitle3" id="ariaid-title7">Application Header Structure (boot control area)</h3><div class="body"><p class="p">A boot control area of size 4 KB is maintained in internal flash area of device as a shared memory between the application and the bootloader. This area will contain fields as shown in figure below.</p>
+<br /><img class="image" src="GUID-638A782B-60C4-4ECE-A459-2517B31F1C56-low.png" alt="ota_header" /><br /></div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title8" id="image-download-process"><h2 class="title topictitle2" id="ariaid-title8">Image download process</h2><div class="body"><p class="p">1.The OTA service task identifies that the server manifest includes an image with a version number numerically higher than the current version being executed in the system. Image version number is a C macro that can be defined in MHC.</p>
+<p class="p">2.The transport layer starts downloading the image using the link in the URL. If the URL starts with an <code class="ph codeph">https://</code> TLS is automatically used.</p>
+<p class="p">3.Once the download is completed successfully, the OTA framework verifies the image by checking the SHA-256 hash, once transport layer finished receiving all data.</p>
+<p class="p">If download fails, system will go to <code class="ph codeph">IDLE</code>. If <code class="ph codeph">Auto Update</code> is enabled,  user need to reset the device to initiate OTA again.</p>
+<p class="p">4.If image digest verification is failed, user will be notified using user registered callback.</p>
+<p class="p">If image digest verification is passed, OTA framework will create an entry in OTA database present in external filesystem. OTA database is maintained in <code class="ph codeph">csv</code> format.</p>
+<p class="p">Each entry in the OTA database will contain following information:</p>
+<p class="p"><strong class="ph b">a. image name:</strong> name of downloaded image.</p>
+<p class="p"><strong class="ph b">b. image status:</strong> This will be set as <strong class="ph b">0xFE</strong>, for newly downloaded image.</p>
+<p class="p"><strong class="ph b">c. version number:</strong> Version number of image obtained from JSON manifest.</p>
+<p class="p"><strong class="ph b">d. image digest:</strong> Image digest obtained from JSON manifest.</p>
+<p class="p">5.Once entry is made successfully, OTA framework updates <code class="ph codeph">Boot-Control-header</code>, status field of the current application to “Disabled” 0xF0.</p>
+<p class="p">User will be notified about successful OTA process via user registered callback and wait for system reset or trigger auto system reset based on MHC configuration to load new image into the program flash memory.</p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title9" id="blockflow-diagram"><h2 class="title topictitle2" id="ariaid-title9">Block/Flow Diagram</h2><div class="body"><p class="p"><strong class="ph b">a. OTA Service:</strong></p>
+<br /><img class="image" src="GUID-8703A25E-0F5F-4352-863A-C91C5A658D77-low.png" alt="resized_otaservice_flowchart" /><br /><ul class="ul"><li class="li"><p class="p"><strong class="ph b">OTA Start:</strong> OTA process can be triggered using various methods :</p>
+<p class="p">Periodically : System will communicate with OTA server periodically (configured by user) to check if any new image is available and initiate OTA process accordingly.</p>
+<p class="p">Manually : OTA can be triggerred by the application by calling an API.</p>
+<p class="p">Other sources : User may configure/implement any other means of source like MQTT server to trigger OTA. This is a subset of the manual triggers.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Download JSON manifest file and check for version :</strong> JSON file will be downloaded from server first , once OTA process is initiated. JSON file will have version number along with other details. Now system will try to compare the extracted version number from JSON file with currently running application version number and decide accordingly the next step :</p>
+<ul class="ul"><li class="li"><p class="p">If version number is same abort the OTA process because new image is not available.</p>
+</li>
+<li class="li"><p class="p">If version number is different and higher than the current application version number, then system will continue with OTA process.</p>
+</li>
+</ul>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Patch Functionality :</strong> If patch functionality is enabled in the application , it will try fetch relative information from JSON manifest and proceed accordingly.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Initiating image Download process :</strong> Based on user configuration system will go for image downloading or will wait for download trigger by user.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Digest verify :</strong> SHA-256 verification will be done for downloaded image.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Update OTA database file system :</strong> If digest verification is successful , OTA database will be updated in file system for new image.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Storing image in the external flash and wait :</strong> If downloaded successfully, the image will be stored in the external flash using standard FS present in Harmony. Afterwards system will perform following steps depending upon user configuration :</p>
+<ul class="ul"><li class="li"><p class="p">reset automatically if Auto reset option is enabled .</p>
+</li>
+<li class="li"><p class="p">wait till user application triggers reset.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p class="p"><strong class="ph b">b. Image Programming:</strong></p>
+<br /><img class="image" src="GUID-6CEDAF97-6147-4C6F-9FE0-CDA600B31D9A-low.png" alt="resized_bootloader_flowchart" /><br /><p class="p">1.During each system boot-up, bootloader checks if it needs to program any new, valid image from the external flash. Bootloader goes to program mode, if-</p>
+<p class="p">1.any newly downloaded image present in the external flash.2.if the already present image in the program flash is not "validated" during previous boot.</p>
+<p class="p">There are two conditions :</p>
+<ul class="ul"><li class="li"><p class="p">whether the Application Image in Program-Flash area is valid (indicated by the STATUS field, value of 0xF8 in image boot control area of internal flash), and</p>
+</li>
+<li class="li"><p class="p">whether it has been confirmed that no errors were present during the previous boot (indicated by the STATUS field of image Database in the external flash, value of 0xF8 ).</p>
+<p class="p">According to bootloader logic if these two conditions are satisfied it will not go to <code class="ph codeph">Program Mode</code> and the bootloader immediately jumps to the application image present in the program-flash area of the device.</p>
+</li>
+</ul>
+<p class="p">2.If two conditions mentioned in the step 1 are not satisfied, the bootloader switches to Image Program Mode. In Image Program Mode bootloader follows Image Programming sequence, which finds the highest ranked image in Image-Store(external flash), erases the Program-Flash area and copies the selected image to the Program-Flash area if the image is successfully verified. As the newly downloaded image with highest version is set as the highest ranked, during the first boot time after the Image-downloading, the bootloader attempts to load the newly downloaded image at the first try.</p>
+<p class="p">The bootloader choses the highest ranked image to boot. The images are ranked in following order:</p>
+<pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d13750e403', this);">Copy</button><code id="d13750e403" content="1.The downloaded , valid Image with highest version.  &#xD;&#xA;&#xD;&#xA;2.The next valid, higher version image.  &#xD;&#xA;&#xD;&#xA;3.The next known valid, higher version image.  &#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;4.Default (Golden/Factory) image.&#xD;">1.The downloaded , valid Image with highest version.  &#xD;
+&#xD;
+2.The next valid, higher version image.  &#xD;
+&#xD;
+3.The next known valid, higher version image.  &#xD;
+&#xD;
+  .&#xD;
+&#xD;
+  .&#xD;
+&#xD;
+  .&#xD;
+&#xD;
+4.Default (Golden/Factory) image.&#xD;</code></pre><p class="p">3.If the image is not valid, the bootloader invalidates the image by setting “Invalidate” <code class="ph codeph">0xF0</code> in <code class="ph codeph">STATUS</code> field of image in OTA database present in the external flash and restarts the Image-Programming sequence.</p>
+<p class="p">4.If image is verified successfully, bootloader updates <code class="ph codeph">STATUS</code> field of boot control area in internal flash as <code class="ph codeph">Unbooted (0xFC)</code></p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title10" id="patch-functionality"><h2 class="title topictitle2" id="ariaid-title10">Patch functionality</h2><div class="body"><p class="p">OTA service provides facility of patch OTA . User can configure <code class="ph codeph">PATCH</code> functionality using MHC menu ,for more details on configuration please follow - <strong class="ph b">OTA System Service Configuration</strong> section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility and follow instructions from <a class="xref" href="https://github.com/MicrochipTech/jojodiff" target="_blank">here</a> .</p>
+<p class="p">User can provide required parameters for patch in JSON file ( Please follow <code class="ph codeph">OTA server JSON manifest</code> section , for more details ) . OTA Service will follow below steps during while processing <code class="ph codeph">patch functionality</code> :</p>
+<ul class="ul"><li class="li"><p class="p">Check if base version is present in OTA DB</p>
+<ul class="ul"><li class="li"><p class="p">If not present, sysetm will try to download full image from server .</p>
+</li>
+<li class="li"><p class="p">If present, system will proceed with logic for patch functionality.</p>
+</li>
+</ul>
+</li>
+<li class="li"><p class="p">During patching system will at first verify downloaded patch image using SHA-256 .</p>
+</li>
+<li class="li"><p class="p">If patch file is verified successfully , system will generate target binary image.</p>
+</li>
+<li class="li"><p class="p">After successful generation of target image , SHA-256 verification will be done against target image .</p>
+</li>
+<li class="li"><p class="p">If target image is verified successfully , same will be stored in OTA DB present in the external flash.</p>
+</li>
+<li class="li"><p class="p">Finally new image will be applied by bootloader as per application logic.</p>
+</li>
+</ul>
+<br /><img class="image" src="GUID-8A28BE3F-64CA-4262-896C-E8395A525496-low.png" alt="resized_patch_details" /><br /></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title11" id="configuration-fuses"><h2 class="title topictitle2" id="ariaid-title11">Configuration fuses</h2><div class="body"><p class="p">Due to the way configuration fuses are stored in the device, they cannot be modified by the bootloader at runtime. Consequently, when the bootloader loads the application, the config fuses set in the bootloader (using <code class="ph codeph">#pragma</code> in the bootloader code) will be retained.</p>
+<p class="p">Unlike most of the other PIC32MZ devices, some of the configuration values of PCI32MZW1 / WFI32 can be overridden at runtime. These are marked as loadable configurations in the datasheet. Please refer to the <code class="ph codeph">Configuration Bits</code> section of the <code class="ph codeph">SPECIAL FEATURES</code> chapter of the PIC32MZW1 datasheet to see a list of loadable configurations and how to apply them. These loadable configs can be applied at runtime from the application.</p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title12" id="generating-the-ota-image"><h2 class="title topictitle2" id="ariaid-title12">Generating the OTA image</h2><div class="body"><p class="p">Images that are downloaded from the server as part of the OTA process should be stored in <code class="ph codeph">.bin</code> format as opposed to the Intel Hex format that is generated by MPLABX.</p>
+<p class="p">To convert the <code class="ph codeph">hex</code> file to <code class="ph codeph">bin</code> format, you can use the <code class="ph codeph">hex2bin</code> tool in the <code class="ph codeph">tools</code> folder of your project. This folder will be created when you generate MHC code with the OTA service included in your project.</p>
+<ul class="ul"><li class="li"><p class="p">In case of a windows machine, you can execute the command <code class="ph codeph">hex2bin.exe -i &lt;path to hex file in the dist folder&gt;</code>. In case your development environment is based on a non-Windows OS, you can execute the python script with the same arguments. Make sure that you have python3 installed in your machine.</p>
+</li>
+<li class="li"><p class="p">User may execute <code class="ph codeph">hex2bin</code> tool directly from <code class="ph codeph">tools</code> folder without any argument. In that case, tool will search for <code class="ph codeph">hex</code> file in default path <code class="ph codeph">"..\project.X\dist\project\production"</code> and generate <code class="ph codeph">bin</code> file .</p>
+</li>
+<li class="li"><p class="p">User may also execute post build command <code class="ph codeph">../../tools/hex2bin/hex2bin.exe</code> from MPLABx project itself :</p>
+<ul class="ul"><li class="li"><p class="p">Right click on the project and click on properties.</p>
+</li>
+</ul>
+</li>
+</ul>
+<br /><img class="image" src="GUID-5BBFBE7A-316E-4134-B169-E8C5303F32AD-low.png" alt="project_loading" /><br /><ul class="ul"><li class="li with-image"><p class="p">Select "building", insert below command and click "OK":</p>
+<p class="p"><code class="ph codeph">../../tools/hex2bin/hex2bin.exe </code></p>
+<p class="p"><strong class="ph b">Note</strong>: python should be present in the system variable path.</p>
+<br /><img class="image" src="GUID-98F6D44F-52D2-47A0-A7A4-3A832C870C06-low.png" alt="resized_post_build" /><br /></li>
+</ul>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title13" id="ota-server"><h2 class="title topictitle2" id="ariaid-title13">OTA server</h2><div class="body"><p class="p">Any standard http/https server can be used as OTA server as long as it hosts a manifest file with the mandatory fields.</p>
+<ul class="ul"><li class="li with-image"><p class="p">For testing the service, you may also use a simple python command to create a local <strong class="ph b">HTTP</strong> server using below steps:</p>
+<ul class="ul"><li class="li with-image"><p class="p">Open command prompt and change directory to the folder where json file/ota image is present.</p>
+<br /><img class="image" src="GUID-BA709067-E54C-48AF-91E4-0263108E8CD9-low.png" alt="resized_Change_dir" /><br /></li>
+<li class="li"><p class="p">Use below python command in command prompt:</p>
+</li>
+</ul>
+<pre class="pre codeblock python">  python -m SimpleHTTPServer <span class="hl-number">8000</span></pre><br /><img class="image" src="GUID-3433357A-1585-4518-99C6-CB513BDE9A86-low.png" alt="resized_http_server" /><br /></li>
+</ul>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title14" id="integrating-bootloader"><h2 class="title topictitle2" id="ariaid-title14">Integrating bootloader</h2><div class="body"><p class="p">It is required to integrate the bootloader and OTA application image to create a single unified HEX file. To integrate 2 images we can use hexmate tool, which is readily available with MPLABX package as part of the standard installation. To combine the hex files - please follow steps mentioned in configuration page <strong class="ph b">OTA System Service Configuration</strong>.</p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title15" id="resolving-data-conflict--compilation-error"><h2 class="title topictitle2" id="ariaid-title15">Resolving <code class="ph codeph">Data Conflict </code> Compilation error</h2><div class="body"><p class="p">During compilation if user is facing <code class="ph codeph">Data conflict at address..</code> compilation error , please check if there is any mismatch of configuration ( <code class="ph codeph">#pragma </code>) between bootloader and application. User may simply compare <code class="ph codeph">initialization.c</code> files of both the projects to check mismatch.</p>
+<br /><img class="image" src="GUID-80EAA68A-0040-4390-81BF-3A5A6C6BBB6A-low.png" alt="resized_pragma_mismatch" /><br /></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="Net System Service Interface" />
+<meta name="DC.relation" scheme="URI" content="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-9F5B3013-33E1-4917-920A-F0F8FD1D704E.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-AFAB4E7D-CACF-4851-B9F6-B963450DB193.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-E5040CD9-28E3-4862-8A70-81C548C31901.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-CBCB9481-CA72-4E90-A4FE-6243DAB9057B.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-E8248C48-3802-4362-A1F6-80CD79C20956.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-34AA46D6-A6BB-459C-95C5-4D4C733D21AC.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-560DA0FB-8CF0-4EAB-A5D4-7641AE5FFBF3.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-87D2FD77-3A00-47BA-9CCD-8FB708F03EA4.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-BE525C46-F3B6-45A6-AFB0-BB23EFAB4208.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-7EA384CB-36B6-4064-AC58-CC582F611968.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-21594EF4-8CE1-4BFA-B2C3-CA15EF80D761.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-D2624727-1BC0-4511-BB6C-35D027018A24.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-2D68F47B-8E2E-4F12-B126-AB828481897D.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-D3EC049D-63E2-4FC1-8A1A-7A4323878851.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-26537238-7459-436C-88BF-A506A0EC46B0.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-007A2A1C-CCE4-44C0-A735-2591D764708D.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-30A62A7C-8781-4779-A4F3-F1D5BC265D51.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-77D07DB9-DDA3-416C-B107-9B5789336162.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-6D0974F9-BDE5-4905-BC62-CFA6733A675A.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-95DB52B3-F70E-435B-96C6-96BB819004F7.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-2C74519E-9B7A-45F9-B042-119754809978.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-DF9EDA3A-3278-4F8C-9FF8-F392E49360DE.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-1910387B-8C3A-4408-9D3D-7ABDC2A90E99.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-9B0C8D64-9CC9-41EB-A114-321B1DECE901.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-16745EB6-5053-46F3-A8B2-3A1EEEB70BCA.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-2A33E6A9-B6CC-42BC-AD7D-EDE218C1AD45.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-20880B8D-6815-43DC-BCC6-8C29E1C1AE5A.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-CD8600B6-BDA0-4A35-AB3D-BF74C4540A2B.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-F55CC6FB-EF86-4353-9A2F-C56DD3EA2ED2.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-335E6EC1-1976-4BDE-BC58-99C64AA570D2.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="net-system-service-interface" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>Net System Service Interface</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-net-system-service-interface" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-010BB62D-452D-4B87-9F43-FDA5BF80F6AF"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="net-system-service-interface">
+<h1 class="title topictitle1" id="ariaid-title1">Net System Service Interface</h1><div class="body"></div>
+<div class="related-links">
+<ul class="ullinks">
+<li class="link ulchildlink"><strong><a href="GUID-9F5B3013-33E1-4917-920A-F0F8FD1D704E.html">SYS_NET_DEFAULT_AUTO_RECONNECT Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-AFAB4E7D-CACF-4851-B9F6-B963450DB193.html">SYS_NET_DEFAULT_NET_INTF Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-E5040CD9-28E3-4862-8A70-81C548C31901.html">SYS_NET_DEFAULT_TLS_ENABLE Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-CBCB9481-CA72-4E90-A4FE-6243DAB9057B.html">SYS_NET_INTF_ETHERNET Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-E8248C48-3802-4362-A1F6-80CD79C20956.html">SYS_NET_INTF_WIFI Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-34AA46D6-A6BB-459C-95C5-4D4C733D21AC.html">SYS_NET_IP_PROT_TCP Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-560DA0FB-8CF0-4EAB-A5D4-7641AE5FFBF3.html">SYS_NET_MAX_HOSTNAME_LEN Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-87D2FD77-3A00-47BA-9CCD-8FB708F03EA4.html">SYS_NET_IP_PROT_UDP Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-BE525C46-F3B6-45A6-AFB0-BB23EFAB4208.html">SYS_NET_MAX_NUM_OF_SOCKETS Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-7EA384CB-36B6-4064-AC58-CC582F611968.html">SYS_NET_MODE_CLIENT Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-21594EF4-8CE1-4BFA-B2C3-CA15EF80D761.html">SYS_NET_MODE_SERVER Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-D2624727-1BC0-4511-BB6C-35D027018A24.html">NET_DATA Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-2D68F47B-8E2E-4F12-B126-AB828481897D.html">NET_CFG Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-D3EC049D-63E2-4FC1-8A1A-7A4323878851.html">SYS_NET_EVENT Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-26537238-7459-436C-88BF-A506A0EC46B0.html">SYS_NET_RESULT Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-007A2A1C-CCE4-44C0-A735-2591D764708D.html">SYS_NET_CTRL_MSG Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-30A62A7C-8781-4779-A4F3-F1D5BC265D51.html">SYS_NET_STATUS Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-77D07DB9-DDA3-416C-B107-9B5789336162.html">SYS_NET_Config Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-6D0974F9-BDE5-4905-BC62-CFA6733A675A.html">SYS_NET_CALLBACK Typedef</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-95DB52B3-F70E-435B-96C6-96BB819004F7.html">SYS_NET_CALLBACK Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-2C74519E-9B7A-45F9-B042-119754809978.html">SYS_NET_Initialize Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-DF9EDA3A-3278-4F8C-9FF8-F392E49360DE.html">SYS_NET_Deinitialize Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-1910387B-8C3A-4408-9D3D-7ABDC2A90E99.html">SYS_NET_SetConfigParam Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-9B0C8D64-9CC9-41EB-A114-321B1DECE901.html">SYS_NET_Open Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-16745EB6-5053-46F3-A8B2-3A1EEEB70BCA.html">SYS_NET_Close Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-2A33E6A9-B6CC-42BC-AD7D-EDE218C1AD45.html">SYS_NET_CtrlMsg Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-20880B8D-6815-43DC-BCC6-8C29E1C1AE5A.html">SYS_NET_GetStatus Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-CD8600B6-BDA0-4A35-AB3D-BF74C4540A2B.html">SYS_NET_RecvMsg Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-F55CC6FB-EF86-4353-9A2F-C56DD3EA2ED2.html">SYS_NET_SendMsg Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-335E6EC1-1976-4BDE-BC58-99C64AA570D2.html">SYS_NET_Task Function</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html">Net System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="data-types-and-constants-summary"><h2 class="title topictitle2" id="ariaid-title2">Data Types and Constants Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e180"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e182"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_INTF_WIFI</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Net Socket Intf - Wifi</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_INTF_ETHERNET</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Net Socket Intf - Ethernet</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_MODE_CLIENT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Net Socket Mode - Client</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_MODE_SERVER</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Net Socket Mode - Server</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_MAX_HOSTNAME_LEN</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Max Host Name Length</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_IP_PROT_UDP</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Ip Protocol Mode - UDP</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_IP_PROT_TCP</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Ip Protocol Mode - TCP</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_MAX_NUM_OF_SOCKETS</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Number of Instances Supported by the NET System Service</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_DEFAULT_TLS_ENABLE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Default Values for TLS - False</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_DEFAULT_AUTO_RECONNECT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Default Values for Auto Reconnect - True</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_DEFAULT_NET_INTF</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Default Values for Interface - 0 (Wifi)</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>NET_CFG</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>AppDebug Flow for the Logs - Configuration</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>NET_DATA</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>AppDebug Flow for the Logs - Data</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_Config</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Used for passing on the configuration related to the Net Socket that needs</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_STATUS</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Identifies the current status of the Sys Net Instance.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_EVENT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Identifies the event type for which the User Callback is called.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_CTRL_MSG</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Identifies the control message for which the User has called the SYS_NET_CtrlMsg().</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e180 "><span>SYS_NET_RESULT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e182 "><span>Identifies the return values for the Sys Net APIs.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="initialization-functions-summary"><h2 class="title topictitle2" id="ariaid-title3">Initialization functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e286"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e288"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e286 "><span>SYS_NET_Initialize</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e288 "><span>Returns success/ failure for initialization of data structures of the NET service</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e286 "><span>SYS_NET_Deinitialize</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e288 "><span>Deinitialization of data structures of the NET service</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="status-functions-summary"><h2 class="title topictitle2" id="ariaid-title4">Status functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e311"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e313"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e311 "><span>SYS_NET_GetStatus</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e313 "><span>Returns System NET instance status.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title5" id="setup-functions-summary"><h2 class="title topictitle2" id="ariaid-title5">Setup functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e331"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e333"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e331 "><span>SYS_NET_Open</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e333 "><span>Opens a new NET System Service instance.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e331 "><span>SYS_NET_Close</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e333 "><span>Deinitializes the specific instance of the NET System service</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e331 "><span>SYS_NET_Task</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e333 "><span>Executes the SYS NET service state machine for the instance</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e331 "><span>SYS_NET_CtrlMsg</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e333 "><span>Returns success/ failure for the disconnect/ reconnect operation asked by the user.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e331 "><span>SYS_NET_SetConfigParam</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e333 "><span>Returns success on setting a configuration parameter for Net System Service.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title6" id="data-exchange-functions-summary"><h2 class="title topictitle2" id="ariaid-title6">Data Exchange functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e371"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d2344e373"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e371 "><span>SYS_NET_SendMsg</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e373 "><span>Returns No of Bytes sent to peer using the System NET instance.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e371 "><span>SYS_NET_RecvMsg</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e373 "><span>Returns No of Bytes received from peer using the System NET instance.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e371 "><span>SYS_NET_CALLBACK</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d2344e373 "><span>Pointer to a Net system service callback function.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

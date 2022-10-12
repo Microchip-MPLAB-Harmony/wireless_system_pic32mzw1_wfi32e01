@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="Wi-Fi System Service Configuration" />
+<meta name="DC.relation" scheme="URI" content="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="wi-fi-system-service-configuration" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>Wi-Fi System Service Configuration</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-wi-fi-system-service-configuration" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="wi-fi-system-service-configuration">
+<h1 class="title topictitle1" id="ariaid-title1">Wi-Fi System Service Configuration</h1><div class="body"><p class="p">The Wi-Fi System Service library should be configured through MHC(MPLAB Harmony Configurator). The following figure shows the MHC configuration window for configuring the Wi-Fi System Service and a brief description of various configuration options.</p>
+<p class="p">When user select the Wi-Fi System Service library, all the required dependencies are added automatically into the MHC configuration. In the Wi-Fi System Service library, user can select the operating device mode as station(STA) or access point(AP) and make a required changes in the selected mode.</p>
+<br /><img class="image" src="GUID-05B9E711-9CB2-4DEF-A718-6D442B411B21-low.png" alt="Wi-Fi_service_MHC" /><br /></div>
+<div class="related-links">
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html">Wi-Fi System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="configuration-options"><h2 class="title topictitle2" id="ariaid-title2">Configuration Options:</h2><div class="body"><p class="p">Using MHC menu,user can select required device mode as a station(STA) or access point(AP).</p>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title3" id="device-mode"><h3 class="title topictitle3" id="ariaid-title3">Device Mode:</h3><div class="body"><pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d36569e34', this);">Copy</button><code id="d36569e34" content="Indicates the device operation mode(STA/AP).&#xD;">Indicates the device operation mode(STA/AP).&#xD;</code></pre></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title4" id="sta-mode"><h3 class="title topictitle3" id="ariaid-title4">STA Mode:</h3><div class="body"><pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d36569e40', this);">Copy</button><code id="d36569e40" content="SSID: &#xD;&#xA;    Access Point (AP/Router) SSID to connect.&#xD;&#xA;&#xD;&#xA;Security type :&#xD;&#xA;    Indicates the security being used by the AP with which device should connect - OPEN / WPA2 / WPAWPA2 (Mixed)/ WPA3.    &#xD;&#xA;&#xD;&#xA;Password:&#xD;&#xA;    Password to be used while connecting to the AP. &#xD;&#xA;    This is mandatory if security mode is set to anything other than OPEN. &#xD;&#xA;    It will be ignored if security mode is set to OPEN.&#xD;&#xA;&#xD;&#xA;Auto Connect:&#xD;&#xA;    Indicate whether to auto connect to AP (enable) or wait for user input (disable).&#xD;">SSID: &#xD;
+    Access Point (AP/Router) SSID to connect.&#xD;
+&#xD;
+Security type :&#xD;
+    Indicates the security being used by the AP with which device should connect - OPEN / WPA2 / WPAWPA2 (Mixed)/ WPA3.    &#xD;
+&#xD;
+Password:&#xD;
+    Password to be used while connecting to the AP. &#xD;
+    This is mandatory if security mode is set to anything other than OPEN. &#xD;
+    It will be ignored if security mode is set to OPEN.&#xD;
+&#xD;
+Auto Connect:&#xD;
+    Indicate whether to auto connect to AP (enable) or wait for user input (disable).&#xD;</code></pre></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title5" id="ap-mode"><h3 class="title topictitle3" id="ariaid-title5">AP Mode:</h3><div class="body"><pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d36569e46', this);">Copy</button><code id="d36569e46" content="SSID:&#xD;&#xA;    Indicate AP mode SSID.&#xD;&#xA;&#xD;&#xA;Security:&#xD;&#xA;    Indicate AP mode security: &#xD;&#xA;        - OPEN&#xD;&#xA;        - WPA2&#xD;&#xA;        - WPAWPA2(Mixed)&#xD;&#xA;        - WPA3&#xD;&#xA;        &#xD;&#xA;Password:&#xD;&#xA;    Indicate AP mode password(passphrase).&#xD;&#xA;&#xD;&#xA;SSID Visibility:&#xD;&#xA;    Indicate AP mode SSID visibility.&#xD;&#xA;&#xD;&#xA;Channel:&#xD;&#xA;    Indicate operating channel of AP mode.&#xD;">SSID:&#xD;
+    Indicate AP mode SSID.&#xD;
+&#xD;
+Security:&#xD;
+    Indicate AP mode security: &#xD;
+        - OPEN&#xD;
+        - WPA2&#xD;
+        - WPAWPA2(Mixed)&#xD;
+        - WPA3&#xD;
+        &#xD;
+Password:&#xD;
+    Indicate AP mode password(passphrase).&#xD;
+&#xD;
+SSID Visibility:&#xD;
+    Indicate AP mode SSID visibility.&#xD;
+&#xD;
+Channel:&#xD;
+    Indicate operating channel of AP mode.&#xD;</code></pre></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title6" id="advanced-configuration"><h3 class="title topictitle3" id="ariaid-title6">Advanced configuration:</h3><div class="body"><pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d36569e52', this);">Copy</button><code id="d36569e52" content="Country code:&#xD;&#xA;  Regulatory domain country code configuration:&#xD;&#xA;    - GEN - General&#xD;&#xA;    - USA - North America&#xD;&#xA;    - EMEA - Europe&#xD;&#xA;    - JPN - Japan&#xD;&#xA;&#xD;&#xA;Number of Clients:&#xD;&#xA;    Indicates the maximum number of clients user can register.&#xD;&#xA;&#xD;&#xA;Enable Wi-Fi Provisioning service:&#xD;&#xA;    Enables/Disables Wi-Fi Provisioning System Service  functionality along with Wi-Fi System Service.&#xD;&#xA;&#xD;&#xA;Enable Wi-Fi Scanning:&#xD;&#xA;    Enables/Disables Wi-Fi Scan functionality of Wi-Fi System Service.&#xD;&#xA;    &#xD;&#xA;    Channel Number:&#xD;&#xA;       Values of Scan Channel Number:  &#xD;&#xA;       0 - scan all the channels&#xD;&#xA;       1 to 13 - - scan on specified channel&#xD;&#xA;&#xD;&#xA;    Scan Mode:&#xD;&#xA;      ACTIVE  : Requst Active Scan&#xD;&#xA;      PASSIVE : Request Passive Scan&#xD;&#xA;&#xD;&#xA;    SSID List(Active Scan Only):&#xD;&#xA;      User preferred SSIDs list for scanning.&#xD;&#xA;      Maximum 4 SSIDs of maximum 32 characters allowed. &#xD;&#xA;        e.g. DEMO_AP1,DEMO_AP2,DEMO_AP3,DEMO_AP4).&#xD;&#xA;      This field is only applicable for Active Scan.&#xD;&#xA;&#xD;&#xA;    SSID List Delimiter character:&#xD;&#xA;      Delimiter used for separating names in the &#34;SSID List(Active Scan Only)&#34; field.&#xD;&#xA;&#xD;&#xA;    Bitwise Channel Scan Mask:&#xD;&#xA;      - 0x3fff : All 2.4GHZ channels&#xD;&#xA;      - 0x07ff : 2.4GHz channels 1 through 11 (USA)&#xD;&#xA;      - 0x1fff : 2.4GHz channels 1 through 13 (Europe)&#xD;&#xA;      - 0x3fff : 2.4GHz channels 1 through 14(Asia)&#xD;&#xA;      - 0x0001 : 2.4GHz (2412 MHz) channel 1&#xD;&#xA;      - 0x0002 : 2.4GHz (2412 MHz) channel 2&#xD;&#xA;      - User can find more details of mask value in the   WDRV_PIC32MZW_CHANNEL24_MASK&#xD;&#xA;&#xD;&#xA;    Number Of Slots:&#xD;&#xA;      The number of scan slots per channel.&#xD;&#xA;      &#xD;&#xA;    Active Slot Time:&#xD;&#xA;      Time(in milliseconds) spent on each active channel to send the probe requests to find near by BSS's.&#xD;&#xA;    &#xD;&#xA;    Passive Slot Time:&#xD;&#xA;      Time(in milliseconds) spent on each passive channel listening for beacons.&#xD;&#xA;        &#xD;&#xA;    Number Of Probes:&#xD;&#xA;      Number of probe requests to be sent for each scan slot when &#34;SSID List&#34; field is empty.&#xD;&#xA;      Number of probe requests to be sent for each ssid to scan in each scan slot when preferred &#34;SSID List&#34; is configured.&#xD;&#xA;      This field is only applicable for Active Scan.&#xD;&#xA;&#xD;&#xA;    Scan Match Mode:&#xD;&#xA;      FIND_ALL: Scan for all matches&#xD;&#xA;      STOP_ON_FIRST : Stop scan on first match&#xD;&#xA;&#xD;&#xA;Enable Debug Logs:&#xD;&#xA;    Enables/Disables Wi-Fi and Wi-Fi Provisioning System Service flows and levels.&#xD;&#xA;    Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-&gt; System Service-&gt; App Debug Service.&#xD;">Country code:&#xD;
+  Regulatory domain country code configuration:&#xD;
+    - GEN - General&#xD;
+    - USA - North America&#xD;
+    - EMEA - Europe&#xD;
+    - JPN - Japan&#xD;
+&#xD;
+Number of Clients:&#xD;
+    Indicates the maximum number of clients user can register.&#xD;
+&#xD;
+Enable Wi-Fi Provisioning service:&#xD;
+    Enables/Disables Wi-Fi Provisioning System Service  functionality along with Wi-Fi System Service.&#xD;
+&#xD;
+Enable Wi-Fi Scanning:&#xD;
+    Enables/Disables Wi-Fi Scan functionality of Wi-Fi System Service.&#xD;
+    &#xD;
+    Channel Number:&#xD;
+       Values of Scan Channel Number:  &#xD;
+       0 - scan all the channels&#xD;
+       1 to 13 - - scan on specified channel&#xD;
+&#xD;
+    Scan Mode:&#xD;
+      ACTIVE  : Requst Active Scan&#xD;
+      PASSIVE : Request Passive Scan&#xD;
+&#xD;
+    SSID List(Active Scan Only):&#xD;
+      User preferred SSIDs list for scanning.&#xD;
+      Maximum 4 SSIDs of maximum 32 characters allowed. &#xD;
+        e.g. DEMO_AP1,DEMO_AP2,DEMO_AP3,DEMO_AP4).&#xD;
+      This field is only applicable for Active Scan.&#xD;
+&#xD;
+    SSID List Delimiter character:&#xD;
+      Delimiter used for separating names in the "SSID List(Active Scan Only)" field.&#xD;
+&#xD;
+    Bitwise Channel Scan Mask:&#xD;
+      - 0x3fff : All 2.4GHZ channels&#xD;
+      - 0x07ff : 2.4GHz channels 1 through 11 (USA)&#xD;
+      - 0x1fff : 2.4GHz channels 1 through 13 (Europe)&#xD;
+      - 0x3fff : 2.4GHz channels 1 through 14(Asia)&#xD;
+      - 0x0001 : 2.4GHz (2412 MHz) channel 1&#xD;
+      - 0x0002 : 2.4GHz (2412 MHz) channel 2&#xD;
+      - User can find more details of mask value in the   WDRV_PIC32MZW_CHANNEL24_MASK&#xD;
+&#xD;
+    Number Of Slots:&#xD;
+      The number of scan slots per channel.&#xD;
+      &#xD;
+    Active Slot Time:&#xD;
+      Time(in milliseconds) spent on each active channel to send the probe requests to find near by BSS's.&#xD;
+    &#xD;
+    Passive Slot Time:&#xD;
+      Time(in milliseconds) spent on each passive channel listening for beacons.&#xD;
+        &#xD;
+    Number Of Probes:&#xD;
+      Number of probe requests to be sent for each scan slot when "SSID List" field is empty.&#xD;
+      Number of probe requests to be sent for each ssid to scan in each scan slot when preferred "SSID List" is configured.&#xD;
+      This field is only applicable for Active Scan.&#xD;
+&#xD;
+    Scan Match Mode:&#xD;
+      FIND_ALL: Scan for all matches&#xD;
+      STOP_ON_FIRST : Stop scan on first match&#xD;
+&#xD;
+Enable Debug Logs:&#xD;
+    Enables/Disables Wi-Fi and Wi-Fi Provisioning System Service flows and levels.&#xD;
+    Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-&gt; System Service-&gt; App Debug Service.&#xD;</code></pre></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title7" id="enabling-wi-fi-system-service"><h3 class="title topictitle3" id="ariaid-title7">Enabling Wi-Fi System Service</h3><div class="body"><p class="p">All of the required files are automatically added into the MPLAB X IDE
+project by the MHC when the library is selected for use.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

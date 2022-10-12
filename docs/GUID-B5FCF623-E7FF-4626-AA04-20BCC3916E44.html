@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="MQTT System Service Interface" />
+<meta name="DC.relation" scheme="URI" content="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-13E248BF-5C3E-4B90-A116-D708A72ECF13.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-B8B066C9-9D43-45BF-B3E4-F0B4D07A496A.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-B2F4E27B-9331-4E16-9395-7B630DF98CC0.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-3E5312EC-F437-4001-870C-D02566138DE5.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-8C49DDF2-665A-4AE3-A68A-BBAE2C0A22DD.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-E9E4CB78-3ABF-44B7-BC07-9AD7EC142A9B.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-50083FB4-76EC-41B8-ADC6-A4466DE3972C.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-13A901DD-DEC5-4002-95DF-E87651A5FE82.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-01230F94-41B8-4AF4-A81B-FFE243BAB213.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-31D8837E-9521-4C37-820E-BC817E1A525D.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-4756B92F-E53F-41CB-BA7F-2FDC1FBC85AC.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-28A59856-E897-40FA-B089-39C8C84D27CD.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-C19B77FE-63FC-469F-A9C0-95D41B59DBE1.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-31BDD8EE-0AB5-4542-BB67-A14746424248.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-FF17C85E-72C4-4E0B-A7D5-A7B71C1DA84E.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-B0DCC36D-84BA-4AF0-8048-81D0E773F6BA.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-E459CCF2-499A-4FA1-8CD3-59A216415FD1.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-1FC1E3CD-9E78-4C97-ADD7-B04DBE255FC2.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-69ABE7A5-0098-4C34-B9AA-72DDB247C7F5.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-0785F012-1F1A-4AA4-9167-58736B812C00.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="mqtt-system-service-interface" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>MQTT System Service Interface</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-mqtt-system-service-interface" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-B5FCF623-E7FF-4626-AA04-20BCC3916E44"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="mqtt-system-service-interface">
+<h1 class="title topictitle1" id="ariaid-title1">MQTT System Service Interface</h1><div class="body"></div>
+<div class="related-links">
+<ul class="ullinks">
+<li class="link ulchildlink"><strong><a href="GUID-13E248BF-5C3E-4B90-A116-D708A72ECF13.html">SYS_MQTT_DEFAULT_NET_INTF Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-B8B066C9-9D43-45BF-B3E4-F0B4D07A496A.html">SYS_MQTT_INTF_ETHERNET Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-B2F4E27B-9331-4E16-9395-7B630DF98CC0.html">SYS_MQTT_INTF_WIFI Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-3E5312EC-F437-4001-870C-D02566138DE5.html">SYS_MQTT_EVENT_TYPE Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-8C49DDF2-665A-4AE3-A68A-BBAE2C0A22DD.html">SYS_MQTT_RESULT Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-E9E4CB78-3ABF-44B7-BC07-9AD7EC142A9B.html">SYS_MQTT_STATUS Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-50083FB4-76EC-41B8-ADC6-A4466DE3972C.html">SYS_MQTT_PublishConfig Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-13A901DD-DEC5-4002-95DF-E87651A5FE82.html">SYS_MQTT_PublishTopicCfg Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-01230F94-41B8-4AF4-A81B-FFE243BAB213.html">SYS_MQTT_Config Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-31D8837E-9521-4C37-820E-BC817E1A525D.html">SYS_MQTT_SubscribeConfig Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-4756B92F-E53F-41CB-BA7F-2FDC1FBC85AC.html">SYS_MQTT_BrokerConfig Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-28A59856-E897-40FA-B089-39C8C84D27CD.html">SYS_MQTT_CALLBACK Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-C19B77FE-63FC-469F-A9C0-95D41B59DBE1.html">SYS_MQTT_Deinitialize Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-31BDD8EE-0AB5-4542-BB67-A14746424248.html">SYS_MQTT_Initialize Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.html">SYS_MQTT_Connect Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-FF17C85E-72C4-4E0B-A7D5-A7B71C1DA84E.html">SYS_MQTT_Disconnect Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-B0DCC36D-84BA-4AF0-8048-81D0E773F6BA.html">SYS_MQTT_GetStatus Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-E459CCF2-499A-4FA1-8CD3-59A216415FD1.html">SYS_MQTT_Publish Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-1FC1E3CD-9E78-4C97-ADD7-B04DBE255FC2.html">SYS_MQTT_Subscribe Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-69ABE7A5-0098-4C34-B9AA-72DDB247C7F5.html">SYS_MQTT_Unsubscribe Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-0785F012-1F1A-4AA4-9167-58736B812C00.html">SYS_MQTT_Task Function</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html">MQTT System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="data-types-and-constants-summary"><h2 class="title topictitle2" id="ariaid-title2">Data Types and Constants Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e134"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e136"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_INTF_WIFI</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Mqtt Socket Intf - Wifi</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_INTF_ETHERNET</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Mqtt Socket Intf - Ethernet</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_STATUS</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Identifies the current status of the Sys Mqtt Instance.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_RESULT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Identifies the return values for the Sys Mqtt APIs.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_BrokerConfig</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Used for passing on the configuration related to the MQTT Broker</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_SubscribeConfig</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Used for passing on the configuration related to the MQTT Subtopics the user</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_PublishConfig</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Used for Reading the message that has been received on a topic subscribed to.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_PublishTopicCfg</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Used for publishing a message on a topic. It contains the config related to the Topic</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_EVENT_TYPE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Event Message Type which comes with the Callback SYS_MQTT_CALLBACK()</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e134 "><span>SYS_MQTT_Config</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e136 "><span>Used for passing on the configuration related to the either MQTT Broker,</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="initialization-functions-summary"><h2 class="title topictitle2" id="ariaid-title3">Initialization functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e199"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e201"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e199 "><span>SYS_MQTT_Initialize</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e201 "><span>Returns success/ failure for initialization of data structures of the MQTT service</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e199 "><span>SYS_MQTT_Deinitialize</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e201 "><span>Deinitialization of data structures of the MQTT service</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="status-functions-summary"><h2 class="title topictitle2" id="ariaid-title4">Status functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e224"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e226"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e224 "><span>SYS_MQTT_GetStatus</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e226 "><span>Returns System MQTT instance status.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title5" id="setup-functions-summary"><h2 class="title topictitle2" id="ariaid-title5">Setup functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e244"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e246"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e244 "><span>SYS_MQTT_Connect</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e246 "><span>Connects to the configured MQTT Broker.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e244 "><span>SYS_MQTT_Disconnect</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e246 "><span>Disconnects from the MQTT Server</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e244 "><span>SYS_MQTT_Task</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e246 "><span>Executes the MQTT Service State Machine</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e244 "><span>SYS_MQTT_Subscribe</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e246 "><span>Returns success/ failure for the subscribing to a Topic by the user.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e244 "><span>SYS_MQTT_Unsubscribe</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e246 "><span>Returns success/ failure for the unsubscribing to a Topic by the user.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title6" id="data-exchange-functions-summary"><h2 class="title topictitle2" id="ariaid-title6">Data Exchange functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e284"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d10861e286"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e284 "><span>SYS_MQTT_Publish</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e286 "><span>Returns success/ failure for the publishing of message asked by the user.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e284 "><span>SYS_MQTT_CALLBACK</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d10861e286 "><span>Pointer to a MQTT system service callback function.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1582 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<keywords publicationid="GUID-2B8E373F-A339-4F88-A864-07460CC2D917"
+          language="en-US"
+          version="1"
+          documenttitle="MPLAB Harmony PIC32MZW1/WFI32 wireless system services"
+          pubtype="Online Reference"
+          pubsubtype=""
+          pubuserguidesubtype=""
+          pubproductheirarchy=""
+          devices=""
+          revisiondate="20/01/2022 00:00:00"
+          revisionletter="A"
+          isbn=""
+          pubid=""
+          reachid=""
+          description=""
+          lastmodified="23/08/2022 03:01:43"
+          covertitle="MPLAB Harmony PIC32MZW1/WFI32 wireless system services"
+          frontcover="">
+   <keyworditem topicid="GUID-35EAAD3C-3DC0-4AC0-8ECD-BD900AD22695"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>App Debug System Service Configuration</register>
+      <title>App Debug System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_appdebug_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-39F92DDD-F7E2-45D1-B015-BF0B3A9FD6BD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>APP_LOG_DBG_LVL Macro</register>
+      <title>APP_LOG_DBG_LVL Macro</title>
+      <bitfield/>
+      <keyword>APP_LOG_DBG_LVL</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-A20F7777-F80F-4FC9-BC45-F39030A65105"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>APP_LOG_ERROR_LVL Macro</register>
+      <title>APP_LOG_ERROR_LVL Macro</title>
+      <bitfield/>
+      <keyword>APP_LOG_ERROR_LVL</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-68AB743B-D2CB-4548-86FD-10BB3E1C3FA6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>APP_LOG_FN_EE_LVL Macro</register>
+      <title>APP_LOG_FN_EE_LVL Macro</title>
+      <bitfield/>
+      <keyword>APP_LOG_FN_EE_LVL</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-57E25DE7-ED25-4DE8-9A44-C0BF175E752D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>APP_LOG_INFO_LVL Macro</register>
+      <title>APP_LOG_INFO_LVL Macro</title>
+      <bitfield/>
+      <keyword>APP_LOG_INFO_LVL</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F21D1BCE-BDCB-421D-B9E2-11B883C2AC54"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>APP_LOG_LVL_DISABLE Macro</register>
+      <title>APP_LOG_LVL_DISABLE Macro</title>
+      <bitfield/>
+      <keyword>APP_LOG_LVL_DISABLE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9B772857-AD63-4637-BA65-C70530584A1E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_MAX_NUM_OF_USERS Macro</register>
+      <title>SYS_APPDEBUG_MAX_NUM_OF_USERS Macro</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_MAX_NUM_OF_USERS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FEC8454E-5F93-4596-800E-8B8BCBC24032"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_CtrlMsgType Enum</register>
+      <title>SYS_APPDEBUG_CtrlMsgType Enum</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_CtrlMsgType</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-38AED8C2-2FA2-4438-961E-79C3E153D01A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_RESULT Enum</register>
+      <title>SYS_APPDEBUG_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F7EB79E2-9930-436C-BE86-720D58FE0BFB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_CONFIG Struct</register>
+      <title>SYS_APPDEBUG_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4E47C21A-9803-41C3-853C-04FDAD30A075"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_CtrlMsg Function</register>
+      <title>SYS_APPDEBUG_CtrlMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_CtrlMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-988925A4-8993-491F-A8E9-8B7131FC0286"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_Close Function</register>
+      <title>SYS_APPDEBUG_Close Function</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_Close</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F457EE08-DC44-4FA8-952E-AE5EB673FF76"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_Deinitialize Function</register>
+      <title>SYS_APPDEBUG_Deinitialize Function</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_Deinitialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4A1F8FC6-6463-48BF-97C9-7BDFDCF686A6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_Initialize Function</register>
+      <title>SYS_APPDEBUG_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-270923F2-A3D7-4B68-A399-AEAAFC7C0F64"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_Open Function</register>
+      <title>SYS_APPDEBUG_Open Function</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_Open</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-11C5C134-0D1A-4812-9D5A-4F355264839C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_DBG_PRINT</register>
+      <title>SYS_APPDEBUG_DBG_PRINT</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_DBG_PRINT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-53743705-6039-46B7-8052-7FB8438940F2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_ERR_PRINT</register>
+      <title>SYS_APPDEBUG_ERR_PRINT</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_ERR_PRINT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-98A20067-8DD0-4FF2-846A-9EB8D1758ECE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_FN_ENTER_PRINT</register>
+      <title>SYS_APPDEBUG_FN_ENTER_PRINT</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_FN_ENTER_PRINT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3299B9CD-1B7F-47FD-95CD-636CC3BFFED6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_FN_EXIT_PRINT</register>
+      <title>SYS_APPDEBUG_FN_EXIT_PRINT</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_FN_EXIT_PRINT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-00292779-019D-4DAF-B38F-317F529F725A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_APPDEBUG_INFO_PRINT</register>
+      <title>SYS_APPDEBUG_INFO_PRINT</title>
+      <bitfield/>
+      <keyword>SYS_APPDEBUG_INFO_PRINT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-226069A1-E832-4560-8457-6363E3A0EB83"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>MQTT System Service Configuration</register>
+      <title>MQTT System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_mqtt_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-13E248BF-5C3E-4B90-A116-D708A72ECF13"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_DEFAULT_NET_INTF Macro</register>
+      <title>SYS_MQTT_DEFAULT_NET_INTF Macro</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_DEFAULT_NET_INTF</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B8B066C9-9D43-45BF-B3E4-F0B4D07A496A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_INTF_ETHERNET Macro</register>
+      <title>SYS_MQTT_INTF_ETHERNET Macro</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_INTF_ETHERNET</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B2F4E27B-9331-4E16-9395-7B630DF98CC0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_INTF_WIFI Macro</register>
+      <title>SYS_MQTT_INTF_WIFI Macro</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_INTF_WIFI</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3E5312EC-F437-4001-870C-D02566138DE5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_EVENT_TYPE Enum</register>
+      <title>SYS_MQTT_EVENT_TYPE Enum</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_EVENT_TYPE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8C49DDF2-665A-4AE3-A68A-BBAE2C0A22DD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_RESULT Enum</register>
+      <title>SYS_MQTT_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E9E4CB78-3ABF-44B7-BC07-9AD7EC142A9B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_STATUS Enum</register>
+      <title>SYS_MQTT_STATUS Enum</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_STATUS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-50083FB4-76EC-41B8-ADC6-A4466DE3972C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_PublishConfig Struct</register>
+      <title>SYS_MQTT_PublishConfig Struct</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_PublishConfig</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-13A901DD-DEC5-4002-95DF-E87651A5FE82"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_PublishTopicCfg Struct</register>
+      <title>SYS_MQTT_PublishTopicCfg Struct</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_PublishTopicCfg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-01230F94-41B8-4AF4-A81B-FFE243BAB213"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Config Struct</register>
+      <title>SYS_MQTT_Config Struct</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Config</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-31D8837E-9521-4C37-820E-BC817E1A525D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_SubscribeConfig Struct</register>
+      <title>SYS_MQTT_SubscribeConfig Struct</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_SubscribeConfig</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4756B92F-E53F-41CB-BA7F-2FDC1FBC85AC"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_BrokerConfig Struct</register>
+      <title>SYS_MQTT_BrokerConfig Struct</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_BrokerConfig</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-28A59856-E897-40FA-B089-39C8C84D27CD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_CALLBACK Function</register>
+      <title>SYS_MQTT_CALLBACK Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C19B77FE-63FC-469F-A9C0-95D41B59DBE1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Deinitialize Function</register>
+      <title>SYS_MQTT_Deinitialize Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Deinitialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-31BDD8EE-0AB5-4542-BB67-A14746424248"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Initialize Function</register>
+      <title>SYS_MQTT_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Connect Function</register>
+      <title>SYS_MQTT_Connect Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Connect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FF17C85E-72C4-4E0B-A7D5-A7B71C1DA84E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Disconnect Function</register>
+      <title>SYS_MQTT_Disconnect Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Disconnect</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B0DCC36D-84BA-4AF0-8048-81D0E773F6BA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_GetStatus Function</register>
+      <title>SYS_MQTT_GetStatus Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_GetStatus</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E459CCF2-499A-4FA1-8CD3-59A216415FD1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Publish Function</register>
+      <title>SYS_MQTT_Publish Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Publish</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1FC1E3CD-9E78-4C97-ADD7-B04DBE255FC2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Subscribe Function</register>
+      <title>SYS_MQTT_Subscribe Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Subscribe</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-69ABE7A5-0098-4C34-B9AA-72DDB247C7F5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Unsubscribe Function</register>
+      <title>SYS_MQTT_Unsubscribe Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Unsubscribe</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0785F012-1F1A-4AA4-9167-58736B812C00"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_MQTT_Task Function</register>
+      <title>SYS_MQTT_Task Function</title>
+      <bitfield/>
+      <keyword>SYS_MQTT_Task</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B8C3059F-624D-4C22-93D5-33243DA6CB4F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Net System Service Configuration</register>
+      <title>Net System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_net_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9F5B3013-33E1-4917-920A-F0F8FD1D704E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_DEFAULT_AUTO_RECONNECT Macro</register>
+      <title>SYS_NET_DEFAULT_AUTO_RECONNECT Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_DEFAULT_AUTO_RECONNECT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-AFAB4E7D-CACF-4851-B9F6-B963450DB193"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_DEFAULT_NET_INTF Macro</register>
+      <title>SYS_NET_DEFAULT_NET_INTF Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_DEFAULT_NET_INTF</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E5040CD9-28E3-4862-8A70-81C548C31901"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_DEFAULT_TLS_ENABLE Macro</register>
+      <title>SYS_NET_DEFAULT_TLS_ENABLE Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_DEFAULT_TLS_ENABLE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CBCB9481-CA72-4E90-A4FE-6243DAB9057B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_INTF_ETHERNET Macro</register>
+      <title>SYS_NET_INTF_ETHERNET Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_INTF_ETHERNET</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E8248C48-3802-4362-A1F6-80CD79C20956"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_INTF_WIFI Macro</register>
+      <title>SYS_NET_INTF_WIFI Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_INTF_WIFI</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-34AA46D6-A6BB-459C-95C5-4D4C733D21AC"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_IP_PROT_TCP Macro</register>
+      <title>SYS_NET_IP_PROT_TCP Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_IP_PROT_TCP</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-560DA0FB-8CF0-4EAB-A5D4-7641AE5FFBF3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_MAX_HOSTNAME_LEN Macro</register>
+      <title>SYS_NET_MAX_HOSTNAME_LEN Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_MAX_HOSTNAME_LEN</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-87D2FD77-3A00-47BA-9CCD-8FB708F03EA4"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_IP_PROT_UDP Macro</register>
+      <title>SYS_NET_IP_PROT_UDP Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_IP_PROT_UDP</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BE525C46-F3B6-45A6-AFB0-BB23EFAB4208"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_MAX_NUM_OF_SOCKETS Macro</register>
+      <title>SYS_NET_MAX_NUM_OF_SOCKETS Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_MAX_NUM_OF_SOCKETS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7EA384CB-36B6-4064-AC58-CC582F611968"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_MODE_CLIENT Macro</register>
+      <title>SYS_NET_MODE_CLIENT Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_MODE_CLIENT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-21594EF4-8CE1-4BFA-B2C3-CA15EF80D761"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_MODE_SERVER Macro</register>
+      <title>SYS_NET_MODE_SERVER Macro</title>
+      <bitfield/>
+      <keyword>SYS_NET_MODE_SERVER</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D2624727-1BC0-4511-BB6C-35D027018A24"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>NET_DATA Macro</register>
+      <title>NET_DATA Macro</title>
+      <bitfield/>
+      <keyword>NET_DATA</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2D68F47B-8E2E-4F12-B126-AB828481897D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>NET_CFG Macro</register>
+      <title>NET_CFG Macro</title>
+      <bitfield/>
+      <keyword>NET_CFG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D3EC049D-63E2-4FC1-8A1A-7A4323878851"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_EVENT Enum</register>
+      <title>SYS_NET_EVENT Enum</title>
+      <bitfield/>
+      <keyword>SYS_NET_EVENT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-26537238-7459-436C-88BF-A506A0EC46B0"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_RESULT Enum</register>
+      <title>SYS_NET_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_NET_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-007A2A1C-CCE4-44C0-A735-2591D764708D"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_CTRL_MSG Enum</register>
+      <title>SYS_NET_CTRL_MSG Enum</title>
+      <bitfield/>
+      <keyword>SYS_NET_CTRL_MSG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-30A62A7C-8781-4779-A4F3-F1D5BC265D51"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_STATUS Enum</register>
+      <title>SYS_NET_STATUS Enum</title>
+      <bitfield/>
+      <keyword>SYS_NET_STATUS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-77D07DB9-DDA3-416C-B107-9B5789336162"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_Config Struct</register>
+      <title>SYS_NET_Config Struct</title>
+      <bitfield/>
+      <keyword>SYS_NET_Config</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6D0974F9-BDE5-4905-BC62-CFA6733A675A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_CALLBACK Typedef</register>
+      <title>SYS_NET_CALLBACK Typedef</title>
+      <bitfield/>
+      <keyword>SYS_NET_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-95DB52B3-F70E-435B-96C6-96BB819004F7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_CALLBACK Function</register>
+      <title>SYS_NET_CALLBACK Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2C74519E-9B7A-45F9-B042-119754809978"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_Initialize Function</register>
+      <title>SYS_NET_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DF9EDA3A-3278-4F8C-9FF8-F392E49360DE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_Deinitialize Function</register>
+      <title>SYS_NET_Deinitialize Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_Deinitialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1910387B-8C3A-4408-9D3D-7ABDC2A90E99"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_SetConfigParam Function</register>
+      <title>SYS_NET_SetConfigParam Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_SetConfigParam</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9B0C8D64-9CC9-41EB-A114-321B1DECE901"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_Open Function</register>
+      <title>SYS_NET_Open Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_Open</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-16745EB6-5053-46F3-A8B2-3A1EEEB70BCA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_Close Function</register>
+      <title>SYS_NET_Close Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_Close</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2A33E6A9-B6CC-42BC-AD7D-EDE218C1AD45"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_CtrlMsg Function</register>
+      <title>SYS_NET_CtrlMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_CtrlMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-20880B8D-6815-43DC-BCC6-8C29E1C1AE5A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_GetStatus Function</register>
+      <title>SYS_NET_GetStatus Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_GetStatus</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-CD8600B6-BDA0-4A35-AB3D-BF74C4540A2B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_RecvMsg Function</register>
+      <title>SYS_NET_RecvMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_RecvMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F55CC6FB-EF86-4353-9A2F-C56DD3EA2ED2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_SendMsg Function</register>
+      <title>SYS_NET_SendMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_SendMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-335E6EC1-1976-4BDE-BC58-99C64AA570D2"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_NET_Task Function</register>
+      <title>SYS_NET_Task Function</title>
+      <bitfield/>
+      <keyword>SYS_NET_Task</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Wi-Fi System Service Configuration</register>
+      <title>Wi-Fi System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_wifi_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-41A54E26-7261-45CA-AF4A-A0175CBE303E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_STATUS Enum</register>
+      <title>SYS_WIFI_STATUS Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_STATUS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C7194E88-A1DC-4EFA-8FCE-B3127970E193"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_MODE Enum</register>
+      <title>SYS_WIFI_MODE Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_MODE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-5905E9EC-4C85-42AD-AC7C-90E41923D709"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_CTRLMSG Enum</register>
+      <title>SYS_WIFI_CTRLMSG Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_CTRLMSG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3684FF88-AC4A-45AB-8857-49E1C46FDC61"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_RESULT Enum</register>
+      <title>SYS_WIFI_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2BE63079-2FCD-4C89-9C2D-1ED1A506A66B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_SCAN_MODES Enum</register>
+      <title>SYS_WIFI_SCAN_MODES Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_SCAN_MODES</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B8650787-4731-48E9-B342-55EAFCC5496B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_AUTH Enum</register>
+      <title>SYS_WIFI_AUTH Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_AUTH</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BA16CF18-DCA0-4AA8-8A17-18EAC7380EF5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_AP_CONFIG Struct</register>
+      <title>SYS_WIFI_AP_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_AP_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BFAB8833-E678-457A-9C14-AEC9CA4B05B3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_CONFIG Struct</register>
+      <title>SYS_WIFI_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-1802D445-0432-4C05-83C5-8DF39FCC41DF"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_STA_CONFIG Struct</register>
+      <title>SYS_WIFI_STA_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_STA_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3410AB90-8C90-4B2A-9A36-081663B2F794"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_SCAN_CONFIG Struct</register>
+      <title>SYS_WIFI_SCAN_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_SCAN_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_STA_APP_INFO Struct</register>
+      <title>SYS_WIFI_STA_APP_INFO Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_STA_APP_INFO</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-65C429E8-E63B-4FF1-8939-C80E558E0F29"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_CALLBACK Typedef</register>
+      <title>SYS_WIFI_CALLBACK Typedef</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-86C7B809-3344-4813-95FE-24B5894EEC7C"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_CtrlMsg Function</register>
+      <title>SYS_WIFI_CtrlMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_CtrlMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-17C14258-CDD3-4FBE-B2D5-528666AB0D33"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_Deinitialize Function</register>
+      <title>SYS_WIFI_Deinitialize Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_Deinitialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F3CF23C1-1804-4A3D-AE91-4EDD8A565D37"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_GetStatus Function</register>
+      <title>SYS_WIFI_GetStatus Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_GetStatus</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6528061F-6F04-4A18-85C3-8B7839B8E235"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_Initialize Function</register>
+      <title>SYS_WIFI_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-61F4CED4-8E5E-421C-881E-A6BEAE2B392F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFI_Tasks Function</register>
+      <title>SYS_WIFI_Tasks Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFI_Tasks</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7C9FB838-46C2-4CA1-A573-B110ED225368"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Wi-Fi provisioning System Service Configuration</register>
+      <title>Wi-Fi provisioning System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_wifi_prov_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-3F684EBE-A5FB-4AE3-A0A8-629D54D9300B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_CTRLMSG Enum</register>
+      <title>SYS_WIFIPROV_CTRLMSG Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_CTRLMSG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7FEA46C8-788C-4E6A-B46E-5A8FEE9B7CED"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_RESULT Enum</register>
+      <title>SYS_WIFIPROV_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2F0FEF24-2562-4783-A816-2E0B65C679D5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_MODE Enum</register>
+      <title>SYS_WIFIPROV_MODE Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_MODE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BC6FF56F-269A-4570-B96A-76C3D29BF4D9"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_STATUS Enum</register>
+      <title>SYS_WIFIPROV_STATUS Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_STATUS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-4D8F8775-405D-4FE4-B72E-9807B7005C89"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_AUTH Enum</register>
+      <title>SYS_WIFIPROV_AUTH Enum</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_AUTH</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-445B119E-3EAD-4ECB-8662-27AB3B193F52"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_CONFIG Struct</register>
+      <title>SYS_WIFIPROV_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-791A8D39-45C6-4D33-A082-C308E48A6D7B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_AP_CONFIG Struct</register>
+      <title>SYS_WIFIPROV_AP_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_AP_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BCF00564-E312-4462-A11B-079E6A5414EB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_CALLBACK Typedef</register>
+      <title>SYS_WIFIPROV_CALLBACK Typedef</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6FAB8216-E82D-4B1B-899B-55CC9B16302A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_CtrlMsg Function</register>
+      <title>SYS_WIFIPROV_CtrlMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_CtrlMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-A3BBC2D0-94C5-4D00-8A54-558B7F27500F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_Deinitialize Function</register>
+      <title>SYS_WIFIPROV_Deinitialize Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_Deinitialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-244208E3-3A35-4EA4-8A25-08FB3A0C34F1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_GetStatus Function</register>
+      <title>SYS_WIFIPROV_GetStatus Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_GetStatus</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9015FCED-F411-41BE-B7DE-6929204283F6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_Initialize Function</register>
+      <title>SYS_WIFIPROV_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-2B3ABECA-845C-4A2C-90DA-6BB38A0424F6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WIFIPROV_Tasks Function</register>
+      <title>SYS_WIFIPROV_Tasks Function</title>
+      <bitfield/>
+      <keyword>SYS_WIFIPROV_Tasks</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-44230E49-6079-4901-9D7C-F71412C3B9EA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>OTA System Service Configuration</register>
+      <title>OTA System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_ota_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F03C9E56-6E27-4686-A0CA-14D14F615FB5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_STATES Enum</register>
+      <title>SYS_OTA_STATES Enum</title>
+      <bitfield/>
+      <keyword>SYS_OTA_STATES</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-FF900B9E-1306-498E-8261-D7FEFA8CC184"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_RESULT Enum</register>
+      <title>SYS_OTA_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_OTA_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7E595932-B68F-4074-BA7D-36D836AA8B5B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_CTRLMSG Enum</register>
+      <title>SYS_OTA_CTRLMSG Enum</title>
+      <bitfield/>
+      <keyword>SYS_OTA_CTRLMSG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7B12B319-188D-4C1D-8AEE-349BE7660528"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_STATUS Enum</register>
+      <title>SYS_OTA_STATUS Enum</title>
+      <bitfield/>
+      <keyword>SYS_OTA_STATUS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6B52ABB2-B67F-4DC8-9147-43E43664223B"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_Config Struct</register>
+      <title>SYS_OTA_Config Struct</title>
+      <bitfield/>
+      <keyword>SYS_OTA_Config</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-E3DE3951-0B4D-44ED-8EDD-5DE48A3597FC"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_DATA Struct</register>
+      <title>SYS_OTA_DATA Struct</title>
+      <bitfield/>
+      <keyword>SYS_OTA_DATA</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-793F497B-BD41-400B-9FB5-0C0ECBB2B1D5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_CALLBACK Typedef</register>
+      <title>SYS_OTA_CALLBACK Typedef</title>
+      <bitfield/>
+      <keyword>SYS_OTA_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0B54E267-5E7C-4408-BB57-0BB6E61B59D3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_Initialize Function</register>
+      <title>SYS_OTA_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_OTA_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8F2A596D-F14C-43E8-8D8C-951C45191D23"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_CtrlMsg Function</register>
+      <title>SYS_OTA_CtrlMsg Function</title>
+      <bitfield/>
+      <keyword>SYS_OTA_CtrlMsg</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-10DC0C0A-E5D5-417A-86E0-199C0ECC0B50"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_OTA_Tasks Function</register>
+      <title>SYS_OTA_Tasks Function</title>
+      <bitfield/>
+      <keyword>SYS_OTA_Tasks</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-D861E940-4256-413D-ACFD-88DD118AFA93"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Registering call back function</register>
+      <title>Registering call back function</title>
+      <bitfield/>
+      <keyword>SYS_OTA_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-F3104485-0F0B-4CB8-B1F6-88C6F8873471"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>Web Socket Server (WSS) System Service Configuration</register>
+      <title>Web Socket Server (WSS) System Service Configuration</title>
+      <bitfield/>
+      <keyword>mcc_h3_pic32mzw1_wss_system_service_configurations</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-818A720C-1FD4-4EA4-B22C-F44B52F11DB5"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_GUID Macro</register>
+      <title>SYS_WSS_GUID Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_GUID</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7A668B78-45FE-4EDF-965E-1900422374CE"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_CLIENT_KEY_SIZE Macro</register>
+      <title>SYS_WSS_CLIENT_KEY_SIZE Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_CLIENT_KEY_SIZE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-067B7E35-0233-4030-BDC7-ADA3C5A65281"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_CLIENT_KEY_SIZE_DECODED Macro</register>
+      <title>SYS_WSS_CLIENT_KEY_SIZE_DECODED Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_CLIENT_KEY_SIZE_DECODED</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B12643ED-A0B9-4331-9E81-961355411485"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_HTTP_VERSION_1_1 Macro</register>
+      <title>SYS_WSS_HTTP_VERSION_1_1 Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_HTTP_VERSION_1_1</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8305E5FB-D8B6-4824-AD2A-EFA4BF0DCDCD"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_KA_TIMER_PERIOD Macro</register>
+      <title>SYS_WSS_KA_TIMER_PERIOD Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_KA_TIMER_PERIOD</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-BEE2CEA6-760B-4433-B6F9-46FAD85BA076"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_SERVER_KEY_SIZE Macro</register>
+      <title>SYS_WSS_SERVER_KEY_SIZE Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_SERVER_KEY_SIZE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-055E1A74-7370-4E9A-BDC6-FE5CA1547D14"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_SHA1_DIGEST_SIZE Macro</register>
+      <title>SYS_WSS_SHA1_DIGEST_SIZE Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_SHA1_DIGEST_SIZE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-DE91F328-40E1-48BE-9E5D-8638A49014A1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_STATUS_CODE_LEN Macro</register>
+      <title>SYS_WSS_STATUS_CODE_LEN Macro</title>
+      <bitfield/>
+      <keyword>SYS_WSS_STATUS_CODE_LEN</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-7DC907EC-3CE8-45F2-A78B-6AACDAEF6F52"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_RESULT Enum</register>
+      <title>SYS_WSS_RESULT Enum</title>
+      <bitfield/>
+      <keyword>SYS_WSS_RESULT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-0F240AEF-6B53-4CD2-A8FD-1D16BA00B43E"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_EVENTS Enum</register>
+      <title>SYS_WSS_EVENTS Enum</title>
+      <bitfield/>
+      <keyword>SYS_WSS_EVENTS</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-04628A3C-69FB-458A-B6A7-9CE08A6C26EB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_STATE Enum</register>
+      <title>SYS_WSS_STATE Enum</title>
+      <bitfield/>
+      <keyword>SYS_WSS_STATE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-91BC6347-08EF-4EE7-ADDE-90524E70867A"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_FRAME Enum</register>
+      <title>SYS_WSS_FRAME Enum</title>
+      <bitfield/>
+      <keyword>SYS_WSS_FRAME</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8A2DC2AD-7D43-4568-9CA7-325A8F1C64CA"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_STATUS_CODE Enum</register>
+      <title>SYS_WSS_STATUS_CODE Enum</title>
+      <bitfield/>
+      <keyword>SYS_WSS_STATUS_CODE</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-17FAEA79-D63F-4222-B015-DF863DD4AFA6"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_HANDSHAKE_CTXT Struct</register>
+      <title>SYS_WSS_HANDSHAKE_CTXT Struct</title>
+      <bitfield/>
+      <keyword>SYS_WSS_HANDSHAKE_CTXT</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B70E454B-E9FB-4214-AC26-354C154592A1"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_RXDATA Struct</register>
+      <title>SYS_WSS_RXDATA Struct</title>
+      <bitfield/>
+      <keyword>SYS_WSS_RXDATA</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-79B1C1D0-37E8-464B-82BE-41A226C2AB59"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_CONFIG Struct</register>
+      <title>SYS_WSS_CONFIG Struct</title>
+      <bitfield/>
+      <keyword>SYS_WSS_CONFIG</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-C340A70C-DB26-427E-B902-B253B1590DD7"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_CALLBACK Typedef</register>
+      <title>SYS_WSS_CALLBACK Typedef</title>
+      <bitfield/>
+      <keyword>SYS_WSS_CALLBACK</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-9F1A7B19-413E-4254-8E08-E61C7A180E8F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_Initialize Function</register>
+      <title>SYS_WSS_Initialize Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_Initialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-897565A1-B722-4A0C-AE94-7C04BDEBEA4F"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_Deinitialize Function</register>
+      <title>SYS_WSS_Deinitialize Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_Deinitialize</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-8C607133-0A31-4E3D-BDCC-A6CF5E5950B9"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_PingClient Function</register>
+      <title>SYS_WSS_PingClient Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_PingClient</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-846D93A7-8E39-4AB6-AF2F-99A20D770DB9"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_register_callback Function</register>
+      <title>SYS_WSS_register_callback Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_register_callback</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-B0D9910C-94B2-4947-AC80-5CE869E553BB"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_sendMessage Function</register>
+      <title>SYS_WSS_sendMessage Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_sendMessage</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-6226C2BC-B29A-4FFD-BE21-B9B3EF06B446"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_CloseConnection Function</register>
+      <title>SYS_WSS_CloseConnection Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_CloseConnection</keyword>
+   </keyworditem>
+   <keyworditem topicid="GUID-28B1581E-648F-4F92-B376-19B1A46D81C3"
+                nocomponent="true"
+                parent="">
+      <device/>
+      <module/>
+      <component/>
+      <register>SYS_WSS_Task Function</register>
+      <title>SYS_WSS_Task Function</title>
+      <bitfield/>
+      <keyword>SYS_WSS_Task</keyword>
+   </keyworditem>
+</keywords>

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="MQTT System Service Usage" />
+<meta name="DC.relation" scheme="URI" content="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="mqtt-system-service-usage" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>MQTT System Service Usage</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-mqtt-system-service-usage" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-0B818BAA-AF92-41F7-B4C1-7516ADA6F4A5"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="mqtt-system-service-usage">
+<h1 class="title topictitle1" id="ariaid-title1">MQTT System Service Usage</h1><div class="body"></div>
+<div class="related-links">
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html">MQTT System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="title topictitle2" id="ariaid-title2">Description</h2><div class="body"><p class="p">The MQTT System Service provides simple APIs to enable MQTT Client Connectivity to a configured MQTT Broker. The User need not take care of intermediate states of a MQTT Connection, as the Service internally takes care of that. User is not required to have Security domain knowledge to establish a secured connection via the application using MQTT System Service library.</p>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title3" id="command-line"><h3 class="title topictitle3" id="ariaid-title3">Command Line</h3><div class="body"><p class="p">User can follow below commands for MQTT System Service:</p>
+<p class="p">1.sysmqtthelp
+MQTT System Service help command which displays the supported CLI commands</p>
+<br /><img class="image" src="GUID-E597468C-7587-442E-A7E9-6AC5814793C0-low.png" alt="sysmqtthelp_cli" /><br /><p class="p">2.sysmqtt openCommand for Reconfiguring an already open instance of MQTT System Service</p>
+<br /><img class="image" src="GUID-FDEA107D-684F-4F3D-995C-0F13E0D12AB8-low.png" alt="sysmqttopen_cli" /><br /><div class="p">Note: Once the User has configured all the params, the last command for opening the new connection should 'sysmqtt open <span class="undefined_element"> apply'</span><p class="p">3.sysmqtt closeCommand to close the instance of MQTT System Service</p>
+<br /><img class="image" src="GUID-62A63BAA-BD81-4765-93E1-1F3110DA6A49-low.png" alt="sysmqttclose_cli" /><br /><p class="p">4.sysmqtt sendCommand to send message on a topic for the instance of MQTT System Service</p>
+<br /><img class="image" src="GUID-CA647797-B871-40B9-B9FE-B5C79A48FA29-low.png" alt="sysmqttsend_cli" /><br /><p class="p">5.sysmqtt sunbscribeCommand to subscribe to a topic to receive message coming on that topic</p>
+<br /><img class="image" src="GUID-8C663F91-6758-48F4-87BC-6153950662EF-low.png" alt="sysmqttsubscribe_cli" /><br /><p class="p">6.sysmqtt unsunbscribeCommand to unsubscribe from a topic</p>
+<br /><img class="image" src="GUID-DEFF8814-B672-4DD9-AD74-64D8732DEB23-low.png" alt="sysmqttunsubscribe_cli" /><br /><p class="p">7.sysmqtt get infoCommand for knowing the Current Information for all the Instances of Net System Service</p>
+<br /><img class="image" src="GUID-B90F503D-DFF7-453D-B6B7-722D2B7319FD-low.png" alt="sysmqttgetinfo_cli" /><br /></div>
+</div>
+<div class="topic nested3" aria-labelledby="ariaid-title4" id="abstraction-model"><h4 class="title topictitle4" id="ariaid-title4">Abstraction Model</h4><div class="body"><p class="p">The MQTT System Service library provides an abstraction to the MQTT APIs to provide following functionalities.</p>
+<ul class="ul"><li class="li"><p class="p">Connectivity for MQTT Client</p>
+</li>
+<li class="li"><p class="p">Secured Connectivity using TLS</p>
+</li>
+<li class="li"><p class="p">Self Healing</p>
+</li>
+<li class="li"><p class="p">Reduce code user has to write</p>
+</li>
+<li class="li"><p class="p">Reduce time to develop and maintain</p>
+</li>
+</ul>
+<p class="p">The following diagram depicts the MQTT System Service abstraction model.</p>
+<br /><img class="image" src="GUID-8477BB30-91DD-43D8-B1D7-B429A4AF79ED-low.png" alt="MqttService_abstract" /><br /></div>
+<div class="topic nested4" aria-labelledby="ariaid-title5" id="how-the-library-works"><h5 class="title topictitle5" id="ariaid-title5">How The Library Works</h5><div class="body"><p class="p">By default MHC generated code provides all the functionalities to enable MQTT Client applicatation, with secured or unsecured connectivity. User needs to configure the required MQTT Brokerconfiguration using MHC. User needs to call the SYS_MQTT_Connect() API with a valid callback to open an instance of the MQTT Client configured in the MHC.</p>
+<br /><img class="image" src="GUID-EC299163-AAAA-455C-98CB-91239FFB0CF8-low.png" alt="MqttConnect" /><br /><p class="p">The User Application is expected to call SYS_MQTT_Task() API periodically as this API ensures that the MQTT System service is able to execute its state machine to process any messages and invoke the user callback for any events.</p>
+<p class="p">The User Application can call SYS_MQTT_Publish()/ SYS_MQTT_Subscribe() API in case it wants to publish message to a topic or receive messages on a topic.</p>
+<br /><img class="image" src="GUID-EF4C6A24-0BE7-45B2-AF51-0F9F3AEFD3CD-low.png" alt="MqttPublish" /><br /><br /><img class="image" src="GUID-690E5496-64F4-4489-871E-4D278B2CE21C-low.png" alt="MqttSubscribe" /><br /><p class="p">The User Application when enables Auto-Reconnect, it enables the self healing feature of the MQTT Service. When this feature is enabled, the service will automatically try to establish connection with the MQTT Broker whenever a connection breaks.</p>
+<br /><img class="image" src="GUID-9DD26F75-EC2E-4FD1-98C6-8C765AF18D47-low.png" alt="MqttSelfHealing" /><br /></div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -25,7 +25,9 @@
 ################################################################################
 #### Global Variables ####
 ################################################################################
+global wifi_prov_helpkeyword
 
+wifi_prov_helpkeyword = "mcc_h3_pic32mzw1_wifi_prov_system_service_configurations"
 ################################################################################
 #### Business Logic ####
 ################################################################################
@@ -36,6 +38,7 @@ import re
 ################################################################################
 def instantiateComponent(syswifiprovComponent):
 
+    global wifi_prov_helpkeyword
     res = Database.activateComponents(["HarmonyCore"])
 
     # Enable dependent Harmony core components
@@ -49,11 +52,13 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovConfigMenu = syswifiprovComponent.createComboSymbol("SYS_WIFIPROV_CONFIG_MENU", None, ["NVM", "User"])
     syswifiprovConfigMenu.setLabel("WiFi Configuration Stored At?")
+    syswifiprovConfigMenu.setHelp(wifi_prov_helpkeyword)
     syswifiprovConfigMenu.setDescription("Select the Wi-Fi Configuration storing method")
     syswifiprovConfigMenu.setDefaultValue("NVM")
 
     syswifiprovNvmAdd = syswifiprovComponent.createStringSymbol("SYS_WIFIPROV_NVMADDR", syswifiprovConfigMenu)
     syswifiprovNvmAdd.setLabel("WiFi Configuration Stored At NVM Address")
+    syswifiprovNvmAdd.setHelp(wifi_prov_helpkeyword)
     syswifiprovNvmAdd.setVisible(True)
     syswifiprovNvmAdd.setDescription("Enter 4KB Aligned NVM Address for storing WiFi Configuration")
     syswifiprovNvmAdd.setDefaultValue("0x900FF000")
@@ -61,6 +66,7 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovNvmErrMsg = syswifiprovComponent.createCommentSymbol("SYS_WIFIPROV_NVMADDR_ERR", None)
     syswifiprovNvmErrMsg.setLabel("**Placeholder for NVM adress error")
+    syswifiprovNvmErrMsg.setHelp(wifi_prov_helpkeyword)
     syswifiprovNvmErrMsg.setVisible(False)
 
     # set XC32-LD additional driver option to reserve memory
@@ -73,38 +79,45 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovstaEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_STA_ENABLE", None)
     syswifiprovstaEnable.setVisible(False)
+    syswifiprovstaEnable.setHelp(wifi_prov_helpkeyword)
     syswifiprovstaEnable.setDefaultValue((Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_STA_ENABLE") == True))
     syswifiprovstaEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_STA_ENABLE"])
 
     syswifiprovapEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_AP_ENABLE", None)
     syswifiprovapEnable.setVisible(False)
+    syswifiprovapEnable.setHelp(wifi_prov_helpkeyword)
     syswifiprovapEnable.setDefaultValue((Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_AP_ENABLE") == True))
     syswifiprovapEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_AP_ENABLE"])
 
     syswifiprovdebugEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_APPDEBUG_ENABLE", None)
     syswifiprovdebugEnable.setVisible(False)
+    syswifiprovdebugEnable.setHelp(wifi_prov_helpkeyword)
     syswifiprovdebugEnable.setDefaultValue((Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_APPDEBUG_ENABLE") == True))
     syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_APPDEBUG_ENABLE"])
     syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_PROVISION_ENABLE"])
 
     syswifiprovSave = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_SAVECONFIG", syswifiprovConfigMenu)
     syswifiprovSave.setLabel("Save Configuration in NVM")
+    syswifiprovSave.setHelp(wifi_prov_helpkeyword)
     syswifiprovSave.setDefaultValue(True)
     syswifiprovSave.setDescription("Enable Option to store Wi-Fi Configuration to NVM")
     syswifiprovSave.setDependencies(syswifiprovNvmCheck, ["SYS_WIFIPROV_CONFIG_MENU"])
 
     syswifiprovMethod = syswifiprovComponent.createMenuSymbol("SYS_WIFIPROV_METHOD", None)
     syswifiprovMethod.setLabel("WiFi Provisioning Methods")
+    syswifiprovMethod.setHelp(wifi_prov_helpkeyword)
     syswifiprovMethod.setVisible(True)
 
     syswifiprovcmd = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_CMD", syswifiprovMethod)
     syswifiprovcmd.setLabel("Command Line (CLI) ")
+    syswifiprovcmd.setHelp(wifi_prov_helpkeyword)
     syswifiprovcmd.setDefaultValue(True)
     syswifiprovcmd.setDescription("Enable WiFi Provisioning via CLI")
     syswifiprovcmd.setDependencies(syswifiprovMenuVisible, ["SYS_WIFIPROV_ENABLE"])
 
     syswifiprovhttp = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_HTTP", syswifiprovMethod)
     syswifiprovhttp.setLabel("HTTP")
+    syswifiprovhttp.setHelp(wifi_prov_helpkeyword)
     syswifiprovhttp.setVisible(True)
     syswifiprovhttp.setDescription("Enable WiFi Provisioning via HTTP")
     syswifiprovhttp.setDefaultValue(False)
@@ -113,6 +126,7 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovhttpnetenb = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_ENABLE_HTTPNET", syswifiprovhttp)
     syswifiprovhttpnetenb.setLabel("Enable HTTPNET")
+    syswifiprovhttpnetenb.setHelp(wifi_prov_helpkeyword)
     syswifiprovhttpnetenb.setVisible(True)
     syswifiprovhttpnetenb.setDescription("Defult HTTP enabled,Enable HTTPNET")
     syswifiprovhttpnetenb.setDefaultValue(False)
@@ -120,6 +134,7 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovhttptype = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_HTTP_SECURE", syswifiprovhttpnetenb)
     syswifiprovhttptype.setLabel("Enable Secure Connection with HTTPNET")
+    syswifiprovhttptype.setHelp(wifi_prov_helpkeyword)
     syswifiprovhttptype.setVisible(True)
     syswifiprovhttptype.setDescription("HTTP - support only NonSecure and HTTPNET - support both Secure and NonSecure")
     syswifiprovhttptype.setDefaultValue(False)
@@ -127,6 +142,7 @@ def instantiateComponent(syswifiprovComponent):
     
     syswifiprovhttpPort = syswifiprovComponent.createIntegerSymbol("SYS_WIFIPROV_HTTPPORT", syswifiprovhttpnetenb)
     syswifiprovhttpPort.setLabel("Server Port")
+    syswifiprovhttpPort.setHelp(wifi_prov_helpkeyword)
     syswifiprovhttpPort.setMin(1)
     syswifiprovhttpPort.setMax(65535)
     syswifiprovhttpPort.setDefaultValue(80)
@@ -135,12 +151,14 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovsocket = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_SOCKET", syswifiprovMethod)
     syswifiprovsocket.setLabel("TCP Socket ")
+    syswifiprovsocket.setHelp(wifi_prov_helpkeyword)
     syswifiprovsocket.setDefaultValue(True)
     syswifiprovsocket.setDescription("Enable WiFi Provisioning via SOcket")
     syswifiprovsocket.setDependencies(syswifiprovMenuVisible, ["SYS_WIFIPROV_ENABLE"])
 
     syswifiprovsocketPort = syswifiprovComponent.createIntegerSymbol("SYS_WIFIPROV_SOCKETPORT", syswifiprovsocket)
     syswifiprovsocketPort.setLabel("Socket Server Port")
+    syswifiprovsocketPort.setHelp(wifi_prov_helpkeyword)
     syswifiprovsocketPort.setMin(1)
     syswifiprovsocketPort.setMax(65535)
     syswifiprovsocketPort.setDefaultValue(6666)

@@ -25,7 +25,9 @@
 ################################################################################
 #### Global Variables ####
 ################################################################################
+global wifi_helpkeyword
 
+wifi_helpkeyword = "mcc_h3_pic32mzw1_wifi_system_service_configurations"
 ################################################################################
 #### Business Logic ####
 ################################################################################
@@ -34,23 +36,28 @@
 #### Component ####
 ################################################################################
 def instantiateComponent(syswifiComponent):
-
+    global wifi_helpkeyword
+	
     syswifiEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_ENABLE", None)
     #syswifiEnable.setLabel("Enable WiFi Service")
+    syswifiEnable.setHelp(wifi_helpkeyword)
     syswifiEnable.setVisible(False)
     syswifiEnable.setDefaultValue(True)
 
     syswifiEnableErrMsg = syswifiComponent.createCommentSymbol("SYS_WIFI_ERR", None)
     syswifiEnableErrMsg.setLabel("**Placeholder for error display")
+    syswifiEnableErrMsg.setHelp(wifi_helpkeyword)
     syswifiEnableErrMsg.setVisible(False)
 
     syswifiMode = syswifiComponent.createComboSymbol("SYS_WIFI_MODE", None, ["STA", "AP"])
     syswifiMode.setLabel("Device Mode")
+    syswifiMode.setHelp(wifi_helpkeyword)
     syswifiMode.setDescription("Select the Device Boot Mode ")
     syswifiMode.setDefaultValue("STA")
 
     syswifistaEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_STA_ENABLE", syswifiMode)
     syswifistaEnable.setLabel("STA Mode")
+    syswifistaEnable.setHelp(wifi_helpkeyword)
     syswifistaEnable.setDefaultValue(True)
     #syswifistaEnable.setVisible(True)
 #    syswifistaEnable.setDependencies(syswifiSTAMenu, ["SYS_WIFI_MODE"])
@@ -59,17 +66,20 @@ def instantiateComponent(syswifiComponent):
 
     syswifistaSsid = syswifiComponent.createStringSymbol("SYS_WIFI_STA_SSID_NAME", syswifistaEnable)
     syswifistaSsid.setLabel("SSID")
+    syswifistaSsid.setHelp(wifi_helpkeyword)
     syswifistaSsid.setVisible(True)
     syswifistaSsid.setDescription("Enter STA Mode SSID.The maximum length is 32 characters.")
     syswifistaSsid.setDefaultValue("DEMO_AP")
 
     syswifistaAuth = syswifiComponent.createComboSymbol("SYS_WIFI_STA_AUTH", syswifistaEnable, ["OPEN", "WPA2","WPA2WPA3","WPA3"])
     syswifistaAuth.setLabel("Security type")
+    syswifistaAuth.setHelp(wifi_helpkeyword)
     syswifistaAuth.setDescription("Enter STA Mode Security type")
     syswifistaAuth.setDefaultValue("WPA2")
 
     syswifistaPwd = syswifiComponent.createStringSymbol("SYS_WIFI_STA_PWD_NAME", syswifistaEnable)
     syswifistaPwd.setLabel("Password")
+    syswifistaPwd.setHelp(wifi_helpkeyword)
     syswifistaPwd.setVisible(True)
     syswifistaPwd.setDescription("Enter STA Mode Password.WPA2/WPA3 - Maximum key length is 63 characters.Minimum key length is 8 characters.")
     syswifistaPwd.setDefaultValue("password")
@@ -77,11 +87,13 @@ def instantiateComponent(syswifiComponent):
 
     syswifistaAuto = syswifiComponent.createBooleanSymbol("SYS_WIFI_STA_AUTOCONNECT", syswifistaEnable)
     syswifistaAuto.setLabel("Auto Connect")
+    syswifistaAuto.setHelp(wifi_helpkeyword)
     syswifistaAuto.setDescription("Enable Auto Connect Feature")
     syswifistaAuto.setDefaultValue(True)
 
     syswifiapEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_AP_ENABLE", syswifiMode)
     syswifiapEnable.setLabel("AP Mode")
+    syswifiapEnable.setHelp(wifi_helpkeyword)
     syswifiapEnable.setDefaultValue(True)
     #syswifiapEnable.setVisible(Database.getSymbolValue("sysWifiPic32mzw1","SYS_WIFI_MODE") == "STA")
     #syswifiapEnable.setDependencies(syswifiAPMenu, ["SYS_WIFI_MODE"])
@@ -90,17 +102,20 @@ def instantiateComponent(syswifiComponent):
 
     syswifiapSsid = syswifiComponent.createStringSymbol("SYS_WIFI_AP_SSID_NAME", syswifiapEnable)
     syswifiapSsid.setLabel("SSID")
+    syswifiapSsid.setHelp(wifi_helpkeyword)
     syswifiapSsid.setVisible(True)
     syswifiapSsid.setDescription("Enter AP Mode SSID.The maximum length is 32 characters")
     syswifiapSsid.setDefaultValue("DEMO_AP_SOFTAP")
 
     syswifiapAuth = syswifiComponent.createComboSymbol("SYS_WIFI_AP_AUTH", syswifiapEnable, ["OPEN", "WPA2","WPAWPA2(Mixed)","WPA2WPA3","WPA3"])
     syswifiapAuth.setLabel("Security")
+    syswifiapAuth.setHelp(wifi_helpkeyword)
     syswifiapAuth.setDescription("Enter AP Mode Security")
     syswifiapAuth.setDefaultValue("WPA2")
 
     syswifiapPwd = syswifiComponent.createStringSymbol("SYS_WIFI_AP_PWD_NAME", syswifiapEnable)
     syswifiapPwd.setLabel("Password")
+    syswifiapPwd.setHelp(wifi_helpkeyword)
     syswifiapPwd.setVisible(True)
     syswifiapPwd.setDescription("Enter AP Mode Password.WPA2/WPA3 - Maximum key length is 63 characters.Minimum key length is 8 characters.")
     syswifiapPwd.setDefaultValue("password")
@@ -108,6 +123,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiapSsidv = syswifiComponent.createBooleanSymbol("SYS_WIFI_AP_SSIDVISIBILE", syswifiapEnable)
     syswifiapSsidv.setLabel("SSID Visibility")
+    syswifiapSsidv.setHelp(wifi_helpkeyword)
     syswifiapSsidv.setDefaultValue(True)
     syswifiapSsidv.setDescription("Enable AP Mode SSID Visibility")
     syswifiapSsidv.setDependencies(syswifiMenuVisible, ["SYS_WIFI_ENABLE"])
@@ -115,6 +131,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiapChannel = syswifiComponent.createIntegerSymbol("SYS_WIFI_AP_CHANNEL", syswifiapEnable)
     syswifiapChannel.setLabel("Channel Number")
+    syswifiapChannel.setHelp(wifi_helpkeyword)
     syswifiapChannel.setMin(1)
     syswifiapChannel.setMax(13)
     syswifiapChannel.setDescription("Enable AP Mode Channel")
@@ -124,17 +141,20 @@ def instantiateComponent(syswifiComponent):
     # Advanced Configuration
     syswifiAdvMenu = syswifiComponent.createCommentSymbol("SYS_WIFI_ADVANCED_CONFIG_MENU", None)
     syswifiAdvMenu.setLabel("Advanced Configuration")
+    syswifiAdvMenu.setHelp(wifi_helpkeyword)
     syswifiAdvMenu.setVisible(True)
     #syswifiAdvMenu.setDefaultValue(False)
 
     syswificountrycode = syswifiComponent.createComboSymbol("SYS_WIFI_COUNTRYCODE", syswifiAdvMenu, ["GEN", "USA", "EMEA", "CUST1", "CUST2"])
     syswificountrycode.setLabel("Country Code")
+    syswificountrycode.setHelp(wifi_helpkeyword)
     syswificountrycode.setDefaultValue("GEN")
     syswificountrycode.setDescription("Enable Country Code. \n Support channels per Country code: \n GEN - 1 to 13, \n USA - 1 to 11, \n EMEA - 1 to 13, \n CUST1,CUST2 - Dependent on user configuration")
     syswificountrycode.setDependencies(syswifiMenuVisible, ["SYS_WIFI_ENABLE"])
 
     syswifiCB = syswifiComponent.createIntegerSymbol("SYS_WIFI_MAX_CBS", syswifiAdvMenu)
     syswifiCB.setLabel("Number of Clients")
+    syswifiCB.setHelp(wifi_helpkeyword)
     syswifiCB.setMin(1)
     syswifiCB.setMax(5)
     syswifiCB.setDefaultValue(2)
@@ -143,6 +163,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiprovEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_PROVISION_ENABLE", syswifiAdvMenu)
     syswifiprovEnable.setLabel("Enable WiFi Provisioning Service")
+    syswifiprovEnable.setHelp(wifi_helpkeyword)
     syswifiprovEnable.setDefaultValue(True)
     syswifiprovEnable.setVisible(True)
     syswifiprovEnable.setDescription("Enable WiFi Provisioning Service")
@@ -150,12 +171,14 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_SCAN_ENABLE", syswifiAdvMenu)
     syswifiScanEnable.setLabel("Enable WiFi Scanning")
+    syswifiScanEnable.setHelp(wifi_helpkeyword)
     syswifiScanEnable.setDefaultValue(False)
     syswifiScanEnable.setVisible(True)
     syswifiScanEnable.setDescription("Enable WiFi Scanning")
 
     syswifiScanChannel = syswifiComponent.createIntegerSymbol("SYS_WIFI_SCAN_CHANNEL", syswifiScanEnable)
     syswifiScanChannel.setLabel("Channel Number")
+    syswifiScanChannel.setHelp(wifi_helpkeyword)
     syswifiScanChannel.setVisible(False)
     syswifiScanChannel.setMin(0)
     syswifiScanChannel.setMax(13)
@@ -165,6 +188,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanMode = syswifiComponent.createComboSymbol("SYS_WIFI_SCAN_MODE", syswifiScanEnable, ["PASSIVE", "ACTIVE"])
     syswifiScanMode.setLabel("Scan Mode")
+    syswifiScanMode.setHelp(wifi_helpkeyword)
     syswifiScanMode.setVisible(False)
     syswifiScanMode.setDescription("Select the Scan Mode ")
     syswifiScanMode.setDefaultValue("ACTIVE")
@@ -172,6 +196,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanSsidList = syswifiComponent.createStringSymbol("SYS_WIFI_SCAN_SSID_LIST", syswifiScanEnable)
     syswifiScanSsidList.setLabel("SSID List (Active Scan Only)")
+    syswifiScanSsidList.setHelp(wifi_helpkeyword)
     syswifiScanSsidList.setVisible(False)
     syswifiScanSsidList.setDescription("**Only for Active Scan** Maximum 4 SSIDs of maximum 32 characters. (e.g. ssid01,myopenap,demo_ap,securedap)")
     syswifiScanSsidList.setDefaultValue("")
@@ -179,6 +204,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanSsidDelim = syswifiComponent.createStringSymbol("SYS_WIFI_SCAN_SSID_DELIM_CHAR", syswifiScanEnable)
     syswifiScanSsidDelim.setLabel("SSID List Delimiter character")
+    syswifiScanSsidDelim.setHelp(wifi_helpkeyword)
     syswifiScanSsidDelim.setVisible(False)
     syswifiScanSsidDelim.setDescription("Specify the delimiter used for separating AP names in the SSID List above")
     syswifiScanSsidDelim.setDefaultValue(",")
@@ -186,6 +212,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanChannelMask = syswifiComponent.createHexSymbol("SYS_WIFI_SCAN_CHAN_MASK", syswifiScanEnable)
     syswifiScanChannelMask.setLabel("Bitwise Channel Scan Mask")
+    syswifiScanChannelMask.setHelp(wifi_helpkeyword)
     syswifiScanChannelMask.setVisible(False)
     syswifiScanChannelMask.setDescription("Enter Hex Value for Bitwise desired Channels. (e.g. 0x1fff: channel 1-13")
     syswifiScanChannelMask.setMin(0x1)
@@ -196,6 +223,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanNumSlots = syswifiComponent.createIntegerSymbol("SYS_WIFI_SCAN_NUM_SLOTS", syswifiScanEnable)
     syswifiScanNumSlots.setLabel("Number Of Slots")
+    syswifiScanNumSlots.setHelp(wifi_helpkeyword)
     syswifiScanNumSlots.setVisible(False)
     syswifiScanNumSlots.setMin(1)
     syswifiScanNumSlots.setMax(4)
@@ -205,6 +233,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanActiveSlotTime = syswifiComponent.createIntegerSymbol("SYS_WIFI_SCAN_ACTIVE_SLOT_TIME", syswifiScanEnable)
     syswifiScanActiveSlotTime.setLabel("Active Slot Time")
+    syswifiScanActiveSlotTime.setHelp(wifi_helpkeyword)
     syswifiScanActiveSlotTime.setVisible(False)
     syswifiScanActiveSlotTime.setMin(10)
     syswifiScanActiveSlotTime.setMax(1500)
@@ -214,6 +243,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanPassiveSlotTime = syswifiComponent.createIntegerSymbol("SYS_WIFI_SCAN_PASSIVE_SLOT_TIME", syswifiScanEnable)
     syswifiScanPassiveSlotTime.setLabel("Passive Slot Time")
+    syswifiScanPassiveSlotTime.setHelp(wifi_helpkeyword)
     syswifiScanPassiveSlotTime.setVisible(False)
     syswifiScanPassiveSlotTime.setMin(10)
     syswifiScanPassiveSlotTime.setMax(1500)
@@ -223,6 +253,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanNumProbes = syswifiComponent.createIntegerSymbol("SYS_WIFI_SCAN_NUM_PROBES", syswifiScanEnable)
     syswifiScanNumProbes.setLabel("Number Of Probes")
+    syswifiScanNumProbes.setHelp(wifi_helpkeyword)
     syswifiScanNumProbes.setVisible(False)
     syswifiScanNumProbes.setMin(1)
     syswifiScanNumProbes.setMax(2)
@@ -232,6 +263,7 @@ def instantiateComponent(syswifiComponent):
 
     syswifiScanMatchMode = syswifiComponent.createComboSymbol("SYS_WIFI_SCAN_MATCH_MODE", syswifiScanEnable, ["STOP_ON_FIRST", "FIND_ALL"])
     syswifiScanMatchMode.setLabel("Scan Match Mode")
+    syswifiScanMatchMode.setHelp(wifi_helpkeyword)
     syswifiScanMatchMode.setVisible(False)
     syswifiScanMatchMode.setDescription("The scan matching mode can be to stop on first match or match all")
     syswifiScanMatchMode.setDefaultValue("FIND_ALL")
@@ -239,35 +271,41 @@ def instantiateComponent(syswifiComponent):
     
     syswifiDebugLogEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_ENABLE", syswifiAdvMenu)
     syswifiDebugLogEnable.setLabel("Enable Debug Logs")
+    syswifiDebugLogEnable.setHelp(wifi_helpkeyword)
     syswifiDebugLogEnable.setVisible(True)
     syswifiDebugLogEnable.setDefaultValue(False)
 #    syswifiDebugLogEnable.setDependencies(syswifiDebugMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
 
     syswifiDebugBasicMenu = syswifiComponent.createMenuSymbol("SYS_WIFI_APPDEBUG_LEVEL_CONFIG_MENU", syswifiDebugLogEnable)
     syswifiDebugBasicMenu.setLabel("Debug Level Configuration")
+    syswifiDebugBasicMenu.setHelp(wifi_helpkeyword)
     syswifiDebugBasicMenu.setVisible(True)
     syswifiDebugBasicMenu.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
 
     syswifiDebugErrLevel = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_ERR_LEVEL", syswifiDebugBasicMenu)
     syswifiDebugErrLevel.setLabel("Enable Error Level")
+    syswifiDebugErrLevel.setHelp(wifi_helpkeyword)
     syswifiDebugErrLevel.setVisible(True)
     syswifiDebugErrLevel.setDefaultValue(False)
     #syswifiDebugErrLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
 
     syswifiDebugDbgLevel = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_DBG_LEVEL", syswifiDebugBasicMenu)
     syswifiDebugDbgLevel.setLabel("Enable Debug Level")
+    syswifiDebugDbgLevel.setHelp(wifi_helpkeyword)
     syswifiDebugDbgLevel.setVisible(True)
     syswifiDebugDbgLevel.setDefaultValue(False)
     #syswifiDebugDbgLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
 
     syswifiDebugInfoLevel = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_INFO_LEVEL", syswifiDebugBasicMenu)
     syswifiDebugInfoLevel.setLabel("Enable Info Level")
+    syswifiDebugInfoLevel.setHelp(wifi_helpkeyword)
     syswifiDebugInfoLevel.setVisible(True)
     syswifiDebugInfoLevel.setDefaultValue(False)
     #syswifiDebugInfoLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
 
     syswifiDebugFuncLevel = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_FUNC_LEVEL", syswifiDebugBasicMenu)
     syswifiDebugFuncLevel.setLabel("Enable Function Entry/Exit Level")
+    syswifiDebugFuncLevel.setHelp(wifi_helpkeyword)
     syswifiDebugFuncLevel.setVisible(True)
     syswifiDebugFuncLevel.setDefaultValue(False)
     #syswifiDebugFuncLevel.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
@@ -281,37 +319,44 @@ def instantiateComponent(syswifiComponent):
 
     syswifiDebugFlowBasicMenu = syswifiComponent.createMenuSymbol("SYS_WIFI_APPDEBUG_FLOW_CONFIG_MENU", syswifiDebugLogEnable)
     syswifiDebugFlowBasicMenu.setLabel("Debug Flow Configuration")
+    syswifiDebugFlowBasicMenu.setHelp(wifi_helpkeyword)
     syswifiDebugFlowBasicMenu.setVisible(True)
     #syswifiDebugFlowBasicMenu.setDefaultValue(False)
     syswifiDebugFlowBasicMenu.setDependencies(syswifiMenuVisible, ["SYS_WIFI_APPDEBUG_ENABLE"])
 
     syswifiDebugFlowCfgFlow = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_CFG_FLOW", syswifiDebugFlowBasicMenu)
     syswifiDebugFlowCfgFlow.setLabel("Enable WiFi Cfg Flow")
+    syswifiDebugFlowCfgFlow.setHelp(wifi_helpkeyword)
     syswifiDebugFlowCfgFlow.setDefaultValue(False)
     syswifiDebugFlowCfgFlow.setVisible(True)
 
     syswifiDebugConnectFlow = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_CONNECT_FLOW", syswifiDebugFlowBasicMenu)
     syswifiDebugConnectFlow.setLabel("Enable WiFi Connect Flow")
+    syswifiDebugConnectFlow.setHelp(wifi_helpkeyword)
     syswifiDebugConnectFlow.setDefaultValue(False)
     syswifiDebugConnectFlow.setVisible(True)
 
     syswifiDebugProvFlow = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_PROVISIONING_FLOW", syswifiDebugFlowBasicMenu)
     syswifiDebugProvFlow.setLabel("Enable WiFi Provisioning Flow")
+    syswifiDebugProvFlow.setHelp(wifi_helpkeyword)
     syswifiDebugProvFlow.setDefaultValue(False)
     syswifiDebugProvFlow.setVisible(True)
 
     syswifiDebugProvCMDFlow = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_PROVISIONINGCMD_FLOW", syswifiDebugFlowBasicMenu)
     syswifiDebugProvCMDFlow.setLabel("Enable WiFi Provisioning Command Flow")
+    syswifiDebugProvCMDFlow.setHelp(wifi_helpkeyword)
     syswifiDebugProvCMDFlow.setDefaultValue(False)
     syswifiDebugProvCMDFlow.setVisible(True)
 
     syswifiDebugProvSOCKFlow = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_PROVISIONINGSOCK_FLOW", syswifiDebugFlowBasicMenu)
     syswifiDebugProvSOCKFlow.setLabel("Enable WiFi Provisioning Socket Flow")
+    syswifiDebugProvSOCKFlow.setHelp(wifi_helpkeyword)
     syswifiDebugProvSOCKFlow.setDefaultValue(False)
     syswifiDebugProvSOCKFlow.setVisible(True)
 
     syswifiDebugPreStr = syswifiComponent.createStringSymbol("SYS_WIFI_APPDEBUG_PRESTR", syswifiDebugLogEnable)
     syswifiDebugPreStr.setLabel("Prefix String")
+    syswifiDebugPreStr.setHelp(wifi_helpkeyword)
     syswifiDebugPreStr.setVisible(True)
     syswifiDebugPreStr.setDescription("Prefix String")
     syswifiDebugPreStr.setDefaultValue("WIFI_SRVC")
@@ -321,6 +366,7 @@ def instantiateComponent(syswifiComponent):
     # RTOS Configuration
     syswifiRtosMenu = syswifiComponent.createMenuSymbol("SYS_WIFI_RTOS_MENU", syswifiAdvMenu)
     syswifiRtosMenu.setLabel("RTOS Configuration")
+    syswifiRtosMenu.setHelp(wifi_helpkeyword)
     syswifiRtosMenu.setDescription("RTOS Configuration")
     syswifiRtosMenu.setVisible(False)
     syswifiRtosMenu.setVisible((Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal") and (Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != None))
@@ -330,6 +376,7 @@ def instantiateComponent(syswifiComponent):
     # Menu for RTOS options
     syswifiInstnExecMode = syswifiComponent.createComboSymbol("SYS_WIFI_RTOS", syswifiRtosMenu, ["Standalone"]) 
     syswifiInstnExecMode.setLabel("Run Library Tasks as")
+    syswifiInstnExecMode.setHelp(wifi_helpkeyword)
     syswifiInstnExecMode.setVisible(False)
     syswifiInstnExecMode.setDescription("Rtos Options")
     syswifiInstnExecMode.setDefaultValue("Standalone")
@@ -337,6 +384,7 @@ def instantiateComponent(syswifiComponent):
     # RTOS Task Stack Size
     syswifiTaskSize = syswifiComponent.createIntegerSymbol("SYS_WIFI_RTOS_TASK_STACK_SIZE", syswifiRtosMenu)
     syswifiTaskSize.setLabel("Stack Size")
+    syswifiTaskSize.setHelp(wifi_helpkeyword)
     syswifiTaskSize.setVisible(True)
     syswifiTaskSize.setDescription("Rtos Task Stack Size")
     syswifiTaskSize.setDefaultValue(1024)
@@ -345,6 +393,7 @@ def instantiateComponent(syswifiComponent):
     # RTOS Task Priority
     syswifiTaskPriority = syswifiComponent.createIntegerSymbol("SYS_WIFI_RTOS_TASK_PRIORITY", syswifiRtosMenu)
     syswifiTaskPriority.setLabel("Task Priority")
+    syswifiTaskPriority.setHelp(wifi_helpkeyword)
     syswifiTaskPriority.setVisible(True)
     syswifiTaskPriority.setDescription("Rtos Task Priority")
     syswifiTaskPriority.setDefaultValue(1)
@@ -353,6 +402,7 @@ def instantiateComponent(syswifiComponent):
     # RTOS Use Task Delay?
     syswifiUseTaskDelay = syswifiComponent.createBooleanSymbol("SYS_WIFI_RTOS_USE_DELAY", syswifiRtosMenu)
     syswifiUseTaskDelay.setLabel("Use Task Delay?")
+    syswifiUseTaskDelay.setHelp(wifi_helpkeyword)
     syswifiUseTaskDelay.setVisible(True)
     syswifiUseTaskDelay.setDescription("Rtos Use Task Delay?")
     syswifiUseTaskDelay.setDefaultValue(True)
@@ -361,6 +411,7 @@ def instantiateComponent(syswifiComponent):
     # RTOS Task Delay
     syswifiTaskDelay = syswifiComponent.createIntegerSymbol("SYS_WIFI_RTOS_DELAY", syswifiRtosMenu)
     syswifiTaskDelay.setLabel("Task Delay")
+    syswifiTaskDelay.setHelp(wifi_helpkeyword)
     syswifiTaskDelay.setVisible(True)
     syswifiTaskDelay.setDescription("WiFi Driver Task Delay")
     syswifiTaskDelay.setDefaultValue(1)

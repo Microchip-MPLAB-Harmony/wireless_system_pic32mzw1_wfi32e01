@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="Web Socket Server System Service Interface" />
+<meta name="DC.relation" scheme="URI" content="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-818A720C-1FD4-4EA4-B22C-F44B52F11DB5.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-7A668B78-45FE-4EDF-965E-1900422374CE.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-067B7E35-0233-4030-BDC7-ADA3C5A65281.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-B12643ED-A0B9-4331-9E81-961355411485.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-8305E5FB-D8B6-4824-AD2A-EFA4BF0DCDCD.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-BEE2CEA6-760B-4433-B6F9-46FAD85BA076.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-055E1A74-7370-4E9A-BDC6-FE5CA1547D14.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-DE91F328-40E1-48BE-9E5D-8638A49014A1.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-7DC907EC-3CE8-45F2-A78B-6AACDAEF6F52.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-0F240AEF-6B53-4CD2-A8FD-1D16BA00B43E.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-04628A3C-69FB-458A-B6A7-9CE08A6C26EB.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-91BC6347-08EF-4EE7-ADDE-90524E70867A.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-8A2DC2AD-7D43-4568-9CA7-325A8F1C64CA.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-17FAEA79-D63F-4222-B015-DF863DD4AFA6.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-B70E454B-E9FB-4214-AC26-354C154592A1.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-79B1C1D0-37E8-464B-82BE-41A226C2AB59.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-C340A70C-DB26-427E-B902-B253B1590DD7.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-9F1A7B19-413E-4254-8E08-E61C7A180E8F.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-897565A1-B722-4A0C-AE94-7C04BDEBEA4F.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-8C607133-0A31-4E3D-BDCC-A6CF5E5950B9.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-846D93A7-8E39-4AB6-AF2F-99A20D770DB9.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-B0D9910C-94B2-4947-AC80-5CE869E553BB.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-6226C2BC-B29A-4FFD-BE21-B9B3EF06B446.html" />
+<meta name="DC.relation" scheme="URI" content="GUID-28B1581E-648F-4F92-B376-19B1A46D81C3.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="web-socket-server-system-service-interface" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>Web Socket Server System Service Interface</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-web-socket-server-system-service-interface" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-9DCBB817-ECC8-46C6-954B-F6B0D8F5C0BC"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="web-socket-server-system-service-interface">
+<h1 class="title topictitle1" id="ariaid-title1">Web Socket Server System Service Interface</h1><div class="body"></div>
+<div class="related-links">
+<ul class="ullinks">
+<li class="link ulchildlink"><strong><a href="GUID-818A720C-1FD4-4EA4-B22C-F44B52F11DB5.html">SYS_WSS_GUID Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-7A668B78-45FE-4EDF-965E-1900422374CE.html">SYS_WSS_CLIENT_KEY_SIZE Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-067B7E35-0233-4030-BDC7-ADA3C5A65281.html">SYS_WSS_CLIENT_KEY_SIZE_DECODED Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-B12643ED-A0B9-4331-9E81-961355411485.html">SYS_WSS_HTTP_VERSION_1_1 Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-8305E5FB-D8B6-4824-AD2A-EFA4BF0DCDCD.html">SYS_WSS_KA_TIMER_PERIOD Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-BEE2CEA6-760B-4433-B6F9-46FAD85BA076.html">SYS_WSS_SERVER_KEY_SIZE Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-055E1A74-7370-4E9A-BDC6-FE5CA1547D14.html">SYS_WSS_SHA1_DIGEST_SIZE Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-DE91F328-40E1-48BE-9E5D-8638A49014A1.html">SYS_WSS_STATUS_CODE_LEN Macro</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-7DC907EC-3CE8-45F2-A78B-6AACDAEF6F52.html">SYS_WSS_RESULT Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-0F240AEF-6B53-4CD2-A8FD-1D16BA00B43E.html">SYS_WSS_EVENTS Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-04628A3C-69FB-458A-B6A7-9CE08A6C26EB.html">SYS_WSS_STATE Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-91BC6347-08EF-4EE7-ADDE-90524E70867A.html">SYS_WSS_FRAME Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-8A2DC2AD-7D43-4568-9CA7-325A8F1C64CA.html">SYS_WSS_STATUS_CODE Enum</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-17FAEA79-D63F-4222-B015-DF863DD4AFA6.html">SYS_WSS_HANDSHAKE_CTXT Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-B70E454B-E9FB-4214-AC26-354C154592A1.html">SYS_WSS_RXDATA Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-79B1C1D0-37E8-464B-82BE-41A226C2AB59.html">SYS_WSS_CONFIG Struct</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-C340A70C-DB26-427E-B902-B253B1590DD7.html">SYS_WSS_CALLBACK Typedef</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-9F1A7B19-413E-4254-8E08-E61C7A180E8F.html">SYS_WSS_Initialize Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-897565A1-B722-4A0C-AE94-7C04BDEBEA4F.html">SYS_WSS_Deinitialize Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-8C607133-0A31-4E3D-BDCC-A6CF5E5950B9.html">SYS_WSS_PingClient Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-846D93A7-8E39-4AB6-AF2F-99A20D770DB9.html">SYS_WSS_register_callback Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-B0D9910C-94B2-4947-AC80-5CE869E553BB.html">SYS_WSS_sendMessage Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-6226C2BC-B29A-4FFD-BE21-B9B3EF06B446.html">SYS_WSS_CloseConnection Function</a></strong><br />
+</li>
+<li class="link ulchildlink"><strong><a href="GUID-28B1581E-648F-4F92-B376-19B1A46D81C3.html">SYS_WSS_Task Function</a></strong><br />
+</li>
+</ul>
+
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html">Web Socket Server (WSS) System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="data-types-and-constants-summary"><h2 class="title topictitle2" id="ariaid-title2">Data Types and Constants Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d23366e150"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d23366e152"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_KA_TIMER_PERIOD</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Decides the accuracy of the client timeout</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_CLIENT_KEY_SIZE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Array size for holding the client key</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_CLIENT_KEY_SIZE_DECODED</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Decoded client key size as per the RFC6455</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_SERVER_KEY_SIZE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Array saze for holding the server key</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_SHA1_DIGEST_SIZE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>SHA1 digest size -server key genartion</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_HTTP_VERSION_0_9</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>HTTP vesrion 0.9</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_HTTP_VERSION_1_0</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>HTTP version 1.0</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_HTTP_VERSION_1_1</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>HTTP version 1.1</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_STATUS_CODE_LEN</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Closing Status code lenth as per RFC6455</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_GUID</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>WebSocket GUID as per Section 1.3 of RFC 6455</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_CONFIG</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Used for passing on the configuration(port and TLS) for socket connection</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_HANDSHAKE_CTXT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Stores the handshake information of a client.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_FRAME_HEADER</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Identifies the frame format as defined by RFC6455.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_RXDATA</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Stores the data received from the client along with the datalength.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_RESULT</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Identifies the return values for the WSS system service APIs.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_STATE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Identifies the state machine values of the WSS system service.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_FRAME</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Identifies the frame types as defined by the RFC6455.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_EVENTS</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Identifies the events reported to the application using the call back function.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e150 "><span>SYS_WSS_STATUS_CODE</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e152 "><span>Identifies status code to be used in the closing handshake as defined by RF6455.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="initialization-functions-summary"><h2 class="title topictitle2" id="ariaid-title3">Initialization functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d23366e261"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d23366e263"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e261 "><span>SYS_WSS_Initialize</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e263 "><span>Returns wss object handle after initialization of data structures and timers of the WSS system service</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e261 "><span>SYS_WSS_Deinitialize</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e263 "><span>Deinitialization of data structures of the WSS system service</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="data-exchange-functions-summary"><h2 class="title topictitle2" id="ariaid-title4">Data Exchange functions Summary</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d23366e286"><span>Name</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d23366e288"><span>Description</span></th>
+</tr>
+</thead>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e286 "><span>SYS_WSS_sendMessage</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e288 "><span>Returns failure or success after sending the data to the client.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e286 "><span>SYS_WSS_register_callback</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e288 "><span>Returns success after registration of the user call back function.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e286 "><span>SYS_WSS_CloseConnection</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e288 "><span>Returns success after sending a close frame to the client.</span></td>
+</tr>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e286 "><span>SYS_WSS_PingClient</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d23366e288 "><span>Returns success after sending a ping frame to the client.</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

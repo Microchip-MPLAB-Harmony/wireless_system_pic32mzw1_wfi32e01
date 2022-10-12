@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
+<meta name="DC.rights.owner" content="(C) Copyright 2022" />
+<meta name="DC.type" content="topic" />
+<meta name="DC.title" content="OTA System Service Configuration" />
+<meta name="DC.relation" scheme="URI" content="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" />
+<meta name="DC.format" content="XHTML" />
+<meta name="DC.identifier" content="ota-system-service-configuration" />
+<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
+<title>OTA System Service Configuration</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-ota-system-service-configuration" />
+<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
+<meta name="Microsoft.Help.TocOrder" content="0" />
+<meta name="Microsoft.Help.Locale" content="en-US" />
+<meta name="Microsoft.Help.TopicLocale" content="en-US" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<script language="javascript">
+       
+       if (window.parent.location.protocol != 'file:') {
+				document.addEventListener('click', function(e) {
+				    if (e.target) {
+               if (e.target.nodeName == "A" ) {
+                    if (!e.target.target) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                              
+                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
+                      if (origUrl.length === 0) {
+                          origUrl = window.parent.location.href;
+                      }
+                      var href= e.target.getAttribute("href");
+                      var parts = href.split("#");
+          
+                      var url = "";
+                      if (parts.length == 2 ) {
+                        if (!parts[0].length) {
+                            url = window.parent.location.search.replace('?','')
+                        } else {
+                            url = parts[0].replace('.html','');
+                        }
+                      } else {
+                        url = parts[0].replace('.html','');
+                      }
+
+                      if (parts.length == 2) {
+                          url += "#" + parts[1];
+                      }
+    
+                      window.parent.location.href = origUrl + "?" + url;
+
+                      return false;
+                    }
+               }
+            }
+				});
+			}
+
+		</script><script language="javascript">
+         
+         function copyContent(content, button) {
+         
+            var textArea = document.createElement("textarea");
+            
+            // Place in the top-left corner of screen regardless of scroll position.
+            textArea.style.position = 'fixed';
+            textArea.style.top = 0;
+            textArea.style.left = 0;
+            
+            // Ensure it has a small width and height. Setting to 1px / 1em
+            // doesn't work as this gives a negative w/h on some browsers.
+            textArea.style.width = '2em';
+            textArea.style.height = '2em';
+            
+            // We don't need padding, reducing the size if it does flash render.
+            textArea.style.padding = 0;
+            
+            // Clean up any borders.
+            textArea.style.border = 'none';
+            textArea.style.outline = 'none';
+            textArea.style.boxShadow = 'none';
+            
+            // Avoid flash of the white box if rendered for any reason.
+            textArea.style.background = 'transparent';
+            
+            textArea.value = content;
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+               if (!button.classList.contains("copied")){
+                  button.textContent = "Copied";
+                  button.classList.add("copied");
+                  setTimeout(function(){
+                     button.textContent = "Copy";
+                     button.classList.remove("copied");
+                  },1000);
+               }
+            } catch (err) {
+               console.log('Oops, unable to copy');
+            }
+            
+            document.body.removeChild(textArea);
+         }
+         
+         function cpy(id, button) {
+            var element = document.getElementById(id);
+            var content = element.getAttribute("content");
+            
+            copyContent(content, button);
+         }
+         
+         document.addEventListener("DOMContentLoaded", function(event) {
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.style.position = "relative";
+               var copy = document.createElement("button");
+               copy.textContent = "Copy";
+               copy.setAttribute("class", "copy-code");
+               
+               var content = elem.textContent;
+               
+               copy.addEventListener("click", function(){
+                  copyContent(content, copy);
+               });
+               
+               elem.addEventListener("mouseenter", function(evt){
+                  elem.prepend(copy);
+               });
+            });
+            
+            document.querySelectorAll(".codeblock").forEach(function(elem) {
+               elem.addEventListener("mouseleave", function(evt){
+                  document.querySelector(".copy-code").remove();
+               });
+            });
+         });
+         
+      </script><script language="javascript">
+          
+          // Add the MathML namespace to html
+          var html = document.getElementsByTagName("html")[0],
+          head = document.getElementsByTagName("head")[0];
+          
+          var mathJax = document.createElement("script");
+          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
+          head.appendChild(mathJax);
+          
+          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
+          
+          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
+          
+          if (!inIframe()) { 
+          
+          var Default = "index.html?GUID-44230E49-6079-4901-9D7C-F71412C3B9EA"; 
+          
+          var displaylocation = "value" + window.location.href;
+          
+          var GUIDS = displaylocation.split('GUID');          
+          
+          if (displaylocation.indexOf('#GUID') != -1) {            
+          var First = GUIDS[1].split('.html');  
+          if (GUIDS[3]){First = GUIDS[2].split('.html');}
+          if (GUIDS[4]){First = GUIDS[3].split('.html');}
+          if (GUIDS[5]){First = GUIDS[4].split('.html');}
+          
+          var Second = GUIDS[2].split('#');   
+          if (GUIDS[3]){Second = GUIDS[3].split('#');}
+          if (GUIDS[4]){Second = GUIDS[4].split('#');}
+          if (GUIDS[5]){Second = GUIDS[5].split('#');}
+          
+          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
+          }                    
+          window.top.location = Default;
+          }       
+          
+        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
+        
+          button.copy-code{
+            display:none;
+            padding:0.7em 1.4em;
+            margin:0 0.3em 0.3em 0;
+            border-radius:0.15em;
+            box-sizing: border-box;
+            text-decoration:none;
+            font-family:'Roboto',sans-serif;
+            text-transform:uppercase;
+            font-weight:400;
+            color:#FFFFFF;
+            background-color:#9c9c9c;
+            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+            text-align:center;
+            position:relative;
+            border: 0;
+            float: right;
+            border-radius: .5em;
+            cursor: pointer;
+          }
+          button.copy-code:active{
+            top:0.1em;
+          }
+          
+          pre:hover button.copy-code{
+            display: inline-block !important;
+          }
+          button.copy-code.copied {
+            cursor: default !important;
+          }
+          
+          
+          @media all and (max-width:30em){
+            button.copy-code{
+              display:block;
+              margin:0.4em auto;
+            }
+          }
+        
+        
+      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
+<body id="ota-system-service-configuration">
+<h1 class="title topictitle1" id="ariaid-title1">OTA System Service Configuration</h1><div class="body"><p class="p">The OTA System Service library should be configured through the MHC ( <em class="ph i"><strong class="ph b">MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System Service Interface</strong></em> ). When user selects the OTA System Service library, all the required dependencies components are added automatically in the MHC configuration.</p>
+<p class="p">The following figure shows the MHC configuration window for configuring the OTA System Service and a brief description of various configuration options.</p>
+<p class="p">1.Open the MHC 3</p>
+<p class="p">2.Drag the OTA Service Module into the Active components from the Available components.</p>
+<br /><img class="image" src="GUID-EB36963A-A6D4-49BC-A78F-461F15031AB8-low.png" alt="ota_service_MHC" /><br /><p class="p">3.Configure the various parameters</p>
+<br /><img class="image" src="GUID-63897CE4-6840-406B-82A9-F56C5AEC9FE1-low.png" alt="ota_config" /><br /><p class="p">4.configure <strong class="ph b">Auto reset</strong>:</p>
+<br /><img class="image" src="GUID-511FAF9D-2A70-4A8C-82DF-5C0677765B47-low.png" alt="ota_config_autoreset" /><br /><p class="p">By default this option will be enabled . System will reset automatically after successful download of OTA image to load new image into the system and run, without any notifications to the current application.</p>
+<p class="p">If it is disabled by user , system will not go for reset automatically. Instead, it will be waiting for user trigger for system reset.</p>
+<p class="p">5.configure <strong class="ph b">server URL</strong>:</p>
+<br /><img class="image" src="GUID-B9FF72A6-4CCB-4474-8E28-991670DE743C-low.png" alt="ota_config_serverurl" /><br /><p class="p">User need to provide the server url where the manifest file in <code class="ph codeph">json</code> format is available.OTA service will use this url to connect to server and download <code class="ph codeph">json</code> file to check for updates.</p>
+<p class="p">6.configure <strong class="ph b">Auto OTA update</strong>:</p>
+<br /><img class="image" src="GUID-8DA19CE5-1D03-4191-84B7-765DCC81DDC7-low.png" alt="ota_config_autoupdate" /><br /><p class="p">By default this option will be enabled.</p>
+<p class="p">If it is enabled , OTA service will not wait for user trigger to initiate OTA process. It will automatically start OTA process if new update is available in the server.</p>
+<p class="p">If it is disabled , OTA service will wait for user trigger to initiate OTA process. User will be notified about new update availability via user defined callbacks.</p>
+<p class="p">7.configure <strong class="ph b">Periodic OTA check</strong>:</p>
+<br /><img class="image" src="GUID-276D2B42-78EF-4EF5-9FDD-7B60A792CA36-low.png" alt="ota_config_periodiccheck" /><br /><p class="p">By default this option will be configured to 60 seconds.</p>
+<p class="p">When enabled, OTA service will periodically download the manifest file to check for update availability at the user defined interval.</p>
+<p class="p">If it is disabled, OTA service will be checking for update availability on user trigger via the control message API.</p>
+<p class="p">8.configure <strong class="ph b">Application version</strong>:</p>
+<br /><img class="image" src="GUID-2BFEC2AC-400F-44FB-A3E4-86BD5D340EDC-low.png" alt="ota_config_appversion" /><br /><p class="p">User must ensure to provide correct integer version while generating OTA image.</p>
+<p class="p">This version number should be also be mentioned in the manifest file in OTA server. OTA upgrade will be triggered when a version with numerically higher version number is identified in the manifest file.</p>
+<p class="p">9.configure <strong class="ph b">Advances Configuration</strong>:</p>
+<br /><img class="image" src="GUID-4A38E939-2E38-43A6-8091-AECC89187E0F-low.png" alt="ota_advance_config" /><br /><ul class="ul"><li class="li"><p class="p"><strong class="ph b">Number of images:</strong>  This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Set JSON file size in bytes:</strong> Maximum size (in bytes) of the <code class="ph codeph">json</code> file present in the server.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Enforce TLS:</strong> By default this option will be disabled.If it is enabled by user, service will enforce TLS connection irrespective of the server URL prefix (<code class="ph codeph">http://</code> / <code class="ph codeph">https://</code>)mentioned by user. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.</p>
+<p class="p"><strong class="ph b">NOTE : If disabled service will automatically detect and go for http or https connection, by looking into server URL mentioned by user</strong></p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Disk space check:</strong> By default this option will be disabled. If enable, free sector check will be done, in ext flash before download starts.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Enable/Disable Patch Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">patch</code> functionality.</p>
+</li>
+</ul>
+<p class="p"><strong class="ph b">All of the required files are automatically added into the MPLAB X IDE project by the MHC when the OTA Service is selected for use.</strong></p>
+<p class="p">10.Generate code using "Generate" button in MHC :</p>
+<br /><img class="image" src="GUID-90157A96-7171-4DC8-BDAB-1CACE8395898-low.png" alt="ota_mhc_generate" /><br /><p class="p">11.In case you are creating a factory image, include the bootloader project from the apps folder of this repo as a <code class="ph codeph">loadable project</code> into the application :</p>
+<br /><img class="image" src="GUID-E3F0AB13-BEE8-4E93-B331-E8CCA7E34BEE-low.png" alt="resized_ota_add_loadables" /><br /><p class="p"><strong class="ph b">NOTE: Please open bootloader project in MPLABx IDE and compile separately, before loading</strong></p>
+<p class="p">12.Build the project to get the unified hex and load the same on device.</p>
+</div>
+<div class="related-links">
+<div class="familylinks">
+<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html">Over The Air (OTA) firmware update System Service</a></div>
+</div>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="building-custom-logic"><h2 class="title topictitle2" id="ariaid-title2">Building custom logic</h2><div class="body"><p class="p">User can build custom logic required for own design, using configrable parameters as mentioned above. Additionally , users can also build and apply required application level logic which can be included in <strong class="ph b">app.c</strong> file.</p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="easily-registering-user-callbacks"><h2 class="title topictitle2" id="ariaid-title3">Easily registering user callbacks</h2><div class="body"><p class="p">For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  <strong class="ph b">app_ota.c</strong> file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in <strong class="ph b">OTA System Service Interface</strong> section.</p>
+</div>
+</div>
+</body>
+</html>

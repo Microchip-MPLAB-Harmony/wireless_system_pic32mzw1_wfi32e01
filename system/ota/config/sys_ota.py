@@ -25,7 +25,9 @@
 ################################################################################
 #### Global Variables ####
 ################################################################################
+global ota_helpkeyword
 
+ota_helpkeyword = "mcc_h3_pic32mzw1_ota_system_service_configurations"
 ################################################################################
 #### Business Logic ####
 ################################################################################
@@ -41,35 +43,41 @@ def setVisible_OnValueChanged(symbol, event):
 
 def instantiateComponent(sysOTAPic32mzw1Component):
     
+    global ota_helpkeyword
     #-------------------------------------------------------------------------#
     #                           OTA main menu                        #
     #-------------------------------------------------------------------------#
     sysotaResetEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_AUTORESET_ENABLE", None)
     sysotaResetEnable.setLabel("Auto reset")
+    sysotaResetEnable.setHelp(ota_helpkeyword)
     sysotaResetEnable.setDescription('enable auto system reset after new image downloaded')
     sysotaResetEnable.setVisible(True)
     sysotaResetEnable.setDefaultValue(True)
     
     sysotaURL = sysOTAPic32mzw1Component.createStringSymbol("SYS_OTA_URL", None)
     sysotaURL.setLabel("server URL")
+    sysotaURL.setHelp(ota_helpkeyword)
     sysotaURL.setVisible(True)
     sysotaURL.setDescription("Server address (http://server addr../ota.json)")
     sysotaURL.setDefaultValue("http://192.168.43.173:8000/ota.json")
 
     sysotaAutoUpdateEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_AUTOUPDATE_ENABLE", None)
     sysotaAutoUpdateEnable.setLabel("Auto OTA update")
+    sysotaAutoUpdateEnable.setHelp(ota_helpkeyword)
     sysotaAutoUpdateEnable.setDescription('enable auto ota update')
     sysotaAutoUpdateEnable.setVisible(True)
     sysotaAutoUpdateEnable.setDefaultValue(True)
         
     symbol = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_PERODIC_UPDATE", None)
     symbol.setLabel("Periodic OTA check")
+    symbol.setHelp(ota_helpkeyword)
     symbol.setDescription("System checks update with server periodically if enables this option")
     symbol.setVisible(True)
     symbol.setDefaultValue(True)
         
     symbol_interval = sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_TIME_INTERVAL", symbol)
     symbol_interval.setLabel("Time inerval(sec)")
+    symbol_interval.setHelp(ota_helpkeyword)
     symbol_interval.setMin(0)
     symbol_interval.setMax(7200)
     symbol_interval.setDefaultValue(60)
@@ -79,6 +87,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     
     sysotaAppVersion = sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_APP_VER_NUM", None)
     sysotaAppVersion.setLabel("Application version")
+    sysotaAppVersion.setHelp(ota_helpkeyword)
     sysotaAppVersion.setMin(0)
     sysotaAppVersion.setMax(255)
     sysotaAppVersion.setDefaultValue(1)
@@ -87,16 +96,19 @@ def instantiateComponent(sysOTAPic32mzw1Component):
 
     symbol_debug = sysOTAPic32mzw1Component.createCommentSymbol("SYS_OTA_DEBUG_MENU", None)
     symbol_debug.setLabel("DEBUG")
+    symbol_debug.setHelp(ota_helpkeyword)
     symbol_debug.setVisible(True)
     
     symbol_CLICMD_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_CLICMD_ENABLED", symbol_debug)
     symbol_CLICMD_enabling.setLabel("Enable CLI commands")
+    symbol_CLICMD_enabling.setHelp(ota_helpkeyword)
     symbol_CLICMD_enabling.setVisible(True)
-    symbol_CLICMD_enabling.setDefaultValue(False)
+    symbol_CLICMD_enabling.setDefaultValue(True)
     symbol_CLICMD_enabling.setDescription("Enable OTA CLI command")
     
     symbol_APPDEBUG_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_APPDEBUG_ENABLED", symbol_debug)
     symbol_APPDEBUG_enabling.setLabel("Enable Debug Logs")
+    symbol_APPDEBUG_enabling.setHelp(ota_helpkeyword)
     symbol_APPDEBUG_enabling.setVisible(True)
     symbol_APPDEBUG_enabling.setDefaultValue(False)
     symbol_APPDEBUG_enabling.setDescription("Enable OTA debug log")
@@ -107,6 +119,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
 
         symbol = sysOTAPic32mzw1Component.createIntegerSymbol("OTA_RTOS_TASK_DELAY", menu)
         symbol.setLabel("RTOS Task Delay (ms)")
+        symbol.setHelp(ota_helpkeyword)
         symbol.setMin(0)
         symbol.setMax(100)
         symbol.setDefaultValue(1)
@@ -115,12 +128,14 @@ def instantiateComponent(sysOTAPic32mzw1Component):
 
         symbol = sysOTAPic32mzw1Component.createIntegerSymbol("OTA_RTOS_STACK_SIZE", menu)
         symbol.setLabel("RTOS Task Stack Size")
+        symbol.setHelp(ota_helpkeyword)
         symbol.setDefaultValue(1024)
         symbol.setReadOnly(True)
         symbol.setVisible(False)
 
         symbol = sysOTAPic32mzw1Component.createIntegerSymbol("OTA_RTOS_TASK_PRIORITY", menu)
         symbol.setLabel("RTOS Task Priority")
+        symbol.setHelp(ota_helpkeyword)
         symbol.setDefaultValue(1)
         symbol.setReadOnly(True)
         symbol.setVisible(False)   
@@ -131,11 +146,13 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     
     symbol = sysOTAPic32mzw1Component.createCommentSymbol("SYS_OTA_ADVANCED_CONFIG_MENU", None)
     symbol.setLabel("Advanced Configuration")
+    symbol.setHelp(ota_helpkeyword)
     symbol.setVisible(True)
     #syswifiAdvMenu.setDefaultValue(False)
         
     symbol_max_img = sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_NUM_IMGS", symbol)
     symbol_max_img.setLabel("Number of images")
+    symbol_max_img.setHelp(ota_helpkeyword)
     symbol_max_img.setMin(0)
     symbol_max_img.setMax(5)
     symbol_max_img.setDefaultValue(2)
@@ -144,6 +161,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     
     symbol_JSON_buf_size = sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_JSON_FILE_MAXSIZE", symbol)
     symbol_JSON_buf_size.setLabel("Set JSON file size in bytes")
+    symbol_JSON_buf_size.setHelp(ota_helpkeyword)
     symbol_JSON_buf_size.setMin(0)
     symbol_JSON_buf_size.setMax(1000)
     symbol_JSON_buf_size.setDefaultValue(1000)
@@ -152,21 +170,31 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     
     symbol_tls_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_ENFORCE_TLS", symbol)
     symbol_tls_enabling.setLabel("Enforce TLS")
+    symbol_tls_enabling.setHelp(ota_helpkeyword)
     symbol_tls_enabling.setVisible(True)
     #symbol_tls_enabling.setDefaultValue(True)
     symbol_tls_enabling.setDescription("Enforcing TLS for OTA")
     
     symbol_sector_check_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FREE_SECTOR_CHECK_ENABLE", symbol)
     symbol_sector_check_enabling.setLabel("Disk space check")
+    symbol_sector_check_enabling.setHelp(ota_helpkeyword)
     symbol_sector_check_enabling.setVisible(True)
     symbol_sector_check_enabling.setDefaultValue(False)
     symbol_sector_check_enabling.setDescription("To Enable free sector check in ext flash before download starts")
     
     symbol_patch_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_PATCH_ENABLE", symbol)
     symbol_patch_enabling.setLabel("Enable/Disable Patch Functionality")
+    symbol_patch_enabling.setHelp(ota_helpkeyword)
     symbol_patch_enabling.setVisible(True)
     symbol_patch_enabling.setDefaultValue(False)
     symbol_patch_enabling.setDescription("To Enable patch functionality support")
+    
+    symbol_secure_ota_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_SECURE_BOOT_ENABLED", symbol)
+    symbol_secure_ota_enabling.setLabel("Enable/Disable Secure OTA Functionality")
+    symbol_secure_ota_enabling.setVisible(True)
+    symbol_secure_ota_enabling.setHelp(ota_helpkeyword)
+    symbol_secure_ota_enabling.setDefaultValue(False)
+    symbol_secure_ota_enabling.setDescription("To Enable Secure OTA functionality support")
 
     ############################################################################
     #### Code Generation ####
@@ -450,6 +478,16 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     src.setSourcePath("system/ota/framework/tools/hex2bin/hex2bin.py")
     src.setOutputName("hex2bin.py")
     src.setDestPath("../../../../tools/hex2bin/")
+    src.setType("IMPORTANT")
+    src.setMarkup(False)
+    src.setEnabled(True)
+    
+    ################################### ecdsaSign.py file ######################################
+    
+    src = sysOTAPic32mzw1Component.createFileSymbol("SYS_ECDSASIGN_PY", None)
+    src.setSourcePath("system/ota/framework/tools/ecdsaSign.py")
+    src.setOutputName("ecdsaSign.py")
+    src.setDestPath("../../../../tools/")
     src.setType("IMPORTANT")
     src.setMarkup(False)
     src.setEnabled(True)

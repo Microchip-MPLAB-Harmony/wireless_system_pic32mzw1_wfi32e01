@@ -41,3 +41,6 @@
 <#if SYS_OTA_PATCH_ENABLE == true>
 #define SYS_OTA_PATCH_ENABLE   	
 </#if>
+<#if SYS_OTA_SECURE_BOOT_ENABLED == true>
+#define SYS_OTA_SECURE_BOOT_ENABLED   	
+</#if>
