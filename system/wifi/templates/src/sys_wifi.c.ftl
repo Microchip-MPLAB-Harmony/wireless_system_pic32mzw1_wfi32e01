@@ -52,6 +52,17 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 <#if SYS_WIFI_PROVISION_ENABLE == true>
 #include "system/wifiprov/sys_wifiprov.h"
 </#if>
+
+<#if SYS_WIFI_STA_AUTH == "WPAWPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2WPA3-Enterprise" || SYS_WIFI_STA_AUTH == "WPA3-Enterprise" >
+#include "tcpip/src/link_list.h"
+#include "wolfssl/ssl.h"
+#include "wolfssl/wolfcrypt/logging.h"
+
+#include "${SYS_WIFI_STA_ENT_CACERT_FILE_NAME}"
+#include "${SYS_WIFI_STA_ENT_PRIVATE_CERT_FILE_NAME}"
+#include "${SYS_WIFI_STA_ENT_PRIVATE_KEY_FILE_NAME}"
+</#if>
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Type Definitions
@@ -89,6 +100,12 @@ typedef struct
     SYS_WIFI_STA_APP_INFO wifiSrvcStaAppInfo;
     
 } SYS_WIFI_STA_CONNECTION_INFO;
+
+</#if>
+<#if SYS_WIFI_STA_AUTH == "WPAWPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2WPA3-Enterprise" || SYS_WIFI_STA_AUTH == "WPA3-Enterprise" >
+
+typedef uintptr_t SYS_WIFI_TLS_CONTEXT_HANDLE;
+#define SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID  (((SYS_WIFI_TLS_CONTEXT_HANDLE) -1))
 
 </#if>
 // *****************************************************************************
@@ -1237,6 +1254,50 @@ static SYS_WIFI_RESULT SYS_WIFI_SetSSID(void)
     }
     return ret;
 }
+<#if SYS_WIFI_STA_AUTH == "WPAWPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2WPA3-Enterprise" || SYS_WIFI_STA_AUTH == "WPA3-Enterprise" >
+static SYS_WIFI_TLS_CONTEXT_HANDLE SYS_WIFI_Create_TLS_Context(
+    const uint8_t *const pCAcert,
+    uint16_t u16CAcertLen,
+    int caCertFormat,    
+    const uint8_t *const pCert,
+    uint16_t u16CertLen,
+    int privCertFormat,
+    const uint8_t *const pPriKey,
+    uint16_t u16PriKeyLen,
+    int privKeyFormat)
+{
+    WOLFSSL_CTX *pTlsCtx = NULL;     
+    // Create wolfssl context with TLS v1.2 
+    pTlsCtx = wolfSSL_CTX_new(wolfTLSv1_2_client_method());
+    // Load CA certificate into WOLFSSL_CTX for validating peer
+    if (SSL_SUCCESS != wolfSSL_CTX_load_verify_buffer(pTlsCtx, pCAcert, u16CAcertLen, caCertFormat))
+    {
+        wolfSSL_CTX_free(pTlsCtx);
+        SYS_CONSOLE_PRINT("\n\r_Create_TLS_Context load ca cert failed\n");
+        return SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+    }
+    // Verify the certificate received from the server during the handshake 
+    wolfSSL_CTX_set_verify(pTlsCtx, WOLFSSL_VERIFY_PEER, 0);
+
+    // Load client certificate into WOLFSSL_CTX 
+    if (SSL_SUCCESS != wolfSSL_CTX_use_certificate_buffer(pTlsCtx, pCert, u16CertLen, privCertFormat))
+    {
+        wolfSSL_CTX_free(pTlsCtx);
+        SYS_CONSOLE_PRINT("_Create_TLS_Context load priv cert failed\n");
+        return SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+    }
+
+    // Load client key into WOLFSSL_CTX
+    if (SSL_SUCCESS != wolfSSL_CTX_use_PrivateKey_buffer(pTlsCtx, pPriKey, u16PriKeyLen, privKeyFormat))
+    {
+        wolfSSL_CTX_free(pTlsCtx);
+        SYS_CONSOLE_PRINT("_Create_TLS_Context load priv key failed\n");
+        return SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+    }
+
+    return (SYS_WIFI_TLS_CONTEXT_HANDLE) pTlsCtx;
+}
+</#if>
 
 static SYS_WIFI_RESULT SYS_WIFI_ConfigReq(void)
 {
@@ -1244,6 +1305,10 @@ static SYS_WIFI_RESULT SYS_WIFI_ConfigReq(void)
     uint8_t authType = SYS_WIFI_GetAuthType();
     uint8_t * const pwd = SYS_WIFI_GetPsk();
     uint8_t pwdLen = SYS_WIFI_GetPskLen();
+    <#if SYS_WIFI_STA_AUTH == "WPAWPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2WPA3-Enterprise" || SYS_WIFI_STA_AUTH == "WPA3-Enterprise" >
+    const char *pIdentity = SYS_WIFI_STA_ENT_USER ;
+    const char *domain = SYS_WIFI_STA_ENT_SERVER_DOMAIN;
+    </#if>
 
 <#if SYS_WIFI_APPDEBUG_ENABLE  == true>
         SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "authType=%d,password=%s,password len=%d\r\n",authType,pwd,pwdLen);
@@ -1343,7 +1408,120 @@ static SYS_WIFI_RESULT SYS_WIFI_ConfigReq(void)
                 break;
             }
 </#if>
-
+<#if SYS_WIFI_STA_AUTH == "WPAWPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2WPA3-Enterprise" || SYS_WIFI_STA_AUTH == "WPA3-Enterprise" >
+            case SYS_WIFI_WPA2_ENTERPRISE:
+            {
+                SYS_WIFI_TLS_CONTEXT_HANDLE tlsCtxHandle = SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+                tlsCtxHandle = SYS_WIFI_Create_TLS_Context(
+                        SYS_WIFI_STA_ENT_CACERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_CACERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_CACERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_FORMAT);
+                if (WDRV_PIC32MZW_STATUS_OK != WDRV_PIC32MZW_AuthCtxSetEnterpriseTLS(&g_wifiSrvcObj.wifiSrvcAuthCtx,pIdentity,tlsCtxHandle,domain,WDRV_PIC32MZW_AUTH_TYPE_WPA2_ENTERPRISE)) 
+                {
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                    SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "Unable to set authentication to WPA3 PSK \r\n");
+</#if>
+                    ret = SYS_WIFI_CONFIG_FAILURE;
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                } 
+                else 
+                {
+                    SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "set authentication to WPA3 PSK \r\n");
+</#if>
+                }
+                break;
+            }
+            case SYS_WIFI_WPAWPA2MIXED_ENTERPRISE:
+            {
+                SYS_WIFI_TLS_CONTEXT_HANDLE tlsCtxHandle = SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+                tlsCtxHandle = SYS_WIFI_Create_TLS_Context(
+                        SYS_WIFI_STA_ENT_CACERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_CACERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_CACERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_FORMAT);
+                if (WDRV_PIC32MZW_STATUS_OK != WDRV_PIC32MZW_AuthCtxSetEnterpriseTLS(&g_wifiSrvcObj.wifiSrvcAuthCtx,pIdentity,tlsCtxHandle,domain,WDRV_PIC32MZW_AUTH_TYPE_WPA2_ENTERPRISE)) 
+                {
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                    SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "Unable to set authentication to WPA3 PSK \r\n");
+</#if>
+                    ret = SYS_WIFI_CONFIG_FAILURE;
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                } 
+                else 
+                {
+                    SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "set authentication to WPA3 PSK \r\n");
+</#if>
+                }
+                break;
+            }
+            case SYS_WIFI_WPA2WPA3MIXED_ENTERPRISE:
+            {
+                SYS_WIFI_TLS_CONTEXT_HANDLE tlsCtxHandle = SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+                tlsCtxHandle = SYS_WIFI_Create_TLS_Context(
+                        SYS_WIFI_STA_ENT_CACERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_CACERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_CACERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_FORMAT);
+                if (WDRV_PIC32MZW_STATUS_OK != WDRV_PIC32MZW_AuthCtxSetEnterpriseTLS(&g_wifiSrvcObj.wifiSrvcAuthCtx,pIdentity,tlsCtxHandle,domain,WDRV_PIC32MZW_AUTH_TYPE_WPA2_ENTERPRISE)) 
+                {
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                    SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "Unable to set authentication to WPA3 PSK \r\n");
+</#if>
+                    ret = SYS_WIFI_CONFIG_FAILURE;
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                } 
+                else 
+                {
+                    SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "set authentication to WPA3 PSK \r\n");
+</#if>
+                }
+                break;
+            }
+            case SYS_WIFI_WPA3_ENTERPRISE:
+            {
+                SYS_WIFI_TLS_CONTEXT_HANDLE tlsCtxHandle = SYS_WIFI_TLS_CONTEXT_HANDLE_INVALID;
+                tlsCtxHandle = SYS_WIFI_Create_TLS_Context(
+                        SYS_WIFI_STA_ENT_CACERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_CACERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_CACERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_CERT_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_CERT_FORMAT,
+                        SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME,
+                        sizeof(SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME),
+                        SYS_WIFI_STA_ENT_PRIVATE_FORMAT);
+                if (WDRV_PIC32MZW_STATUS_OK != WDRV_PIC32MZW_AuthCtxSetEnterpriseTLS(&g_wifiSrvcObj.wifiSrvcAuthCtx,pIdentity,tlsCtxHandle,domain,WDRV_PIC32MZW_AUTH_TYPE_WPA2_ENTERPRISE)) 
+                {
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                    SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "Unable to set authentication to WPA3 PSK \r\n");
+</#if>
+                    ret = SYS_WIFI_CONFIG_FAILURE;
+<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
+                } 
+                else 
+                {
+                    SYS_APPDEBUG_DBG_PRINT(g_wifiSrvcAppDebugHdl, WIFI_CFG, "set authentication to WPA3 PSK \r\n");
+</#if>
+                }
+                break;
+            }
+</#if>          
             case SYS_WIFI_WEP:
             {
                ret = SYS_WIFI_CONFIG_FAILURE; 

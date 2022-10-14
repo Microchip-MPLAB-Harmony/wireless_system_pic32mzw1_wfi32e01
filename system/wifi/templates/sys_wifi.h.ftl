@@ -99,8 +99,20 @@ typedef enum
     SYS_WIFI_WPA2WPA3MIXED,
 
     /* Requesting a WPA3 Authentication types */
-    SYS_WIFI_WPA3
+    SYS_WIFI_WPA3,
+<#if SYS_WIFI_STA_AUTH == "WPAWPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2-Enterprise" || SYS_WIFI_STA_AUTH == "WPA2WPA3-Enterprise" || SYS_WIFI_STA_AUTH == "WPA3-Enterprise" >
+    /* Requesting a  WPA2 Enterprise Authentication mode types */
+    SYS_WIFI_WPA2_ENTERPRISE,
 
+    /* Requesting a  WPAWPA2MIXED Enterprise Authentication mode types */
+    SYS_WIFI_WPAWPA2MIXED_ENTERPRISE,
+
+    /* Requesting a WPA3 Enterprise Authentication mode types */        
+    SYS_WIFI_WPA3_ENTERPRISE,
+    
+    /* Requesting a WPA2WPA3MIXED Enterprise Authentication mode types */
+    SYS_WIFI_WPA2WPA3MIXED_ENTERPRISE
+</#if>
 } SYS_WIFI_AUTH ;
 
 // *****************************************************************************
