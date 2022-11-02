@@ -1797,6 +1797,12 @@ static uint32_t SYS_WIFI_ExecuteBlock
                     {
                         if (SYS_WIFI_SUCCESS == SYS_WIFI_ConfigReq()) 
                         {
+						
+<#if (SYS_WIFI_POWERSAVE_ENABLE == true) && (SYS_WIFI_WAKEUP == "LISTEN INTERVAL")>                            
+                            WDRV_PIC32MZW_PowerSaveListenIntervalSet(g_wifiSrvcObj.wifiSrvcDrvHdl,SYS_WIFI_LISTENINTERVAL);
+                            WDRV_PIC32MZW_PowerSaveSleepInactLimitSet(g_wifiSrvcObj.wifiSrvcDrvHdl,SYS_WIFI_SLEEPINACTLIMIT);
+</#if>
+
                             if (SYS_WIFI_SUCCESS == SYS_WIFI_ConnectReq()) 
                             {
 <#if (SYS_WIFI_STA_ENABLE == true) && (SYS_WIFI_AP_ENABLE == true)>	
@@ -1844,6 +1850,16 @@ static uint32_t SYS_WIFI_ExecuteBlock
                 wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_TCPIP_READY;
                 break;
             }
+            case SYS_WIFI_STATUS_CONNECT_ERROR:
+            {
+                if (g_wifiSrvcAutoConnectRetry == MAX_AUTO_CONNECT_RETRY)
+                {
+                    SYS_WIFI_CallBackFun(SYS_WIFI_AUTO_CONNECT_FAIL, NULL, g_wifiSrvcCookie); 
+                    wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_CONFIG_ERROR;
+                }
+                break;
+            }
+
 </#if>
 
 
@@ -2008,13 +2024,20 @@ static void SYS_WIFI_WIFIPROVCallBack
                                            ((SYS_WIFIPROV_STA == (SYS_WIFIPROV_MODE) SYS_WIFI_GetMode()) ? "STA" : "AP"),\
                                            ((SYS_WIFIPROV_STA == wifiConfig->mode)?"STA":"AP"));
                             /* Copy received configuration into Wi-Fi service structure */
-			if (SYS_WIFIPROV_STA == (SYS_WIFIPROV_MODE) SYS_WIFI_GetMode())
-                        {
-                            SYS_WIFI_DisConnect();
-                        }
-                            memcpy(&g_wifiSrvcConfig, wifiConfig, sizeof (SYS_WIFIPROV_CONFIG));
-                            WDRV_PIC32MZW_Close(g_wifiSrvcObj.wifiSrvcDrvHdl);
-                            SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_INIT);
+			    if (SYS_WIFIPROV_STA == (SYS_WIFIPROV_MODE) SYS_WIFI_GetMode())
+                            {
+                                SYS_WIFI_DisConnect();
+                            }
+                            if((SYS_WIFIPROV_STA == wifiConfig->mode) && (SYS_WIFIPROV_AP == (SYS_WIFIPROV_MODE) SYS_WIFI_GetMode()))
+                            {
+                                SYS_RESET_SoftwareReset();
+                            } 
+                            else
+                            {
+                                memcpy(&g_wifiSrvcConfig, wifiConfig, sizeof (SYS_WIFIPROV_CONFIG));
+                                WDRV_PIC32MZW_Close(g_wifiSrvcObj.wifiSrvcDrvHdl);
+                                SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_INIT);
+                            }
                         }
                         if (data) 
                         {
