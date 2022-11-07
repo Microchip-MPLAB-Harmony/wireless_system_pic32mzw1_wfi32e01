@@ -230,62 +230,62 @@
 <p class="p">1.Open the MHC 32.Drag the WSS Service Module into from the Available components into the Project Graph. This will trigger the auto activation of the dependent modules.Click on 'Yes' in the confirmation window popped up for component auto activation.</p>
 <br /><img class="image" src="GUID-F6E1FAA3-8E0B-4818-8E5B-9BD56B0C2142-low.png" alt="resized_Activate_WSS" /><br /><p class="p">3.Configure the various parameters</p>
 <br /><img class="image" src="GUID-1DB0A496-C953-48D0-ADCE-AB51521BBDAF-low.png" alt="resized_ConfigWSS" /><br />
-<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d32322e32"><span>Parameter</span></th>
-<th class="entry cellrowborder" style="vertical-align:middle;" id="d32322e34"><span>Description</span></th>
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d33336e32"><span>Parameter</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d33336e34"><span>Description</span></th>
 </tr>
 </thead>
-<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e32 "><span>Port</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e34 "><span>port used by the WSS service. Default is 8000</span></td>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e32 "><span>Port</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e34 "><span>port used by the WSS service. Default is 8000</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e32 "><span>Debug</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e34 "><span>Control debug prints. Disabled by default</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e32 "><span>Debug</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e34 "><span>Control debug prints. Disabled by default</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e32 "><span>Secure Socket</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e34 "><span>Enable/Disable secure web socket. Make sure that you configure the required server certificate and keys in the underlying layers.</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e32 "><span>Secure Socket</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e34 "><span>Enable/Disable secure web socket. Make sure that you configure the required server certificate and keys in the underlying layers.</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e32 "><span>Application template Generation</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e34 "><span>Control the generation of an application template with all the available callbacks.</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e32 "><span>Application template Generation</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e34 "><span>Control the generation of an application template with all the available callbacks.</span></td>
 </tr>
 </tbody>
 </table>
 </div>
 <br /><img class="image" src="GUID-7F9FE90D-AB5C-48C2-9271-AC919BD9C062-low.png" alt="ConfWSS_PortDebugTLSAppTemplate" /><br /><p class="p">4.Enabling secure websocket
 To enable the secure web socket support user need to enable the below configuration options.</p>
-<pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d32322e62', this);">Copy</button><code id="d32322e62" content="1.Enable the highlighted option in the Web Socket Server Service MHC configuration.&#xD;">1.Enable the highlighted option in the Web Socket Server Service MHC configuration.&#xD;</code></pre><br /><img class="image" src="GUID-15F59568-F491-4602-B2A7-C1AFFB592EBB-low.png" alt="wss_tls_enable" /><br /><pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d32322e68', this);">Copy</button><code id="d32322e68" content="2.Enable the highlighted options in the Presentation layer net_pres component. The server certificate used by default will be the one provided by the wolfssl module. The user need to provide the required modifications in the highlighted parameters incase of application specific certificate and keys.&#xD;">2.Enable the highlighted options in the Presentation layer net_pres component. The server certificate used by default will be the one provided by the wolfssl module. The user need to provide the required modifications in the highlighted parameters incase of application specific certificate and keys.&#xD;</code></pre><br /><img class="image" src="GUID-E91B9AB2-57D9-4BA5-82D9-C2A0C30C8DC0-low.png" alt="wss_tls_netpress" /><br /><p class="p">5.Advanced Configuration with RX buffer size, maximum number of supported clients, client timeout and start at boot features.</p>
+<pre class="pre codeblock"><code id="d33336e62" content="1.Enable the highlighted option in the Web Socket Server Service MHC configuration.&#xD;">1.Enable the highlighted option in the Web Socket Server Service MHC configuration.&#xD;</code></pre><br /><img class="image" src="GUID-15F59568-F491-4602-B2A7-C1AFFB592EBB-low.png" alt="wss_tls_enable" /><br /><pre class="pre codeblock"><code id="d33336e68" content="2.Enable the highlighted options in the Presentation layer net_pres component. The server certificate used by default will be the one provided by the wolfssl module. The user need to provide the required modifications in the highlighted parameters incase of application specific certificate and keys.&#xD;">2.Enable the highlighted options in the Presentation layer net_pres component. The server certificate used by default will be the one provided by the wolfssl module. The user need to provide the required modifications in the highlighted parameters incase of application specific certificate and keys.&#xD;</code></pre><br /><img class="image" src="GUID-E91B9AB2-57D9-4BA5-82D9-C2A0C30C8DC0-low.png" alt="wss_tls_netpress" /><br /><p class="p">5.Advanced Configuration with RX buffer size, maximum number of supported clients, client timeout and start at boot features.</p>
 
-<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d32322e81"><span>Parameter</span></th>
-<th class="entry cellrowborder" style="vertical-align:middle;" id="d32322e83"><span>Description</span></th>
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d33336e81"><span>Parameter</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d33336e83"><span>Description</span></th>
 </tr>
 </thead>
-<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e81 "><span>Max Rx buffer length</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e83 "><span>Max length of the buffer used to receive and process messages. Default is 1400</span></td>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e81 "><span>Max Rx buffer length</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e83 "><span>Max length of the buffer used to receive and process messages. Default is 1400</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e81 "><span>Max number of clients</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e83 "><span>Max number of clients allowed to connect to teh WSS. Default is 2</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e81 "><span>Max number of clients</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e83 "><span>Max number of clients allowed to connect to teh WSS. Default is 2</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e81 "><span>Client timeout in ms</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e83 "><span>Timeout after which the client is disconnected in case of no data transfer or ping after connection. Default is 30000</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e81 "><span>Client timeout in ms</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e83 "><span>Timeout after which the client is disconnected in case of no data transfer or ping after connection. Default is 30000</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e81 "><span>Start at boot</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e83 "><span>Control when the WSS is enabled. Enabled at boot by default.</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e81 "><span>Start at boot</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e83 "><span>Control when the WSS is enabled. Enabled at boot by default.</span></td>
 </tr>
 </tbody>
 </table>
 </div>
 <br /><img class="image" src="GUID-B61E1EAD-6442-406F-8D16-20A712795AC5-low.png" alt="AdvancedConf_WSS" /><br /><p class="p">6.FreeRTOS configuration enabled by default</p>
 
-<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d32322e117"><span>Parameter</span></th>
-<th class="entry cellrowborder" style="vertical-align:middle;" id="d32322e119"><span>Description</span></th>
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d33336e117"><span>Parameter</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d33336e119"><span>Description</span></th>
 </tr>
 </thead>
-<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e117 "><span>RTOS Task Delay(ms)</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e119 "><span>WSS RTOS task delay. Default is 1 ms</span></td>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e117 "><span>RTOS Task Delay(ms)</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e119 "><span>WSS RTOS task delay. Default is 1 ms</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e117 "><span>RTOS Task Stack Size</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e119 "><span>WSS RTOS task stack size. Default is 4096</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e117 "><span>RTOS Task Stack Size</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e119 "><span>WSS RTOS task stack size. Default is 4096</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e117 "><span>RTOS Task priority</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d32322e119 "><span>WSS RTOS task priority. Default is 1</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e117 "><span>RTOS Task priority</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d33336e119 "><span>WSS RTOS task priority. Default is 1</span></td>
 </tr>
 </tbody>
 </table>

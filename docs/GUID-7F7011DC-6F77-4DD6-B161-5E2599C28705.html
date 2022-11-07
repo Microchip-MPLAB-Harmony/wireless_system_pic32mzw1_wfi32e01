@@ -225,17 +225,53 @@
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
 <body id="microchip-mplab-harmony-3-release-notes">
 <h1 class="title topictitle1" id="ariaid-title1">Microchip MPLAB® Harmony 3 Release Notes</h1><div class="body"></div>
-<div class="topic nested1" aria-labelledby="ariaid-title2" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v361"><h2 class="title topictitle2" id="ariaid-title2">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.6.1</strong></h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title3" id="new-features"><h3 class="title topictitle3" id="ariaid-title3">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Wi-Fi Connection time improvement.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title2" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v370"><h2 class="title topictitle2" id="ariaid-title2">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.7.0</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title3" id="new-features"><h3 class="title topictitle3" id="ariaid-title3">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Support of secure OTA using WolfSSL and Trustflex.</p>
 </li>
-<li class="li"><p class="p"><span class="xref"></span> Support for Scan and Connect in HTTP Provisioning.</p>
+<li class="li"><p class="p"><span class="xref"></span> Support of secure websocket server.</p>
+</li>
+<li class="li"><p class="p"><span class="xref"></span> Support of low Power Wi-Fi connected sleep modes(WSM and WDS).</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="topic nested2" aria-labelledby="ariaid-title4" id="bug-fixes-and-improvements"><h3 class="title topictitle3" id="ariaid-title4">Bug fixes and Improvements</h3><div class="body"></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title5" id="known-issues-and-limitations"><h3 class="title topictitle3" id="ariaid-title5">Known Issues and Limitations</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Due to an issue in the underlying <code class="ph codeph">net</code> repo, you need to turn off <code class="ph codeph">-Werror</code> for the <code class="ph codeph">icmp.c</code> file in your projects.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title5" id="known-issues-and-limitations"><h3 class="title topictitle3" id="ariaid-title5">Known Issues and Limitations</h3><div class="body"><ul class="ul"><li class="li"><p class="p">In Secure OTA, system console read buffer size should be atleast 200 bytes.</p>
+</li>
+<li class="li"><p class="p">Web socket server will support only upto 500 bytes in a single message.</p>
+</li>
+<li class="li"><p class="p">Web socket server will not honour optional header fields like <code class="ph codeph">Sec-WebSocket-Protocol</code> and <code class="ph codeph">Sec-WebSocket-Extensions</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title6" id="development-tools"><h3 class="title topictitle3" id="ariaid-title6">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v6.00</a></p>
+</li>
+<li class="li"><p class="p">MPLAB® X IDE plug-ins:</p>
+<ul class="ul"><li class="li"><p class="p">MPLAB® Code Configurator (MCC) <code class="ph codeph">v5.1.17</code></p>
+</li>
+</ul>
+</li>
+<li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/compilers" target="_blank">MPLAB® XC32 C/C++ Compiler v3.01</a></p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">DFP 1.6.220</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title7" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v361"><h2 class="title topictitle2" id="ariaid-title7">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.6.1</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title8" id="new-features-1"><h3 class="title topictitle3" id="ariaid-title8">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Wi-Fi Connection time improvement.</p>
+</li>
+<li class="li"><p class="p"><span class="xref"></span> Support for Scan and Connect in HTTP Provisioning.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title9" id="bug-fixes-and-improvements-1"><h3 class="title topictitle3" id="ariaid-title9">Bug fixes and Improvements</h3><div class="body"></div>
+</div>
+<div class="topic nested2" aria-labelledby="ariaid-title10" id="known-issues-and-limitations-1"><h3 class="title topictitle3" id="ariaid-title10">Known Issues and Limitations</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Due to an issue in the underlying <code class="ph codeph">net</code> repo, you need to turn off <code class="ph codeph">-Werror</code> for the <code class="ph codeph">icmp.c</code> file in your projects.</p>
 </li>
 <li class="li"><p class="p">While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.</p>
 </li>
@@ -246,7 +282,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title6" id="development-tools"><h3 class="title topictitle3" id="ariaid-title6">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v6.00</a></p>
+<div class="topic nested2" aria-labelledby="ariaid-title11" id="development-tools-1"><h3 class="title topictitle3" id="ariaid-title11">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v6.00</a></p>
 </li>
 <li class="li"><p class="p">MPLAB® X IDE plug-ins:</p>
 <ul class="ul"><li class="li"><p class="p">MPLAB® Harmony Configurator (MHC) <code class="ph codeph">v3.8.2</code></p>
@@ -261,8 +297,8 @@
 </div>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title7" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v360"><h2 class="title topictitle2" id="ariaid-title7">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.6.0</strong></h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title8" id="new-features-1"><h3 class="title topictitle3" id="ariaid-title8">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> New web socket server system service.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title12" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v360"><h2 class="title topictitle2" id="ariaid-title12">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.6.0</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title13" id="new-features-2"><h3 class="title topictitle3" id="ariaid-title13">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> New web socket server system service.</p>
 </li>
 <li class="li"><p class="p"><span class="xref"></span> Patch OTA feature added to OTA service.</p>
 </li>
@@ -287,7 +323,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title9" id="bug-fixes-and-improvements-1"><h3 class="title topictitle3" id="ariaid-title9">Bug fixes and Improvements</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Improved handling of MQTT Clean session.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title14" id="bug-fixes-and-improvements-2"><h3 class="title topictitle3" id="ariaid-title14">Bug fixes and Improvements</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Improved handling of MQTT Clean session.</p>
 </li>
 <li class="li"><p class="p"><span class="xref"></span> Fixed multi-topic subscription via API.</p>
 </li>
@@ -296,7 +332,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title10" id="known-issues-and-limitations-1"><h3 class="title topictitle3" id="ariaid-title10">Known Issues and Limitations</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Due to an issue in the underlying <code class="ph codeph">net</code> repo, you need to turn off <code class="ph codeph">-Werror</code> for the <code class="ph codeph">icmp.c</code> file in your projects.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title15" id="known-issues-and-limitations-2"><h3 class="title topictitle3" id="ariaid-title15">Known Issues and Limitations</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Due to an issue in the underlying <code class="ph codeph">net</code> repo, you need to turn off <code class="ph codeph">-Werror</code> for the <code class="ph codeph">icmp.c</code> file in your projects.</p>
 </li>
 <li class="li"><p class="p">While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.</p>
 </li>
@@ -307,7 +343,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title11" id="development-tools-1"><h3 class="title topictitle3" id="ariaid-title11">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.50</a></p>
+<div class="topic nested2" aria-labelledby="ariaid-title16" id="development-tools-2"><h3 class="title topictitle3" id="ariaid-title16">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.50</a></p>
 </li>
 <li class="li"><p class="p">MPLAB® X IDE plug-ins:</p>
 <ul class="ul"><li class="li"><p class="p">MPLAB® Harmony Configurator (MHC) <code class="ph codeph">v3.8.0</code></p>
@@ -322,26 +358,26 @@
 </div>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title12" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v351"><h2 class="title topictitle2" id="ariaid-title12">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.5.1</strong></h2><div class="body"><p class="p"><strong class="ph b">Note</strong> : This is an incremental release. All notes under the <code class="ph codeph">v3.5.0</code> release are applicable to this release as well.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title17" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v351"><h2 class="title topictitle2" id="ariaid-title17">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.5.1</strong></h2><div class="body"><p class="p"><strong class="ph b">Note</strong> : This is an incremental release. All notes under the <code class="ph codeph">v3.5.0</code> release are applicable to this release as well.</p>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title13" id="new-features-2"><h3 class="title topictitle3" id="ariaid-title13">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> One click configuration to use TNGTLS client certificates.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title18" id="new-features-3"><h3 class="title topictitle3" id="ariaid-title18">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> One click configuration to use TNGTLS client certificates.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title14" id="bug-fixes-and-improvements-2"><h3 class="title topictitle3" id="ariaid-title14">Bug fixes and Improvements</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Improved handling of MQTT Clean session.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title19" id="bug-fixes-and-improvements-3"><h3 class="title topictitle3" id="ariaid-title19">Bug fixes and Improvements</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><span class="xref"></span> Improved handling of MQTT Clean session.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title15" id="known-issues"><h3 class="title topictitle3" id="ariaid-title15">Known Issues</h3><div class="body"><ul class="ul"><li class="li"><p class="p">When 2 network interfaces are present in the project, compiler optimization should be turned off. (Issue arising from DHCP module in underlying net repo)</p>
+<div class="topic nested2" aria-labelledby="ariaid-title20" id="known-issues"><h3 class="title topictitle3" id="ariaid-title20">Known Issues</h3><div class="body"><ul class="ul"><li class="li"><p class="p">When 2 network interfaces are present in the project, compiler optimization should be turned off. (Issue arising from DHCP module in underlying net repo)</p>
 </li>
 <li class="li"><p class="p">While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title16" id="development-tools-2"><h3 class="title topictitle3" id="ariaid-title16">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.50</a></p>
+<div class="topic nested2" aria-labelledby="ariaid-title21" id="development-tools-3"><h3 class="title topictitle3" id="ariaid-title21">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.50</a></p>
 </li>
 <li class="li"><p class="p">MPLAB® X IDE plug-ins:</p>
 <ul class="ul"><li class="li"><p class="p">MPLAB® Harmony Configurator (MHC) v3.8.0</p>
@@ -354,8 +390,8 @@
 </div>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title17" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v350"><h2 class="title topictitle2" id="ariaid-title17">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.5.0</strong></h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title18" id="new-features-3"><h3 class="title topictitle3" id="ariaid-title18">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Updated dependencies. Please refer to package.xml to see the versions used in this release.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title22" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v350"><h2 class="title topictitle2" id="ariaid-title22">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.5.0</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title23" id="new-features-4"><h3 class="title topictitle3" id="ariaid-title23">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Updated dependencies. Please refer to package.xml to see the versions used in this release.</p>
 </li>
 <li class="li"><p class="p">New OTA update service and bootloader.</p>
 </li>
@@ -384,7 +420,7 @@
 </blockquote>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title19" id="bug-fixes-and-improvements-3"><h3 class="title topictitle3" id="ariaid-title19">Bug fixes and Improvements</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Migration to <code class="ph codeph">XC32 v3.01</code></p>
+<div class="topic nested2" aria-labelledby="ariaid-title24" id="bug-fixes-and-improvements-4"><h3 class="title topictitle3" id="ariaid-title24">Bug fixes and Improvements</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Migration to <code class="ph codeph">XC32 v3.01</code></p>
 </li>
 <li class="li"><p class="p">Services updated to use latest <code class="ph codeph">netpres</code> component.</p>
 </li>
@@ -401,7 +437,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title20" id="known-issues-1"><h3 class="title topictitle3" id="ariaid-title20">Known Issues</h3><div class="body"><ul class="ul"><li class="li"><p class="p">When 2 network interfaces are present in the project, compiler optimization should be turned off. (Issue arising from DHCP module in underlying net repo)</p>
+<div class="topic nested2" aria-labelledby="ariaid-title25" id="known-issues-1"><h3 class="title topictitle3" id="ariaid-title25">Known Issues</h3><div class="body"><ul class="ul"><li class="li"><p class="p">When 2 network interfaces are present in the project, compiler optimization should be turned off. (Issue arising from DHCP module in underlying net repo)</p>
 </li>
 <li class="li"><p class="p">While switching from AP to STA mode without a reset, the system might report multiple failure prints in the console before connecting.</p>
 </li>
@@ -410,7 +446,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title21" id="development-tools-3"><h3 class="title topictitle3" id="ariaid-title21">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.50</a></p>
+<div class="topic nested2" aria-labelledby="ariaid-title26" id="development-tools-4"><h3 class="title topictitle3" id="ariaid-title26">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.50</a></p>
 </li>
 <li class="li"><p class="p">MPLAB® X IDE plug-ins:</p>
 <ul class="ul"><li class="li"><p class="p">MPLAB® Harmony Configurator (MHC) v3.8.0</p>
@@ -423,23 +459,23 @@
 </div>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title22" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v341"><h2 class="title topictitle2" id="ariaid-title22">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.4.1</strong></h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title23" id="new-features-4"><h3 class="title topictitle3" id="ariaid-title23">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Split wireless system services into a seperate repo</p>
+<div class="topic nested1" aria-labelledby="ariaid-title27" id="harmony-3-wireless-system-services-for-the-pic32mzw1wfi32-family--v341"><h2 class="title topictitle2" id="ariaid-title27">Harmony 3 Wireless system services for the PIc32MZW1/WFI32 family  <strong class="ph b">v3.4.1</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title28" id="new-features-5"><h3 class="title topictitle3" id="ariaid-title28">New Features</h3><div class="body"><ul class="ul"><li class="li"><p class="p">Split wireless system services into a seperate repo</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title24" id="bug-fixes"><h3 class="title topictitle3" id="ariaid-title24">Bug fixes</h3><div class="body"><ul class="ul"><li class="li"><p class="p">None</p>
+<div class="topic nested2" aria-labelledby="ariaid-title29" id="bug-fixes"><h3 class="title topictitle3" id="ariaid-title29">Bug fixes</h3><div class="body"><ul class="ul"><li class="li"><p class="p">None</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title25" id="known-issues-2"><h3 class="title topictitle3" id="ariaid-title25">Known Issues</h3><div class="body"><ul class="ul"><li class="li"><p class="p">None</p>
+<div class="topic nested2" aria-labelledby="ariaid-title30" id="known-issues-2"><h3 class="title topictitle3" id="ariaid-title30">Known Issues</h3><div class="body"><ul class="ul"><li class="li"><p class="p">None</p>
 </li>
 </ul>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title26" id="development-tools-4"><h3 class="title topictitle3" id="ariaid-title26">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.40</a></p>
+<div class="topic nested2" aria-labelledby="ariaid-title31" id="development-tools-5"><h3 class="title topictitle3" id="ariaid-title31">Development Tools</h3><div class="body"><ul class="ul"><li class="li"><p class="p"><a class="xref" href="https://www.microchip.com/mplab/mplab-x-ide" target="_blank">MPLAB® X IDE v5.40</a></p>
 </li>
 <li class="li"><p class="p">MPLAB® X IDE plug-ins:</p>
 <ul class="ul"><li class="li"><p class="p">MPLAB® Harmony Configurator (MHC) v3.6.2</p>

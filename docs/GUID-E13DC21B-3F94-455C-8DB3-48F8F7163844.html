@@ -369,7 +369,7 @@
 </ul>
 <p class="p">2.If two conditions mentioned in the step 1 are not satisfied, the bootloader switches to Image Program Mode. In Image Program Mode bootloader follows Image Programming sequence, which finds the highest ranked image in Image-Store(external flash), erases the Program-Flash area and copies the selected image to the Program-Flash area if the image is successfully verified. As the newly downloaded image with highest version is set as the highest ranked, during the first boot time after the Image-downloading, the bootloader attempts to load the newly downloaded image at the first try.</p>
 <p class="p">The bootloader choses the highest ranked image to boot. The images are ranked in following order:</p>
-<pre class="pre codeblock"><button title="Copy Code" class="copy-code" onclick="cpy('d13750e403', this);">Copy</button><code id="d13750e403" content="1.The downloaded , valid Image with highest version.  &#xD;&#xA;&#xD;&#xA;2.The next valid, higher version image.  &#xD;&#xA;&#xD;&#xA;3.The next known valid, higher version image.  &#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;4.Default (Golden/Factory) image.&#xD;">1.The downloaded , valid Image with highest version.  &#xD;
+<pre class="pre codeblock"><code id="d13784e403" content="1.The downloaded , valid Image with highest version.  &#xD;&#xA;&#xD;&#xA;2.The next valid, higher version image.  &#xD;&#xA;&#xD;&#xA;3.The next known valid, higher version image.  &#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;  .&#xD;&#xA;&#xD;&#xA;4.Default (Golden/Factory) image.&#xD;">1.The downloaded , valid Image with highest version.  &#xD;
 &#xD;
 2.The next valid, higher version image.  &#xD;
 &#xD;
@@ -385,7 +385,7 @@
 <p class="p">4.If image is verified successfully, bootloader updates <code class="ph codeph">STATUS</code> field of boot control area in internal flash as <code class="ph codeph">Unbooted (0xFC)</code></p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title10" id="patch-functionality"><h2 class="title topictitle2" id="ariaid-title10">Patch functionality</h2><div class="body"><p class="p">OTA service provides facility of patch OTA . User can configure <code class="ph codeph">PATCH</code> functionality using MHC menu ,for more details on configuration please follow - <strong class="ph b">OTA System Service Configuration</strong> section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility and follow instructions from <a class="xref" href="https://github.com/MicrochipTech/jojodiff" target="_blank">here</a> .</p>
+<div class="topic nested1" aria-labelledby="ariaid-title10" id="patch-functionality"><h2 class="title topictitle2" id="ariaid-title10">Patch functionality</h2><div class="body"><p class="p">OTA service provides facility of patch OTA . User can configure <code class="ph codeph">PATCH</code> functionality using MHC menu ,for more details on configuration please follow - <strong class="ph b">OTA System Service Configuration</strong> section. Patching is a concept using which , user can generate a binary file, that contains only the difference between the current image and base image version. For generating diff file user can download utility(jojodiff07) and follow instructions from <a class="xref" href="https://github.com/MicrochipTech/jojodiff" target="_blank">here</a> . Other versions of the jojodiff utility may lead to compatiblity issues and may cause failure in the OTA patch update. Therefore it is recommended to use the  jojodiff07 version for creating the diff file.</p>
 <p class="p">User can provide required parameters for patch in JSON file ( Please follow <code class="ph codeph">OTA server JSON manifest</code> section , for more details ) . OTA Service will follow below steps during while processing <code class="ph codeph">patch functionality</code> :</p>
 <ul class="ul"><li class="li"><p class="p">Check if base version is present in OTA DB</p>
 <ul class="ul"><li class="li"><p class="p">If not present, sysetm will try to download full image from server .</p>
@@ -407,11 +407,128 @@
 </ul>
 <br /><img class="image" src="GUID-8A28BE3F-64CA-4262-896C-E8395A525496-low.png" alt="resized_patch_details" /><br /></div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title11" id="configuration-fuses"><h2 class="title topictitle2" id="ariaid-title11">Configuration fuses</h2><div class="body"><p class="p">Due to the way configuration fuses are stored in the device, they cannot be modified by the bootloader at runtime. Consequently, when the bootloader loads the application, the config fuses set in the bootloader (using <code class="ph codeph">#pragma</code> in the bootloader code) will be retained.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title11" id="securing-ota-by-verifying-images-in-bootloader"><h2 class="title topictitle2" id="ariaid-title11">Securing OTA by verifying Images in Bootloader</h2><div class="body"><p class="p">Images will be verified by using image's ECDSA signature on Bootloader. For this user need to provide image's signature , generated in R-S format to <code class="ph codeph">Signature</code> field of JSON manifest file (Please follow <code class="ph codeph">Generating Signature</code> section of this document). This <code class="ph codeph">Signature</code> will be stored by application in <code class="ph codeph">ota</code> database present in external flash and bootlader will use the same for image verification.</p>
+<p class="p">We have implemented 2 configurations of OTA Bootloader to perform signature verification of images:</p>
+<ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">In software using Wolfcrypt (ota_booloader_wolfcrypt.x).</p>
+</li>
+<li class="li"><span class="indent-level-default">2.</span><p class="p">In Hardware using Trust Flex device (ota_booloader_trustflex.x).</p>
+</li>
+</ol>
+<p class="p">For more information on ota bootloader, please follow <a class="xref" href="https://github.com/Microchip-MPLAB-Harmony/wireless_apps_pic32mzw1_wfi32e01/tree/v3.6.1/apps/ota_bootloader" target="_blank">Bootloader document</a></p>
+<p class="p">User need to load the corresponding bootloader configuration as <code class="ph codeph">loadable</code> component as per application requirement. Loading bootloader into application is required , only for generating <code class="ph codeph">factory</code> image. For more information on configuring <code class="ph codeph">loadable project</code> , please refer <code class="ph codeph">OTA System Service Configuration</code> section of <a class="xref" href="configuration.md#configuring-the-library">Configuring the library</a>.</p>
+<p class="p">Whenever, user wants to apply successfully downloaded new <code class="ph codeph">ota</code> image, bootloader will take the control. Bootloader will perform signature verification of the image :</p>
+<ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">if signature verfication is failed;</p>
+<ul class="ul"><li class="li"><p class="p">Bootloader will try to load another version of OTA image if present in OTA database.</p>
+</li>
+<li class="li"><p class="p">If bootloader can not find another image , it will load the factory image to the internal flash.</p>
+</li>
+</ul>
+</li>
+<li class="li"><span class="indent-level-default">2.</span><p class="p">if signature verification is passed; bootloader will load the image after successfully verifying digest.</p>
+</li>
+</ol>
+<p class="p"><strong class="ph b">NOTE : Secure OTA is not supported, when <code class="ph codeph">PATCH</code> functionality is enabled.</strong></p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title12" id="enabling-secure-ota"><h2 class="title topictitle2" id="ariaid-title12">Enabling Secure OTA</h2><div class="body"><p class="p">By default, <code class="ph codeph">secure ota</code> option will be disabled. To enable it , user need to follow below steps.</p>
+<ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">Enable <code class="ph codeph">Secure OTA Functionality</code> as described in <code class="ph codeph">configure Advances Configuration</code> section of <a class="xref" href="configuration.md#configuring-the-library">Configuring the library</a>.</p>
+</li>
+<li class="li"><span class="indent-level-default">2.</span><p class="p">Define "SYS_OTA_SECURE_BOOT_ENABLED" in bootloader project. For more details please follow <a class="xref" href="https://github.com/Microchip-MPLAB-Harmony/wireless_apps_pic32mzw1_wfi32e01/tree/v3.6.1/apps/ota_bootloader" target="_blank">Bootloader document</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title13" id="verification-of-factory-image"><h2 class="title topictitle2" id="ariaid-title13">Verification of factory image</h2><div class="body"><p class="p">For verification of factory image user need to follow below steps :</p>
+<ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">User need to create ".bin" format of HEX image, created while building factory image using MPLABX . User need to use following command:</p>
+<p class="p"><code class="ph codeph">python hex2bin.py -i "path of hex image" -o "path of bin file" -f 0</code></p>
+<p class="p"><code class="ph codeph">example : python hex2bin.py -i "E:\ota_new_festeure\factory_image_verification\hex2bin\factory_image.hex" -o "E:\ota_new_festeure\factory_image_verification\hex2bin\factory_image1.bin" -f 0</code></p>
+<p class="p"><code class="ph codeph">hex2bin.py</code> file can be found in the <code class="ph codeph">tools</code> folder of your project. This folder will be created when you generate MHC code with the OTA service included in your project.</p>
+</li>
+<li class="li"><span class="indent-level-default">2.</span><p class="p">Generate signature, by followinf <code class="ph codeph">Generating Signature</code> section of this document .</p>
+</li>
+<li class="li"><span class="indent-level-default">3.</span><p class="p">Store the generated signature in target system using following console command (Factory image should already be loaded in the system and factory image should be running):</p>
+<p class="p"><code class="ph codeph">sysota set factory sign "signature"</code></p>
+<p class="p"><code class="ph codeph">example : sysota set factory sign "FkV6dJ9kMqJrJypp/0/V8MdIV4Y6ocNX5NVb5zvwDa2ygXJsVHDQZGCNR/L0lp13xroX9biwMBbpi/ZqJi1Erw=="</code></p>
+</li>
+</ol>
+<p class="p"><strong class="ph b">NOTE :</strong></p>
+<p class="p"><strong class="ph b">1. It is recommended to perform above mentioned steps and store signature in target device as soon as application runs for the first time. This will ensure safe and successful loading of <code class="ph codeph">factory image</code> in the system , whenever required. This is one time activity</strong><strong class="ph b">2. If <code class="ph codeph">factory reset</code> is triggered without storing signature of <code class="ph codeph">factory image</code>, system will unable to load image and run.</strong></p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title14" id="generating-public-key-and-private-key"><h2 class="title topictitle2" id="ariaid-title14">Generating Public Key and Private Key</h2><div class="body"><p class="p">To generate private key :
+<code class="ph codeph">openssl ecparam -genkey -name prime256v1 -noout -out ECC_prime256v1.key</code></p>
+<p class="p">To extract public key from certificate :
+<code class="ph codeph">openssl.exe ec -in ECC_prime256v1.key -pubout -out ECC_prime256v1.pub</code></p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title15" id="generating-signature"><h2 class="title topictitle2" id="ariaid-title15">Generating Signature</h2><div class="body"><p class="p">User need to generate signature in R-S format and provide it in manifest file. To generate R-S format of <code class="ph codeph">image signature</code>, user may take any approach; example: using openssl library etc.</p>
+<p class="p">Alternately, user may use python script <code class="ph codeph">ecdsaSign.py</code> present in the <code class="ph codeph">tools</code> folder of project. This folder will be created when user generates MHC code with the OTA service included in project.</p>
+<p class="p">User may use below command, for generating signature :</p>
+<p class="p"><code class="ph codeph">python ecdsaSign.py -f [image file name] -k [private key file name]</code></p>
+<p class="p">Example : <code class="ph codeph">python sign.py -f image.bin -k ECC_prime256v1.key</code></p>
+<p class="p">image.bin -&gt; image file name.</p>
+<p class="p">ECC_prime256v1.key -&gt; private key file name.</p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title16" id="providing-signature-in-manifest-file"><h2 class="title topictitle2" id="ariaid-title16">Providing Signature in Manifest file:</h2><div class="body"><p class="p">User need to mention <code class="ph codeph">Signature</code> in Manifest file, by introducing <code class="ph codeph">Signature</code> field in the file as shown below:</p>
+<pre class="pre codeblock json">{
+    <span class="hl-json_key">"ota"</span>: [
+            {
+                <span class="hl-json_key">"Version"</span>: <span class="hl-number">2</span>,
+                <span class="hl-json_key">"URL"</span>: <span class="hl-string">"http://192.168.43.173:8000/wifi_ota_app_upgrade_ver2.bin"</span>,
+                <span class="hl-json_key">"Digest"</span>: <span class="hl-string">"d6f951e9ad5af844068a3ce1cc25e86ac945fa371791ca3e493f91672d95a2d4"</span>,
+                <span class="hl-json_key">"Signature"</span>: <span class="hl-string">"pra2wlOiZO/zjzqaP9DZGe9dmm0aC4gx4r0yoyI7DU3sVpkdJ034v5XoiN5jdpeuLRge4RjsB/KSrVho8pwC2w=="</span>,
+                <span class="hl-json_key">"EraseVer"</span>: false
+            }
+           ]
+}
+</pre></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title17" id="provisioning-trustflex-parts-for-ota-fw-verification"><h2 class="title topictitle2" id="ariaid-title17">Provisioning TrustFlex parts for OTA FW Verification</h2><div class="body"><p class="p">ATECC608 based Trustflex can be used to perform secure firmware verification. The steps to provision it using TPDS2 is documented here.</p>
+<ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">Setup TPDS V2</p>
+<p class="p">Setup TPDSV2 following the steps at https://www.microchip.com/en-us/product/SW-TPDSV2</p>
+<p class="p">Make sure that you update TPDS after installation.</p>
+</li>
+<li class="li"><span class="indent-level-default">2.</span><p class="p">Hardware Setup</p>
+<ul class="ul"><li class="li"><p class="p">Plug in the DT100104 click board into the microbus interface.</p>
+</li>
+<li class="li with-image"><p class="p">Make sure that you flip all DIP switches other than SW1:2 in click board to OFF position. This will configure the board to expose the TrustFlex device over the I2C Bus.</p>
+<br /><img class="image" src="GUID-533D0E3F-0F37-4594-9E4F-1A1FAF0AA03A-low.png" alt="trust_flex_image1" /><br /></li>
+</ul>
+</li>
+<li class="li"><span class="indent-level-default">3.</span><p class="p">Device Firmware</p>
+<p class="p">TPDS talks to the trust elements using the KitProtocol. So, before using TPDS to provision TrustFlex with the Rio2 device , we need to flash the <a class="xref" href="https://github.com/MicrochipTech/PIC32MZW1_Projects/tree/main/pic32mzw1_kitprotocol" target="_blank">KitProtocol firmware</a> into the dev-board.</p>
+<ul class="ul"><li class="li"><p class="p">To update the kit-protocol firmware to use I2C1 instead of the default I2C2 (connected to the onboard TnG module), change HAL_I2C_I2C2 defined in hal_i2c_harmony.h file of the kit protocol project to HAL_I2C_I2C1.</p>
+</li>
+<li class="li with-image"><p class="p">When the firmware boots-up, the UART console (15008N1) will display the devices detected.</p>
+<br /><img class="image" src="GUID-9D236600-5063-4EEB-B546-5994E9CD5836-low.png" alt="trust_flex_image2" /><br /><br /><img class="image" src="GUID-AFC59CF8-F404-49B9-A1B5-1F3ACCD8457A-low.png" alt="trust_flex_image3" /><br /></li>
+</ul>
+</li>
+<li class="li"><span class="indent-level-default">4.</span><p class="p">Loading the Public Key for FW verification (Provisioning)</p>
+<ul class="ul"><li class="li with-image"><p class="p">Open TPDS  and select ATECC608-TFXTLS configurator under the "Configurators" Tab.</p>
+<br /><img class="image" src="GUID-C314C285-63A0-4EFA-A619-2DB83436B49A-low.png" alt="SelectTrustFlexConfigurator" /><br /></li>
+<li class="li with-image"><p class="p">Select the Firmware Validation (Secure Boot) usecase from the next screen</p>
+<br /><img class="image" src="GUID-07CD1833-D8E2-40B5-8236-22A2799E5571-low.png" alt="trust_flex_image5" /><br /></li>
+<li class="li with-image"><p class="p">Load the public key into Slot 15</p>
+<br /><img class="image" src="GUID-D1BA4250-68ED-4018-A2F3-65ED86AA763A-low.png" alt="trust_flex_image6" /><br /></li>
+<li class="li"><p class="p">Generate a provisioning package and use it to provision the sample.</p>
+<ul class="ul"><li class="li"><p class="p">The attached kit with the trustFlex device mounted on it will be automatically detected and provisioned.
+<img class="image" src="GUID-3A8E3532-9296-42FF-80B5-BA4090816965-low.png" alt="trust_flex_image7" /><br /></p>
+</li>
+</ul>
+</li>
+</ul>
+<br /><img class="image" src="GUID-10D67F6B-6F86-4403-B66B-230F2DEAAFBF-low.png" alt="trust_flex_image8" /><br /></li>
+<li class="li"><span class="indent-level-default">5.</span><p class="p">You can now use the device to verify image signatures in the bootloader.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title18" id="configuration-fuses"><h2 class="title topictitle2" id="ariaid-title18">Configuration fuses</h2><div class="body"><p class="p">Due to the way configuration fuses are stored in the device, they cannot be modified by the bootloader at runtime. Consequently, when the bootloader loads the application, the config fuses set in the bootloader (using <code class="ph codeph">#pragma</code> in the bootloader code) will be retained.</p>
 <p class="p">Unlike most of the other PIC32MZ devices, some of the configuration values of PCI32MZW1 / WFI32 can be overridden at runtime. These are marked as loadable configurations in the datasheet. Please refer to the <code class="ph codeph">Configuration Bits</code> section of the <code class="ph codeph">SPECIAL FEATURES</code> chapter of the PIC32MZW1 datasheet to see a list of loadable configurations and how to apply them. These loadable configs can be applied at runtime from the application.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title12" id="generating-the-ota-image"><h2 class="title topictitle2" id="ariaid-title12">Generating the OTA image</h2><div class="body"><p class="p">Images that are downloaded from the server as part of the OTA process should be stored in <code class="ph codeph">.bin</code> format as opposed to the Intel Hex format that is generated by MPLABX.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title19" id="generating-the-ota-image"><h2 class="title topictitle2" id="ariaid-title19">Generating the OTA image</h2><div class="body"><p class="p">Images that are downloaded from the server as part of the OTA process should be stored in <code class="ph codeph">.bin</code> format as opposed to the Intel Hex format that is generated by MPLABX.</p>
 <p class="p">To convert the <code class="ph codeph">hex</code> file to <code class="ph codeph">bin</code> format, you can use the <code class="ph codeph">hex2bin</code> tool in the <code class="ph codeph">tools</code> folder of your project. This folder will be created when you generate MHC code with the OTA service included in your project.</p>
 <ul class="ul"><li class="li"><p class="p">In case of a windows machine, you can execute the command <code class="ph codeph">hex2bin.exe -i &lt;path to hex file in the dist folder&gt;</code>. In case your development environment is based on a non-Windows OS, you can execute the python script with the same arguments. Make sure that you have python3 installed in your machine.</p>
 </li>
@@ -430,7 +547,7 @@
 </ul>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title13" id="ota-server"><h2 class="title topictitle2" id="ariaid-title13">OTA server</h2><div class="body"><p class="p">Any standard http/https server can be used as OTA server as long as it hosts a manifest file with the mandatory fields.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title20" id="ota-server"><h2 class="title topictitle2" id="ariaid-title20">OTA server</h2><div class="body"><p class="p">Any standard http/https server can be used as OTA server as long as it hosts a manifest file with the mandatory fields.</p>
 <ul class="ul"><li class="li with-image"><p class="p">For testing the service, you may also use a simple python command to create a local <strong class="ph b">HTTP</strong> server using below steps:</p>
 <ul class="ul"><li class="li with-image"><p class="p">Open command prompt and change directory to the folder where json file/ota image is present.</p>
 <br /><img class="image" src="GUID-BA709067-E54C-48AF-91E4-0263108E8CD9-low.png" alt="resized_Change_dir" /><br /></li>
@@ -441,10 +558,10 @@
 </ul>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title14" id="integrating-bootloader"><h2 class="title topictitle2" id="ariaid-title14">Integrating bootloader</h2><div class="body"><p class="p">It is required to integrate the bootloader and OTA application image to create a single unified HEX file. To integrate 2 images we can use hexmate tool, which is readily available with MPLABX package as part of the standard installation. To combine the hex files - please follow steps mentioned in configuration page <strong class="ph b">OTA System Service Configuration</strong>.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title21" id="integrating-bootloader"><h2 class="title topictitle2" id="ariaid-title21">Integrating bootloader</h2><div class="body"><p class="p">It is required to integrate the bootloader and OTA application image to create a single unified HEX file. To integrate 2 images we can use hexmate tool, which is readily available with MPLABX package as part of the standard installation. To combine the hex files - please follow steps mentioned in configuration page <strong class="ph b">OTA System Service Configuration</strong>.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title15" id="resolving-data-conflict--compilation-error"><h2 class="title topictitle2" id="ariaid-title15">Resolving <code class="ph codeph">Data Conflict </code> Compilation error</h2><div class="body"><p class="p">During compilation if user is facing <code class="ph codeph">Data conflict at address..</code> compilation error , please check if there is any mismatch of configuration ( <code class="ph codeph">#pragma </code>) between bootloader and application. User may simply compare <code class="ph codeph">initialization.c</code> files of both the projects to check mismatch.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title22" id="resolving-data-conflict--compilation-error"><h2 class="title topictitle2" id="ariaid-title22">Resolving <code class="ph codeph">Data Conflict </code> Compilation error</h2><div class="body"><p class="p">During compilation if user is facing <code class="ph codeph">Data conflict at address..</code> compilation error , please check if there is any mismatch of configuration ( <code class="ph codeph">#pragma </code>) between bootloader and application. User may simply compare <code class="ph codeph">initialization.c</code> files of both the projects to check mismatch.</p>
 <br /><img class="image" src="GUID-80EAA68A-0040-4390-81BF-3A5A6C6BBB6A-low.png" alt="resized_pragma_mismatch" /><br /></div>
 </div>
 </body>

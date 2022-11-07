@@ -108,7 +108,7 @@
             -   [SYS\_WIFI\_Tasks Function](GUID-61F4CED4-8E5E-421C-881E-A6BEAE2B392F.md)
         -   [Wi-Fi System Service Developer's Guide](GUID-C171D15D-DC5E-4D98-BD34-F95338A640A7.md)
     -   [Wi-Fi provisioning System Service](GUID-6C1BB28E-7F9B-4582-8E74-E301F89C58AC.md)
-        -   [Wi-Fi Provisioning Methods](GUID-4913BE25-06C5-4ED7-9352-DA99287424F7.md)
+        -   [Wi-Fi provisioning System Service Usage](GUID-4913BE25-06C5-4ED7-9352-DA99287424F7.md)
         -   [Wi-Fi provisioning System Service Configuration](GUID-7C9FB838-46C2-4CA1-A573-B110ED225368.md)
         -   [Wi-Fi Provisioning System Service Interface](GUID-EC779F2A-1DDD-4F5A-A648-47DE4498A25F.md)
             -   [SYS\_WIFIPROV\_CTRLMSG Enum](GUID-3F684EBE-A5FB-4AE3-A0A8-629D54D9300B.md)
