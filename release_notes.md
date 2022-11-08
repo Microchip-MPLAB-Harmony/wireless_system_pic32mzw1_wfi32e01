@@ -18,6 +18,8 @@ nav_order: 99
 
 -    [Wi-Fi] Support of low Power Wi-Fi connected sleep modes\(WSM and WDS\).
 
+-    [Wi-Fi] Support of Wi-Fi Enterprise mode.
+
 
 ### Bug fixes and Improvements
 
