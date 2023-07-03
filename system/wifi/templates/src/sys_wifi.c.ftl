@@ -209,6 +209,18 @@ static uint8_t SYS_WIFI_APDisconnectSTA(uint8_t *macAddr);
 static void  SYS_WIFI_WIFIPROVCallBack(uint32_t event, void * data,void *cookie);
 </#if>
 
+<#if  SYS_WIFI_STA_ENABLE == true>
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+static int g_ipv6AddrIdx = 0;
+static void SYS_WIFI_TCPIP_IPv6EventHandler
+(
+        TCPIP_NET_HANDLE hNet, 
+        IPV6_EVENT_TYPE evType, 
+        const void* evParam, 
+        const void* usrParam);
+</#if>
+</#if>
+
 
 // *****************************************************************************
 // *****************************************************************************
@@ -732,9 +744,28 @@ static void SYS_WIFI_STAConnCallBack
 <#if !((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true)>
             IPV4_ADDR ipAddr;
             ipAddr.Val = TCPIP_STACK_NetAddress(TCPIP_STACK_NetHandleGet("PIC32MZW1"));
+            g_wifiSrvcConfig.staConfig.ipAddr.Val=ipAddr.Val;
             SYS_WIFI_CallBackFun(SYS_WIFI_CONNECT, &ipAddr, g_wifiSrvcCookie);
             SYS_CONSOLE_PRINT("static IP address obtained = %d.%d.%d.%d \r\n",
                         ipAddr.v[0], ipAddr.v[1], ipAddr.v[2], ipAddr.v[3]);
+<#if !(tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT)?has_content && (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT) == true>
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+            TCPIP_NET_HANDLE    netH;
+            IPV6_ADDR_STRUCT currIpv6Add;
+            IPV6_ADDR_HANDLE nextHandle;
+            char   addrBuff[44];
+            IPV6_ADDR addr6 = 0;
+            netH = TCPIP_STACK_NetHandleGet("PIC32MZW1");
+            nextHandle = TCPIP_STACK_NetIPv6AddressGet(netH, IPV6_ADDR_TYPE_UNICAST, &currIpv6Add, 0);
+            if(nextHandle)
+            {   // have a valid address; display it
+                addr6 = currIpv6Add.address;
+                TCPIP_Helper_IPv6AddressToString(&addr6, addrBuff, sizeof(addrBuff));
+                SYS_CONSOLE_PRINT("static IPv6 address obtained = %s \r\n", addrBuff);
+                memcpy(&g_wifiSrvcConfig.staConfig.ipv6Addr, &addr6, sizeof(addr6));
+            }
+</#if>
+</#if>
 </#if>
             break;
         }
@@ -960,6 +991,61 @@ static void SYS_WIFI_TCPIP_DHCP_EventHandler
         }
     }
 }
+</#if>
+<#if  SYS_WIFI_STA_ENABLE == true>
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+static void SYS_WIFI_TCPIP_IPv6EventHandler(TCPIP_NET_HANDLE hNet, IPV6_EVENT_TYPE evType, const void* evParam, const void* usrParam)
+{
+    IPV6_ADDR_STRUCT *pAddr;
+
+    if (IPV6_EVENT_ADDRESS_ADDED == evType)
+    {
+        pAddr = (IPV6_ADDR_STRUCT*)evParam;
+
+        if (NULL == pAddr)
+        {
+            return;
+        }
+
+        if (IPV6_ADDR_TYPE_UNICAST == pAddr->flags.type)
+        {
+            if (IPV6_ADDR_SCOPE_LINK_LOCAL == pAddr->flags.scope)
+            {
+                char   addrBuff[44];
+                memcpy(&g_wifiSrvcConfig.staConfig.ipv6Addr[0], &pAddr->address, sizeof(pAddr->address));
+                TCPIP_Helper_IPv6AddressToString(&pAddr->address, addrBuff, sizeof(addrBuff));
+                SYS_CONSOLE_PRINT("IPv6 address obtained = %s \r\n", addrBuff);
+				g_ipv6AddrIdx = 0;
+				SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_STA_IPV6_RECIEVED);
+            }
+            else if (IPV6_ADDR_SCOPE_GLOBAL == pAddr->flags.scope)
+            {
+                int i;
+                for (i=1; i<3; i++)
+                {
+                    if ((0 == memcmp(&g_wifiSrvcConfig.staConfig.ipv6Addr[i].v, &pAddr->address.v, 16)))
+                    {
+                        pAddr = NULL;
+                    }
+                    else
+                    {
+                        char   addrBuff[44];
+                        memcpy(&g_wifiSrvcConfig.staConfig.ipv6Addr[i].v, &pAddr->address.v, 16);
+                        TCPIP_Helper_IPv6AddressToString(&g_wifiSrvcConfig.staConfig.ipv6Addr[i], addrBuff, sizeof(addrBuff));
+                        SYS_CONSOLE_PRINT("IPv6 address obtained = %s \r\n", addrBuff);
+						g_ipv6AddrIdx = i;
+						SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_STA_IPV6_RECIEVED);
+                        break;
+                    }
+                }
+            }
+        }
+        else if (IPV6_ADDR_TYPE_MULTICAST == pAddr->flags.type)
+        {
+        }
+    }
+}
+</#if>
 </#if>
 </#if>
 
@@ -1601,6 +1687,9 @@ static uint32_t SYS_WIFI_ExecuteBlock
     SYS_WIFI_OBJ *               wifiSrvcObj = (SYS_WIFI_OBJ *) object;
 <#if SYS_WIFI_PROVISION_ENABLE == true>
     uint8_t                      ret =  SYS_WIFIPROV_OBJ_INVALID;
+<#if SYS_WIFI_STA_ENABLE == true>	
+	static bool provConnStatus = false;
+</#if>
 <#else>
     uint8_t                      ret =  SYS_WIFI_OBJ_INVALID;
 </#if>
@@ -1715,7 +1804,9 @@ static uint32_t SYS_WIFI_ExecuteBlock
                     {
 <#if (SYS_WIFI_STA_ENABLE == true) && (SYS_WIFI_AP_ENABLE == true)>                  
 <#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
-     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true)>
+     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true) ||
+	 (((tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT)?has_content && (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT) == true) &&
+		((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true))>
                         /* PIC32MZW1 network handle*/
                         netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
 </#if>
@@ -1744,9 +1835,34 @@ static uint32_t SYS_WIFI_ExecuteBlock
                         }
 </#if>
 </#if>
+<#if (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT)?has_content && (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT) == true>
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+                        /* STA Mode */
+                        if (SYS_WIFI_STA == SYS_WIFI_GetMode()) 
+                        {
+                            if (TCPIP_DHCPV6_CLIENT_RES_OK == TCPIP_DHCPV6_Enable(netHdl))
+                            {
+                            }
+							TCPIP_IPV6_HandlerRegister(netHdl, SYS_WIFI_TCPIP_IPv6EventHandler, NULL);
+                        } 
+                        else if (SYS_WIFI_AP == SYS_WIFI_GetMode()) /*AP Mode*/
+                        {
+                            TCPIP_DHCPV6_CLIENT_INFO ClientInfo;
+
+                            memset(&ClientInfo, 0, sizeof(ClientInfo));
+                            TCPIP_DHCPV6_ClientInfoGet(netHdl, &ClientInfo);
+                            if (ClientInfo.clientState > TCPIP_DHCPV6_CLIENT_STATE_IDLE) 
+                            {
+                                TCPIP_DHCPV6_Disable(netHdl);
+                            }
+                        }
+</#if>
+</#if>
 <#elseif SYS_WIFI_STA_ENABLE == true>
 <#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
-     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true)>
+     ((tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER)?has_content && (tcpipDhcps.TCPIP_STACK_USE_DHCP_SERVER) == true) ||
+	 (((tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT)?has_content && (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT) == true) &&
+		((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true))>
                         /* PIC32MZW1 network handle*/
                         netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
 </#if>
@@ -1763,6 +1879,14 @@ static uint32_t SYS_WIFI_ExecuteBlock
                         {
                             g_wifiSrvcDhcpHdl= TCPIP_DHCP_HandlerRegister (netHdl, SYS_WIFI_TCPIP_DHCP_EventHandler, NULL);
                         }
+</#if>
+<#if (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT)?has_content && (tcpipDhcpcv6.TCPIP_STACK_USE_DHCPV6_CLIENT) == true>
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+                            if (TCPIP_DHCPV6_CLIENT_RES_OK == TCPIP_DHCPV6_Enable(netHdl))
+						{
+						}
+						TCPIP_IPV6_HandlerRegister(netHdl, SYS_WIFI_TCPIP_IPv6EventHandler, NULL);
+</#if>
 </#if>
 <#elseif SYS_WIFI_AP_ENABLE == true>
 <#if ((tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT)?has_content && (tcpipDhcp.TCPIP_STACK_USE_DHCP_CLIENT) == true) ||
@@ -1827,7 +1951,6 @@ static uint32_t SYS_WIFI_ExecuteBlock
             case SYS_WIFI_STATUS_STA_IP_RECIEVED:
             {
                 WDRV_PIC32MZW_CHANNEL_ID channel;
-                bool provConnStatus = false;
                  
                 /* Update the application(client) on receiving IP address */
                 SYS_WIFI_CallBackFun(SYS_WIFI_CONNECT, &g_wifiSrvcConfig.staConfig.ipAddr, g_wifiSrvcCookie);
@@ -1850,6 +1973,38 @@ static uint32_t SYS_WIFI_ExecuteBlock
                 wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_TCPIP_READY;
                 break;
             }
+			
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+            case SYS_WIFI_STATUS_STA_IPV6_RECIEVED:
+            {
+                /* Update the application(client) on receiving IP address */
+                SYS_WIFI_CallBackFun(SYS_WIFI_CONNECT_WITH_IPV6, &g_wifiSrvcConfig.staConfig.ipv6Addr[g_ipv6AddrIdx], g_wifiSrvcCookie);
+
+<#if SYS_WIFI_PROVISION_ENABLE == true>
+                if(provConnStatus == false)
+                {
+                    WDRV_PIC32MZW_CHANNEL_ID channel;
+                    /* Update the Wi-Fi provisioning service on receiving the IP Address, 
+                       The Wi-Fi provisioning service has to start the TCP server socket
+                       when IP address is assigned from HOMEAP to STA.only applicable 
+                       if user has enable TCP Socket configuration from MHC */
+                    SYS_WIFIPROV_CtrlMsg(g_wifiSrvcProvObj,SYS_WIFIPROV_CONNECT,&provConnStatus,sizeof(bool));                
+                    WDRV_PIC32MZW_InfoOpChanGet(g_wifiSrvcObj.wifiSrvcDrvHdl,&channel);
+                    g_wifiSrvcConfig.staConfig.channel = (uint8_t )channel;
+                    provConnStatus = true;
+                }
+                
+                if(g_wifiSrvcConfig.saveConfig == true)
+                {
+                  SYS_WIFIPROV_CtrlMsg(g_wifiSrvcProvObj,SYS_WIFIPROV_SETCONFIG,&g_wifiSrvcConfig,sizeof(SYS_WIFI_CONFIG));
+                }
+</#if>
+                wifiSrvcObj->wifiSrvcStatus = SYS_WIFI_STATUS_TCPIP_READY;
+                break;
+            }
+</#if>
+
+			
             case SYS_WIFI_STATUS_CONNECT_ERROR:
             {
                 if (g_wifiSrvcAutoConnectRetry == MAX_AUTO_CONNECT_RETRY)
@@ -1916,6 +2071,22 @@ static uint32_t SYS_WIFI_ExecuteBlock
 </#if>
             case SYS_WIFI_STATUS_TCPIP_READY:
             {
+<#if SYS_WIFI_STA_ENABLE == true>			
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+               if (SYS_WIFI_STA == SYS_WIFI_GetMode())
+                {
+                    static  bool dhcpv6Enabled = false;
+                    if(dhcpv6Enabled == false)
+                    {
+                        TCPIP_DHCPV6_CLIENT_RES res = TCPIP_DHCPV6_Enable(netHdl);
+                        if ((TCPIP_DHCPV6_CLIENT_RES_OK == res))
+                        {
+                            dhcpv6Enabled = true;
+                        }
+                    }                
+                }
+</#if>
+</#if>
                 break;
             }
 

@@ -170,6 +170,10 @@ typedef enum
 <#if SYS_WIFI_STA_ENABLE == true>
     /*Control message type for requesting a Assoc handle */
     SYS_WIFI_GETDRVASSOCHANDLE,
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+    /*Event message type for connectivity with IPv6 */
+    SYS_WIFI_CONNECT_WITH_IPV6,
+</#if>
 </#if>
 
 } SYS_WIFI_CTRLMSG ;
@@ -266,6 +270,11 @@ typedef struct
     
     /* Wi-Fi station mode IP address */
     IPV4_ADDR ipAddr;
+
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+    /* Wi-Fi station mode IPv6 address */
+    IPV6_ADDR ipv6Addr[3];
+</#if>
 
 } SYS_WIFI_STA_CONFIG;
 </#if>
@@ -468,6 +477,11 @@ typedef enum
 <#if SYS_WIFI_STA_ENABLE == true>
     /* Wi-Fi system service is in station mode IP address received status*/        
     SYS_WIFI_STATUS_STA_IP_RECIEVED,
+
+<#if ((tcpipIPv6.TCPIP_STACK_USE_IPV6)?has_content && (tcpipIPv6.TCPIP_STACK_USE_IPV6) == true) >
+    /* Wi-Fi system service is in station mode IP v6 address received status*/        
+    SYS_WIFI_STATUS_STA_IPV6_RECIEVED,
+</#if>
 </#if>
 <#if SYS_WIFI_AP_ENABLE == true>
     /* In AP mode,Wi-Fi system service is in wait for AP IP address */

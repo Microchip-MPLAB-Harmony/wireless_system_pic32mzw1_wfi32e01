@@ -449,6 +449,14 @@ def instantiateComponent(syswifiComponent):
     syswifiScanMatchMode.setDescription("The scan matching mode can be to stop on first match or match all")
     syswifiScanMatchMode.setDefaultValue("FIND_ALL")
     syswifiScanMatchMode.setDependencies(syswifiMenuVisible, ["SYS_WIFI_SCAN_ENABLE"])
+
+    syswifiIpType = syswifiComponent.createComboSymbol("SYS_WIFI_IPTYPE", syswifiAdvMenu, ["IPv4 ONLY", "IPv4 & IPv6"])
+    syswifiIpType.setLabel("IP Type")
+    syswifiIpType.setHelp(wifi_helpkeyword)
+    syswifiIpType.setDefaultValue("IPv4 ONLY")
+    syswifiIpType.setDescription("Enabling IP Type (v4 or 'v4 & v6') support in the TCP Stack.")
+    syswifiIpType.setDependencies(syswifiIpTypeAction, ["SYS_WIFI_IPTYPE"])
+
     
     syswifiDebugLogEnable = syswifiComponent.createBooleanSymbol("SYS_WIFI_APPDEBUG_ENABLE", syswifiAdvMenu)
     syswifiDebugLogEnable.setLabel("Enable Debug Logs")
@@ -712,6 +720,26 @@ def syswifiMenuVisible(symbol, event):
         print("WIFI Menu Invisible.")
         symbol.setVisible(False)
 
+def syswifiIpTypeAction(symbol, event):
+    if (event["value"] == "IPv4 & IPv6"):
+        print("WIFI IP v4 & v6 Type")
+        if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_STA_ENABLE") == True):
+            res = Database.activateComponents(["tcpipIPv6"],"NETWORK LAYER")
+            res = Database.activateComponents(["tcpipNdp"],"NETWORK LAYER")
+            res = Database.activateComponents(["tcpipIcmpv6"],"NETWORK LAYER")
+            res = Database.activateComponents(["tcpipDhcpcv6"],"APPLICATION LAYER")
+            setVal("tcpipDhcpcv6", "TCPIP_DHCPV6_IANA_DESCRIPTORS_NO", 1)
+            setVal("tcpipDhcpcv6", "TCPIP_DHCPV6_IATA_DESCRIPTORS_NO", 1)
+            setVal("tcpipDhcpcv6", "TCPIP_DHCPV6_USER_NOTIFICATION", True)
+            setVal("tcpipDhcpcv6", "TCPIP_DHCPV6_FLAG_STACK_START_ENABLE", False)
+    else:
+        print("WIFI IP v4 Type")
+        if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_STA_ENABLE") == True):
+            res = Database.deactivateComponents(["tcpipIPv6"])
+            res = Database.deactivateComponents(["tcpipNdp"])
+            res = Database.deactivateComponents(["tcpipIcmpv6"])
+            res = Database.deactivateComponents(["tcpipDhcpcv6"])
+            
 def syswifishowRTOSMenu(symbol, event):
     if (event["value"] == None):
         symbol.setVisible(False)
