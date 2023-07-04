@@ -763,6 +763,8 @@ static void SYS_WIFI_STAConnCallBack
                 TCPIP_Helper_IPv6AddressToString(&addr6, addrBuff, sizeof(addrBuff));
                 SYS_CONSOLE_PRINT("static IPv6 address obtained = %s \r\n", addrBuff);
                 memcpy(&g_wifiSrvcConfig.staConfig.ipv6Addr, &addr6, sizeof(addr6));
+                /* Update the application(client) on receiving IP address */
+                SYS_WIFI_CallBackFun(SYS_WIFI_CONNECT_WITH_IPV6, &g_wifiSrvcConfig.staConfig.ipv6Addr, g_wifiSrvcCookie);
             }
 </#if>
 </#if>
