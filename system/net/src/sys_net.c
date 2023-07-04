@@ -108,6 +108,11 @@ SYS_MODULE_OBJ g_NetAppDbgHdl;
 #define SYS_NET_PERIOIDC_TIMEOUT   30 //Sec
 #define SYS_NET_TIMEOUT_CONST (SYS_NET_PERIOIDC_TIMEOUT * SYS_TMR_TickCounterFrequencyGet())
 
+#ifdef TCPIP_STACK_USE_IPV6
+#define SYS_NET_IPV6_GLOBAL_ADDR_TIMEOUT   10 //Sec
+#define SYS_NET_IPV6_GLOBAL_ADDR_TIMEOUT_CONST (SYS_NET_IPV6_GLOBAL_ADDR_TIMEOUT * SYS_TMR_TickCounterFrequencyGet())
+#endif
+
 static inline void SYS_NET_SetInstStatus(SYS_NET_Handle *hdl, SYS_NET_STATUS status)
 {
     hdl->status = status;
@@ -1002,12 +1007,20 @@ static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
 #endif        
         
         hostIPv4.Val = 0;
+#ifdef TCPIP_STACK_USE_IPV6
         memset(&hostIPv6, 0 , sizeof(hostIPv6));
                 
         TCPIP_DNS_RESULT result =
                 TCPIP_DNS_IsNameResolved(hdl->cfg_info.host_name,
                                      &hostIPv4,
                                      &hostIPv6);
+#else
+	
+        TCPIP_DNS_RESULT result =
+                TCPIP_DNS_IsNameResolved(hdl->cfg_info.host_name,
+                                     &hostIPv4,
+                                     NULL);
+#endif        
         switch (result)
         {
             /* DNS Resolved */
@@ -1115,11 +1128,23 @@ static void SYS_NET_Client_Task(SYS_NET_Handle *hdl)
         /* DNS Resolved; Open Socket */
     case SYS_NET_STATUS_IPV6_DNS_RESOLVED:
     {
-        if(SYS_NET_IsLinkIpv6AddrAvailable(hdl) == false)
+        static uint32_t u32TimerStarted = 0;
+        if(u32TimerStarted == 0)
+        {
+            /* Wait for SYS_NET_IPV6_GLOBAL_ADDR_TIMEOUT sec only 
+             * to get IPv6 Global Address */
+            SYS_NET_StartTimer(hdl, SYS_NET_IPV6_GLOBAL_ADDR_TIMEOUT_CONST);
+            u32TimerStarted = 1;
+            break;
+        }
+        
+        if((SYS_NET_IsLinkIpv6AddrAvailable(hdl) == false) && (SYS_NET_TimerExpired(hdl) == false))
         {
             break;
         }
         
+        SYS_NET_ResetTimer(hdl);
+        u32TimerStarted = 0;
         SYS_NET_SetInstStatus(hdl, SYS_NET_STATUS_DNS_RESOLVED);
     }
         break;
