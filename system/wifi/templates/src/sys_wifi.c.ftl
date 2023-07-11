@@ -1023,20 +1023,29 @@ static void SYS_WIFI_TCPIP_IPv6EventHandler(TCPIP_NET_HANDLE hNet, IPV6_EVENT_TY
             else if (IPV6_ADDR_SCOPE_GLOBAL == pAddr->flags.scope)
             {
                 int i;
+                IPV6_ADDR ipv6Addr;               
+                memset(&ipv6Addr, 0, sizeof(ipv6Addr));
+
                 for (i=1; i<3; i++)
                 {
                     if ((0 == memcmp(&g_wifiSrvcConfig.staConfig.ipv6Addr[i].v, &pAddr->address.v, 16)))
                     {
-                        pAddr = NULL;
+                        break;
                     }
                     else
                     {
                         char   addrBuff[44];
+                        
+                        if ((0 != memcmp(&g_wifiSrvcConfig.staConfig.ipv6Addr[i].v, &ipv6Addr.v, 16)))
+                        {
+                            continue;
+                        }
+
                         memcpy(&g_wifiSrvcConfig.staConfig.ipv6Addr[i].v, &pAddr->address.v, 16);
                         TCPIP_Helper_IPv6AddressToString(&g_wifiSrvcConfig.staConfig.ipv6Addr[i], addrBuff, sizeof(addrBuff));
                         SYS_CONSOLE_PRINT("IPv6 address obtained = %s \r\n", addrBuff);
-						g_ipv6AddrIdx = i;
-						SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_STA_IPV6_RECIEVED);
+                        g_ipv6AddrIdx = i;
+                        SYS_WIFI_SetTaskstatus(SYS_WIFI_STATUS_STA_IPV6_RECIEVED);
                         break;
                     }
                 }
@@ -1845,7 +1854,8 @@ static uint32_t SYS_WIFI_ExecuteBlock
                             if (TCPIP_DHCPV6_CLIENT_RES_OK == TCPIP_DHCPV6_Enable(netHdl))
                             {
                             }
-							TCPIP_IPV6_HandlerRegister(netHdl, SYS_WIFI_TCPIP_IPv6EventHandler, NULL);
+                            memset(g_wifiSrvcConfig.staConfig.ipv6Addr, 0, sizeof(g_wifiSrvcConfig.staConfig.ipv6Addr));
+                            TCPIP_IPV6_HandlerRegister(netHdl, SYS_WIFI_TCPIP_IPv6EventHandler, NULL);
                         } 
                         else if (SYS_WIFI_AP == SYS_WIFI_GetMode()) /*AP Mode*/
                         {
@@ -1887,7 +1897,8 @@ static uint32_t SYS_WIFI_ExecuteBlock
                             if (TCPIP_DHCPV6_CLIENT_RES_OK == TCPIP_DHCPV6_Enable(netHdl))
 						{
 						}
-						TCPIP_IPV6_HandlerRegister(netHdl, SYS_WIFI_TCPIP_IPv6EventHandler, NULL);
+                        memset(g_wifiSrvcConfig.staConfig.ipv6Addr, 0, sizeof(g_wifiSrvcConfig.staConfig.ipv6Addr));
+                        TCPIP_IPV6_HandlerRegister(netHdl, SYS_WIFI_TCPIP_IPv6EventHandler, NULL);
 </#if>
 </#if>
 <#elseif SYS_WIFI_AP_ENABLE == true>
@@ -1986,6 +1997,7 @@ static uint32_t SYS_WIFI_ExecuteBlock
                 if(provConnStatus == false)
                 {
                     WDRV_PIC32MZW_CHANNEL_ID channel;
+                    provConnStatus = true;
                     /* Update the Wi-Fi provisioning service on receiving the IP Address, 
                        The Wi-Fi provisioning service has to start the TCP server socket
                        when IP address is assigned from HOMEAP to STA.only applicable 
@@ -1993,7 +2005,6 @@ static uint32_t SYS_WIFI_ExecuteBlock
                     SYS_WIFIPROV_CtrlMsg(g_wifiSrvcProvObj,SYS_WIFIPROV_CONNECT,&provConnStatus,sizeof(bool));                
                     WDRV_PIC32MZW_InfoOpChanGet(g_wifiSrvcObj.wifiSrvcDrvHdl,&channel);
                     g_wifiSrvcConfig.staConfig.channel = (uint8_t )channel;
-                    provConnStatus = true;
                 }
                 
                 if(g_wifiSrvcConfig.saveConfig == true)
