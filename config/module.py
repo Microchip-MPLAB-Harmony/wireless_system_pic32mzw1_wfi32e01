@@ -21,4 +21,4 @@ def loadModule():
     
     sysOTAPic32mzw1Component = Module.CreateComponent('sysOtaPic32mzw1', 'OTA SERVICE', '/Wireless/System Services/', 'system/ota/config/sys_ota.py')
     
-    wssComponent = Module.CreateComponent("sysWssPic32mzw1", "Web Socket Server Service", "/Wireless/System Services/","system/wss/config/sys_wss.py")
+    wssComponent = Module.CreateComponent("sysWssPic32mzw1", "Web Socket System Service", "/Wireless/System Services/","system/wss/config/sys_wss.py")

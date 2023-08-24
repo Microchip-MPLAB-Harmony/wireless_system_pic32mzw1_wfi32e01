@@ -37,14 +37,53 @@ wss_helpkeyword = "mcc_h3_pic32mzw1_wss_system_service_configurations"
 ################################################################################
 def instantiateComponent(wssComponent):
     global wss_helpkeyword
+    wssMode = wssComponent.createComboSymbol("SYS_WSS_MODE", None, ["SYS_WSS_CLIENT", "SYS_WSS_SERVER"])
+    wssMode.setLabel("WebSocket Service Mode")
+    wssMode.setHelp(wss_helpkeyword)
+    wssMode.setDefaultValue("SYS_WSS_SERVER")
+    wssMode.setDependencies(wssSetMode, ["SYS_WSS_MODE"])
+    
     wssPort = wssComponent.createIntegerSymbol("SYS_WSS_PORT", None)
-    wssPort.setLabel("Web Socket Server Server Port")
+    wssPort.setLabel("WebSocket Server Port")
     wssPort.setHelp(wss_helpkeyword)
     wssPort.setMin(1)
     wssPort.setMax(65535)
-    wssPort.setDefaultValue(True)
     wssPort.setDefaultValue(8000)
     wssPort.setDependencies(wssSetPort, ["SYS_WSS_PORT"])
+    
+    wssServerIP = wssComponent.createStringSymbol("SYS_WSS_SERVER_IP", None)
+    wssServerIP.setLabel("WebSocket Server IP")
+    wssServerIP.setHelp(wss_helpkeyword)
+    wssServerIP.setVisible(False)
+    wssServerIP.setDescription("IP address of the websocket server")
+    wssServerIP.setDefaultValue("192.168.1.1")
+    wssServerIP.setDependencies(wssSetIP, ["SYS_WSS_SERVER_IP"])
+    wssServerIP.setDependencies(wssSetClientMenuVisible, ["SYS_WSS_MODE"])
+    
+    wssHostName = wssComponent.createStringSymbol("SYS_WSS_HOST_NAME", None)
+    wssHostName.setLabel("Host Name/ URL")
+    wssHostName.setHelp(wss_helpkeyword)
+    wssHostName.setVisible(False)
+    wssHostName.setDescription("Host Name/ URL")
+    wssHostName.setDefaultValue("ws://192.168.1.1:8000")
+    wssHostName.setDependencies(wssSetClientMenuVisible, ["SYS_WSS_MODE"])
+    
+    
+    # wssIntf = wssComponent.createKeyValueSetSymbol("SYS_WSS_INTF", None)
+    # wssIntf.setLabel("Supported Interface for websocket client")
+    # wssIntf.setHelp(wss_helpkeyword)
+    # wssIntf.addKey("WIFI", "0", "Websocket connection over WiFi")
+    # wssIntf.addKey("ETHERNET", "1", "Websocket connection over Ethernet")
+    # wssIntf.setDisplayMode("Key")
+    # wssIntf.setOutputMode("Key")
+    # wssIntf.setDefaultValue(0)
+    # #wssIntf.setDependencies(wssSetIntf, ["SYS_WSS_INTF"])
+    
+    wssIntf = wssComponent.createComboSymbol("SYS_WSS_INTF", None, ["SYS_WSS_WIFI", "SYS_WSS_ETHERNET"])
+    wssIntf.setLabel("Interface supported")
+    wssIntf.setHelp(wss_helpkeyword)
+    wssIntf.setDefaultValue("SYS_WSS_WIFI")
+    wssIntf.setDependencies(wssSetIntf, ["SYS_WSS_INTF"])
 
     wssEnableTls = wssComponent.createBooleanSymbol("SYS_WSS_ENABLE_TLS", None)
     wssEnableTls.setLabel("Enable TLS")
@@ -57,7 +96,7 @@ def instantiateComponent(wssComponent):
     wssDebugEnable.setHelp(wss_helpkeyword)
     wssDebugEnable.setDescription("WSS Debug - Logs ")
     wssDebugEnable.setDefaultValue(False)
-	
+    
     wssAppTemplate = wssComponent.createBooleanSymbol("SYS_WSS_GEN_APP_TEMPLATE", None)
     wssAppTemplate.setLabel("Generate Application Template")
     wssAppTemplate.setHelp(wss_helpkeyword)
@@ -85,6 +124,7 @@ def instantiateComponent(wssComponent):
     wssNumClients.setMax(4)
     wssNumClients.setDefaultValue(2)
     wssNumClients.setDependencies(wssSetMaxSocket, ["SYS_WSS_MAX_NUM_CLIENTS"])
+    wssNumClients.setDependencies(wssSetServerMenuVisible, ["SYS_WSS_MODE"])
 
     wssNumClients = wssComponent.createIntegerSymbol("SYS_WSS_CLIENT_TIMEOUT", wssADVMenu)
     wssNumClients.setLabel("Client timeout in ms")
@@ -254,7 +294,7 @@ def wssSetTLS(symbol, event):
         Database.setSymbolValue("net_Pres", "NET_PRES_BLOB_SERVER_SUPPORT", True)
     else:
         Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", False)
-		
+        
 def wssSetMaxSocket(symbol, event):
     if (event["value"]!=None):
         Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_SUPP_NO_OF_SOCKS", event["value"])
@@ -263,6 +303,43 @@ def wssSetMaxSocket(symbol, event):
 def wssSetPort(symbol,event):
     if (event["value"]!=None):
         setVal("sysNetPic32mzw1", "SYS_NET_PORT", Database.getSymbolValue("sysWssPic32mzw1", "SYS_WSS_PORT"))
-        setVal("sysNetPic32mzw1", "SYS_NET_MODE", "SERVER")
     else:
-        pass  
+        pass
+def wssSetIP(symbol,event):
+    if (event["value"]!=None):
+        setVal("sysNetPic32mzw1", "SYS_NET_HOST_NAME", Database.getSymbolValue("sysWssPic32mzw1", "SYS_WSS_SERVER_IP"))
+    else:
+        pass
+def wssSetMode(symbol,event):
+    if (event["value"] == "SYS_WSS_SERVER"):
+        setVal("sysNetPic32mzw1", "SYS_NET_MODE", "SERVER")
+ 
+    else:
+        if (event["value"] == "SYS_WSS_CLIENT"):
+            setVal("sysNetPic32mzw1", "SYS_NET_MODE", "CLIENT")
+            #Database.setSymbolValue("sysWssPic32mzw1", "SYS_WSS_MAX_NUM_CLIENTS", wssADVMenu,1)
+            #Database.setSymbolValue("sysNetPic32mzw1", "SYS_NET_SUPP_NO_OF_SOCKS", 1)
+
+
+def wssSetIntf(symbol,event):
+    if (event["value"] == "SYS_WSS_WIFI"):
+        setVal("sysNetPic32mzw1", "SYS_NET_SUPP_INTF", 1)
+        setVal("sysNetPic32mzw1", "SYS_NET_INTF", "WIFI")
+   
+    else:
+        if (event["value"] == "SYS_WSS_ETHERNET"):
+            setVal("sysNetPic32mzw1", "SYS_NET_SUPP_INTF", 1) 
+            setVal("sysNetPic32mzw1", "SYS_NET_INTF", "ETHERNET")
+           
+         
+def wssSetClientMenuVisible(symbol, event):
+    if (event["value"] == "SYS_WSS_CLIENT"):
+        symbol.setVisible(True)
+    else:
+        symbol.setVisible(False)
+
+def wssSetServerMenuVisible(symbol, event):
+    if (event["value"] == "SYS_WSS_SERVER"):
+        symbol.setVisible(True)
+    else:
+        symbol.setVisible(False)
