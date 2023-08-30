@@ -86,6 +86,10 @@ extern "C" {
     #define JSON_URL_MAX_LEN    1000
 #endif
     #define FACTORY_IMAGE_SIGNATURE_MAX_LEN    1000
+	
+	#define SYS_OTA_WIFI 0
+	
+	#define SYS_OTA_ETHERNET 1
     // *****************************************************************************
 
     /* Application states

@@ -1199,7 +1199,7 @@ static SYS_STATUS OTA_Task_DownloadImage(void) {
 //---------------------------------------------------------------------------
 
 typedef struct {
-    CRYPT_SHA256_CTX *sha256;
+    OTA_CRYPT_SHA256_CTX *sha256;
     uint8_t *buf;
     uint32_t len;
     uint32_t offset;
@@ -1228,17 +1228,17 @@ static SYS_STATUS OTA_Task_VerifyImage(void) {
             ctx->offset = 0;
             ctx->len = FLASH_SECTOR_SIZE;
             ctx->buf = (uint8_t*) OSAL_Malloc(
-                    FLASH_SECTOR_SIZE + sizeof (CRYPT_SHA256_CTX) + 128);
+                    FLASH_SECTOR_SIZE + sizeof (OTA_CRYPT_SHA256_CTX) + 128);
             formulate_digest();
             if (ctx->buf == NULL) {
 
                 return SYS_STATUS_ERROR;
             }
             /*Below step need to check*/
-            ctx->sha256 = (CRYPT_SHA256_CTX *) (((unsigned long) ctx->buf + FLASH_SECTOR_SIZE + 128) & 0xFFFFFF80);
+            ctx->sha256 = (OTA_CRYPT_SHA256_CTX *) (((unsigned long) ctx->buf + FLASH_SECTOR_SIZE + 128) & 0xFFFFFF80);
 
-            memset(ctx->sha256, 0, sizeof (CRYPT_SHA256_CTX));
-            CRYPT_SHA256_Initialize(ctx->sha256);
+            memset(ctx->sha256, 0, sizeof (OTA_CRYPT_SHA256_CTX));
+            OTA_CRYPT_SHA256_Initialize(ctx->sha256);
 
             ctx->img_sz = field_content_length;
             
@@ -1274,7 +1274,7 @@ static SYS_STATUS OTA_Task_VerifyImage(void) {
         case TASK_STATE_V_READ:
         {
 
-            CRYPT_SHA256_DataAdd(ctx->sha256, ctx->buf, ctx->len);
+            OTA_CRYPT_SHA256_DataAdd(ctx->sha256, ctx->buf, ctx->len);
             ctx->offset += ctx->len;
 
             if (ctx->offset == ctx->img_sz) {
@@ -1300,11 +1300,11 @@ static SYS_STATUS OTA_Task_VerifyImage(void) {
         }
         case TASK_STATE_V_DONE:
         {
-            uint8_t digest[CRYPT_SHA256_DIGEST_SIZE];
+            uint8_t digest[OTA_CRYPT_SHA256_DIGEST_SIZE];
             FIRMWARE_IMAGE_HEADER *img;
             if (param->abort == 0) {
 
-                CRYPT_SHA256_Finalize(ctx->sha256, digest);
+                OTA_CRYPT_SHA256_Finalize(ctx->sha256, digest);
                 img = (FIRMWARE_IMAGE_HEADER*) ctx->buf;
                 int i;
 #ifdef SYS_OTA_PATCH_ENABLE                 
@@ -1330,7 +1330,7 @@ static SYS_STATUS OTA_Task_VerifyImage(void) {
                     SYS_CONSOLE_PRINT("SYS OTA : digest[%d] = %d, img->digest[%d] = %d\r\n", i, digest[i], i, img->digest[i]);
                 }
 #endif
-                if (memcmp(digest, img->digest, CRYPT_SHA256_DIGEST_SIZE) != 0) {
+                if (memcmp(digest, img->digest, OTA_CRYPT_SHA256_DIGEST_SIZE) != 0) {
                     SYS_CONSOLE_MESSAGE("SYS OTA : digest mismatch\r\n");
                     status = SYS_STATUS_ERROR;
                 } else {

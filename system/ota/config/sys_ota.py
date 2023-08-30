@@ -26,7 +26,9 @@
 #### Global Variables ####
 ################################################################################
 global ota_helpkeyword
-
+autoConnectTableEthmac = [["tcpipNetConfig", "NETCONFIG_MAC_Dependency", "drvPic32mEthmac", "libdrvPic32mEthmac"]]
+autoConnectTableEthmac1 = [["drvPic32mEthmac", "ETHMAC_PHY_Dependency", "drvExtPhyLan8740", "libdrvExtPhyLan8740"]]
+          
 ota_helpkeyword = "mcc_h3_pic32mzw1_ota_system_service_configurations"
 ################################################################################
 #### Business Logic ####
@@ -52,6 +54,7 @@ def sysota_OnValueChanged(symbol, event):
     if(event['value'] == True):
         Database.activateComponents(["sysNetPic32mzw1"])
         setVal("sysNetPic32mzw1", "SYS_NET_ENABLE_TLS", True)
+        setVal("sysNetPic32mzw1", "SYS_NET_IDX1_ENABLE_TLS", True)
 def instantiateComponent(sysOTAPic32mzw1Component):
     
     global ota_helpkeyword
@@ -71,7 +74,14 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     sysotaURL.setVisible(True)
     sysotaURL.setDescription("Server address (http://server addr../ota.json)")
     sysotaURL.setDefaultValue("http://192.168.43.173:8000/ota.json")
-
+    
+    sysotaIntf = sysOTAPic32mzw1Component.createComboSymbol("SYS_OTA_INTF", None, ["SYS_OTA_WIFI", "SYS_OTA_ETHERNET"])
+    sysotaIntf.setLabel("Supported interface for ota operation")
+    sysotaIntf.setHelp(ota_helpkeyword)
+    sysotaIntf.setDefaultValue("SYS_OTA_WIFI")
+    sysotaIntf.setVisible(True)
+    sysotaIntf.setDependencies(sysotaSetIntf, ["SYS_OTA_INTF"])
+    
     sysotaAutoUpdateEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_AUTOUPDATE_ENABLE", None)
     sysotaAutoUpdateEnable.setLabel("Auto OTA update")
     sysotaAutoUpdateEnable.setHelp(ota_helpkeyword)
@@ -219,7 +229,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     configName = Variables.get("__CONFIGURATION_NAME")
     
     sysotaSourceFile = sysOTAPic32mzw1Component.createFileSymbol("SYS_OTA_SOURCE", None)
-    sysotaSourceFile.setSourcePath("system/ota/framework/sys_ota.c")
+    sysotaSourceFile.setSourcePath("system/ota/framework/sys_ota.c.ftl")
     sysotaSourceFile.setOutputName("sys_ota.c")
     sysotaSourceFile.setDestPath("system/ota/")
     sysotaSourceFile.setProjectPath("config/" + configName + "/system/ota/")
@@ -579,7 +589,7 @@ def finalizeComponent(sysOTAPic32mzw1Component):
     triggerDict = {}
     triggerDict = Database.sendMessage("core", "HEAP_SIZE", {"heap_size" : 170000})
     res = Database.activateComponents(["sysWifiPic32mzw1"])
-    Database.setSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_AP_ENABLE", False)
+    #Database.setSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_AP_ENABLE", False)
     
     sysotasysComponent = Database.createGroup(None,"System Configuration")    
     res = Database.activateComponents(["nvm"],"System Configuration", True)
@@ -623,6 +633,25 @@ def finalizeComponent(sysOTAPic32mzw1Component):
     Database.setSymbolValue("sys_fs", "SYS_FS_RTOS_DELAY", 1)
     
     Database.activateComponents(["sysNetPic32mzw1"])
+    
+
+def sysotaSetIntf(symbol,event):
+    if (event["value"] == "SYS_OTA_WIFI"):
+        setVal("sysNetPic32mzw1", "SYS_NET_SUPP_INTF", 1)
+        setVal("sysNetPic32mzw1", "SYS_NET_INTF", "WIFI")
+   
+    else:
+        if (event["value"] == "SYS_OTA_ETHERNET"):
+            setVal("sysNetPic32mzw1", "SYS_NET_SUPP_INTF", 1)
+            setVal("sysNetPic32mzw1", "SYS_NET_IDX1", True)            
+            setVal("sysNetPic32mzw1", "SYS_NET_IDX1_INTF", "ETHERNET")
+            setVal("sysNetPic32mzw1", "SYS_NET_IDX1_IPPROT", "TCP")
+            setVal("sysNetPic32mzw1", "SYS_NET_IDX1_MODE", "CLIENT")
+            #netconfig_interface_counter_dict_ota = {}
+            #netconfig_interface_counter_dict_ota = Database.sendMessage("tcpipNetConfig", "NETCONFIG_INTERFACE_COUNTER_INC", netconfig_interface_counter_dict_ota)
+            #res = Database.connectDependencies(autoConnectTableEthmac)
+            res = Database.connectDependencies(autoConnectTableEthmac1)
+         
     
 #-----------------------------------------------------------------------------#
     

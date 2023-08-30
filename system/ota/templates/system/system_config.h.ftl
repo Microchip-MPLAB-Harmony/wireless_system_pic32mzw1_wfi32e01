@@ -24,6 +24,7 @@
 #define SYS_OTA_URL                         "${SYS_OTA_URL}"
 #define SYS_OTA_JSON_FILE_MAXSIZE           ${SYS_OTA_JSON_FILE_MAXSIZE}
 #define SYS_OTA_NUM_IMGS                    ${SYS_OTA_NUM_IMGS}
+#define SYS_OTA_INTF                        ${SYS_OTA_INTF}
 <#if SYS_OTA_ENFORCE_TLS == true>
 #define SYS_OTA_ENFORCE_TLS   			    true
 <#else>
