@@ -52,6 +52,7 @@ def instantiateComponent(syswifiComponent):
     syswifiEnableErrMsg.setLabel("**Placeholder for error display")
     syswifiEnableErrMsg.setHelp(wifi_helpkeyword)
     syswifiEnableErrMsg.setVisible(False)
+    syswifiEnableErrMsg.setDependencies(syswifiSTAautoMenu, ["SYS_WIFI_STA_ENABLE"])
 
     syswifiMode = syswifiComponent.createComboSymbol("SYS_WIFI_MODE", None, ["STA", "AP"])
     syswifiMode.setLabel("Device Mode")
@@ -82,11 +83,6 @@ def instantiateComponent(syswifiComponent):
     syswifistaAuth.setDefaultValue("WPA2")
     syswifistaAuth.setDependencies(syswifiSTAMenu,["SYS_WIFI_STA_AUTH"])
 
-    syswifistaEnt = syswifiComponent.createBooleanSymbol("SYS_WIFI_SUPPORT_ENTERPRISE", syswifistaEnable)
-    syswifistaEnt.setDefaultValue(False)
-    syswifistaEnt.setVisible(False)
-    syswifistaEnt.setDescription("Support Enterprise Mode ? ")
-    syswifistaEnt.setDependencies(syswifiSTAMenu, ["SYS_WIFI_STA_AUTH"])
 
     syswifistaPwd = syswifiComponent.createStringSymbol("SYS_WIFI_STA_PWD_NAME", syswifistaEnable)
     syswifistaPwd.setLabel("Password")
@@ -97,6 +93,14 @@ def instantiateComponent(syswifiComponent):
     syswifistaPwd.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_STA_AUTH","SYS_WIFI_STA_PWD_NAME"])
 
 #### ENTERPRISE ####
+
+    syswifistaEntMethod = syswifiComponent.createComboSymbol("SYS_WIFI_ENT_METHOD", syswifistaEnable, ["TLS","TTLS"])
+    syswifistaEntMethod.setLabel("Enterprise Method")
+    syswifistaEntMethod.setHelp(wifi_helpkeyword)
+    syswifistaEntMethod.setDescription("Enter Enterprise Method")
+    syswifistaEntMethod.setDefaultValue("TLS")
+    syswifistaEntMethod.setVisible(False)
+    syswifistaEntMethod.setDependencies(syswifiSTAMenu,["SYS_WIFI_STA_AUTH"])
 
     syswifistaEntUserName = syswifiComponent.createStringSymbol("SYS_WIFI_STA_ENT_USER_NAME", syswifistaEnable)
     syswifistaEntUserName.setLabel("Username & Domainname")
@@ -208,6 +212,21 @@ def instantiateComponent(syswifiComponent):
     syswifistaEntPrivateKeyModuleName.setDefaultValue("private_key")
     syswifistaEntPrivateKeyModuleName.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_STA_AUTH","SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME"])
 
+    syswifistaEntTTLSusername = syswifiComponent.createStringSymbol("SYS_WIFI_STA_ENT_TTLS_USERNAME", syswifistaEnable)
+    syswifistaEntTTLSusername.setLabel("TTLS Username")
+    syswifistaEntTTLSusername.setHelp(wifi_helpkeyword)
+    syswifistaEntTTLSusername.setVisible(False)
+    syswifistaEntTTLSusername.setDescription("Enter Enterprise TTLS MSCHAPV2 username")
+    syswifistaEntTTLSusername.setDefaultValue("ttls_username")
+    syswifistaEntTTLSusername.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_ENT_METHOD","SYS_WIFI_STA_ENT_TTLS_USERNAME"])
+
+    syswifistaEntTTLSpassword = syswifiComponent.createStringSymbol("SYS_WIFI_STA_ENT_TTLS_PASSWORD", syswifistaEnable)
+    syswifistaEntTTLSpassword.setLabel("TTLS Password")
+    syswifistaEntTTLSpassword.setHelp(wifi_helpkeyword)
+    syswifistaEntTTLSpassword.setVisible(False)
+    syswifistaEntTTLSpassword.setDescription("Enter Enterprise TTLS MSCHAPV2 password")
+    syswifistaEntTTLSpassword.setDefaultValue("ttls_username")
+    syswifistaEntTTLSpassword.setDependencies(syswifiSTASecurityMenu, ["SYS_WIFI_ENT_METHOD","SYS_WIFI_STA_ENT_TTLS_PASSWORD"])
 
 #### ENTERPRISE END####
 
@@ -796,6 +815,7 @@ def syswifiRTOSStandaloneMenu(symbol, event):
 
 def syswifiSTASecurityMenu(symbol, event):
     data = symbol.getComponent()
+    sysWifiEntMethod = data.getSymbolByID("SYS_WIFI_ENT_METHOD")
     sysWiFisecurity = data.getSymbolValue("SYS_WIFI_STA_AUTH")
     sysWiFiWPAPwdlen = len(data.getSymbolValue("SYS_WIFI_STA_PWD_NAME"))
     ErrCommSymbol = data.getSymbolByID("SYS_WIFI_ERR")
@@ -813,7 +833,8 @@ def syswifiSTASecurityMenu(symbol, event):
     PrivateKeyFormat = data.getSymbolByID("SYS_WIFI_STA_PRIVATE_KEY_FORMAT")
     PrivateKeyFileName = data.getSymbolByID("SYS_WIFI_STA_ENT_PRIVATE_KEY_FILE_NAME")
     PrivateKeyModuleName = data.getSymbolByID("SYS_WIFI_STA_ENT_PRIVATE_KEY_MODULE_NAME")
-    syswifistaEnt = data.getSymbolByID("SYS_WIFI_SUPPORT_ENTERPRISE")
+    syswifistaEntTTLSusername = data.getSymbolByID("SYS_WIFI_STA_ENT_TTLS_USERNAME")
+    syswifistaEntTTLPassword = data.getSymbolByID("SYS_WIFI_STA_ENT_TTLS_PASSWORD")
 
     utc_dt = datetime.strptime(data.getSymbolValue("SYS_WIFI_STA_ENT_DATE"),'%Y-%m-%dT%H:%M:%S.%fZ')
     unixDate = int((utc_dt - datetime(1970, 1, 1)).total_seconds())
@@ -836,7 +857,10 @@ def syswifiSTASecurityMenu(symbol, event):
         PrivateKeyFormat.setVisible(False)
         PrivateKeyFileName.setVisible(False)
         PrivateKeyModuleName.setVisible(False)
-        syswifistaEnt.setVisible(False)
+        sysWifiEntMethod.setVisible(False)
+        syswifistaEntTTLSusername.setVisible(False)
+        syswifistaEntTTLPassword.setVisible(False)
+        
     elif(sysWiFisecurity == "WPA2" or sysWiFisecurity == "WPA3" or sysWiFisecurity == "WPA2WPA3"):        
         if(sysWiFiWPAPwdlen < 8):
             ErrCommSymbol.setLabel("****Error:Minimum STA Password length is 8 characters.")
@@ -861,9 +885,12 @@ def syswifiSTASecurityMenu(symbol, event):
             PrivateKeyFormat.setVisible(False)
             PrivateKeyFileName.setVisible(False)
             PrivateKeyModuleName.setVisible(False)
-            syswifistaEnt.setVisible(False)
+            sysWifiEntMethod.setVisible(False)
+            syswifistaEntTTLSusername.setVisible(False)
+            syswifistaEntTTLPassword.setVisible(False)
+            
     else:
-        password.setVisible(False)
+        password.setVisible(False) 
         userDomainName.setVisible(True)
         serverDomainNameSAN.setVisible(True)
         serverDomainNameCN.setVisible(True)
@@ -877,7 +904,25 @@ def syswifiSTASecurityMenu(symbol, event):
         PrivateKeyFormat.setVisible(True)
         PrivateKeyFileName.setVisible(True)
         PrivateKeyModuleName.setVisible(True)
-        syswifistaEnt.setVisible(False)
+        sysWifiEntMethod.setVisible(True)
+        if(data.getSymbolValue("SYS_WIFI_ENT_METHOD")=="TTLS"):
+            syswifistaEntTTLSusername.setVisible(True)
+            syswifistaEntTTLPassword.setVisible(True)
+            PrivateCertFormat.setVisible(False)
+            PrivateCertFileName.setVisible(False)
+            PrivateCertModuleName.setVisible(False)
+            PrivateKeyFormat.setVisible(False)
+            PrivateKeyFileName.setVisible(False)
+            PrivateKeyModuleName.setVisible(False)
+        else:
+            syswifistaEntTTLSusername.setVisible(False)
+            syswifistaEntTTLPassword.setVisible(False)
+            PrivateCertFormat.setVisible(True)
+            PrivateCertFileName.setVisible(True)
+            PrivateCertModuleName.setVisible(True)
+            PrivateKeyFormat.setVisible(True)
+            PrivateKeyFileName.setVisible(True)
+            PrivateKeyModuleName.setVisible(True)
 
 def syswifiAPSecurityMenu(symbol, event):
     data = symbol.getComponent()
@@ -926,11 +971,7 @@ def syswifiSTAMenu(symbol, event):
     
     if (event["value"] == "WPAWPA2-Enterprise" or event["value"] == "WPA2-Enterprise" or event["value"] == "WPA2WPA3-Enterprise" or event["value"] == "WPA3-Enterprise"):
         global wolfssl, pic32
-        if(Database.getSymbolValue("drvWifiPic32mzw1","DRV_WIFI_PIC32MZW1_SUPPORT_ENTERPRISE") == True):        
-            Database.setSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_SUPPORT_ENTERPRISE", True)
-        else:
-            Database.setSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_SUPPORT_ENTERPRISE", False)
-        
+     
         if(Database.getComponentByID("lib_wolfcrypt") == None):
             res = Database.activateComponents(["lib_wolfcrypt"],"System Configuration")
 
@@ -957,7 +998,8 @@ def syswifiSTAMenu(symbol, event):
         if(pic32==False):
             res = Database.connectDependencies(autoConnectTablePIC32)
             pic32=True
-
+        if(Database.getSymbolValue("drvWifiPic32mzw1", "DRV_WIFI_PIC32MZW1_SUPPORT_ENTERPRISE") != True ):
+            Database.setSymbolValue("drvWifiPic32mzw1", "DRV_WIFI_PIC32MZW1_SUPPORT_ENTERPRISE", True)
         if(Database.getSymbolValue("lib_wolfssl", "wolfsslSmallStackSupport") != True ):
             Database.setSymbolValue("lib_wolfssl", "wolfsslSmallStackSupport", True)
         if(Database.getSymbolValue("lib_wolfssl", "wolfsslOsalHeapKeys") != True):
@@ -966,6 +1008,8 @@ def syswifiSTAMenu(symbol, event):
             Database.setSymbolValue("lib_wolfssl", "wolfsslUseFastMath", True)
         if(Database.getSymbolValue("lib_wolfcrypt", "wolfcrypt_hw") != True):
             Database.setSymbolValue("lib_wolfcrypt","wolfcrypt_hw", True)
+        if(Database.getSymbolValue("lib_wolfcrypt", "wolfcrypt_tdes_ecb") != True):
+            Database.setSymbolValue("lib_wolfcrypt","wolfcrypt_tdes_ecb", True)
         if(Database.getSymbolValue("lib_wolfcrypt", "wolfcrypt_md4") != True):
             Database.setSymbolValue("lib_wolfcrypt","wolfcrypt_md4", True)
         if(Database.getSymbolValue("lib_wolfcrypt", "wolfcrypt_dsa") != True):
@@ -983,6 +1027,7 @@ def syswifiSTAMenu(symbol, event):
         if(Database.getSymbolValue("lib_wolfcrypt", "wolfcrypt_aes_ccm") == True):
             Database.setSymbolValue("lib_wolfcrypt","wolfcrypt_aes_ccm", False)
     else:
+        Database.getComponentByID("drvWifiPic32mzw1").setDependencyEnabled("DRV_WIFI_PIC32MZW1_SUPPORT_ENTERPRISE", False)
         if(Database.getComponentByID("lib_wolfssl") != None):
             print("Deactivating WolfSSL")
             Database.setSymbolValue("lib_wolfssl","wolfssl", False)

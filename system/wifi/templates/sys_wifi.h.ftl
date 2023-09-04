@@ -115,6 +115,16 @@ typedef enum
 </#if>
 } SYS_WIFI_AUTH ;
 
+typedef enum{
+
+    /* Requesting a TLS mode within Enterprise Authentication mode types */    
+    SYS_WIFI_ENTERPRISE_TLS,
+    
+    /* Requesting a TTLS mode within Enterprise Authentication mode types */           
+    SYS_WIFI_ENTERPRISE_TTLS,   
+            
+}SYS_WIFI_ENTERPRISE_METHOD;
+
 // *****************************************************************************
 /* System Wi-Fi service control message types
 
