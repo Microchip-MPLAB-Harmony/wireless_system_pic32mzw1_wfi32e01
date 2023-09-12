@@ -86,10 +86,10 @@ extern "C" {
     #define JSON_URL_MAX_LEN    1000
 #endif
     #define FACTORY_IMAGE_SIGNATURE_MAX_LEN    1000
+    
+    #define SYS_OTA_WIFI 0
 	
-	#define SYS_OTA_WIFI 0
-	
-	#define SYS_OTA_ETHERNET 1
+    #define SYS_OTA_ETHERNET 1
     // *****************************************************************************
 
     /* Application states
@@ -165,7 +165,11 @@ extern "C" {
 
         /*Checking JSON content for proper value and mandatory fields */
         SYS_OTA_UPDATE_CHECK_JSON_CONTENT,
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
 
+        /* To download Files from server*/
+        SYS_OTA_DOWNLOAD_FILES,
+</#if>
         /*Complete of OTA update check*/
         SYS_OTA_UPDATE_CHECK_DONE,
         
@@ -175,8 +179,152 @@ extern "C" {
 
     } SYS_OTA_STATES;
 
-    // *****************************************************************************
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+ /***********************************************************/
+      
+      /* Structure for slot information*/
+    typedef struct SYS_OTA_SLOT_INFO_
+    {
+        uint32_t slot_address[SYS_OTA_NUM_OF_SLOTS];
+        uint32_t slot_size[SYS_OTA_NUM_OF_SLOTS];
+        uint32_t file_size_in_slot[SYS_OTA_NUM_OF_SLOTS];
+        
+    }SYS_OTA_SLOT_INFO;
+    
+    /* Structure for file parameters */
+    typedef struct SYS_OTA_FILES_DATA_
+    {
+        int8_t      file_index;
+        uint8_t     total_no_of_files;
+        char        file_url[OTA_URL_SIZE];
+        char        file_digest_string[64];
+        char        file_signature_string[98];
+        uint8_t     slot_number;
+        bool        error;
+        uint8_t     total_files_downloaded;
+        SYS_OTA_SLOT_INFO slot_info;
 
+    }SYS_OTA_FILE_DATA;
+
+     /* File download task context */
+  typedef struct {
+
+      CRYPT_SHA256_CTX sha256;
+      uint8_t *buf;
+      uint32_t buf_len;
+      uint32_t copied_len;
+      uint32_t total_len;
+
+  }OTA_FILE_DOWNLOAD_TASK_CONTEXT;
+    
+
+    /* System ota file download status 
+
+      Summary:
+        provide status of file download.
+
+      Description:
+        provide status of file download.
+
+      Remarks:
+   
+     */
+
+    typedef enum
+    {
+        SYS_OTA_PARSE_JSON = 0,
+                
+        SYS_OTA_CHECK_SLOT,
+                
+        SYS_OTA_VERIFY_SLOT_DIGEST,
+                
+        SYS_OTA_DOWNLOAD_FILE,
+                
+        SYS_OTA_VERIFY_DIGEST,
+
+        SYS_OTA_VERIFY_SIGNATURE,
+                
+        SYS_OTA_DOWNLOAD_DONE,
+
+<#if SYS_OTA_FILE_JUMP_ENABLE == true>
+        SYS_OTA_UPDATE_BOOTCNTRL_AREA,
+</#if>
+                
+        SYS_OTA_FILE_DOWNLOAD_ERROR
+
+    }SYS_OTA_FILE_DOWNLOAD_STATUS;
+
+
+    typedef enum {
+        /* To provide status of file */
+        
+        SYS_OTA_FILE_OPEN = 0,
+                
+        SYS_OTA_FILE_DOWNLOAD,
+        
+        SYS_OTA_FILE_WRITE_TO_NVM,
+                
+        SYS_OTA_FILE_DOWNLOAD_DONE,
+        
+    } SYS_OTA_FILE_DOWNLOAD_STATE;
+
+  /* Digest Verification task states */
+  typedef enum {
+
+      VERIFY_TASK_STATE_INIT = 0,
+
+      VERIFY_TASK_STATE_READ,
+
+      VERIFY_TASK_STATE_DATA_ADD,
+
+      VERIFY_TASK_STATE_DONE,
+
+      VERIFY_TASK_STATE_IDLE,
+
+      VERIFY_TASK_STATE_ERROR
+
+  } SYS_OTA_FILE_VERIFY_TASK;
+
+
+ /* Digest Verification task results */
+  typedef enum
+  {
+      SYS_OTA_DIGEST_MISMATCH = 0,
+
+      SYS_OTA_DIGEST_MATCH,
+
+      SYS_OTA_DIGEST_ERROR,
+
+      SYS_OTA_DIGEST_IDLE
+
+  }SYS_OTA_VERIFY_DIGEST_RESULT;
+
+
+ /* Signature Verification task results */
+  typedef enum{
+
+      /* Operation completed with success */
+      SYS_OTA_SIGNATURE_VERIFICATION_SUCCESS = 0,
+
+      /* Operation failed. */
+      SYS_OTA_SIGNATURE_VERIFICATION_FAILURE,
+
+      /* Operation request object is invalid */
+      SYS_OTA_SIGNATURE_INVALID=255
+
+  }SYS_OTA_VERIFY_SIGN_RESULT;
+
+ /***********************************************************/
+  
+<#if SYS_OTA_FILE_JUMP_ENABLE == true>
+  void OTA_UpdateBootctl(void);
+
+  void SYS_OTA_SystemReset(void);
+</#if>
+</#if>
+
+
+    // *****************************************************************************//
     /* System ota service control message types
 
       Summary:

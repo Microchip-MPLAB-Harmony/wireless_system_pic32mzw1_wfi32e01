@@ -30,6 +30,9 @@ autoConnectTableEthmac = [["tcpipNetConfig", "NETCONFIG_MAC_Dependency", "drvPic
 autoConnectTableEthmac1 = [["drvPic32mEthmac", "ETHMAC_PHY_Dependency", "drvExtPhyLan8740", "libdrvExtPhyLan8740"]]
           
 ota_helpkeyword = "mcc_h3_pic32mzw1_ota_system_service_configurations"
+sysotaFileSlotInstance = []
+sysotaMaxFiles = 5
+sysotaFileNumPrev = 1
 ################################################################################
 #### Business Logic ####
 ################################################################################
@@ -46,7 +49,7 @@ def setVisible_OnValueChanged(symbol, event):
 def setVal(component, symbol, value):
     triggerSvDict = {"Component":component,"Id":symbol, "Value":value}
     if(Database.sendMessage(component, "SET_SYMBOL", triggerSvDict) == None):
-        print "Set Symbol Failure" + component + ":" + symbol + ":" + str(value)
+        print("Set Symbol Failure" + component + ":" + symbol + ":" + str(value))
         return False
     else:
         return True
@@ -61,6 +64,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     #-------------------------------------------------------------------------#
     #                           OTA main menu                        #
     #-------------------------------------------------------------------------#
+
     sysotaResetEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_AUTORESET_ENABLE", None)
     sysotaResetEnable.setLabel("Auto reset")
     sysotaResetEnable.setHelp(ota_helpkeyword)
@@ -190,8 +194,8 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     symbol_JSON_buf_size.setLabel("Set JSON file size in bytes")
     symbol_JSON_buf_size.setHelp(ota_helpkeyword)
     symbol_JSON_buf_size.setMin(0)
-    symbol_JSON_buf_size.setMax(1000)
-    symbol_JSON_buf_size.setDefaultValue(1000)
+    symbol_JSON_buf_size.setMax(2000)
+    symbol_JSON_buf_size.setDefaultValue(2000)
     symbol_JSON_buf_size.setDescription("Set JSON file size in bytes")
     symbol_JSON_buf_size.setVisible(True)
     
@@ -210,36 +214,112 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     symbol_sector_check_enabling.setDescription("To Enable free sector check in ext flash before download starts")
     
     symbol_patch_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_PATCH_ENABLE", symbol)
-    symbol_patch_enabling.setLabel("Enable/Disable Patch Functionality")
+    symbol_patch_enabling.setLabel("Enable Patch Functionality")
     symbol_patch_enabling.setHelp(ota_helpkeyword)
     symbol_patch_enabling.setVisible(True)
     symbol_patch_enabling.setDefaultValue(False)
     symbol_patch_enabling.setDescription("To Enable patch functionality support")
     
     symbol_secure_ota_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_SECURE_BOOT_ENABLED", symbol)
-    symbol_secure_ota_enabling.setLabel("Enable/Disable Secure OTA Functionality")
+    symbol_secure_ota_enabling.setLabel("Enable Secure OTA Functionality")
     symbol_secure_ota_enabling.setVisible(True)
     symbol_secure_ota_enabling.setHelp(ota_helpkeyword)
     symbol_secure_ota_enabling.setDefaultValue(False)
     symbol_secure_ota_enabling.setDescription("To Enable Secure OTA functionality support")
+    
+    ###-------------Files/Img Download Menu----------------###
 
+    # Enable Support for File Download ? 
+    sysotaFileDownloadEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FILE_DOWNLOAD_ENABLE", symbol)
+    sysotaFileDownloadEnable.setLabel("Enable File Download ")
+    sysotaFileDownloadEnable.setVisible(True)
+    sysotaFileDownloadEnable.setHelp(ota_helpkeyword)
+    sysotaFileDownloadEnable.setDefaultValue(False)
+    sysotaFileDownloadEnable.setDescription("Enable File Download")
+
+    # File Download Start Address
+    sysotaFileDownloadStartAddr = sysOTAPic32mzw1Component.createStringSymbol("SYS_OTA_FILE_DOWNLOAD_ADDRESS", sysotaFileDownloadEnable)
+    sysotaFileDownloadStartAddr.setLabel("File/img Download - NVM Start Address ")
+    sysotaFileDownloadStartAddr.setHelp(ota_helpkeyword)
+    sysotaFileDownloadStartAddr.setVisible(False)
+    sysotaFileDownloadStartAddr.setDescription("Enter the File Download Start Address.")
+    sysotaFileDownloadStartAddr.setDefaultValue("0x000FE000")
+    sysotaFileDownloadStartAddr.setDependencies(setVisible_OnValueChanged, ["SYS_OTA_FILE_DOWNLOAD_ENABLE"])
+    
+    # Number of Slots
+    sysotaFileDownloadNoOfSlots = sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_NO_OF_SLOTS", sysotaFileDownloadEnable)
+    sysotaFileDownloadNoOfSlots.setHelp(ota_helpkeyword)
+    sysotaFileDownloadNoOfSlots.setLabel("Number of Slots ")
+    sysotaFileDownloadNoOfSlots.setMax(sysotaMaxFiles)
+    sysotaFileDownloadNoOfSlots.setMin(0)
+    sysotaFileDownloadNoOfSlots.setVisible(False)
+    sysotaFileDownloadNoOfSlots.setDescription("Number of NVM Slots to save downloaded files")
+    sysotaFileDownloadNoOfSlots.setDefaultValue(1)
+    sysotaFileDownloadNoOfSlots.setDependencies(setVisible_OnValueChanged, ["SYS_OTA_FILE_DOWNLOAD_ENABLE"])
+    
+    # Get Size of Each Slot
+    for slot in range(0,sysotaMaxFiles):
+       sysotaFileSlotInstance.append(sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_FILE_SLOT_SIZE"+str(slot),sysotaFileDownloadNoOfSlots))
+       sysotaFileSlotInstance[slot].setLabel("Size in bytes of Slot "+ str(slot))
+       sysotaFileDownloadNoOfSlots.setHelp(ota_helpkeyword)
+       sysotaFileSlotInstance[slot].setMax(20480)
+       sysotaFileSlotInstance[slot].setMin(4096)
+       print(sysotaFileDownloadNoOfSlots.getValue())
+       #sysotaFileSlotInstance[slot].setVisible(True)
+
+       if (slot < sysotaFileDownloadNoOfSlots.getValue()):
+            sysotaFileSlotInstance[slot].setVisible(True)
+            sysotaFileSlotInstance[slot].setDefaultValue(True)
+       else:
+            sysotaFileSlotInstance[slot].setVisible(False)
+            sysotaFileSlotInstance[slot].setDefaultValue(False)
+       sysotaFileSlotInstance[slot].setDependencies(sysotaFileInstanceEnable,["SYS_OTA_FILE_DOWNLOAD_ENABLE","SYS_OTA_NO_OF_SLOTS"])
+
+    # Enable Jump Address
+    sysotaFileJumpEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FILE_JUMP_ENABLE", sysotaFileDownloadEnable)
+    sysotaFileJumpEnable.setLabel("Enable Jump to Address ")
+    sysotaFileJumpEnable.setVisible(True)
+    sysotaFileJumpEnable.setHelp(ota_helpkeyword)
+    sysotaFileJumpEnable.setDefaultValue(False)
+    sysotaFileJumpEnable.setDescription("Enable Jump to Address, After download")
+    sysotaFileJumpEnable.setDependencies(setVisible_OnValueChanged, ["SYS_OTA_FILE_DOWNLOAD_ENABLE"])
+
+    # Jump Address
+    sysotaFileJumpAddr = sysOTAPic32mzw1Component.createStringSymbol("SYS_OTA_FILE_JUMP_ADDRESS", sysotaFileJumpEnable)
+    sysotaFileJumpAddr.setLabel("Jump Address ")
+    sysotaFileJumpAddr.setHelp(ota_helpkeyword)
+    sysotaFileJumpAddr.setVisible(False)
+    sysotaFileJumpAddr.setDescription("Enter the Jump Address.")
+    sysotaFileJumpAddr.setDefaultValue("0x000FE000")
+    sysotaFileJumpAddr.setDependencies(setVisible_OnValueChanged, ["SYS_OTA_FILE_JUMP_ENABLE"]) 
+    
+    # Enable File System
+    symbol_fs_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FS_ENABLED", sysotaFileDownloadEnable)
+    symbol_fs_enabling.setLabel("Use external memory in OTA")
+    symbol_fs_enabling.setVisible(True)
+    symbol_fs_enabling.setHelp(ota_helpkeyword)
+    symbol_fs_enabling.setDefaultValue(True)
+    symbol_fs_enabling.setDescription("To Enable Filesystem in OTA service")
+   # symbol_fs_enabling.setDependencies(setVisible_OnValueChanged,["SYS_OTA_FILE_DOWNLOAD_ENABLE"])
+
+    #Boot From dedicated Bootflash
+    symbol_dedicated_bootflash_enabling = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_BOOTLOAD_FROM_DEDICATED_BOOTFLASH_ENABLED", symbol)
+    symbol_dedicated_bootflash_enabling.setLabel("Use dedicated boot flash")
+    symbol_dedicated_bootflash_enabling.setVisible(False)
+    symbol_dedicated_bootflash_enabling.setHelp(ota_helpkeyword)
+    symbol_dedicated_bootflash_enabling.setDefaultValue(False)
+    symbol_dedicated_bootflash_enabling.setDescription("To enable usage of dedicated bootflash memory  for bootloader")
+    
+      
     ############################################################################
     #### Code Generation ####
     ############################################################################
     configName = Variables.get("__CONFIGURATION_NAME")
     
-    sysotaSourceFile = sysOTAPic32mzw1Component.createFileSymbol("SYS_OTA_SOURCE", None)
-    sysotaSourceFile.setSourcePath("system/ota/framework/sys_ota.c.ftl")
-    sysotaSourceFile.setOutputName("sys_ota.c")
-    sysotaSourceFile.setDestPath("system/ota/")
-    sysotaSourceFile.setProjectPath("config/" + configName + "/system/ota/")
-    sysotaSourceFile.setType("SOURCE")
-    sysotaSourceFile.setMarkup(True)
-    sysotaSourceFile.setEnabled(True)
-    
+
     ########### system header #################
     sysotaHeaderFile = sysOTAPic32mzw1Component.createFileSymbol("SYS_OTA_HEADER", None)
-    sysotaHeaderFile.setSourcePath("system/ota/framework/sys_ota.h")
+    sysotaHeaderFile.setSourcePath("system/ota/framework/sys_ota.h.ftl")
     sysotaHeaderFile.setOutputName("sys_ota.h")
     sysotaHeaderFile.setDestPath("system/ota/")
     sysotaHeaderFile.setProjectPath("config/" + configName + "/system/ota/")
@@ -249,7 +329,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     ########### system header end #################
     
     sysotaSourceFile = sysOTAPic32mzw1Component.createFileSymbol("OTA_SOURCE", None)
-    sysotaSourceFile.setSourcePath("system/ota/framework/ota.c")
+    sysotaSourceFile.setSourcePath("system/ota/framework/ota.c.ftl")
     sysotaSourceFile.setOutputName("ota.c")
     sysotaSourceFile.setDestPath("system/ota/framework/")
     sysotaSourceFile.setProjectPath("config/" + configName + "/system/ota/framework/")
@@ -258,7 +338,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     sysotaSourceFile.setEnabled(True)
 
     sysotaHeaderFile = sysOTAPic32mzw1Component.createFileSymbol("OTA_HEADER", None)
-    sysotaHeaderFile.setSourcePath("system/ota/framework/ota.h")
+    sysotaHeaderFile.setSourcePath("system/ota/framework/ota.h.ftl")
     sysotaHeaderFile.setOutputName("ota.h")
     sysotaHeaderFile.setDestPath("system/ota/framework/")
     sysotaHeaderFile.setProjectPath("config/" + configName + "/system/ota/framework/")
@@ -537,6 +617,16 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     sysotaHeaderFile.setType("HEADER")
     sysotaHeaderFile.setMarkup(True)
     sysotaHeaderFile.setEnabled(True)
+
+    sysotaSourceFile = sysOTAPic32mzw1Component.createFileSymbol("SYS_OTA_SOURCE", None)
+    sysotaSourceFile.setSourcePath("system/ota/framework/sys_ota.c.ftl")
+    sysotaSourceFile.setOutputName("sys_ota.c")
+    sysotaSourceFile.setDestPath("system/ota/")
+    sysotaSourceFile.setProjectPath("config/" + configName + "/system/ota/")
+    sysotaSourceFile.setType("SOURCE")
+    sysotaSourceFile.setMarkup(True)
+    sysotaSourceFile.setEnabled(True)
+    
     
     
     
@@ -550,7 +640,42 @@ def onAttachmentConnected(source, target):
     remoteComponent = target["component"]
     remoteID = remoteComponent.getID()
     
+def sysotaFileInstanceEnable(symbol, event):
+    global sysotaFileNumPrev
+    print("Start sysotaFileInstanceEnable")
+    if(event["id"] == "SYS_OTA_FILE_DOWNLOAD_ENABLE"):
+        otafileEnable = Database.getSymbolValue("sysotaFileDownloadEnable","SYS_OTA_FILE_DOWNLOAD_ENABLE")
+        fileIndex = int(filesymbol.getID().strip("SYS_OTA_FILE_SLOT_SIZE"))
+        print("File Slot " + str(fileIndex))
+        print(sysotaFileNumPrev)
+        print(tcpipDhcpsInstancesNumPrev)
+        if(otafileEnable == True):
+            if(fileIndex < sysotaFileNumPrev ):
+                symbol.setVisible(True)
+        else:
+            symbol.setVisible(False)
 
+    else:
+        print(symbol.getID())
+        print(event["id"])
+        sysotaFileNumValue = event["value"]
+        print(sysotaFileNumValue)
+        print(sysotaFileNumPrev)
+        if (sysotaFileNumValue > sysotaFileNumPrev):
+            sysotaFileSlotInstance[sysotaFileNumPrev].setVisible(True)
+            sysotaFileSlotInstance[sysotaFileNumPrev].setValue(True, 1)
+            sysotaFileNumPrev = sysotaFileNumPrev + 1
+        else:
+            if(sysotaFileNumValue < sysotaFileNumPrev):
+                sysotaFileNumPrev = sysotaFileNumPrev - 1
+                sysotaFileSlotInstance[sysotaFileNumPrev].setVisible(False)
+                sysotaFileSlotInstance[sysotaFileNumPrev].setValue(False, 1)
+                print("Set False " + str(sysotaFileNumPrev))
+
+            else:
+                print("Do Nothing "+ str(sysotaFileNumPrev))
+    
+    print("END sysotaFileInstanceEnable")
 
 
 def onAttachmentDisconnected(source, target):

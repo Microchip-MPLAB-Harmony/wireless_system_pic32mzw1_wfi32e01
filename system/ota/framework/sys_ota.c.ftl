@@ -48,6 +48,13 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 #include "system_definitions.h"
 #include "system/ota/framework/cjson/cjson.h"
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+#include "system/../wolfssl/wolfcrypt/types.h"
+#include "system/../wolfssl/wolfcrypt/ecc.h"
+#include "system/../wolfssl/wolfcrypt/tfm.h"
+#include "system/../wolfssl/wolfcrypt/asn_public.h"
+#include <wolfssl/wolfcrypt/coding.h>
+</#if>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -105,6 +112,84 @@ SYS_OTA_Config g_SysOtaConfig;
 /*variable for ota service parameters*/
 SYS_OTA_DATA sys_otaData;
 
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+
+#define TERM_GREEN "\x1B[32m"
+#define TERM_RED   "\x1B[31m"
+#define TERM_YELLOW "\x1B[33m"
+#define TERM_RESET "\x1B[0m"
+
+SYS_OTA_FILE_DATA g_SysFileData = {0,0};
+static bool g_key_present = false;
+static uint8_t g_public_key_slot = 0;
+static bool g_secure_download = false;
+static uint8_t g_formulated_digest[32];
+
+
+static SYS_OTA_FILE_DOWNLOAD_STATUS File_Dnld_Status = SYS_OTA_PARSE_JSON;
+    
+static SYS_OTA_VERIFY_SIGN_RESULT  SYS_OTA_Verify_File_Signature
+ (
+    void
+ );
+static bool SYS_OTA_FILE_Params_Initialize
+(
+    void
+);
+static bool SYS_OTA_Parse_JSON
+(
+    uint8_t index
+);
+static bool SYS_OTA_Get_Key_Data
+(
+    cJSON *cert_data
+);
+static void SYS_OTA_File_Download_Tasks
+(
+    void
+);
+static bool SYS_OTA_NVM_Read
+(
+    uint32_t addr, 
+    uint8_t* buff, 
+    uint32_t len
+);
+static bool SYS_OTA_NVM_Write
+(
+    uint32_t addr, 
+    uint8_t* buff, 
+    uint32_t len
+);
+static bool SYS_OTA_CheckSlot
+(
+    int slot_number
+);
+ static void formulate_digest
+ (
+    void
+ );
+ static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
+(
+    void
+);
+  static bool SYS_OTA_Download_File
+ (
+    char *file_URL
+ );
+ static bool SYS_OTA_Get_File_Data
+(
+    cJSON *file_data
+);
+ void SYS_OTA_Print_Server_Data
+ (
+    void
+ );
+  static bool SYS_OTA_Store_signature
+ (
+    void
+ );
+
+</#if>
 // *****************************************************************************
 // *****************************************************************************
 // Section: Local Functions
@@ -400,7 +485,7 @@ void WiFiServCallback(uint32_t event, void * data, void *cookie) {
         case SYS_WIFI_CONNECT:
         {
             SYS_CONSOLE_PRINT("Device CONNECTED \r\n");
-           // sys_otaData.dev_cnctd_to_nw = true;
+            sys_otaData.dev_cnctd_to_nw = true;
             break;
         }
         case SYS_WIFI_DISCONNECT:
@@ -408,11 +493,11 @@ void WiFiServCallback(uint32_t event, void * data, void *cookie) {
             SYS_CONSOLE_PRINT("Device DISCONNECTED \r\n");
             break;
         }
-        default:
+        case SYS_WIFI_PROVCONFIG:
         {
-            
+            SYS_CONSOLE_PRINT("Received the Provisioning data \r\n");
             break;
-        } 
+        }
     }
 }
 
@@ -444,6 +529,7 @@ static bool SYS_OTA_IsTls_Request(const char *URIText){
         }
     }
 }
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: parsing JSON file content
@@ -678,6 +764,25 @@ static bool SYS_OTA_ParseJsonContent(cJSON *config_json) {
                     ota_params.version = ((int) ota_image_version->valuedouble);
                     return true;
                 } else {
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+
+                        SYS_CONSOLE_PRINT(TERM_YELLOW"SYS_OTA_FILE : JSON parsing  \r\n"TERM_RESET);
+                        
+                        /* To find the Files array in Json file, if present parse the file and save in array */
+                        cJSON *temp_array = NULL, *files_array = NULL;
+                        for(int count=0; count < server_array_count; count++)
+                        {
+                            temp_array = OTA_cJSON_GetArrayItem(server_array,count);
+                            files_array = OTA_cJSON_GetObjectItem(temp_array, "files");
+                            if(files_array != NULL ) 
+                            {
+                                g_SysFileData.total_no_of_files = OTA_cJSON_GetArraySize(files_array);
+                                sys_otaData.update_check_state = SYS_OTA_DOWNLOAD_FILES;
+                                SYS_CONSOLE_PRINT("SYS_OTA_FILE : Files/Imgs present in server - Download img/files Initiated\r\n");
+                                break;
+                            }
+                        }  
+</#if>        
                     return false;
                 }
             }
@@ -785,11 +890,36 @@ static bool SYS_OTA_Update_Check() {
                 break;
             }
             sys_otaData.json_content_parse_result = SYS_OTA_ParseJsonContent(config_json);
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+ 
+            /* Initialize File Download Parameters */
+            if( (sys_otaData.update_check_state != SYS_OTA_DOWNLOAD_FILES) 
+                    || (SYS_OTA_FILE_Params_Initialize() == false))
+            {
+				OTA_cJSON_Delete(config_json);
+                sys_otaData.update_check_state = SYS_OTA_UPDATE_CHECK_DONE;
+            }
+<#else>
+            
             OTA_cJSON_Delete(config_json);
             sys_otaData.update_check_state = SYS_OTA_UPDATE_CHECK_DONE;
+</#if>
             break;
+
+        }
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+
+        case SYS_OTA_DOWNLOAD_FILES:
+        {
+            if(g_SysFileData.error != true)
+            {
+                SYS_OTA_File_Download_Tasks();
+                break;
+            }
+            SYS_CONSOLE_PRINT(TERM_RED"DOWNLOAD TASK ERROR(1)\r\n"TERM_RESET);
         }
 
+</#if>
         case SYS_OTA_UPDATE_CHECK_DONE:
         {
             sys_otaData.update_check_state = SYS_OTA_UPDATE_CHECK_CNCT_TO_SRVR;
@@ -1033,6 +1163,7 @@ SYS_OTA_RESULT SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) {
     return ret;
 }
 
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: To set OTA image related parameters 
@@ -1051,7 +1182,7 @@ void SYS_OTA_SET_PARAMETERS(char *url, uint32_t version, char *digest)
 // *****************************************************************************
 // *****************************************************************************
 
-static void SYS_OTA_SystemReset(void) {
+void SYS_OTA_SystemReset(void) {
     SYSKEY = 0x00000000;
     SYSKEY = 0xAA996655;
     SYSKEY = 0x556699AA;
@@ -1121,6 +1252,783 @@ static void SYS_OTA_RTCset(void) {
     RTCC_AlarmSet(&alarm_time, RTCC_ALARM_MASK_HHMISS);
     RTCC_TimeGet(&sys_time);
 }
+
+
+<#if SYS_OTA_FILE_DOWNLOAD_ENABLE == true>
+// *****************************************************************************
+// *****************************************************************************
+// Section: File/Img download functions definition 
+// *****************************************************************************
+// *****************************************************************************/
+/******************************************************************************/
+/* Initialize the parameters required for file download*/
+static bool SYS_OTA_FILE_Params_Initialize
+(
+    void
+)
+{
+    g_SysFileData.error = false;
+    
+    if (SYS_OTA_NUM_OF_SLOTS <= 0)
+    {
+        return false;
+    }
+    
+    g_SysFileData.file_index = 0;
+    
+    /* Calculate the address of Slots */
+		<#list 0..< SYS_OTA_NO_OF_SLOTS as x>
+			g_SysFileData.slot_info.slot_size[${x}] = (uint32_t )SYS_OTA_SLOT_${x}_SIZE;
+		</#list>
+    g_SysFileData.slot_info.slot_address[0] = SYS_OTA_FILE_DOWNLOAD_START_ADDRESS;
+
+    for(int i=1; i < SYS_OTA_NUM_OF_SLOTS; i++){
+        g_SysFileData.slot_info.slot_address[i] = g_SysFileData.slot_info.slot_address[i-1] 
+                + g_SysFileData.slot_info.slot_size[i-1];
+    }
+    return true;
+}
+
+/* Parse JSON content for Server Files data*/
+static bool SYS_OTA_Parse_JSON
+(
+    uint8_t index
+)
+{
+    bool download_start = false;
+    cJSON *config_json = OTA_cJSON_Parse(sys_otaData.json_buf);
+    if (config_json == NULL) {
+        OTA_cJSON_Delete(config_json);
+        g_SysFileData.error = true;
+        return false;
+    }
+    
+    cJSON *server_array = OTA_cJSON_GetObjectItem(config_json, "ota");
+    uint8_t server_array_count = OTA_cJSON_GetArraySize(server_array);
+        
+    /* To find the Files array in Json file, if present parse the file and save in array */
+    cJSON *temp_array = NULL,*files_array = NULL;
+    for(int array_count=0; array_count < server_array_count; array_count++)
+    {
+        temp_array = OTA_cJSON_GetArrayItem(server_array,array_count);
+        files_array = OTA_cJSON_GetObjectItem(temp_array, "files");
+        if(files_array != NULL)
+        {
+            //SYS_CONSOLE_PRINT("SYS_OTA_FILE : Downloading index : %d\r\n",index);
+            download_start = true;
+            break;
+        }
+    }
+    if (files_array == NULL)
+    {
+        return false;
+    }
+    
+#ifdef SYS_OTA_APPDEBUG_ENABLED
+    SYS_CONSOLE_PRINT("SYS_OTA_FILE : Total Number of Files to be Downloaded : %d\r\n",g_SysFileData.total_no_of_files);
+    SYS_CONSOLE_PRINT("SYS_OTA_FILE : Downloading index : %d",index);
+#endif
+    
+    cJSON *file_data = OTA_cJSON_GetArrayItem(files_array,index);
+    
+    if( download_start == true && SYS_OTA_Get_File_Data(file_data))
+    {
+         return true;;
+    }
+    return false;
+}
+
+/* Get Key data from server */
+static bool SYS_OTA_Get_Key_Data
+(
+    cJSON *cert_data
+)
+{
+    cJSON *slot_number = OTA_cJSON_GetObjectItem(cert_data, "slot_number");
+    cJSON *file_size = OTA_cJSON_GetObjectItem(cert_data,"length");
+    cJSON *file_URL = OTA_cJSON_GetObjectItem(cert_data,"URL");
+    cJSON *digest_temp = OTA_cJSON_GetObjectItem(cert_data, "digest");
+    
+    /* ERROR Handling*/
+    if( slot_number == NULL || file_size == NULL
+            || file_URL == NULL || digest_temp == NULL)
+    {
+        return false;
+    }
+    g_SysFileData.slot_number = (uint8_t) slot_number->valueint;
+    /* ERROR Handling */
+    if(g_SysFileData.slot_number >= SYS_OTA_NUM_OF_SLOTS 
+            || g_SysFileData.slot_number < 0)
+    {
+       SYS_CONSOLE_PRINT("\tERROR!!! - Slot Number \r\n");
+       return false;
+    } 
+    g_public_key_slot = g_SysFileData.slot_number;
+    /* ERROR Handling *//* To check if file size is greater than slot size*/
+    if((uint32_t) file_size->valueint 
+            > g_SysFileData.slot_info.slot_size[g_SysFileData.slot_number])
+    {
+       SYS_CONSOLE_PRINT("\tERROR!!! - Slot Size \r\n");
+       return false;
+    }
+        
+    g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number] = (uint32_t) file_size->valueint;
+    /* Copy file URL  and digest  */
+    memset(g_SysFileData.file_url,'\0', OTA_URL_SIZE);
+    memcpy(g_SysFileData.file_url, (char *)file_URL->valuestring, strlen(file_URL->valuestring));
+    char *digest_c = digest_temp->valuestring;
+    strncpy(g_SysFileData.file_digest_string, digest_c, 64);
+
+    g_key_present = true;
+    g_secure_download = true;
+    return true;
+}        
+    
+    
+/* Get each file array data into structure */
+static bool SYS_OTA_Get_File_Data
+(
+    cJSON *file_data
+)
+{
+    
+    if (g_key_present == false)
+    {
+        cJSON *cert_array = OTA_cJSON_GetObjectItem(file_data, "public_key");
+        
+        if( cert_array != NULL)
+        {
+            cJSON *sign = OTA_cJSON_GetObjectItem(file_data, "signature");
+            if( sign == NULL )
+                return false;
+            char *signature_c = sign->valuestring;
+            memset(g_SysFileData.file_signature_string,'\0', 98);
+            strncpy(g_SysFileData.file_signature_string, signature_c, 98);
+            
+            
+            cJSON *cert_data = OTA_cJSON_GetArrayItem(cert_array,0);
+            return SYS_OTA_Get_Key_Data(cert_data);
+        }
+    }
+    
+    g_key_present = false;
+    cJSON *slot_number = OTA_cJSON_GetObjectItem(file_data, "slot_number");
+    cJSON *file_size = OTA_cJSON_GetObjectItem(file_data,"length");
+    cJSON *file_URL = OTA_cJSON_GetObjectItem(file_data,"URL");
+    cJSON *digest_temp = OTA_cJSON_GetObjectItem(file_data, "digest");
+    
+
+    /* ERROR Handling*/
+    if( slot_number == NULL || file_size == NULL
+            || file_URL == NULL || digest_temp == NULL)
+    {
+        return false;
+    }
+    g_SysFileData.slot_number = (uint8_t) slot_number->valueint;
+    /* ERROR Handling */
+    if(g_SysFileData.slot_number >= SYS_OTA_NUM_OF_SLOTS 
+            || g_SysFileData.slot_number < 0)
+    {
+       return false;
+    } 
+    /* ERROR Handling *//* To check if file size is greater than slot size*/
+    if((uint32_t) file_size->valueint 
+            > g_SysFileData.slot_info.slot_size[g_SysFileData.slot_number])
+    {
+       return false;
+    }
+        
+    g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number] = (uint32_t) file_size->valueint;
+    /* Copy file URL  and digest  */
+    memset(g_SysFileData.file_url,'\0', OTA_URL_SIZE);
+    memcpy(g_SysFileData.file_url, (char *)file_URL->valuestring, strlen(file_URL->valuestring));
+    
+    char *digest_c = digest_temp->valuestring;
+    memset(g_SysFileData.file_digest_string,'\0', 64);
+    strncpy(g_SysFileData.file_digest_string, digest_c, 64);
+    
+    
+
+    return true;
+}        
+
+/* To Read from NVM */
+static bool SYS_OTA_NVM_Read
+(
+    uint32_t addr, 
+    uint8_t* buff, 
+    uint32_t len
+)
+{
+    INT_Flash_Open();
+    
+    if(INT_Flash_Read(addr, buff, len)){
+        INT_Flash_Close();
+        return true;
+    }
+    return false;
+}
+
+/* To Write to NVM */
+static bool SYS_OTA_NVM_Write
+(
+    uint32_t addr, 
+    uint8_t* buff, 
+    uint32_t len
+)
+{
+    INT_Flash_Open();
+    
+    /* Erase cycle is always 4KB aligned*/
+    if(INT_Flash_Erase(addr, 4096U)){
+        if(INT_Flash_Write(addr, buff, len)){
+            INT_Flash_Close();
+            return true;
+        }
+    } 
+    return false;
+}
+
+/* To check the Slot */
+static bool SYS_OTA_CheckSlot
+(
+    int slot_number
+)
+{
+    uint32_t addr = g_SysFileData.slot_info.slot_address[slot_number];
+    uint32_t size = g_SysFileData.slot_info.slot_size[slot_number];
+    uint8_t buf[1024] = {0};
+    uint8_t erase_flag = 0xFF;
+    
+    for(int i = 0; i < size; i += 1024 ){
+        while(NVM_IsBusy());
+        SYS_OTA_NVM_Read(addr, buf, 1024);
+        for(int j = 0; j < 1024; j++){
+            if(buf[j] != erase_flag){
+                #ifdef SYS_OTA_APPDEBUG_ENABLED
+                SYS_CONSOLE_PRINT("\tSlot %d IS not Empty\r\n");
+                #endif
+                return false;
+            }
+        }
+        addr += 1024;
+    }
+    #ifdef SYS_OTA_APPDEBUG_ENABLED
+        SYS_CONSOLE_PRINT(TERM_GREEN"\tSlot %d Empty -> Download\r\n"TERM_RESET);
+    #endif
+    return true;
+}
+
+
+/* Calculate &  Verify SHA-256 digest*/
+static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
+(
+    void
+)
+{
+    static SYS_OTA_FILE_VERIFY_TASK SYS_OTA_Verify_Status = VERIFY_TASK_STATE_INIT;
+    static OTA_FILE_DOWNLOAD_TASK_CONTEXT ctx;
+    static uint32_t NVM_address = 0, len = 0;
+    static uint8_t app_digest[CRYPT_SHA256_DIGEST_SIZE];
+    
+    switch (SYS_OTA_Verify_Status){
+        case VERIFY_TASK_STATE_INIT:
+        {
+            ctx.total_len = g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number];
+            ctx.copied_len = 0;
+            ctx.buf = OSAL_Malloc(FLASH_SECTOR_SIZE);
+            if(ctx.buf == NULL){
+                return SYS_OTA_DIGEST_ERROR;
+            }
+            
+            NVM_address = g_SysFileData.slot_info.slot_address[g_SysFileData.slot_number];
+            CRYPT_SHA256_Initialize(&ctx.sha256);
+            SYS_OTA_Verify_Status = VERIFY_TASK_STATE_READ;
+            break;
+        }
+        case VERIFY_TASK_STATE_READ:
+        {
+            len = ctx.total_len - ctx.copied_len;
+            if(len > FLASH_SECTOR_SIZE){
+                len = FLASH_SECTOR_SIZE;
+            }
+            while(NVM_IsBusy());
+            if(true == SYS_OTA_NVM_Read(NVM_address, ctx.buf, len))
+            {
+                SYS_OTA_Verify_Status = VERIFY_TASK_STATE_DATA_ADD;
+                break;
+            }
+            SYS_OTA_Verify_Status = VERIFY_TASK_STATE_ERROR;
+            break;
+        }
+        case VERIFY_TASK_STATE_DATA_ADD:
+        {
+            CRYPT_SHA256_DataAdd(&ctx.sha256, ctx.buf, len);
+            ctx.copied_len += len;
+            if(ctx.copied_len == ctx.total_len){
+                SYS_OTA_Verify_Status = VERIFY_TASK_STATE_DONE;
+                break;
+            }
+            len = 0;
+            NVM_address += FLASH_SECTOR_SIZE;
+            SYS_OTA_Verify_Status = VERIFY_TASK_STATE_READ;
+            break;
+        }
+        
+        case VERIFY_TASK_STATE_DONE:
+        {
+            CRYPT_SHA256_Finalize(&ctx.sha256, app_digest);
+            OSAL_Free(ctx.buf);
+            formulate_digest();
+            #ifdef SYS_OTA_APPDEBUG_ENABLED
+            for (uint8_t i = 0; i < 32; i++) {
+                SYS_CONSOLE_PRINT("SYS OTA : server digest[%d] = %d, digest[%d] = %d\r\n", i, g_formulated_digest[i], i, app_digest[i]);
+            }
+            #endif
+            
+            SYS_OTA_Verify_Status = VERIFY_TASK_STATE_INIT;
+            if (memcmp(app_digest,g_formulated_digest,CRYPT_SHA256_DIGEST_SIZE) == 0) 
+            {
+                SYS_CONSOLE_PRINT(TERM_GREEN"\tDigest Verified Successfully\r\n"TERM_RESET);
+                return SYS_OTA_DIGEST_MATCH;
+            }
+            SYS_CONSOLE_PRINT(TERM_RED"\tDigest MISMATCH\r\n"TERM_RESET);
+            return SYS_OTA_DIGEST_MISMATCH;
+            break;
+        }
+        case VERIFY_TASK_STATE_ERROR:
+            SYS_CONSOLE_PRINT(TERM_RED"\tDigest ERROR\r\n"TERM_RESET);
+            SYS_OTA_Verify_Status = VERIFY_TASK_STATE_IDLE;
+            break;
+        case VERIFY_TASK_STATE_IDLE:
+            break;
+            
+    }
+     return SYS_OTA_DIGEST_IDLE;
+ }
+
+/* Formulate digest to hex 32 bytes*/
+ static void formulate_digest
+ (
+    void
+ )
+ {
+    int i;
+    int index = 0;
+    char temp_serv_digest[4];
+    
+    for (i = 0; i < 32; i++) {
+        strncpy(temp_serv_digest, &g_SysFileData.file_digest_string[index], 2);
+        index = index + 2;
+        g_formulated_digest[i] = (uint8_t) strtol(temp_serv_digest, NULL, 16);
+    }
+ }
+
+ 
+ /* To download file from Server*/
+ static bool SYS_OTA_Download_File
+ (
+    char *file_URL
+ )
+ {
+    int rx_len = 0;
+    static OTA_FILE_DOWNLOAD_TASK_CONTEXT cntx;
+    static SYS_OTA_FILE_DOWNLOAD_STATE download_status = SYS_OTA_FILE_OPEN;
+    static DRV_HANDLE downloader2;
+    static uint32_t Slot_address = 0;
+    
+    switch (download_status) {
+        case SYS_OTA_FILE_OPEN:
+        {
+            cntx.buf_len = 0; 
+            cntx.copied_len = 0;
+            cntx.total_len = g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number];
+            field_content_length = 0;
+            
+			/* Create the buffer */
+            cntx.buf = (uint8_t *)OSAL_Malloc(FLASH_SECTOR_SIZE);
+            if(cntx.buf == NULL){
+                g_SysFileData.error = true; 
+                break;
+            }
+            downloader2 = DOWNLOADER_Open(file_URL);
+            if (downloader2 == DRV_HANDLE_INVALID) {
+                SYS_CONSOLE_PRINT(TERM_RED"SYS_OTA_FILE_ERROR : Unable to open File URL \r\n"TERM_RESET);
+                g_SysFileData.error = true;
+                break;
+            }
+			
+            Slot_address = g_SysFileData.slot_info.slot_address[g_SysFileData.slot_number];
+            SYS_CONSOLE_PRINT("FILE: %d -> Downloading to Slot : %d Address : %X Total_len : %d\r\n",g_SysFileData.file_index,g_SysFileData.slot_number,Slot_address, g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number]);
+            download_status = SYS_OTA_FILE_DOWNLOAD;
+            break;
+        }
+        
+        case SYS_OTA_FILE_DOWNLOAD:
+        {
+            int req_len = cntx.total_len - cntx.copied_len;
+            if (req_len > FLASH_SECTOR_SIZE) {
+                req_len = FLASH_SECTOR_SIZE;
+            }
+            /* Download 4KB of file (if file size is more than 4KB)*/
+            rx_len = DOWNLOADER_Read(downloader2, &cntx.buf[cntx.buf_len], ( req_len - cntx.buf_len )); 
+            #ifdef SYS_OTA_APPDEBUG_ENABLED
+            if(rx_len != 0){
+                SYS_CONSOLE_PRINT("\tTASK_STATE_D_DOWNLOAD :: rx_len : %d\r\n",rx_len);
+            }
+            #endif
+            if (rx_len <= 0) {
+                if (rx_len < 0) {
+                    g_SysFileData.error = true;
+                    SYS_CONSOLE_PRINT(TERM_RED"\tSYS OTA FILE ERROR : File Downloading error\r\n"TERM_RESET);
+                }
+                break;
+            }
+            cntx.buf_len += rx_len;
+            if(field_content_length != 0)
+            {
+                cntx.total_len = field_content_length;
+                g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number] = field_content_length;
+                /*To Check if actual size of file is greater than slot size */
+                if(field_content_length > g_SysFileData.slot_info.slot_size[g_SysFileData.slot_number]){
+                    SYS_CONSOLE_PRINT(TERM_RED"\tOriginal File size is Greater than slot size\r\n"TERM_RESET);
+                    g_SysFileData.error = true;
+                    break;
+                }
+            }
+            
+            /* Stop download when buffer is full */
+            if (cntx.buf_len == req_len) {
+                download_status = SYS_OTA_FILE_WRITE_TO_NVM;
+            }
+            break;
+        }
+		 
+		 /*Write to NVM */
+        case SYS_OTA_FILE_WRITE_TO_NVM:
+        {
+            /* Write 4KB of file to NVM*/
+            while(NVM_IsBusy());
+            if(SYS_OTA_NVM_Write (Slot_address, cntx.buf, FLASH_SECTOR_SIZE ) != true ){
+                SYS_CONSOLE_PRINT(TERM_RED"\tNVM Write Error \r\n"TERM_RESET);
+                g_SysFileData.error = true;
+                break;
+            }
+            
+            cntx.copied_len += cntx.buf_len;
+            cntx.buf_len = 0;
+           
+            if(cntx.copied_len < cntx.total_len){
+                download_status = SYS_OTA_FILE_DOWNLOAD;
+                Slot_address += FLASH_SECTOR_SIZE;
+                break;
+            }
+            download_status = SYS_OTA_FILE_DOWNLOAD_DONE;
+            break;
+        }
+        
+        case SYS_OTA_FILE_DOWNLOAD_DONE:
+        {
+            DOWNLOADER_Close(downloader2);
+            SYS_CONSOLE_PRINT("\tDownloaded length %d\r\n",g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number]);
+            
+            OSAL_Free(cntx.buf);
+            cntx.buf = NULL;
+            download_status = SYS_OTA_FILE_OPEN;
+            File_Dnld_Status = SYS_OTA_VERIFY_DIGEST;
+            break;
+        }
+    }
+    return false;
+}     
+ 
+ void SYS_OTA_Print_Server_Data(void)
+ {
+    SYS_CONSOLE_PRINT("\nslot : %d\r\n",g_SysFileData.slot_number);
+    SYS_CONSOLE_PRINT("length : %d\r\n",g_SysFileData.slot_info.file_size_in_slot[g_SysFileData.slot_number]);
+    SYS_CONSOLE_PRINT("URL : %s\r\n",g_SysFileData.file_url);
+    SYS_CONSOLE_PRINT("digest : \r\n");
+    for(int i = 0; i < 64; i++){
+        SYS_CONSOLE_PRINT("%c",g_SysFileData.file_digest_string[i]);
+    }
+    SYS_CONSOLE_PRINT("\nsign : \r\n");
+    for(int i = 0; i < 98; i++){
+        SYS_CONSOLE_PRINT("%c",g_SysFileData.file_signature_string[i]);
+    }
+    
+ }
+ 
+ /* To Verify Signature */
+ static SYS_OTA_VERIFY_SIGN_RESULT  SYS_OTA_Verify_File_Signature
+ (
+    void
+ )
+ {
+    int verify = -1, ret = -1;
+    ecc_key eccKey;
+    word32 inOutIdx = 0;
+    mp_int r,s;
+    
+    byte decoded_signature[strlen(g_SysFileData.file_signature_string)];
+    word32 outLen = sizeof(decoded_signature);
+    
+    /* Converts signature string to hex */
+    if(Base64_Decode((byte *)g_SysFileData.file_signature_string, strlen(g_SysFileData.file_signature_string), decoded_signature, &outLen) != 0 ) {
+        /* error decoding input buffer */
+        SYS_CONSOLE_PRINT(TERM_RED"\tSignature Decode fail\n\r"TERM_RESET);
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+
+    /* Public key Data*/
+    uint32_t public_key_address = g_SysFileData.slot_info.slot_address[g_public_key_slot];
+    uint8_t public_key_size = g_SysFileData.slot_info.file_size_in_slot[g_public_key_slot];
+    
+    uint8_t *public_key = (uint8_t *)OSAL_Malloc(public_key_size);
+    if(public_key == NULL){
+        g_SysFileData.error = true; 
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+    
+    SYS_CONSOLE_PRINT("\tPub key addr  : %X  size : %d\r\n",public_key_address, public_key_size);
+
+    /*Read Public key from NVM memory */    
+    SYS_OTA_NVM_Read(public_key_address, public_key, public_key_size);
+    
+    /* Decode public key*/
+    ret = wc_EccPublicKeyDecode( public_key, &inOutIdx, &eccKey, public_key_size);
+    OSAL_Free(public_key);
+    if (ret < 0)
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    
+    /* Set the curve ID*/
+    ret = wc_ecc_set_curve(&eccKey, 32, ECC_SECP256R1);
+    if (ret < 0)
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    if (mp_init(&r) != MP_OKAY){
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+    if (mp_read_unsigned_bin(&r, (byte*)decoded_signature + 0, 32) != 0) {
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+    if (mp_init(&s) != MP_OKAY){
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+    if (mp_read_unsigned_bin(&s, (byte*)decoded_signature + 32, 32) != 0) {
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+    
+    /* Verify the signature */
+    ret = wc_ecc_verify_hash_ex(&r, &s, g_formulated_digest, 32, &verify, &eccKey);
+    if (ret < 0){
+        SYS_CONSOLE_PRINT(TERM_RED"\tSignature Verification failed!!!\r\n"TERM_RESET);
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+
+    if(verify != 1)
+    {
+        SYS_CONSOLE_PRINT("\tBroken Image : Signature verification failed : verify_2 : %d\r\n",verify);
+        return SYS_OTA_SIGNATURE_VERIFICATION_FAILURE;
+    }
+    SYS_CONSOLE_PRINT(TERM_GREEN"\tSignature Verified Successfully \r\n"TERM_RESET);
+    return SYS_OTA_SIGNATURE_VERIFICATION_SUCCESS;
+}
+
+ /* Store sign (in 256 bytes) + pub key in public key slot*/
+ static bool SYS_OTA_Store_signature
+ (
+    void
+ )
+ {
+     char buffer[4096];
+     uint32_t pub_key_addr = g_SysFileData.slot_info.slot_address[g_public_key_slot];
+     uint32_t pub_key_size = g_SysFileData.slot_info.file_size_in_slot[g_public_key_slot];
+     
+     SYS_CONSOLE_PRINT(TERM_YELLOW"\tWriting signature + public key to NVM Slot : %d\r\n"TERM_RESET, g_public_key_slot);
+     while(NVM_IsBusy());
+     SYS_OTA_NVM_Read(pub_key_addr, (uint8_t *)buffer, pub_key_size );
+
+     char buffer_dest[4096] = {'\0'};
+     strncpy(buffer_dest, g_SysFileData.file_signature_string, 98);
+
+     char *addr = &buffer_dest[0];
+     addr = addr + 256;
+     memcpy(addr, buffer , pub_key_size);
+     
+     while(NVM_IsBusy());
+     SYS_OTA_NVM_Write(pub_key_addr, (uint8_t *)buffer_dest, 4096);
+     
+     SYS_CONSOLE_PRINT("\tDone Writing\r\n"TERM_RESET);
+     for(volatile int i =0; i< 10000;i++);
+     
+#ifdef SYS_OTA_APPDEBUG_ENABLED
+     while(NVM_IsBusy());
+     SYS_CONSOLE_PRINT("NVM data Slot : \r\n",g_public_key_slot);
+     SYS_OTA_NVM_Read(pub_key_addr, (uint8_t *)buffer, 355 );
+     for(int i=0; i<355; i++){
+         SYS_CONSOLE_PRINT("%c",buffer[i]);
+     }
+#endif
+     return true;
+ }
+ 
+ /* File Download Tasks*/
+static void SYS_OTA_File_Download_Tasks
+(
+    void
+)
+{
+    g_SysFileData.error = false;
+    
+    switch(File_Dnld_Status)
+    {
+        case SYS_OTA_PARSE_JSON:
+            if (g_SysFileData.file_index < g_SysFileData.total_no_of_files )
+            {
+                if( !(SYS_OTA_Parse_JSON(g_SysFileData.file_index)))
+                {
+                    SYS_CONSOLE_PRINT(TERM_RED"\tJSON Parse Error \r\n"TERM_RESET);
+                    g_SysFileData.error = true;
+                    break;
+                }
+                File_Dnld_Status = SYS_OTA_CHECK_SLOT;
+                break;
+            }
+            
+            File_Dnld_Status = SYS_OTA_DOWNLOAD_DONE;
+            break;
+            
+        case SYS_OTA_CHECK_SLOT:
+        {
+            if( SYS_OTA_CheckSlot(g_SysFileData.slot_number))
+            {
+                /* if Slot empty Download file*/
+                File_Dnld_Status = SYS_OTA_DOWNLOAD_FILE;
+                break;
+            }
+            
+            /* If Slot not empty, Check if its key slot*/
+            if(g_public_key_slot == g_SysFileData.slot_number)
+            {
+                File_Dnld_Status = SYS_OTA_PARSE_JSON;
+                break;
+            }
+            SYS_CONSOLE_PRINT(TERM_YELLOW"\tSlot %d NOT Empty -> Verify Digest\r\n"TERM_RESET);   
+            File_Dnld_Status = SYS_OTA_VERIFY_SLOT_DIGEST;
+            break;
+        }
+            
+        case SYS_OTA_VERIFY_SLOT_DIGEST:
+        {
+            uint8_t result = -1;
+            result = SYS_OTA_Verify_Digest();
+            
+            if(result ==  SYS_OTA_DIGEST_MATCH)
+            {
+                g_SysFileData.file_index++;
+                File_Dnld_Status = SYS_OTA_PARSE_JSON;
+                break;
+            }
+            else if (result ==  SYS_OTA_DIGEST_MISMATCH)
+            {
+                File_Dnld_Status = SYS_OTA_DOWNLOAD_FILE;
+                break;
+            }
+            else if (result ==  SYS_OTA_DIGEST_ERROR)
+            {
+                File_Dnld_Status = SYS_OTA_FILE_DOWNLOAD_ERROR;
+                break;
+            }
+            break;
+        }
+            
+        case SYS_OTA_DOWNLOAD_FILE:
+            if(g_SysFileData.error == false)
+            {
+                SYS_OTA_Download_File(g_SysFileData.file_url);
+                break;
+            }
+            break;
+            
+        case SYS_OTA_VERIFY_DIGEST:
+        {
+            uint8_t result = -1;
+            result = SYS_OTA_Verify_Digest();
+            if(result ==  SYS_OTA_DIGEST_MATCH){
+                if(g_key_present == true)
+                {
+                    File_Dnld_Status = SYS_OTA_PARSE_JSON;
+                    break;
+                }
+                if(g_secure_download == true)
+                {
+                    File_Dnld_Status = SYS_OTA_VERIFY_SIGNATURE;
+                    g_secure_download = false;
+                    break;
+                }
+                g_SysFileData.file_index++;
+                File_Dnld_Status = SYS_OTA_PARSE_JSON;
+                break;
+            }
+            else if(result ==  SYS_OTA_DIGEST_MISMATCH)
+            {
+                File_Dnld_Status = SYS_OTA_FILE_DOWNLOAD_ERROR;
+                break;
+            }
+            else if(result ==  SYS_OTA_DIGEST_ERROR)
+            {
+                File_Dnld_Status = SYS_OTA_FILE_DOWNLOAD_ERROR;
+                break;
+            }
+            break;
+        }
+        
+        case SYS_OTA_VERIFY_SIGNATURE:
+                
+            if( SYS_OTA_SIGNATURE_VERIFICATION_SUCCESS == SYS_OTA_Verify_File_Signature())
+            {
+                g_SysFileData.file_index++;
+                SYS_OTA_Store_signature();
+                File_Dnld_Status = SYS_OTA_PARSE_JSON;
+                break;
+            }
+            
+            File_Dnld_Status = SYS_OTA_FILE_DOWNLOAD_ERROR;
+            break;
+            
+        case SYS_OTA_DOWNLOAD_DONE:
+        {
+            SYS_CONSOLE_PRINT("SYS_OTA_FILE : Files Downloaded Successfully\r\n");
+            g_SysFileData.error = false;
+            g_SysFileData.file_index = 0;
+			File_Dnld_Status = SYS_OTA_PARSE_JSON;
+<#if SYS_OTA_FILE_JUMP_ENABLE == true>
+            File_Dnld_Status = SYS_OTA_UPDATE_BOOTCNTRL_AREA;
+<#else>     
+            sys_otaData.update_check_state = SYS_OTA_UPDATE_CHECK_DONE;
+</#if>
+            break;
+        }
+   
+<#if SYS_OTA_FILE_JUMP_ENABLE == true>
+        case SYS_OTA_UPDATE_BOOTCNTRL_AREA:
+        {
+            OTA_UpdateBootctl();
+            break;
+        }
+</#if>
+        case SYS_OTA_FILE_DOWNLOAD_ERROR:
+            SYS_CONSOLE_PRINT(TERM_RED"SYS_OTA_FILE : DOWNLOAD_ERROR \r\n"TERM_RESET);
+			g_SysFileData.file_index = 0;
+            File_Dnld_Status = SYS_OTA_PARSE_JSON;
+            sys_otaData.update_check_state = SYS_OTA_UPDATE_CHECK_DONE;
+            g_SysFileData.error = true;
+            break;
+            
+    }
+    return;
+}
+</#if>
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: Initialization of OTA service related parameters
@@ -1186,8 +2094,7 @@ void SYS_OTA_Tasks(void) {
                 SYS_CONSOLE_MESSAGE("\r\nSYS OTA : IP address obtained for preferred interface for OTA\r\n");
                 sys_otaData.dev_cnctd_to_nw = true;
                 sys_otaData.state = SYS_OTA_WAITFOR_NETWORK_CONNECTION;
-                }               
-            
+            }
             break;
         }
         case SYS_OTA_WAITFOR_NETWORK_CONNECTION:

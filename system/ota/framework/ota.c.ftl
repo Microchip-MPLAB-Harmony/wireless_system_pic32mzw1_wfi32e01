@@ -49,10 +49,11 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 #include "osal/osal.h"
 #include "crypto/crypto.h"
 #include "system/ota/framework/csv/csv.h"
-
+<#if SYS_OTA_FS_ENABLED == true> 
 #ifdef SYS_OTA_PATCH_ENABLE
 #include "ota_patch.h"
 #endif
+</#if>
 
 #define OTA_DEBUG   1
 #define OTA_MAIN_CODE   2
@@ -65,17 +66,23 @@ SUBSTITUTE GOODS, TECHNOLOGY, SERVICES, OR ANY CLAIMS BY THIRD PARTIES
 
 
 
+
+<#if SYS_OTA_BOOTLOAD_FROM_DEDICATED_BOOTFLASH_ENABLED == true>
+#define BOOT_ADDRESS    0xB0000200
+<#else>
 #define BOOT_ADDRESS    0xB0020000 + 0x00001000
+</#if>
 #define APP_IMG_BOOT_CTL_BLANK      { 0xFF, 0xFF, 0xFF, 0x03, 0xFFFFFFFF,  0x00000001   ,  BOOT_ADDRESS  }
 #define OTA_DOWNLOADER_TIMEOUT 1000
 #define __woraround_unused_variable(x) ((void)x)
+<#if SYS_OTA_FS_ENABLED == true>
 #define APP_MOUNT_NAME          "/mnt/myDrive1"
 #define APP_DIR_NAME            "/mnt/myDrive1/ota"
 #define OTA_DB_NAME             "image_database.csv"
 #define APP_DEVICE_NAME         "/dev/mtda1"
 #define APP_FS_TYPE             FAT
 #define FACTORY_IMAGE           "factory_reset.bin"
-
+</#if>
 
 #ifdef SYS_OTA_FREE_SECTOR_CHECK_ENABLE
 #define OTA_CHECK_FREE_SECTOR
@@ -99,15 +106,19 @@ typedef enum {
     OTA_TASK_IDLE,
     OTA_TASK_ALLOCATE_SLOT,
     OTA_TASK_CHECK_DB,
+<#if SYS_OTA_FS_ENABLED == true>	
 #ifdef SYS_OTA_PATCH_ENABLE            
     OTA_TASK_SEARCH_PATCH_BASEVERSION,
 #endif
+</#if>
     OTA_TASK_DOWNLOAD_IMAGE,
     OTA_TASK_VERIFY_IMAGE_DIGEST,
+<#if SYS_OTA_FS_ENABLED == true>
 #ifdef SYS_OTA_PATCH_ENABLE
     OTA_TASK_VERIFY_PATCH_IMAGE_DIGEST,
     OTA_TASK_PATCH_BUILD_IMAGE,
 #endif
+</#if>
     OTA_TASK_DATABASE_ENTRY,
     OTA_TASK_SET_IMAGE_STATUS,
     OTA_TASK_FACTORY_RESET,
@@ -146,24 +157,29 @@ typedef struct {
 static OTA_DATA __attribute__((coherent, aligned(128))) ota;
 
 static OTA_PARAMS ota_params;
-static OTA_DB_BUFFER *imageDB;
+
 extern size_t field_content_length;
-static char image_name[100];
+
 #ifdef SYS_OTA_SECURE_BOOT_ENABLED
 static char image_signature_file_name[100];
 #endif
 static bool disk_mount = false;
+<#if SYS_OTA_FS_ENABLED == true>
 #ifdef SYS_OTA_PATCH_ENABLE
 static bool patch_verification = false;
 static uint8_t serv_app_patch_digest_g[32];
 static char serv_app_patch_digest_gl[4];
 #endif
+
+static char image_name[100];
+static OTA_DB_BUFFER *imageDB;
 static uint8_t serv_app_digest_g[32];
 static char serv_app_digest_gl[4];
 static int8_t selected_row;
 static uint32_t offset;
 static SYS_FS_HANDLE dirHandle;
 static SYS_FS_FSTAT stat;
+</#if>
 static uint32_t erase_ver;
 static bool ota_isTls_request;
 CACHE_COHERENCY ota_original_cache_policy;
@@ -200,10 +216,11 @@ typedef struct {
 
 } APP_DATA_FILE;
 APP_DATA_FILE CACHE_ALIGN appFile;
-
+<#if SYS_OTA_FS_ENABLED == true>
 #ifdef SYS_OTA_PATCH_ENABLE
 OTA_PATCH_PARAMS_t patch_param;
 #endif
+</#if>
 // *****************************************************************************
 // *****************************************************************************
 // Section: To check if image download request is via TLS connection 
@@ -371,6 +388,7 @@ void OTA_StoreFactoryImageSignature(void *buf) {
     None
  */
 //---------------------------------------------------------------------------
+<#if SYS_OTA_FS_ENABLED == true>
 #ifdef SYS_OTA_PATCH_ENABLE
 void OTA_GetPatchStatus(OTA_PARAMS *result) {
     result->patch_progress_status = OTA_PatchProgressStatus();
@@ -411,6 +429,8 @@ void OTA_GetImageDbInfo(void)
         SYS_CONSOLE_PRINT("%s\t\t%x\t\t%d\t\t%s\n\r",image_name,status,ver,digest_str);
     }
 }
+</#if>
+<#if SYS_OTA_FS_ENABLED == true>
 // *****************************************************************************
 // *****************************************************************************
 // Section: Mounting Disk in external flash
@@ -555,6 +575,9 @@ static void OTA_patch_build_image_path() {
     strcpy((strrchr(image_name, '.') + 1), "bin");
 }
 #endif
+</#if>
+
+<#if SYS_OTA_FS_ENABLED == true>
 // *****************************************************************************
 // *****************************************************************************
 // Section: convert string digest into hex format
@@ -589,7 +612,7 @@ static void formulate_digest() {
         SYS_CONSOLE_PRINT("SYS OTA : formulated digest[%d]: %x\r\n", i, serv_app_digest_g[i]);
 #endif
     }
-    
+<#if SYS_OTA_FS_ENABLED == true>   
 #ifdef SYS_OTA_PATCH_ENABLE
     if(ota_params.patch_request == true){
         index = 0;
@@ -605,8 +628,10 @@ static void formulate_digest() {
         }
     }
 #endif
+</#if>
 }
 
+</#if>
 // *****************************************************************************
 // *****************************************************************************
 // Section: Initialize required parameters for setting image status
@@ -641,6 +666,7 @@ void OTA_ImgStatus_Params(void) {
     }
 }
 
+<#if SYS_OTA_FS_ENABLED == true> 
 // *****************************************************************************
 // *****************************************************************************
 // Section: To check if image database in the external flash exist
@@ -907,6 +933,8 @@ static void OTA_CleanUp(void) {
         csv_destroy_buffer((CSV_BUFFER *) imageDB);
     SYS_FS_DirClose(dirHandle);
 }
+
+</#if>
 // *****************************************************************************
 // *****************************************************************************
 // Section: To update user about OTA status
@@ -951,6 +979,7 @@ static void OTA_Task_UpdateUser(void) {
         callback(ota.ota_result, NULL, NULL);
     }
 }
+<#if SYS_OTA_FS_ENABLED == true> 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Download image. The image is copied to FS in Image Store.
@@ -1547,6 +1576,7 @@ static SYS_STATUS OTA_Task_DataEntry() {
     return SYS_STATUS_READY;
 }
 
+</#if>
 // *****************************************************************************
 // *****************************************************************************
 // Section: Mark all downloaded image to DISABLED
@@ -1596,8 +1626,10 @@ static SYS_STATUS OTA_Task_FactoryReset(void) {
 #if (SERVICE_TYPE == OTA_DEBUG)
             SYS_CONSOLE_PRINT("Removing \r\n");
 #endif
-            SYS_FS_RESULT res;
+            SYS_FS_RESULT res = SYS_FS_RES_SUCCESS;
+<#if SYS_OTA_FS_ENABLED == true> 
             res = SYS_FS_FileDirectoryRemove(APP_DIR_NAME"/image_database.csv");
+</#if>
             if (res == SYS_FS_RES_FAILURE) {
                 // Directory remove operation failed
 #if (SERVICE_TYPE == OTA_DEBUG)
@@ -1783,7 +1815,7 @@ SYS_STATUS OTA_Start(OTA_PARAMS *param) {
 #endif    
 	memcpy(ota_params.ota_server_url, param->ota_server_url, strlen(param->ota_server_url) + 1);
     ota_params.version = param->version;
-    
+<#if SYS_OTA_FS_ENABLED == true>   
 #ifdef SYS_OTA_PATCH_ENABLE      
     if(param->patch_request == true)
     {
@@ -1800,6 +1832,9 @@ SYS_STATUS OTA_Start(OTA_PARAMS *param) {
 #else
     ota.current_task = OTA_TASK_DOWNLOAD_IMAGE;
 #endif
+<#else>
+    ota.current_task = OTA_TASK_DOWNLOAD_IMAGE;
+</#if>
     
     ota.status = SYS_STATUS_BUSY;
     ota.task.param.img_status = IMG_STATUS_DOWNLOADED;
@@ -1911,7 +1946,7 @@ SYS_STATUS OTA_EraseImage(uint32_t version) {
     ota.status = SYS_STATUS_BUSY;
     return SYS_STATUS_READY;
 }
-
+<#if SYS_OTA_FS_ENABLED == true> 
 // *****************************************************************************
 // *****************************************************************************
 // Section: Erase a particular version of image 
@@ -2076,6 +2111,8 @@ SYS_STATUS OTA_Search_ImageVersion(uint32_t version,char *base_ver_digest) {
     return SYS_STATUS_READY;
 }
 #endif
+
+</#if>
 // *****************************************************************************
 // *****************************************************************************
 // Section: To check if OTA state is idel
@@ -2127,6 +2164,7 @@ void OTA_Tasks(void) {
     switch (ota.current_task) {
         case OTA_TASK_INIT:
         {
+<#if SYS_OTA_FS_ENABLED == true> 
 #if (OTA_NVM_INT_CALLBACK_ENABLE == false)
             if(mutex_nvm_g_status == false){
                 SYS_CONSOLE_PRINT("SYS OTA : NVM Mutex CREATION FAILED\n\r");
@@ -2163,12 +2201,22 @@ void OTA_Tasks(void) {
                 OTA_ImgStatus_Params();
                 disk_mount = false;
             }
+<#else> //SYS_OTA_FS_ENABLED
+                ota.current_task = OTA_TASK_SET_IMAGE_STATUS;
+                ota.task.state = OTA_TASK_INIT;
+                OTA_ImgStatus_Params();
+                disk_mount = false;
+
+</#if>			
             break;
         }
         case OTA_TASK_SET_IMAGE_STATUS:
         {
             ota.ota_idle = false;
+			ota.status = SYS_STATUS_READY;
+<#if SYS_OTA_FS_ENABLED == true> 
             ota.status = OTA_Task_SetImageStatus();
+</#if>
             if (ota.status != SYS_STATUS_BUSY) {
                 ota.ota_result = OTA_RESULT_NONE;
                 if (ota.new_downloaded_img == true)
@@ -2189,6 +2237,7 @@ void OTA_Tasks(void) {
             ota.ota_idle = false;
             ota.current_task = OTA_TASK_IDLE;
             if (ota.ota_result == OTA_RESULT_IMAGE_DOWNLOADED) {
+<#if SYS_OTA_FS_ENABLED == true> 		
 #ifdef SYS_OTA_PATCH_ENABLE                 
                 if(ota_params.patch_request == true){
                     ota.current_task = OTA_TASK_VERIFY_PATCH_IMAGE_DIGEST;
@@ -2202,18 +2251,24 @@ void OTA_Tasks(void) {
                 ota.current_task = OTA_TASK_VERIFY_IMAGE_DIGEST;
                 ota.task.state = OTA_TASK_INIT;
 #endif
+<#else>
+                ota.current_task = OTA_TASK_VERIFY_IMAGE_DIGEST;
+                ota.task.state = OTA_TASK_INIT;
+</#if>
             }
-            
+<#if SYS_OTA_FS_ENABLED == true>             
 #ifdef SYS_OTA_PATCH_ENABLE               
             if (ota.ota_result == OTA_RESULT_PATCH_IMAGE_DIGEST_VERIFY_SUCCESS) {
                 ota.current_task = OTA_TASK_PATCH_BUILD_IMAGE;
                 ota.task.state = OTA_TASK_INIT;
             }
 #endif
+</#if>
             if (ota.ota_result == OTA_RESULT_IMAGE_DIGEST_VERIFY_SUCCESS) {
                 ota.current_task = OTA_TASK_DATABASE_ENTRY;
                 ota.task.state = OTA_TASK_INIT;
             }
+<#if SYS_OTA_FS_ENABLED == true> 		
 #ifdef SYS_OTA_PATCH_ENABLE               
             if (ota.ota_result == OTA_RESULT_PATCH_EVENT_START){
                 ota.current_task = OTA_TASK_DOWNLOAD_IMAGE;
@@ -2225,6 +2280,7 @@ void OTA_Tasks(void) {
                 ota.task.state = OTA_TASK_INIT;
             }
 #endif
+</#if>
             OTA_Task_UpdateUser();
             break;
         }
@@ -2254,7 +2310,7 @@ void OTA_Tasks(void) {
             break;
         }
 #endif
-        
+<#if SYS_OTA_FS_ENABLED == true>       
 #ifdef SYS_OTA_PATCH_ENABLE        
         case OTA_TASK_SEARCH_PATCH_BASEVERSION:
         {
@@ -2272,11 +2328,15 @@ void OTA_Tasks(void) {
             }
             break;
         }
-#endif        
+#endif 
+</#if>      
         case OTA_TASK_DOWNLOAD_IMAGE:
         {
             ota.ota_idle = false;
+			ota.status = SYS_STATUS_READY;
+<#if SYS_OTA_FS_ENABLED == true> 		
             ota.status = OTA_Task_DownloadImage();
+</#if>
             if (ota.status == SYS_STATUS_READY) {
                 if(ota_isTls_request == true){
                     OTA_SetCachePolicy(true);
@@ -2302,7 +2362,7 @@ void OTA_Tasks(void) {
 
             break;
         }
-        
+<#if SYS_OTA_FS_ENABLED == true>      
 #ifdef SYS_OTA_PATCH_ENABLE        
         case OTA_TASK_PATCH_BUILD_IMAGE:
         {           
@@ -2338,13 +2398,17 @@ void OTA_Tasks(void) {
             break;
         }
 #endif
+</#if>
         case OTA_TASK_VERIFY_IMAGE_DIGEST:
         {
             ota.ota_idle = false;
+			ota.status = SYS_STATUS_READY;
+<#if SYS_OTA_FS_ENABLED == true> 		
 #ifdef SYS_OTA_PATCH_ENABLE            
             patch_verification = false;
 #endif
             ota.status = OTA_Task_VerifyImage();
+</#if>
             if (ota.status == SYS_STATUS_READY) {
 
 #if (SERVICE_TYPE == OTA_DEBUG)
@@ -2354,7 +2418,9 @@ void OTA_Tasks(void) {
                 ota.current_task = OTA_TASK_UPDATE_USER;
                 ota.task.state = OTA_TASK_INIT;
                 ota.new_downloaded_img = true;
+<#if SYS_OTA_FS_ENABLED == true> 				
                 SYS_FS_FileClose(appFile.fileHandle1);
+</#if>				
             }
 
             if (ota.status == SYS_STATUS_ERROR) {
@@ -2363,6 +2429,7 @@ void OTA_Tasks(void) {
 #endif
                 ota.ota_result = OTA_RESULT_IMAGE_DIGEST_VERIFY_FAILED;
                 ota.current_task = OTA_TASK_UPDATE_USER;
+<#if SYS_OTA_FS_ENABLED == true> 
                 SYS_FS_FileClose(appFile.fileHandle1);
                 SYS_FS_RESULT res;
                 res = SYS_FS_FileDirectoryRemove(image_name);
@@ -2371,10 +2438,11 @@ void OTA_Tasks(void) {
                 } else {
                     /*Do nothing File is removed successfully*/
                 }
+</#if>				
             }
             break;
         }
-        
+<#if SYS_OTA_FS_ENABLED == true>        
 #ifdef SYS_OTA_PATCH_ENABLE        
         case OTA_TASK_VERIFY_PATCH_IMAGE_DIGEST:
         {
@@ -2409,10 +2477,14 @@ void OTA_Tasks(void) {
             break;
         }
 #endif
+</#if>
         case OTA_TASK_DATABASE_ENTRY:
         {
             ota.ota_idle = false;
+			ota.status = SYS_STATUS_READY;
+<#if SYS_OTA_FS_ENABLED == true> 
             ota.status = OTA_Task_DataEntry();
+</#if>		
             if (ota.status == SYS_STATUS_READY) {
 #if (SERVICE_TYPE == OTA_DEBUG)
                 SYS_CONSOLE_PRINT("SYS OTA : Data Entered\r\n");
@@ -2450,10 +2522,13 @@ void OTA_Tasks(void) {
         case OTA_TASK_ERASE_IMAGE:
         {
             ota.ota_idle = false;
+			ota.status = SYS_STATUS_READY;
 #if (SERVICE_TYPE == OTA_DEBUG)
             SYS_CONSOLE_MESSAGE("SYS OTA : OTA_TASK_ERASE_IMAGE\r\n");
 #endif
+<#if SYS_OTA_FS_ENABLED == true> 
             ota.status = OTA_Task_EraseImage(erase_ver);
+</#if>		
 
             if (ota.status == SYS_STATUS_ERROR) {
                 ota.ota_result = OTA_RESULT_IMAGE_ERASE_FAILED;
@@ -2506,3 +2581,35 @@ void OTA_Initialize(void) {
     /*Initialization of Download protocol parameters*/
     DOWNLOADER_Initialize();
 }
+<#if SYS_OTA_FS_ENABLED == false> 
+typedef struct {
+    FIRMWARE_IMAGE_HEADER img;
+    uint8_t *buf;
+} OTA_SIGN_IMAGE_TASK_CONTEXT;
+
+OTA_SIGN_IMAGE_TASK_CONTEXT *ctx = (void*) ota.task.context;
+
+void OTA_UpdateBootctl() {
+    ctx->buf = (uint8_t*) OSAL_Malloc(FLASH_SECTOR_SIZE);
+    SYS_CONSOLE_PRINT("SYS OTA : Update boot ctrl\r\n");
+    INT_Flash_Open();
+
+    ota.task.param.img_status = IMG_STATUS_DOWNLOADED;
+    ota.task.param.pfm_status = IMG_STATUS_VALID;
+    ctx->img.status = IMG_STATUS_DOWNLOADED;
+    ctx->img.order = 0xFF;
+    ctx->img.type = IMG_TYPE_PRODUCTION;
+    ctx->img.boot_addr = (0xb0000200 + (uint32_t)SYS_OTA_JUMP_TO_ADDRESS);
+    INT_Flash_Erase(APP_IMG_BOOT_CTL_WR, FLASH_SECTOR_SIZE);
+    memcpy(ctx->buf, &ctx->img, sizeof (FIRMWARE_IMAGE_HEADER));
+    INT_Flash_Write(APP_IMG_BOOT_CTL_WR, ctx->buf, FLASH_SECTOR_SIZE);
+    while( NVM_IsBusy() ) ;
+    INT_Flash_Close();
+    
+    if (ctx->buf != NULL) {
+        OSAL_Free(ctx->buf);
+        ctx->buf = NULL;
+    }
+    SYS_OTA_SystemReset();
+}
+</#if>
