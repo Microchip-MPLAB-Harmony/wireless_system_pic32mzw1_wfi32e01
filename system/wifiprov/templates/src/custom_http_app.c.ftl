@@ -92,7 +92,7 @@ uint8_t g_networkType;
 
 static inline uint8_t Findstring_lenth(uint8_t *ptr)
 {
-    uint8_t len=0;
+    uint8_t len = 0;
     for(;*ptr != '&';ptr++,len++);
     return len;
 }
@@ -381,7 +381,7 @@ static HTTP_IO_RESULT HTTPPostConfig_wifi(HTTP_CONN_HANDLE connHandle)
         if(!strncmp((char *)httpDataBuff+Index, (const char *)"stassid=",strlen("stassid=")))
         {
 
-            uint8_t len ;
+            uint8_t len = 0 ;
             Index += strlen("stassid=");
             len = Findstring_lenth(httpDataBuff+Index);
             strncpy((char *)wifiConfig.staConfig.ssid,(const char *)httpDataBuff+Index,len);
@@ -393,7 +393,7 @@ static HTTP_IO_RESULT HTTPPostConfig_wifi(HTTP_CONN_HANDLE connHandle)
 
         if(!strncmp((char *)httpDataBuff+Index, (const char *)"stapwd=",strlen("stapwd=")))
         {
-            uint8_t len ;
+            uint8_t len = 0;
             Index += strlen("stapwd=");
             len = Findstring_lenth(httpDataBuff+Index);
             strncpy((char *)wifiConfig.staConfig.psk,(const char *)httpDataBuff+Index,len);
@@ -431,7 +431,7 @@ static HTTP_IO_RESULT HTTPPostConfig_wifi(HTTP_CONN_HANDLE connHandle)
          Index += 2;
         if(!strncmp((char *)httpDataBuff+Index, (const char *)"apssid=",strlen("apssid=")))
         {
-            uint8_t len ;
+            uint8_t len = 0;
             Index += strlen("apssid=");
             len = Findstring_lenth(httpDataBuff+Index);
             strncpy((char *)wifiConfig.apConfig.ssid,(const char *)httpDataBuff+Index,len);
@@ -441,7 +441,7 @@ static HTTP_IO_RESULT HTTPPostConfig_wifi(HTTP_CONN_HANDLE connHandle)
          Index += 1;
         if(!strncmp((char *)httpDataBuff+Index, (const char *)"appwd=",strlen("appwd=")))
         {
-            uint8_t len ;
+            uint8_t len = 0;
             Index += strlen("appwd=");
             len = Findstring_lenth(httpDataBuff+Index);
             strncpy((char *)wifiConfig.apConfig.psk,(const char *)httpDataBuff+Index,len);

@@ -1920,7 +1920,7 @@ static uint32_t SYS_WIFI_ExecuteBlock
 <#if SYS_WIFI_STA_ENABLE == true>
             case SYS_WIFI_STATUS_STA_IP_RECIEVED:
             {
-                WDRV_PIC32MZW_CHANNEL_ID channel;
+                WDRV_PIC32MZW_CHANNEL_ID channel = 0;
                  
                 /* Update the application(client) on receiving IP address */
                 SYS_WIFI_CallBackFun(SYS_WIFI_CONNECT, &g_wifiSrvcConfig.staConfig.ipAddr, g_wifiSrvcCookie);
@@ -1953,7 +1953,7 @@ static uint32_t SYS_WIFI_ExecuteBlock
 <#if SYS_WIFI_PROVISION_ENABLE == true>
                 if(provConnStatus == false)
                 {
-                    WDRV_PIC32MZW_CHANNEL_ID channel;
+                    WDRV_PIC32MZW_CHANNEL_ID channel = 0 ;
                     provConnStatus = true;
                     /* Update the Wi-Fi provisioning service on receiving the IP Address, 
                        The Wi-Fi provisioning service has to start the TCP server socket
