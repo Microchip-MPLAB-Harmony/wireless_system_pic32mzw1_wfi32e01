@@ -31,6 +31,9 @@ package:
     - name: "wireless_wifi"
       type: "package"
       version: "3.9.1"
+    - name: "wolfssl"
+      type: "package"
+      version: "5.4.0"
     - name: "CMSIS-FreeRTOS"
       type: "package"
       version: "10.4.6"
@@ -40,9 +43,12 @@ package:
     - name: "usb"
       type: "package"
       version: "3.10.0"
-    - name: "wolfssl"
+    - name: "wireless_system_pic32mzw1_wfi32e01"
       type: "package"
-      version: "5.4.0"
+      version: "3.8.0"
+    - name: "touch"
+      type: "package"
+      version: "3.12.1"
       
       
       

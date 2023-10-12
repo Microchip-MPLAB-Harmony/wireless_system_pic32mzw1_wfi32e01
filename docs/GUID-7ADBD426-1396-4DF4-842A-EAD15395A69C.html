@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
-<meta name="DC.rights.owner" content="(C) Copyright 2022" />
-<meta name="DC.type" content="topic" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
+<meta name="DC.rights.owner" content="(C) Copyright 2023" />
+<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
 <meta name="DC.title" content="Net System Service Usage" />
 <meta name="DC.relation" scheme="URI" content="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" />
 <meta name="DC.format" content="XHTML" />
@@ -18,7 +18,7 @@
 <meta name="Microsoft.Help.TocOrder" content="0" />
 <meta name="Microsoft.Help.Locale" content="en-US" />
 <meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
 <script language="javascript">
        
        if (window.parent.location.protocol != 'file:') {
@@ -225,14 +225,14 @@
         
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
 <body id="net-system-service-usage">
-<h1 class="title topictitle1" id="ariaid-title1">Net System Service Usage</h1><div class="body"></div>
+<h1 class="title topictitle1" id="ariaid-title1" style="">Net System Service Usage</h1><div class="body"></div>
 <div class="related-links">
 <div class="familylinks">
 <div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html">Net System Service</a></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="title topictitle2" id="ariaid-title2">Description</h2><div class="body"><p class="p">The NET System Service provides simple APIs to enable Server or Client Connectivity for either TCP or UDP. The User need not take care of intermediate states of a TCPIP Connection, as the Service internally takes care of that. User is not required to have Security domain knowledge to establish a secured connection via the application using NET System Service library.</p>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="title topictitle2" id="ariaid-title2" style="">Description</h2><div class="body"><p class="p">The NET System Service provides simple APIs to enable Server or Client Connectivity for either TCP or UDP. The User need not take care of intermediate states of a TCPIP Connection, as the Service internally takes care of that. User is not required to have Security domain knowledge to establish a secured connection via the application using NET System Service library.</p>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title3" id="command-line"><h3 class="title topictitle3" id="ariaid-title3">Command Line:</h3><div class="body"><p class="p">User can follow below commands for NET System Service:</p>
+<div class="topic nested2" aria-labelledby="ariaid-title3" id="command-line"><h3 class="title topictitle3" id="ariaid-title3" style="">Command Line:</h3><div class="body"><p class="p">User can follow below commands for NET System Service:</p>
 <ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">sysnethelp</p>
 <p class="p">NET System Service help command which displays the supported CLI commands</p>
 <br /><img class="image" src="GUID-618D738A-8E28-4701-8581-6219F069C597-low.ng" alt="resized_sysnethelp_cli" /><br /></li>
@@ -252,7 +252,7 @@
 </div>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title4" id="abstraction-model"><h2 class="title topictitle2" id="ariaid-title4">Abstraction Model</h2><div class="body"><p class="p">The NET System Service library provides an abstraction to the NetPres/ TCPIP APIs to provide following functionalities.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="abstraction-model"><h2 class="title topictitle2" id="ariaid-title4" style="">Abstraction Model</h2><div class="body"><p class="p">The NET System Service library provides an abstraction to the NetPres/ TCPIP APIs to provide following functionalities.</p>
 <ul class="ul"><li class="li"><p class="p">Connectivity for TCP Client</p>
 </li>
 <li class="li"><p class="p">Connectivity for TCP Server</p>
@@ -271,7 +271,7 @@
 <p class="p">The following diagram depicts the Net System Service abstraction model.</p>
 <br /><img class="image" src="GUID-A871FE87-8CAD-4B5F-BDAB-F42F10D509E5-low.png" alt="NetService_abstract" /><br /></div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title5" id="how-the-library-works"><h2 class="title topictitle2" id="ariaid-title5">How The Library Works</h2><div class="body"><p class="p">By default MHC generated code provides all the functionalities to enable Client or Server mode applicatation, with TCP or UDP as the IP Protocol. User needs to configure the required Client or Server mode configuration using MHC. User needs to call the SYS_NET_Open() API with a valid callback to open an instance of the Client/ Server configured in the MHC.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title5" id="how-the-library-works"><h2 class="title topictitle2" id="ariaid-title5" style="">How The Library Works</h2><div class="body"><p class="p">By default MHC generated code provides all the functionalities to enable Client or Server mode applicatation, with TCP or UDP as the IP Protocol. User needs to configure the required Client or Server mode configuration using MHC. User needs to call the SYS_NET_Open() API with a valid callback to open an instance of the Client/ Server configured in the MHC.</p>
 <br /><img class="image" src="GUID-5EC3D05A-E0ED-41EB-A91C-6153AFEBE4E2-low.png" alt="NetOpen" /><br /><p class="p">The User Application is expected to call SYS_NET_Task() API periodically as this API ensures that the Net System service is able to execute its state machine to process any messages and invoke the user callback for any events.</p>
 <br /><img class="image" src="GUID-404699B4-AE98-42BC-A7DC-1EC5219135AE-low.png" alt="NetTask" /><br /><p class="p">The User Application can call SYS_NET_CtrlMsg() API in case it wants to disconnect the opened connection or to reconnect using different configuration.</p>
 <br /><img class="image" src="GUID-7EECAB8D-F9DF-461C-B16D-3ADC4E2AF387-low.png" alt="NetCtrlMsg" /><br /></div>

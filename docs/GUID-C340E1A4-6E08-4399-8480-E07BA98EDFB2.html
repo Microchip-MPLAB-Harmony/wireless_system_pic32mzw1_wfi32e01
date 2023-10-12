@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
-<meta name="DC.rights.owner" content="(C) Copyright 2022" />
-<meta name="DC.type" content="topic" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
+<meta name="DC.rights.owner" content="(C) Copyright 2023" />
+<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
 <meta name="DC.title" content="OTA System Service Developer's Guide" />
 <meta name="DC.relation" scheme="URI" content="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" />
 <meta name="DC.format" content="XHTML" />
@@ -18,7 +18,7 @@
 <meta name="Microsoft.Help.TocOrder" content="0" />
 <meta name="Microsoft.Help.Locale" content="en-US" />
 <meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
 <script language="javascript">
        
        if (window.parent.location.protocol != 'file:') {
@@ -225,12 +225,12 @@
         
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
 <body id="ota-system-service-developers-guide">
-<h1 class="title topictitle1" id="ariaid-title1">OTA System Service Developer's Guide</h1><div class="body"></div>
+<h1 class="title topictitle1" id="ariaid-title1" style="">OTA System Service Developer's Guide</h1><div class="body"></div>
 <div class="related-links">
 <div class="familylinks">
 <div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html">Over The Air (OTA) firmware update System Service</a></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="ota-service-architecture-overview"><h2 class="title topictitle2" id="ariaid-title2"><strong class="ph b">OTA Service Architecture Overview</strong></h2><div class="body"><p class="p">Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process.</p>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="ota-service-architecture-overview"><h2 class="title topictitle2" id="ariaid-title2" style=""><strong class="ph b">OTA Service Architecture Overview</strong></h2><div class="body"><p class="p">Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process.</p>
 <ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">Image Downloading is processed by the OTA service that is integrated with your application code.</p>
 </li>
 <li class="li"><span class="indent-level-default">2.</span><p class="p">Image Programming is processed by the OTA bootloader.</p>
@@ -239,8 +239,8 @@
 <p class="p">For detailed information about OTA service architecture, please refer to the <code class="ph codeph">Architecture Overview</code> section in <a class="xref" href="usage.md#using-the-library">Using the library</a> of the OTA documentation.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="code-modificationimplementation-guide-for-common-use-cases"><h2 class="title topictitle2" id="ariaid-title3"><strong class="ph b">Code modification/implementation guide for common use cases</strong></h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title4" id="registering-a-user-defined-callback-for-ota-system-service"><h3 class="title topictitle3" id="ariaid-title4"><strong class="ph b">Registering a user defined callback for OTA system service</strong></h3><div class="body"><p class="p">Developer may register a callback function to receive callback from the OTA system service for pre-defined scenarios.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="code-modificationimplementation-guide-for-common-use-cases"><h2 class="title topictitle2" id="ariaid-title3" style=""><strong class="ph b">Code modification/implementation guide for common use cases</strong></h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title4" id="registering-a-user-defined-callback-for-ota-system-service"><h3 class="title topictitle3" id="ariaid-title4" style=""><strong class="ph b">Registering a user defined callback for OTA system service</strong></h3><div class="body"><p class="p">Developer may register a callback function to receive callback from the OTA system service for pre-defined scenarios.</p>
 <p class="p">For registering callback developer may follow any one of below mentioned methods.</p>
 <p class="p">a. Using the built-in function <code class="ph codeph">ota_app_reg_cb()</code> wrapper, defined in <code class="ph codeph">app_ota.c</code> . Please see the code snippet below for reference:</p>
 <pre class="pre codeblock c">     <em class="hl-comment">/* Check the application's current state. */</em>
@@ -402,26 +402,26 @@
    }
 </pre></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title5" id="check-for-updates-on-a-custom-trigger-trigger-"><h3 class="title topictitle3" id="ariaid-title5"><strong class="ph b"><em class="ph i">Check</em> for updates on a custom trigger trigger :</strong></h3><div class="body"><p class="p">Your system design may have requirements to check, update image availability, in OTA server only during specific particular conditions  (e.g : Switch pressed or when a MQTT message received on a specific topic). System should then initiate an OTA check in the image server.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title5" id="check-for-updates-on-a-custom-trigger-trigger-"><h3 class="title topictitle3" id="ariaid-title5" style=""><strong class="ph b"><em class="ph i">Check</em> for updates on a custom trigger trigger :</strong></h3><div class="body"><p class="p">Your system design may have requirements to check, update image availability, in OTA server only during specific particular conditions  (e.g : Switch pressed or when a MQTT message received on a specific topic). System should then initiate an OTA check in the image server.</p>
 <p class="p">Under such condition to initiate update check on user trigger , user may follow below steps:</p>
 <p class="p">1.Disable <code class="ph codeph">Periodic OTA check</code> option, in MHC configuration.</p>
 <br /><img class="image" src="GUID-4A97F9CB-49B5-4D5F-A768-E148C22AB591-low.png" alt="resized_disable_periodic_ota" /><br /><p class="p">2.Generate code.</p>
 <p class="p">3.Modify application code to initiate update check using control API <code class="ph codeph">SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) </code>, when trigger condition is fulfilled (e.g. when a switch is pressed ).</p>
-<pre class="pre codeblock"><code id="d25534e107" content="```c&#xD;&#xA;    if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xD;&#xA;    {          &#xD;&#xA;        SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,NULL);&#xD;&#xA;    }&#xD;&#xA;```  &#xD;">```c&#xD;
+<pre class="pre codeblock"><code id="d28072e107" content="```c&#xD;&#xA;    if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xD;&#xA;    {          &#xD;&#xA;        SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,NULL);&#xD;&#xA;    }&#xD;&#xA;```  &#xD;">```c&#xD;
     if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xD;
     {          &#xD;
         SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,NULL);&#xD;
     }&#xD;
 ```  &#xD;</code></pre></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title6" id="initiate-ota-on-user-trigger-"><h3 class="title topictitle3" id="ariaid-title6"><strong class="ph b">Initiate OTA on user trigger :</strong></h3><div class="body"><p class="p">System design may have requirements to trigger an OTA <em class="ph i">update</em> only once a condition only is met. (e.g : Switch pressed or when a MQTT message received from MQTT server).</p>
+<div class="topic nested2" aria-labelledby="ariaid-title6" id="initiate-ota-on-user-trigger-"><h3 class="title topictitle3" id="ariaid-title6" style=""><strong class="ph b">Initiate OTA on user trigger :</strong></h3><div class="body"><p class="p">System design may have requirements to trigger an OTA <em class="ph i">update</em> only once a condition only is met. (e.g : Switch pressed or when a MQTT message received from MQTT server).</p>
 <p class="p">Under such condition to trigger OTA manually, user may follow below steps:</p>
 <p class="p">1.Disable <code class="ph codeph">Auto OTA update</code> and <code class="ph codeph">Periodic OTA check</code> options, in MHC configuration.</p>
 <br /><img class="image" src="GUID-309A49D2-3681-48F1-8244-9FDFBD46972A-low.png" alt="manual_trigger_disable_mhc_option" /><br /><p class="p">2.Generate code.</p>
 <p class="p">3.Developer should provide server URL, OTA image version number present in OTA server and digest of OTA image using API <code class="ph codeph">SYS_OTA_SET_PARAMETERS(char *url, uint8_t version, char *digest)</code></p>
-<pre class="pre codeblock"><code id="d25534e138" content="1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;&#xA;2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&#xD;">1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;
+<pre class="pre codeblock"><code id="d28072e138" content="1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;&#xA;2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&#xD;">1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;
 2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&#xD;</code></pre><p class="p">4.Modify application code to trigger OTA using control API <code class="ph codeph">SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) </code>, when trigger condition is fulfilled (e.g. when a switch is pressed ).</p>
-<pre class="pre codeblock"><code id="d25534e145" content="```c&#xD;&#xA;/* Check the application's current state. */&#xD;&#xA;switch ( appData.state )&#xD;&#xA;{&#xD;&#xA;    /* Application's initial state. */&#xD;&#xA;    case APP_STATE_INIT:&#xD;&#xA;    {&#xD;&#xA;        if(ota_app_reg_cb() == true)&#xD;&#xA;        {&#xD;&#xA;            uint8_t version = 2;&#xD;&#xA;            char *digest = &#34;ef90bf8bf7fd96205c3240c31e1a378430e7a8f053a300e5c91ebe64fefea197&#34;;&#xD;&#xA;            SYS_OTA_SET_PARAMETERS(&#34;http://192.168.43.173:8000/wifi_ota_demo.bin&#34;, version , digest);&#xD;&#xA;            appData.state = APP_STATE_SERVICE_TASKS;&#xD;&#xA;        }&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    case APP_STATE_SERVICE_TASKS:&#xD;&#xA;    {&#xD;&#xA;        if((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;&amp; (ota_initiated == false))&#xD;&#xA;        {          &#xD;&#xA;            ota_initiated = true;&#xD;&#xA;            if(SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_INITIATE_OTA,NULL,NULL))&#xD;&#xA;                appData.state = APP_STATE_OTA_INITIATE_SUCCESS;&#xD;&#xA;            else   &#xD;&#xA;                ota_initiated = false;&#xD;&#xA;        }&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    case APP_STATE_OTA_INITIATE_SUCCESS:&#xD;&#xA;    {&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    /* TODO: implement your application state machine.*/&#xD;&#xA;    default:&#xD;&#xA;    {&#xD;&#xA;        /* TODO: Handle error in application's state machine. */&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;}&#xD;">```c&#xD;
+<pre class="pre codeblock"><code id="d28072e145" content="```c&#xD;&#xA;/* Check the application's current state. */&#xD;&#xA;switch ( appData.state )&#xD;&#xA;{&#xD;&#xA;    /* Application's initial state. */&#xD;&#xA;    case APP_STATE_INIT:&#xD;&#xA;    {&#xD;&#xA;        if(ota_app_reg_cb() == true)&#xD;&#xA;        {&#xD;&#xA;            uint8_t version = 2;&#xD;&#xA;            char *digest = &#34;ef90bf8bf7fd96205c3240c31e1a378430e7a8f053a300e5c91ebe64fefea197&#34;;&#xD;&#xA;            SYS_OTA_SET_PARAMETERS(&#34;http://192.168.43.173:8000/wifi_ota_demo.bin&#34;, version , digest);&#xD;&#xA;            appData.state = APP_STATE_SERVICE_TASKS;&#xD;&#xA;        }&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    case APP_STATE_SERVICE_TASKS:&#xD;&#xA;    {&#xD;&#xA;        if((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;&amp; (ota_initiated == false))&#xD;&#xA;        {          &#xD;&#xA;            ota_initiated = true;&#xD;&#xA;            if(SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_INITIATE_OTA,NULL,NULL))&#xD;&#xA;                appData.state = APP_STATE_OTA_INITIATE_SUCCESS;&#xD;&#xA;            else   &#xD;&#xA;                ota_initiated = false;&#xD;&#xA;        }&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    case APP_STATE_OTA_INITIATE_SUCCESS:&#xD;&#xA;    {&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    /* TODO: implement your application state machine.*/&#xD;&#xA;    default:&#xD;&#xA;    {&#xD;&#xA;        /* TODO: Handle error in application's state machine. */&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;}&#xD;">```c&#xD;
 /* Check the application's current state. */&#xD;
 switch ( appData.state )&#xD;
 {&#xD;
@@ -459,7 +459,7 @@ switch ( appData.state )&#xD;
         /* TODO: Handle error in application's state machine. */&#xD;
         break;&#xD;
     }&#xD;
-}&#xD;</code></pre><pre class="pre codeblock"><code id="d25534e147" content="&#xA;### **Initiate Factory Reset on user trigger :**&#xA;&#xA;Factory Reset is a functionality using which user may get the system back to its original state, meaning, the Factory image will be programmed to internal flash (Program memory) and all other OTA images will be erased from external flash storage along with OTA database if it exist.  &#xA;&#xA;User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` control message as shown in the code snippet below.  &#xA;&#xA;```c&#xA;  if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xA;  {          &#xA;    SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_FACTORY_RESET,NULL,NULL);&#xA;  }">
+}&#xD;</code></pre><pre class="pre codeblock"><code id="d28072e147" content="&#xA;### **Initiate Factory Reset on user trigger :**&#xA;&#xA;Factory Reset is a functionality using which user may get the system back to its original state, meaning, the Factory image will be programmed to internal flash (Program memory) and all other OTA images will be erased from external flash storage along with OTA database if it exist.  &#xA;&#xA;User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` control message as shown in the code snippet below.  &#xA;&#xA;```c&#xA;  if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xA;  {          &#xA;    SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_FACTORY_RESET,NULL,NULL);&#xA;  }">
 ### **Initiate Factory Reset on user trigger :**
 
 Factory Reset is a functionality using which user may get the system back to its original state, meaning, the Factory image will be programmed to internal flash (Program memory) and all other OTA images will be erased from external flash storage along with OTA database if it exist.  
@@ -472,7 +472,7 @@ User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` contro
     SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_FACTORY_RESET,NULL,NULL);
   }</code></pre></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title7" id="how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-"><h3 class="title topictitle3" id="ariaid-title7"><strong class="ph b">How to trigger system reset (from application) on successful OTA completion, with <code class="ph codeph">Autoreset</code> option disabled in MHC :</strong></h3><div class="body"><p class="p">Developer may choose to disable <code class="ph codeph">Autoreset</code> option in MHC and may have requirement to build custom logic for application, deciding when to go for system reset after successful OTA download. This will enable the system/application to complete important tasks before triggering a system reset.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title7" id="how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-"><h3 class="title topictitle3" id="ariaid-title7" style=""><strong class="ph b">How to trigger system reset (from application) on successful OTA completion, with <code class="ph codeph">Autoreset</code> option disabled in MHC :</strong></h3><div class="body"><p class="p">Developer may choose to disable <code class="ph codeph">Autoreset</code> option in MHC and may have requirement to build custom logic for application, deciding when to go for system reset after successful OTA download. This will enable the system/application to complete important tasks before triggering a system reset.</p>
 <p class="p">Developer may easily develop such custom logic using <code class="ph codeph">SYS_OTA_CtrlMsg()</code> API for system reset.</p>
 <p class="p">Please follow below code snippet for reference :</p>
 <pre class="pre codeblock c"><strong class="hl-keyword">if</strong> (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_SYSTEM_RESET, NULL, NULL))
@@ -485,7 +485,7 @@ User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` contro
      }</pre><p class="p">Please note that <code class="ph codeph">SYS_OTA_CtrlMsg()</code> will return <code class="ph codeph">SYS_OTA_SUCCESS</code>, if the request is successful. System will reset only if OTA download has completed successfully. User can check for <code class="ph codeph">SYS_OTA_DB_ENTRY_SUCCESS</code> system callback state, to trigger manual reset.</p>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title8" id="how-to-limit-periodic-ota-check-for-a-definite-number-of-times-"><h3 class="title topictitle3" id="ariaid-title8"><strong class="ph b">How to limit <code class="ph codeph">periodic OTA check</code> for a definite number of times :</strong></h3><div class="body"><p class="p">Developer may have requirement to limit <code class="ph codeph">periodic OTA check</code> to a definite number of times.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title8" id="how-to-limit-periodic-ota-check-for-a-definite-number-of-times-"><h3 class="title topictitle3" id="ariaid-title8" style=""><strong class="ph b">How to limit <code class="ph codeph">periodic OTA check</code> for a definite number of times :</strong></h3><div class="body"><p class="p">Developer may have requirement to limit <code class="ph codeph">periodic OTA check</code> to a definite number of times.</p>
 <p class="p">For example, OTA service should go to idle state until next reset after checking update availability for <code class="ph codeph">3</code> times consecutively. For this, developer may add below lines of code in <code class="ph codeph">sys_ota.c</code> file:</p>
 <pre class="pre codeblock c">   <strong class="hl-keyword">if</strong>(update_check_counter++ &gt;= <span class="hl-number">3</span>) <em class="hl-comment">// `update_check_counter` is an extern variable, defined by developer</em>
                 {
@@ -494,10 +494,10 @@ User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` contro
                     <strong class="hl-keyword">break</strong>;
                 }</pre><br /><img class="image" src="GUID-0FB45991-06A9-4FC6-9BA9-16168B553FD8-low.png" alt="resized_limit_periodic_check" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title9" id="what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-"><h3 class="title topictitle3" id="ariaid-title9"><strong class="ph b">What will happen if an image is downloaded successfully but image digest verify fails :</strong></h3><div class="body"><p class="p">With default logic, the downloaded image will be erased if digest verify fails. OTA system service will disable auto update check, provide user callback and go to IDLE mode.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title9" id="what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-"><h3 class="title topictitle3" id="ariaid-title9" style=""><strong class="ph b">What will happen if an image is downloaded successfully but image digest verify fails :</strong></h3><div class="body"><p class="p">With default logic, the downloaded image will be erased if digest verify fails. OTA system service will disable auto update check, provide user callback and go to IDLE mode.</p>
 </div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title10" id="how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-"><h3 class="title topictitle3" id="ariaid-title10"><strong class="ph b">How developer can trigger periodic update check , when a user defined condition is satisfied (e.g. : switch pressed) :</strong></h3><div class="body"><p class="p">Developer may have the requirement to trigger periodic update check, only when a user defined condition is satisfied .</p>
+<div class="topic nested2" aria-labelledby="ariaid-title10" id="how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-"><h3 class="title topictitle3" id="ariaid-title10" style=""><strong class="ph b">How developer can trigger periodic update check , when a user defined condition is satisfied (e.g. : switch pressed) :</strong></h3><div class="body"><p class="p">Developer may have the requirement to trigger periodic update check, only when a user defined condition is satisfied .</p>
 <p class="p">Let us assume a scenario , in which application should trigger periodic update check, when user press a switch. To develop this particular requirement user may follow below steps :</p>
 <p class="p">1.Disable <code class="ph codeph">Periodic OTA Check</code> option in MHC.</p>
 <br /><img class="image" src="GUID-98F754E1-13BA-441E-8CE5-DA82DD59C05C-low.png" alt="disable_periodic_check" /><br /><p class="p">2.Generate code using MHC.</p>
@@ -514,7 +514,7 @@ User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` contro
                     ota_initiated = false;
             }</pre></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title11" id="how-to-get-download-status-during-ota-update-"><h3 class="title topictitle3" id="ariaid-title11"><strong class="ph b">How to get download status during OTA update :</strong></h3><div class="body"><p class="p">Application Developer may want to get the download status during OTA update, for certain application logic development.They may easily extract download status using below lines of code :</p>
+<div class="topic nested2" aria-labelledby="ariaid-title11" id="how-to-get-download-status-during-ota-update-"><h3 class="title topictitle3" id="ariaid-title11" style=""><strong class="ph b">How to get download status during OTA update :</strong></h3><div class="body"><p class="p">Application Developer may want to get the download status during OTA update, for certain application logic development.They may easily extract download status using below lines of code :</p>
 <pre class="pre codeblock c">   {
        OTA_GetDownloadStatus(&amp;ota_params);<em class="hl-comment">//ota_params should be defined as : OTA_PARAMS ota_params;</em>
        SYS_CONSOLE_PRINT(<span class="hl-string">"*******************************************\n\r"</span>);

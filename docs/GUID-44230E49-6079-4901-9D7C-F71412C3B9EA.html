@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
-<meta name="DC.rights.owner" content="(C) Copyright 2022" />
-<meta name="DC.type" content="topic" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
+<meta name="DC.rights.owner" content="(C) Copyright 2023" />
+<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
 <meta name="DC.title" content="OTA System Service Configuration" />
 <meta name="DC.relation" scheme="URI" content="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" />
 <meta name="DC.format" content="XHTML" />
@@ -18,7 +18,7 @@
 <meta name="Microsoft.Help.TocOrder" content="0" />
 <meta name="Microsoft.Help.Locale" content="en-US" />
 <meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
 <script language="javascript">
        
        if (window.parent.location.protocol != 'file:') {
@@ -225,7 +225,7 @@
         
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
 <body id="ota-system-service-configuration">
-<h1 class="title topictitle1" id="ariaid-title1">OTA System Service Configuration</h1><div class="body"><p class="p">The OTA System Service library should be configured through the MHC ( <em class="ph i"><strong class="ph b">MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System Service Interface</strong></em> ). When user selects the OTA System Service library, all the required dependencies components are added automatically in the MHC configuration.</p>
+<h1 class="title topictitle1" id="ariaid-title1" style="">OTA System Service Configuration</h1><div class="body"><p class="p">The OTA System Service library should be configured through the MHC ( <em class="ph i"><strong class="ph b">MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System Service Interface</strong></em> ). When user selects the OTA System Service library, all the required dependencies components are added automatically in the MHC configuration.</p>
 <p class="p">The following figure shows the MHC configuration window for configuring the OTA System Service and a brief description of various configuration options.</p>
 <p class="p">1.Open the MHC 3</p>
 <p class="p">2.Drag the OTA Service Module into the Active components from the Available components.</p>
@@ -235,19 +235,21 @@
 <p class="p">If it is disabled by user , system will not go for reset automatically. Instead, it will be waiting for user trigger for system reset.</p>
 <p class="p">5.configure <strong class="ph b">server URL</strong>:</p>
 <br /><img class="image" src="GUID-B9FF72A6-4CCB-4474-8E28-991670DE743C-low.png" alt="ota_config_serverurl" /><br /><p class="p">User need to provide the server url where the manifest file in <code class="ph codeph">json</code> format is available.OTA service will use this url to connect to server and download <code class="ph codeph">json</code> file to check for updates.</p>
-<p class="p">6.configure <strong class="ph b">Auto OTA update</strong>:</p>
+<p class="p">6.configure <strong class="ph b">supported Interface</strong>:</p>
+<br /><img class="image" src="GUID-D00A9226-971A-4445-880C-23AA2EEEB0F5-low.png" alt="OTA_Intf_supp" /><br /><p class="p">User can select the preferred interface for the OTA operation.OTA can be performed either over Wi-Fi interface or over Ethernet interface. By default, Wi-Fi interface will be selected. If the user select to have the Ethernet interface for the OTA operation, then the required components for enabling the Ethernet interface will be added to the configuration automatically. The user need to ensure that the added ETHMAC gets connected to the netConfig MAC instance(System Configuration) as shown in the below image.</p>
+<br /><img class="image" src="GUID-A88C02E1-33CB-439D-BC62-036CB89D2526-low.png" alt="OTA_eth_netconf" /><br /><p class="p">7.configure <strong class="ph b">Auto OTA update</strong>:</p>
 <br /><img class="image" src="GUID-8DA19CE5-1D03-4191-84B7-765DCC81DDC7-low.png" alt="ota_config_autoupdate" /><br /><p class="p">By default this option will be enabled.</p>
 <p class="p">If it is enabled , OTA service will not wait for user trigger to initiate OTA process. It will automatically start OTA process if new update is available in the server.</p>
 <p class="p">If it is disabled , OTA service will wait for user trigger to initiate OTA process. User will be notified about new update availability via user defined callbacks.</p>
-<p class="p">7.configure <strong class="ph b">Periodic OTA check</strong>:</p>
+<p class="p">8.configure <strong class="ph b">Periodic OTA check</strong>:</p>
 <br /><img class="image" src="GUID-276D2B42-78EF-4EF5-9FDD-7B60A792CA36-low.png" alt="ota_config_periodiccheck" /><br /><p class="p">By default this option will be configured to 60 seconds.</p>
 <p class="p">When enabled, OTA service will periodically download the manifest file to check for update availability at the user defined interval.</p>
 <p class="p">If it is disabled, OTA service will be checking for update availability on user trigger via the control message API.</p>
-<p class="p">8.configure <strong class="ph b">Application version</strong>:</p>
+<p class="p">9.configure <strong class="ph b">Application version</strong>:</p>
 <br /><img class="image" src="GUID-2BFEC2AC-400F-44FB-A3E4-86BD5D340EDC-low.png" alt="ota_config_appversion" /><br /><p class="p">User must ensure to provide correct integer version while generating OTA image.</p>
 <p class="p">This version number should be also be mentioned in the manifest file in OTA server. OTA upgrade will be triggered when a version with numerically higher version number is identified in the manifest file.</p>
-<p class="p">9.configure <strong class="ph b">Advanced Configuration</strong>:</p>
-<br /><img class="image" src="GUID-4FB01955-BF91-4B1A-AD18-50D01BF954B4-low.png" alt="AdvancedConfig_OTA" /><br /><ul class="ul"><li class="li"><p class="p"><strong class="ph b">Number of images:</strong>  This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot.</p>
+<p class="p">10.configure <strong class="ph b">Advanced Configuration</strong>:</p>
+<br /><img class="image" src="GUID-EDC946BB-7AAC-4F0D-9FE6-E5F6F6B7C64B-low.png" alt="ota_adv_config" /><br /><ul class="ul"><li class="li"><p class="p"><strong class="ph b">Number of images:</strong>  This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot.</p>
 </li>
 <li class="li"><p class="p"><strong class="ph b">Set JSON file size in bytes:</strong> Maximum size (in bytes) of the <code class="ph codeph">json</code> file present in the server.</p>
 </li>
@@ -261,25 +263,40 @@ If it is enabled by user, service will enforce TLS connection irrespective of th
 <p class="p"><strong class="ph b">NOTE : If disabled service will automatically detect and go for http or https connection, by looking into server URL mentioned by user</strong></p>
 <ul class="ul"><li class="li"><p class="p"><strong class="ph b">Disk space check:</strong> By default this option will be disabled. If enable, free sector check will be done, in ext flash before download starts.</p>
 </li>
-<li class="li"><p class="p"><strong class="ph b">Enable/Disable Patch Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">patch</code> functionality.</p>
+<li class="li"><p class="p"><strong class="ph b">Enable Patch Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">patch</code> functionality.</p>
 </li>
-<li class="li"><p class="p"><strong class="ph b">Enable/Disable Secure OTA Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">Secure OTA</code> functionality.</p>
+<li class="li"><p class="p"><strong class="ph b">Enable Secure OTA Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">Secure OTA</code> functionality.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Enable File Download :</strong> By default this option will be disabled. The user can download any file or image into internal flash memory by enabling this option.</p>
+<ul class="ul"><li class="li"><p class="p"><strong class="ph b">File/img Download - NVM Start Address :</strong> This parameter specifies the Program flash start address where the downloaded files/images should be stored. The default value is 0x000F8000. Based on the project size user has to adjust this address value with not overlapping with code area.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Number of Slots :</strong> : This defines the number of slots to be created in the Program flash memory. By default this <strong class="ph b">Number of Slots</strong> is set to 1. Maximum number of slots which can be configured is 3.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Size in bytes of Slot X :</strong> These variables store the size of each slot in Program flash. The number of slot size variables generated depends on the Number of Slots mentioned. The default size is 4096 and the size of each slot can be in-between 4096 and 20480.</p>
+<p class="p">Design Guideline : if customer wants to include multiple files into a single slot, then user has to make a unified file by including multiple files and parse those files accordingly into OTA service.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Enable Jump Address :</strong> This enables the application to jump to this address after all the files are downloaded. This is only applicable if the user is downloading file as an image. User should enable the macro <code class="ph codeph">SYS_OTA_FILE_JUMP_ENABLE</code> in the Bootloader project, <code class="ph codeph">ota_booloader_wolfcrypt</code>.Also, user should update the jump address of the new image <code class="ph codeph">APP_IMG_BOOT_ADDR_2</code> in the <code class="ph codeph">ota_config.h</code> file of Bootloader project <code class="ph codeph">ota_booloader_wolfcrypt</code>.</p>
+<p class="p"><strong class="ph b">Note</strong> : This feature has very high dependency on the available memory on the device. Enabling the feature is strictly constrained to the memory availability.</p>
+</li>
+<li class="li"><p class="p"><strong class="ph b">Use External Memory on OTA :</strong>  The option decides, if OTA feature will be using External Memory along with File System. The user can disable the usage of File System if required. Currently, this feature will be available only with the bootloader <code class="ph codeph">ota_booloader_wolfcrypt</code>. The user should undefine the macro <code class="ph codeph">SYS_OTA_FS_ENABLED</code> in Bootloader project also. The Patch update feature will not be supported without File System. By default, <code class="ph codeph">Use External Memory on OTA</code> feature will be enabled in both application and bootloader.</p>
+</li>
+</ul>
 </li>
 </ul>
 <p class="p"><strong class="ph b">All of the required files are automatically added into the MPLAB X IDE project by the MHC when the OTA Service is selected for use.</strong></p>
-<p class="p">10.Generate code using "Generate" button in MHC :</p>
-<br /><img class="image" src="GUID-90157A96-7171-4DC8-BDAB-1CACE8395898-low.png" alt="ota_mhc_generate" /><br /><p class="p">11.In case you are creating a factory image, include the bootloader project from the apps folder of this repo as a <code class="ph codeph">loadable project</code> into the application :</p>
+<p class="p">11.Generate code using "Generate" button in MHC :</p>
+<br /><img class="image" src="GUID-90157A96-7171-4DC8-BDAB-1CACE8395898-low.png" alt="ota_mhc_generate" /><br /><p class="p">12.In case you are creating a factory image, include the bootloader project from the apps folder of this repo as a <code class="ph codeph">loadable project</code> into the application :</p>
 <br /><img class="image" src="GUID-E3F0AB13-BEE8-4E93-B331-E8CCA7E34BEE-low.png" alt="resized_ota_add_loadables" /><br /><p class="p"><strong class="ph b">NOTE: Please open bootloader project in MPLABx IDE and compile separately, before loading</strong></p>
-<p class="p">12.Build the project to get the unified hex and load the same on device.</p>
+<p class="p">13.Build the project to get the unified hex and load the same on device.</p>
 </div>
 <div class="related-links">
 <div class="familylinks">
 <div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html">Over The Air (OTA) firmware update System Service</a></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="building-custom-logic"><h2 class="title topictitle2" id="ariaid-title2">Building custom logic</h2><div class="body"><p class="p">User can build custom logic required for own design, using configrable parameters as mentioned above. Additionally , users can also build and apply required application level logic which can be included in <strong class="ph b">app.c</strong> file.</p>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="building-custom-logic"><h2 class="title topictitle2" id="ariaid-title2" style="">Building custom logic</h2><div class="body"><p class="p">User can build custom logic required for own design, using configrable parameters as mentioned above. Additionally , users can also build and apply required application level logic which can be included in <strong class="ph b">app.c</strong> file.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="easily-registering-user-callbacks"><h2 class="title topictitle2" id="ariaid-title3">Easily registering user callbacks</h2><div class="body"><p class="p">For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  <strong class="ph b">app_ota.c</strong> file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in <strong class="ph b">OTA System Service Interface</strong> section.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="easily-registering-user-callbacks"><h2 class="title topictitle2" id="ariaid-title3" style="">Easily registering user callbacks</h2><div class="body"><p class="p">For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  <strong class="ph b">app_ota.c</strong> file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in <strong class="ph b">OTA System Service Interface</strong> section.</p>
 </div>
 </div>
 </body>

@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
-<meta name="DC.rights.owner" content="(C) Copyright 2022" />
-<meta name="DC.type" content="topic" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
+<meta name="DC.rights.owner" content="(C) Copyright 2023" />
+<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
 <meta name="DC.title" content="SYS_APPDEBUG_FN_ENTER_PRINT" />
 <meta name="DC.relation" scheme="URI" content="GUID-578A7A2F-0FFE-463F-A241-3190441F74E0.html" />
 <meta name="DC.format" content="XHTML" />
@@ -18,7 +18,7 @@
 <meta name="Microsoft.Help.TocOrder" content="0" />
 <meta name="Microsoft.Help.Locale" content="en-US" />
 <meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
 <script language="javascript">
        
        if (window.parent.location.protocol != 'file:') {
@@ -225,33 +225,33 @@
         
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
 <body id="sys-appdebug-fn-enter-print">
-<h1 class="title topictitle1" id="ariaid-title1">SYS_APPDEBUG_FN_ENTER_PRINT</h1><div class="body"></div>
+<h1 class="title topictitle1" id="ariaid-title1" style="">SYS_APPDEBUG_FN_ENTER_PRINT</h1><div class="body"></div>
 <div class="related-links">
 <div class="familylinks">
 <div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-578A7A2F-0FFE-463F-A241-3190441F74E0.html">App Debug System Service Interface</a></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="title topictitle2" id="ariaid-title2">C</h2><div class="body"><pre class="pre codeblock c"><span class="hl-directive">#define</span> <span class="hl-functions">SYS_APPDEBUG_FN_ENTER_PRINT</span>(obj, flow) SYS_APPDEBUG_PRINT_FN_ENTER(obj, flow, __FUNCTION__, __LINE__)
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="title topictitle2" id="ariaid-title2" style="">C</h2><div class="body"><pre class="pre codeblock c"><span class="hl-directive">#define</span> <span class="hl-functions">SYS_APPDEBUG_FN_ENTER_PRINT</span>(obj, flow) SYS_APPDEBUG_PRINT_FN_ENTER(obj, flow, __FUNCTION__, __LINE__)
 </pre></div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="title topictitle2" id="ariaid-title3">Summary</h2><div class="body"><p class="p">Used for logging Function Entry Logs</p>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="title topictitle2" id="ariaid-title3" style="">Summary</h2><div class="body"><p class="p">Used for logging Function Entry Logs</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="title topictitle2" id="ariaid-title4">Description</h2><div class="body"><p class="p">This macro function is used for logging function entry level logs.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="title topictitle2" id="ariaid-title4" style="">Description</h2><div class="body"><p class="p">This macro function is used for logging function entry level logs.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title5" id="precondition"><h2 class="title topictitle2" id="ariaid-title5">Precondition</h2><div class="body"><p class="p">SYS_APPDEBUG_Open should have been called.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title5" id="precondition"><h2 class="title topictitle2" id="ariaid-title5" style="">Precondition</h2><div class="body"><p class="p">SYS_APPDEBUG_Open should have been called.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title6" id="parameters"><h2 class="title topictitle2" id="ariaid-title6">Parameters</h2><div class="body"><p class="p">obj 	- SYS App Debug object handle, returned from SYS_APPDEBUG_Open flow 	- valid flow defined by the User, log will come only if this flow is enabled data		- valid string ...		- any variable arguments if present</p>
+<div class="topic nested1" aria-labelledby="ariaid-title6" id="parameters"><h2 class="title topictitle2" id="ariaid-title6" style="">Parameters</h2><div class="body"><p class="p">obj 	- SYS App Debug object handle, returned from SYS_APPDEBUG_Open flow 	- valid flow defined by the User, log will come only if this flow is enabled data		- valid string ...		- any variable arguments if present</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title7" id="returns"><h2 class="title topictitle2" id="ariaid-title7">Returns</h2><div class="body"><p class="p">None.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title7" id="returns"><h2 class="title topictitle2" id="ariaid-title7" style="">Returns</h2><div class="body"><p class="p">None.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title8" id="example"><h2 class="title topictitle2" id="ariaid-title8">Example</h2><div class="body"><pre class="pre codeblock c"><em class="hl-comment">// Handle "objSysAppDebug" value must have been returned from SYS_APPDEBUG_Open.</em>
+<div class="topic nested1" aria-labelledby="ariaid-title8" id="example"><h2 class="title topictitle2" id="ariaid-title8" style="">Example</h2><div class="body"><pre class="pre codeblock c"><em class="hl-comment">// Handle "objSysAppDebug" value must have been returned from SYS_APPDEBUG_Open.</em>
 SYS_APPDEBUG_FN_ENTER_PRINT(objSysAppDebug, MY_APP_FLOW_DATA);</pre></div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title9" id="remarks"><h2 class="title topictitle2" id="ariaid-title9">Remarks</h2><div class="body"><p class="p">None.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title9" id="remarks"><h2 class="title topictitle2" id="ariaid-title9" style="">Remarks</h2><div class="body"><p class="p">None.</p>
 </div>
 </div>
 </body>

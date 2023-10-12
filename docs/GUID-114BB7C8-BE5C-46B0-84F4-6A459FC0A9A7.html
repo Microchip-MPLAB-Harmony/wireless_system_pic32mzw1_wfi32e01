@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
-<meta name="DC.rights.owner" content="(C) Copyright 2022" />
-<meta name="DC.type" content="topic" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
+<meta name="DC.rights.owner" content="(C) Copyright 2023" />
+<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
 <meta name="DC.title" content="MQTT System Service Developer's Guide" />
 <meta name="DC.relation" scheme="URI" content="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" />
 <meta name="DC.format" content="XHTML" />
@@ -18,7 +18,7 @@
 <meta name="Microsoft.Help.TocOrder" content="0" />
 <meta name="Microsoft.Help.Locale" content="en-US" />
 <meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
 <script language="javascript">
        
        if (window.parent.location.protocol != 'file:') {
@@ -225,24 +225,24 @@
         
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
 <body>
-<div class="nested0" aria-labelledby="ariaid-title1" id="mqtt-system-service-developers-guide"><h1 class="title topictitle1" id="ariaid-title1">MQTT System Service Developer's Guide</h1><div class="body"><p class="p">The purpose of this document is to explain the MQTT system service design to enable the developer to make changes in the service code as per his/ her requirements if the need be.</p>
+<div class="nested0" aria-labelledby="ariaid-title1" id="mqtt-system-service-developers-guide"><h1 class="title topictitle1" id="ariaid-title1" style="">MQTT System Service Developer's Guide</h1><div class="body"><p class="p">The purpose of this document is to explain the MQTT system service design to enable the developer to make changes in the service code as per his/ her requirements if the need be.</p>
 </div>
 <div class="related-links">
 <div class="familylinks">
 <div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html">MQTT System Service</a></div>
 </div>
 </div></div>
-<div class="topic nested0" aria-labelledby="ariaid-title2" id="overview"><h1 class="title topictitle1" id="ariaid-title2">Overview</h1><div class="body"><p class="p">MQTT system service Library provides an application programming interface (API) to manage MQTT Protocol functionalities. The MQTT system service uses the third party software Paho APIs for achieving these functionalities. It supports key features like client mode for MQTT connectivity, TLS for MQTT connection, Self-Healing, etc.</p>
+<div class="topic nested0" aria-labelledby="ariaid-title2" id="overview"><h1 class="title topictitle1" id="ariaid-title2" style="">Overview</h1><div class="body"><p class="p">MQTT system service Library provides an application programming interface (API) to manage MQTT Protocol functionalities. The MQTT system service uses the third party software Paho APIs for achieving these functionalities. It supports key features like client mode for MQTT connectivity, TLS for MQTT connection, Self-Healing, etc.</p>
 <br /><img class="image" src="GUID-2A1CA2CB-A522-4B65-8F8D-5C462048B748-low.png" alt="Stack" /><br /><p class="p">Though the application developer is free to use the third party software directly to manage the MQTT functionalities, the use of MQTT system service eases the work of the developer by reducing the state machine that the application needs to maintain while also reducing the amount of bookkeeping that otherwise is needed.</p>
 </div>
 </div>
-<div class="topic nested0" aria-labelledby="ariaid-title3" id="detailed-design"><h1 class="title topictitle1" id="ariaid-title3">Detailed Design</h1><div class="body"><p class="p">MQTT system service is a background service that runs in the context of the application task. The idea of the MQTT system service is to reduce the code size for the application and simplifying the state machine that the application may need to maintain by abstracting out the complexity in the system service. The system service achieves this by maintaining a state machine of its own and any bookkeeping that may be needed.</p>
+<div class="topic nested0" aria-labelledby="ariaid-title3" id="detailed-design"><h1 class="title topictitle1" id="ariaid-title3" style="">Detailed Design</h1><div class="body"><p class="p">MQTT system service is a background service that runs in the context of the application task. The idea of the MQTT system service is to reduce the code size for the application and simplifying the state machine that the application may need to maintain by abstracting out the complexity in the system service. The system service achieves this by maintaining a state machine of its own and any bookkeeping that may be needed.</p>
 <p class="p">The MQTT system service supports only client mode. Also, the service supports secured connections for its MQTT connection with the server.</p>
 <p class="p">The MQTT system service also supports Self-Healing, or ‘Auto-Reconnect’. In case there is an interruption in the connection due to the underlying lower layer or when the peer disconnects, the service tries to reconnect again without making the application to bother about retriggering the connection.</p>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title4" id="state-machine"><h2 class="title topictitle2" id="ariaid-title4">State Machine</h2><div class="body"><p class="p">The various states of the MQTT system service are of the enum type <strong class="ph b">SYS_MQTT_STATUS</strong>. The application is expected to call <strong class="ph b">SYS_MQTT_Task()</strong> periodically from its own task context. This function ensures that the MQTT system service state machine receives sufficient execution cycles to process pending packets in the network stack.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="state-machine"><h2 class="title topictitle2" id="ariaid-title4" style="">State Machine</h2><div class="body"><p class="p">The various states of the MQTT system service are of the enum type <strong class="ph b">SYS_MQTT_STATUS</strong>. The application is expected to call <strong class="ph b">SYS_MQTT_Task()</strong> periodically from its own task context. This function ensures that the MQTT system service state machine receives sufficient execution cycles to process pending packets in the network stack.</p>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title5" id="mqtt-client-state-machine"><h3 class="title topictitle3" id="ariaid-title5">MQTT Client State Machine</h3><div class="body"><p class="p">The MQTT system service runs a finite state machine with the following states:</p>
+<div class="topic nested2" aria-labelledby="ariaid-title5" id="mqtt-client-state-machine"><h3 class="title topictitle3" id="ariaid-title5" style="">MQTT Client State Machine</h3><div class="body"><p class="p">The MQTT system service runs a finite state machine with the following states:</p>
 <ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p"><em class="ph i">SYS_MQTT_STATUS_IDLE</em>: Initial State of the MQTT system service, at the initialization.</p>
 </li>
 <li class="li"><span class="indent-level-default">2.</span><p class="p"><em class="ph i">SYS_MQTT_STATUS_LOWER_LAYER_DOWN</em>:</p>
@@ -287,43 +287,43 @@
 </div>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title6" id="number-of-subscription-topics-supported"><h2 class="title topictitle2" id="ariaid-title6">Number of Subscription Topics Supported</h2><div class="body"><p class="p">The number of subscription topics supported by MQTT system service currently is 2. **The same can be increased by changing the value of the macro *SYS_MQTT_SUB_MAX_TOPICS. ***Also note, that the underlying third party software Paho supports 5 subscription topics, so if the developer needs to use more than 5 topics, he/ she will need to make changes in the Paho code (<em class="ph i">MAX_MESSAGE_HANDLERS</em>) too.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title6" id="number-of-subscription-topics-supported"><h2 class="title topictitle2" id="ariaid-title6" style="">Number of Subscription Topics Supported</h2><div class="body"><p class="p">The number of subscription topics supported by MQTT system service currently is 2. **The same can be increased by changing the value of the macro *SYS_MQTT_SUB_MAX_TOPICS. ***Also note, that the underlying third party software Paho supports 5 subscription topics, so if the developer needs to use more than 5 topics, he/ she will need to make changes in the Paho code (<em class="ph i">MAX_MESSAGE_HANDLERS</em>) too.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title7" id="timeperiod-for-ack"><h2 class="title topictitle2" id="ariaid-title7">Timeperiod for ACK</h2><div class="body"><p class="p">The number of seconds the MQTT system service will wait for the ACK to come – CONACK, or SUBACK, or PUBACK, or UNSUBACK is currently 5 seconds. The developer can increase or decrease this time by modifying the value of SYS_MQTT_PERIOIDC_TIMEOUT.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title7" id="timeperiod-for-ack"><h2 class="title topictitle2" id="ariaid-title7" style="">Timeperiod for ACK</h2><div class="body"><p class="p">The number of seconds the MQTT system service will wait for the ACK to come – CONACK, or SUBACK, or PUBACK, or UNSUBACK is currently 5 seconds. The developer can increase or decrease this time by modifying the value of SYS_MQTT_PERIOIDC_TIMEOUT.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title8" id="external-apis"><h2 class="title topictitle2" id="ariaid-title8">External APIs</h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title9" id="sys-mqtt-connect-"><h3 class="title topictitle3" id="ariaid-title9">SYS_MQTT_Connect ()</h3><div class="body"><p class="p">Description: The API is used for connecting an MQTT client to the server. The user needs to register a callback function via this API. The registered callback lets the user know the operational status change or when data is received on the topic subscribed to. One of the advantages of this API is that the user can call this API without bothering about the operational state of the underlying layers, and the service shall take care of all the complexity in such cases.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title8" id="external-apis"><h2 class="title topictitle2" id="ariaid-title8" style="">External APIs</h2><div class="body"></div>
+<div class="topic nested2" aria-labelledby="ariaid-title9" id="sys-mqtt-connect-"><h3 class="title topictitle3" id="ariaid-title9" style="">SYS_MQTT_Connect ()</h3><div class="body"><p class="p">Description: The API is used for connecting an MQTT client to the server. The user needs to register a callback function via this API. The registered callback lets the user know the operational status change or when data is received on the topic subscribed to. One of the advantages of this API is that the user can call this API without bothering about the operational state of the underlying layers, and the service shall take care of all the complexity in such cases.</p>
 <br /><img class="image" src="GUID-4DDC7B8C-4099-4E7D-8EC7-22765B77C9BB-low.png" alt="resized1_SYS_MQTT_Connect" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title10" id="sys-mqtt-disconnect-"><h3 class="title topictitle3" id="ariaid-title10">SYS_MQTT_Disconnect ()</h3><div class="body"><p class="p">Description: The API is used for disconnecting the MQTT client from the server.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title10" id="sys-mqtt-disconnect-"><h3 class="title topictitle3" id="ariaid-title10" style="">SYS_MQTT_Disconnect ()</h3><div class="body"><p class="p">Description: The API is used for disconnecting the MQTT client from the server.</p>
 <br /><img class="image" src="GUID-1DE2847D-D9A4-4735-9A6C-FE9655004009-low.png" alt="resized_SYS_MQTT_Disconnect" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title11" id="sys-mqtt-publish-"><h3 class="title topictitle3" id="ariaid-title11">SYS_MQTT_Publish ()</h3><div class="body"><p class="p">Description: The API is used for publishing a message onto a topic.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title11" id="sys-mqtt-publish-"><h3 class="title topictitle3" id="ariaid-title11" style="">SYS_MQTT_Publish ()</h3><div class="body"><p class="p">Description: The API is used for publishing a message onto a topic.</p>
 <br /><img class="image" src="GUID-FAEB1BDD-06EC-4866-8A0D-284291251855-low.png" alt="resized_SYS_MQTT_Publish" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title12" id="sys-mqtt-subscribe-"><h3 class="title topictitle3" id="ariaid-title12">SYS_MQTT_Subscribe ()</h3><div class="body"><p class="p">Description: The API is used for subscribing to a topic.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title12" id="sys-mqtt-subscribe-"><h3 class="title topictitle3" id="ariaid-title12" style="">SYS_MQTT_Subscribe ()</h3><div class="body"><p class="p">Description: The API is used for subscribing to a topic.</p>
 <br /><img class="image" src="GUID-5EA92DC3-9FDF-408C-88D1-514375199113-low.png" alt="resized_SYS_MQTT_Subscribe" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title13" id="sys-mqtt-unsubscribe-"><h3 class="title topictitle3" id="ariaid-title13">SYS_MQTT_Unsubscribe ()</h3><div class="body"><p class="p">Description: The API is used for unsubscribing from a topic.</p>
+<div class="topic nested2" aria-labelledby="ariaid-title13" id="sys-mqtt-unsubscribe-"><h3 class="title topictitle3" id="ariaid-title13" style="">SYS_MQTT_Unsubscribe ()</h3><div class="body"><p class="p">Description: The API is used for unsubscribing from a topic.</p>
 <br /><img class="image" src="GUID-E453B37F-50D8-42E6-8869-60A3F4451AA9-low.png" alt="resized_SYS_MQTT_Unsubscribe" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title14" id="handling-of-the-messages-received-for-a-topic"><h3 class="title topictitle3" id="ariaid-title14">Handling of the messages received for a Topic</h3><div class="body"><br /><img class="image" src="GUID-8BACF68E-F989-427C-B4A2-D05AB0026A7A-low.png" alt="resized_ReceiveMsgOnTopic" /><br /></div>
+<div class="topic nested2" aria-labelledby="ariaid-title14" id="handling-of-the-messages-received-for-a-topic"><h3 class="title topictitle3" id="ariaid-title14" style="">Handling of the messages received for a Topic</h3><div class="body"><br /><img class="image" src="GUID-8BACF68E-F989-427C-B4A2-D05AB0026A7A-low.png" alt="resized_ReceiveMsgOnTopic" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title15" id="handling-of-keepalive-messages-after-the-mqtt-connection-is-up"><h3 class="title topictitle3" id="ariaid-title15">Handling of KeepAlive messages after the MQTT connection is UP</h3><div class="body"><br /><img class="image" src="GUID-2D692EFB-55B6-4BCF-B2BB-99DC5E76C516-low.png" alt="resized1_KeepAlive" /><br /></div>
+<div class="topic nested2" aria-labelledby="ariaid-title15" id="handling-of-keepalive-messages-after-the-mqtt-connection-is-up"><h3 class="title topictitle3" id="ariaid-title15" style="">Handling of KeepAlive messages after the MQTT connection is UP</h3><div class="body"><br /><img class="image" src="GUID-2D692EFB-55B6-4BCF-B2BB-99DC5E76C516-low.png" alt="resized1_KeepAlive" /><br /></div>
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title16" id="sys-mqtt-task-"><h3 class="title topictitle3" id="ariaid-title16">SYS_MQTT_Task ()</h3><div class="body"><p class="p">Description: This API is used for smooth functioning of the state machine of the MQTT system service**.** The application needs to call this API periodically. Also, this API takes as parameter the handle returned when we connect to server via the SYS_MQTT_Connect() call.</p>
-</div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title17" id="sys-mqtt-initialize--sys-mqtt-deinitialize-"><h3 class="title topictitle3" id="ariaid-title17">SYS_MQTT_Initialize ()/ SYS_MQTT_Deinitialize ()</h3><div class="body"><p class="p">Description: These functions are used for initializing/ deinitializing the data structures of the MQTT system service. The SYS_MQTT_Initialize() function is called from within the System Task. <strong class="ph b">Users can modify these functions in case they want to take some additional actions during the initialization of the service.</strong></p>
+<div class="topic nested2" aria-labelledby="ariaid-title16" id="sys-mqtt-task-"><h3 class="title topictitle3" id="ariaid-title16" style="">SYS_MQTT_Task ()</h3><div class="body"><p class="p">Description: This API is used for smooth functioning of the state machine of the MQTT system service**.** The application needs to call this API periodically. Also, this API takes as parameter the handle returned when we connect to server via the SYS_MQTT_Connect() call.</p>
 </div>
 </div>
+<div class="topic nested2" aria-labelledby="ariaid-title17" id="sys-mqtt-initialize--sys-mqtt-deinitialize-"><h3 class="title topictitle3" id="ariaid-title17" style="">SYS_MQTT_Initialize ()/ SYS_MQTT_Deinitialize ()</h3><div class="body"><p class="p">Description: These functions are used for initializing/ deinitializing the data structures of the MQTT system service. The SYS_MQTT_Initialize() function is called from within the System Task. <strong class="ph b">Users can modify these functions in case they want to take some additional actions during the initialization of the service.</strong></p>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title18" id="cli-commands"><h2 class="title topictitle2" id="ariaid-title18">CLI Commands</h2><div class="body"><p class="p">The details of the cli commands supported by MQTT system service can be found under <strong class="ph b">MQTT System Service Usage</strong>.The CLI commands are implemented using the function <em class="ph i">SysMqtt_Command_Process()</em>. <strong class="ph b">The users can modify any of the commands – configuration or get as per their needs by modifying the above function.</strong></p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title19" id="code-location"><h2 class="title topictitle2" id="ariaid-title19">Code location</h2><div class="body"><p class="p">The base code for the MQTT system service can be found in the <em class="ph i">wireless_system_pic32mzw1_wfi32e01\system\mqtt</em></p>
+<div class="topic nested1" aria-labelledby="ariaid-title18" id="cli-commands"><h2 class="title topictitle2" id="ariaid-title18" style="">CLI Commands</h2><div class="body"><p class="p">The details of the cli commands supported by MQTT system service can be found under <strong class="ph b">MQTT System Service Usage</strong>.The CLI commands are implemented using the function <em class="ph i">SysMqtt_Command_Process()</em>. <strong class="ph b">The users can modify any of the commands – configuration or get as per their needs by modifying the above function.</strong></p>
+</div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title19" id="code-location"><h2 class="title topictitle2" id="ariaid-title19" style="">Code location</h2><div class="body"><p class="p">The base code for the MQTT system service can be found in the <em class="ph i">wireless_system_pic32mzw1_wfi32e01\system\mqtt</em></p>
 <p class="p">The same shall be copied to the following location after the code for the application is generated – <em class="ph i">my_application\firmware\src\config\pic32mz_w1_curiosity\system\mqtt</em></p>
 <p class="p">The code has 4 files:</p>
 <ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">Header file: <em class="ph i">sys_mqtt.h</em> and <em class="ph i">sys_paho_mqtt.h</em></p>
@@ -336,19 +336,19 @@
 <br /><img class="image" src="GUID-22EE92B3-1E60-4407-8985-CA469AFB0574-low.png" alt="resized_MhcMergeWindow" /><br /><p class="p">The user can merge his changes with the the latest changes done in the services using the above window.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title20" id="reference"><h2 class="title topictitle2" id="ariaid-title20">Reference</h2><div class="body">
-<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d38848e320"><span>S. No</span></th>
-<th class="entry cellrowborder" style="vertical-align:middle;" id="d38848e322"><span>Name</span></th>
+<div class="topic nested1" aria-labelledby="ariaid-title20" id="reference"><h2 class="title topictitle2" id="ariaid-title20" style="">Reference</h2><div class="body">
+<div class="tablenoborder"><table cellpadding="4" cellspacing="0" summary="" class="table" frame="border" border="1" rules="all"><col style="width:" /><col style="width:" /><thead class="thead" style="text-align:left;"><tr class="row"><th class="entry cellrowborder" style="vertical-align:middle;" id="d42573e320"><span>S. No</span></th>
+<th class="entry cellrowborder" style="vertical-align:middle;" id="d42573e322"><span>Name</span></th>
 </tr>
 </thead>
-<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d38848e320 "><span>1</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d38848e322 "><span>MQTT system service Usage</span></td>
+<tbody class="tbody"><tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d42573e320 "><span>1</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d42573e322 "><span>MQTT system service Usage</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d38848e320 "><span>2</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d38848e322 "><span>MQTT system service Interface</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d42573e320 "><span>2</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d42573e322 "><span>MQTT system service Interface</span></td>
 </tr>
-<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d38848e320 "><span>3</span></td>
-<td class="entry cellrowborder" style="vertical-align:middle;" headers="d38848e322 "><span>NET system service Interface</span></td>
+<tr class="row"><td class="entry cellrowborder" style="vertical-align:middle;" headers="d42573e320 "><span>3</span></td>
+<td class="entry cellrowborder" style="vertical-align:middle;" headers="d42573e322 "><span>NET system service Interface</span></td>
 </tr>
 </tbody>
 </table>

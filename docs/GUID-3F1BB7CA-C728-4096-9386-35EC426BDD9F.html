@@ -4,21 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2022" />
-<meta name="DC.rights.owner" content="(C) Copyright 2022" />
-<meta name="DC.type" content="topic" />
-<meta name="DC.title" content="Web Socket Server System Service Usage" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
+<meta name="DC.rights.owner" content="(C) Copyright 2023" />
+<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
+<meta name="DC.title" content="Web Socket System Service Usage" />
 <meta name="DC.relation" scheme="URI" content="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" />
 <meta name="DC.format" content="XHTML" />
-<meta name="DC.identifier" content="web-socket-server-system-service-usage" />
+<meta name="DC.identifier" content="web-socket-system-service-usage" />
 <link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
-<title>Web Socket Server System Service Usage</title>
-<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-web-socket-server-system-service-usage" />
+<title>Web Socket System Service Usage</title>
+<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-web-socket-system-service-usage" />
 <meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
 <meta name="Microsoft.Help.TocOrder" content="0" />
 <meta name="Microsoft.Help.Locale" content="en-US" />
 <meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 01/2022" />
+<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
 <script language="javascript">
        
        if (window.parent.location.protocol != 'file:') {
@@ -224,16 +224,16 @@
         
         
       </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
-<body id="web-socket-server-system-service-usage">
-<h1 class="title topictitle1" id="ariaid-title1">Web Socket Server System Service Usage</h1><div class="body"></div>
+<body id="web-socket-system-service-usage">
+<h1 class="title topictitle1" id="ariaid-title1" style="">Web Socket System Service Usage</h1><div class="body"></div>
 <div class="related-links">
 <div class="familylinks">
 <div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html">Web Socket Server (WSS) System Service</a></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="title topictitle2" id="ariaid-title2">Description</h2><div class="body"><p class="p">Web Socket Server System Service Library provides an application programming interface (API) for implementing a Web Socket Server functionalities. The user need not take care about the frame connection handshakes,the data frame formatting etc.   The WSS System Service uses the underlying Net system  Service APIs for achieving TCPIP network functionalities.</p>
+</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="description"><h2 class="title topictitle2" id="ariaid-title2" style="">Description</h2><div class="body"><p class="p">Web Socket System Service Library provides an application programming interface (API) for implementing a Web Socket functionalities. The user need not take care about the connection handshakes,the data frame formatting etc.The WSS Service uses the underlying Net system Service APIs for achieving TCPIP network functionalities.</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="abstraction-model"><h2 class="title topictitle2" id="ariaid-title3">Abstraction Model</h2><div class="body"><p class="p">The Web Socket Server System Service provides an abstraction to the complete Web Socket Server implementation with the following functinalities.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title3" id="abstraction-model"><h2 class="title topictitle2" id="ariaid-title3" style="">Abstraction Model</h2><div class="body"><p class="p">The Web Socket System Service provides an abstraction to the complete Web Socket implementation with the following functinalities.</p>
 <ul class="ul"><li class="li"><p class="p">Connectivity to multiple clients</p>
 </li>
 <li class="li"><p class="p">Simple APIs for data exchanges</p>
@@ -241,16 +241,27 @@
 <li class="li"><p class="p">Reduced time for application development</p>
 </li>
 </ul>
-<p class="p">The following diagram depicts the Web Socket Server System Service abstraction model.</p>
-<br /><img class="image" src="GUID-A7BF756E-BB83-40D4-973C-72DA8F9657A3-low.png" alt="AbstractionModel_WSS" /><br /></div>
+<p class="p">The Web Socket System Service supports the below operating modes:</p>
+<ul class="ul"><li class="li"><p class="p">Server Mode</p>
+</li>
+<li class="li"><p class="p">Client Mode</p>
+</li>
+</ul>
+<p class="p">The following diagram depicts the Web Socket System Service abstraction model.</p>
+<br /><img class="image" src="GUID-8A3E5461-1898-40FE-A45F-9AA5072EC79F-low.png" alt="Abstraction_new" /><br /></div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title4" id="how-the-service-works"><h2 class="title topictitle2" id="ariaid-title4">How the service works</h2><div class="body"><p class="p">Once the user configures the Web Socket Server System Service in the MHC, the MHC will generate the required code for service implementation. User need to implement his application according to the requirement. The WSS system service initialization will be taken care with the code generation.To get the indication on Web Socket Server events, use need to register the callback function using the API SYS_WSS_register_callback().</p>
+<div class="topic nested1" aria-labelledby="ariaid-title4" id="how-the-service-works"><h2 class="title topictitle2" id="ariaid-title4" style="">How the service works</h2><div class="body"><p class="p">Once the user configures the Web Socket System Service in the MHC, the MHC will generate the required code for service implementation. User need to implement his application according to the requirement. The WSS service initialization will be taken care with the code generation.To get the indication on Web Socket Service events, user need to register the callback function using the API SYS_WSS_register_callback().</p>
 </div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title5" id="web-socket-server-system-service-initialization"><h2 class="title topictitle2" id="ariaid-title5">Web Socket Server System Service Initialization</h2><div class="body"><br /><img class="image" src="GUID-EB3E5B15-52A2-46F8-B236-F01A4B70C5F2-low.png" alt="Initialization_WSS" /><br /></div>
+<div class="topic nested1" aria-labelledby="ariaid-title5" id="web-socket-system-service-initialization-in-sever-mode"><h2 class="title topictitle2" id="ariaid-title5" style="">Web Socket System Service Initialization in Sever Mode</h2><div class="body"><br /><img class="image" src="GUID-DB6392DD-9A5A-4C07-922F-E4172701DADA-low.png" alt="WSS_server_init_basic" /><br /></div>
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title6" id="web-socket-server-system-service-api-usage"><h2 class="title topictitle2" id="ariaid-title6">Web Socket Server System Service API usage</h2><div class="body"><p class="p">The below diagram shows the API usage of the Web Socket Server System service.</p>
+<div class="topic nested1" aria-labelledby="ariaid-title6" id="web-socket-system-service-initialization-in-client-mode"><h2 class="title topictitle2" id="ariaid-title6" style="">Web Socket System Service Initialization in Client Mode</h2><div class="body"><br /><img class="image" src="GUID-A003845D-A707-4D40-92A7-8191FEACE565-low.png" alt="WSS_client_init_basic" /><br /></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title7" id="web-socket-system-service-api-usage-in-server-mode"><h2 class="title topictitle2" id="ariaid-title7" style="">Web Socket System Service API usage in Server Mode</h2><div class="body"><p class="p">The below diagram shows the API usage of the Web Socket System service in Server mode.</p>
 <br /><img class="image" src="GUID-31140189-092F-4C1C-8BBC-AD1C621E353F-low.png" alt="APIusage_greyScale2" /><br /></div>
+</div>
+<div class="topic nested1" aria-labelledby="ariaid-title8" id="web-socket-system-service-api-usage-in-client-mode"><h2 class="title topictitle2" id="ariaid-title8" style="">Web Socket System Service API usage in Client Mode</h2><div class="body"><p class="p">The below diagram shows the API usage of the Web Socket System service in Client mode.</p>
+<br /><img class="image" src="GUID-11B082B4-EF96-422D-9A2F-D5634A2169F4-low.png" alt="API_Usage_WSClient_basic" /><br /></div>
 </div>
 </body>
 </html>
