@@ -540,7 +540,7 @@ def finalizeComponent(netComponent):
     res = Database.activateComponents(["sysWifiPic32mzw1"])
     res = Database.activateComponents(["net_Pres"],"System Configuration", True)
 
-    if (sysNetPic32mzw1.SYS_NET_ENABLE_APP_CODE_GENERATION == True):
+    if (Database.getSymbolValue("netComponent", "SYS_NET_ENABLE_APP_CODE_GENERATION") == True):
         Hccomponent = Database.getComponentByID("HarmonyCore")
         fileSymb = Hccomponent.getSymbolByID("APP0_C")
         fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/net/templates/app.c.ftl")
