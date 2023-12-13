@@ -539,6 +539,7 @@ def finalizeComponent(netComponent):
 
     res = Database.activateComponents(["sysWifiPic32mzw1"])
     res = Database.activateComponents(["net_Pres"],"System Configuration", True)
+    res = Database.activateComponents(["tcpipSntp"],"System Configuration", True)
 
     if (Database.getSymbolValue("netComponent", "SYS_NET_ENABLE_APP_CODE_GENERATION") == True):
         Hccomponent = Database.getComponentByID("HarmonyCore")
