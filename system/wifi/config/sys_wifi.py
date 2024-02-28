@@ -48,6 +48,13 @@ def instantiateComponent(syswifiComponent):
     syswifiEnable.setVisible(False)
     syswifiEnable.setDefaultValue(True)
 
+    #Check the Remove Unused Sections in project properties
+    xc32LdRemoveUnsedSections = syswifiComponent.createSettingSymbol("XC32_LD_REMOVE_UNUSED_SECTIONS", None)
+    xc32LdRemoveUnsedSections.setCategory("C32-LD")
+    xc32LdRemoveUnsedSections.setKey("remove-unused-sections")
+    xc32LdRemoveUnsedSections.setValue("true")
+
+
     syswifiEnableErrMsg = syswifiComponent.createCommentSymbol("SYS_WIFI_ERR", None)
     syswifiEnableErrMsg.setLabel("**Placeholder for error display")
     syswifiEnableErrMsg.setHelp(wifi_helpkeyword)
