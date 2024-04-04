@@ -235,15 +235,16 @@ extern "C" {
         SYS_OTA_PARSE_JSON = 0,
                 
         SYS_OTA_CHECK_SLOT,
-                
-        SYS_OTA_VERIFY_SLOT_DIGEST,
-                
+                       
         SYS_OTA_DOWNLOAD_FILE,
-                
-        SYS_OTA_VERIFY_DIGEST,
-
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>
+		SYS_OTA_VERIFY_SLOT_DIGEST,
+        
+		SYS_OTA_VERIFY_DIGEST,
+</#if>
+<#if SYS_OTA_FILE_SIGNATURE_ENABLE == true> 
         SYS_OTA_VERIFY_SIGNATURE,
-                
+</#if>
         SYS_OTA_DOWNLOAD_DONE,
 
 <#if SYS_OTA_FILE_JUMP_ENABLE == true>

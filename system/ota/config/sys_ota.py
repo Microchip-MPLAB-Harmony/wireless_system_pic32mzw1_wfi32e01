@@ -262,7 +262,7 @@ def instantiateComponent(sysOTAPic32mzw1Component):
        sysotaFileSlotInstance.append(sysOTAPic32mzw1Component.createIntegerSymbol("SYS_OTA_FILE_SLOT_SIZE"+str(slot),sysotaFileDownloadNoOfSlots))
        sysotaFileSlotInstance[slot].setLabel("Size in bytes of Slot "+ str(slot))
        sysotaFileDownloadNoOfSlots.setHelp(ota_helpkeyword)
-       sysotaFileSlotInstance[slot].setMax(20480)
+       sysotaFileSlotInstance[slot].setMax(61440)
        sysotaFileSlotInstance[slot].setMin(4096)
        print(sysotaFileDownloadNoOfSlots.getValue())
        #sysotaFileSlotInstance[slot].setVisible(True)
@@ -274,6 +274,24 @@ def instantiateComponent(sysOTAPic32mzw1Component):
             sysotaFileSlotInstance[slot].setVisible(False)
             sysotaFileSlotInstance[slot].setDefaultValue(False)
        sysotaFileSlotInstance[slot].setDependencies(sysotaFileInstanceEnable,["SYS_OTA_FILE_DOWNLOAD_ENABLE","SYS_OTA_NO_OF_SLOTS"])
+
+    # Enable Digest Verification
+    sysotaFileDigestEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FILE_DIGEST_ENABLE", sysotaFileDownloadEnable)
+    sysotaFileDigestEnable.setLabel("Enable Digest Verification ")
+    sysotaFileDigestEnable.setVisible(True)
+    sysotaFileDigestEnable.setHelp(ota_helpkeyword)
+    sysotaFileDigestEnable.setDefaultValue(False)
+    sysotaFileDigestEnable.setDescription("Enable Digest Verification after download")
+    sysotaFileDigestEnable.setDependencies(setVisible_OnValueChanged, ["SYS_OTA_FILE_DOWNLOAD_ENABLE"])
+
+    # Enable Signature Verification
+    sysotaFileSignEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FILE_SIGNATURE_ENABLE", sysotaFileDigestEnable)
+    sysotaFileSignEnable.setLabel("Enable Signature Verification ")
+    sysotaFileSignEnable.setVisible(True)
+    sysotaFileSignEnable.setHelp(ota_helpkeyword)
+    sysotaFileSignEnable.setDefaultValue(False)
+    sysotaFileSignEnable.setDescription("Enable Signature Verification After download")
+    sysotaFileSignEnable.setDependencies(setVisible_OnValueChanged, ["SYS_OTA_FILE_DIGEST_ENABLE"])
 
     # Enable Jump Address
     sysotaFileJumpEnable = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_FILE_JUMP_ENABLE", sysotaFileDownloadEnable)

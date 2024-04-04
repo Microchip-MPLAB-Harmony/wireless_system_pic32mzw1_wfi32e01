@@ -128,10 +128,7 @@ static uint8_t g_formulated_digest[32];
 
 static SYS_OTA_FILE_DOWNLOAD_STATUS File_Dnld_Status = SYS_OTA_PARSE_JSON;
     
-static SYS_OTA_VERIFY_SIGN_RESULT  SYS_OTA_Verify_File_Signature
- (
-    void
- );
+
 static bool SYS_OTA_FILE_Params_Initialize
 (
     void
@@ -164,30 +161,45 @@ static bool SYS_OTA_CheckSlot
 (
     int slot_number
 );
- static void formulate_digest
- (
-    void
- );
- static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
+
+static bool SYS_OTA_Download_File
 (
-    void
-);
-  static bool SYS_OTA_Download_File
- (
     char *file_URL
- );
- static bool SYS_OTA_Get_File_Data
+);
+
+static bool SYS_OTA_Get_File_Data
 (
     cJSON *file_data
 );
- void SYS_OTA_Print_Server_Data
- (
+ 
+void SYS_OTA_Print_Server_Data
+(
     void
- );
-  static bool SYS_OTA_Store_signature
- (
+);
+ 
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>
+static void formulate_digest
+(
     void
- );
+);
+ 
+static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
+(
+    void
+);
+</#if>
+
+<#if SYS_OTA_FILE_SIGNATURE_ENABLE == true>
+static SYS_OTA_VERIFY_SIGN_RESULT  SYS_OTA_Verify_File_Signature
+(
+    void
+);
+ 
+static bool SYS_OTA_Store_signature
+(
+    void
+);
+ </#if>
 
 </#if>
 // *****************************************************************************
@@ -1031,7 +1043,12 @@ static void SYS_OTA_Command_Process(int argc, char *argv[]) {
         }
         else{
             if((!strcmp((char*) argv[2], "info"))){
+			<#if SYS_OTA_FS_ENABLED == true>
                 OTA_GetImageDbInfo();
+			<#else>
+				SYS_CONSOLE_PRINT("External Memory is not in use \n\r");
+			 </#if>
+			
             }
             else{
                 SYS_CONSOLE_PRINT("Following Command supported : \n\r");
@@ -1347,11 +1364,16 @@ static bool SYS_OTA_Get_Key_Data
     cJSON *slot_number = OTA_cJSON_GetObjectItem(cert_data, "slot_number");
     cJSON *file_size = OTA_cJSON_GetObjectItem(cert_data,"length");
     cJSON *file_URL = OTA_cJSON_GetObjectItem(cert_data,"URL");
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>
     cJSON *digest_temp = OTA_cJSON_GetObjectItem(cert_data, "digest");
-    
+	if( digest_temp == NULL)
+	{
+		return false;
+	}
+</#if>   
     /* ERROR Handling*/
     if( slot_number == NULL || file_size == NULL
-            || file_URL == NULL || digest_temp == NULL)
+            || file_URL == NULL)
     {
         return false;
     }
@@ -1376,8 +1398,11 @@ static bool SYS_OTA_Get_Key_Data
     /* Copy file URL  and digest  */
     memset(g_SysFileData.file_url,'\0', OTA_URL_SIZE);
     memcpy(g_SysFileData.file_url, (char *)file_URL->valuestring, strlen(file_URL->valuestring));
+	
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>
     char *digest_c = digest_temp->valuestring;
     strncpy(g_SysFileData.file_digest_string, digest_c, 64);
+</#if>
 
     g_key_present = true;
     g_secure_download = true;
@@ -1398,13 +1423,14 @@ static bool SYS_OTA_Get_File_Data
         
         if( cert_array != NULL)
         {
+<#if SYS_OTA_FILE_SIGNATURE_ENABLE == true>
             cJSON *sign = OTA_cJSON_GetObjectItem(file_data, "signature");
             if( sign == NULL )
                 return false;
             char *signature_c = sign->valuestring;
             memset(g_SysFileData.file_signature_string,'\0', 98);
             strncpy(g_SysFileData.file_signature_string, signature_c, 98);
-            
+</#if>           
             
             cJSON *cert_data = OTA_cJSON_GetArrayItem(cert_array,0);
             return SYS_OTA_Get_Key_Data(cert_data);
@@ -1415,12 +1441,18 @@ static bool SYS_OTA_Get_File_Data
     cJSON *slot_number = OTA_cJSON_GetObjectItem(file_data, "slot_number");
     cJSON *file_size = OTA_cJSON_GetObjectItem(file_data,"length");
     cJSON *file_URL = OTA_cJSON_GetObjectItem(file_data,"URL");
+ <#if SYS_OTA_FILE_DIGEST_ENABLE == true>
     cJSON *digest_temp = OTA_cJSON_GetObjectItem(file_data, "digest");
+	if( digest_temp == NULL)
+	{
+		return false;
+	}
+ </#if>
     
 
     /* ERROR Handling*/
     if( slot_number == NULL || file_size == NULL
-            || file_URL == NULL || digest_temp == NULL)
+            || file_URL == NULL)
     {
         return false;
     }
@@ -1442,11 +1474,12 @@ static bool SYS_OTA_Get_File_Data
     /* Copy file URL  and digest  */
     memset(g_SysFileData.file_url,'\0', OTA_URL_SIZE);
     memcpy(g_SysFileData.file_url, (char *)file_URL->valuestring, strlen(file_URL->valuestring));
-    
+ 
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true> 
     char *digest_c = digest_temp->valuestring;
     memset(g_SysFileData.file_digest_string,'\0', 64);
     strncpy(g_SysFileData.file_digest_string, digest_c, 64);
-    
+</#if>   
     
 
     return true;
@@ -1519,7 +1552,7 @@ static bool SYS_OTA_CheckSlot
     return true;
 }
 
-
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>
 /* Calculate &  Verify SHA-256 digest*/
 static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
 (
@@ -1623,7 +1656,7 @@ static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
         g_formulated_digest[i] = (uint8_t) strtol(temp_serv_digest, NULL, 16);
     }
  }
-
+ </#if>
  
  /* To download file from Server*/
  static bool SYS_OTA_Download_File
@@ -1735,7 +1768,12 @@ static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
             OSAL_Free(cntx.buf);
             cntx.buf = NULL;
             download_status = SYS_OTA_FILE_OPEN;
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>  
             File_Dnld_Status = SYS_OTA_VERIFY_DIGEST;
+<#else>
+			File_Dnld_Status = SYS_OTA_PARSE_JSON;
+			g_SysFileData.file_index++;
+ </#if>
             break;
         }
     }
@@ -1758,6 +1796,7 @@ static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
     
  }
  
+<#if SYS_OTA_FILE_SIGNATURE_ENABLE == true>
  /* To Verify Signature */
  static SYS_OTA_VERIFY_SIGN_RESULT  SYS_OTA_Verify_File_Signature
  (
@@ -1871,6 +1910,7 @@ static SYS_OTA_VERIFY_DIGEST_RESULT SYS_OTA_Verify_Digest
      return true;
  }
  
+</#if>
  /* File Download Tasks*/
 static void SYS_OTA_File_Download_Tasks
 (
@@ -1912,11 +1952,15 @@ static void SYS_OTA_File_Download_Tasks
                 File_Dnld_Status = SYS_OTA_PARSE_JSON;
                 break;
             }
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>
             SYS_CONSOLE_PRINT(TERM_YELLOW"\tSlot %d NOT Empty -> Verify Digest\r\n"TERM_RESET);   
             File_Dnld_Status = SYS_OTA_VERIFY_SLOT_DIGEST;
+<#else>
+			File_Dnld_Status = SYS_OTA_DOWNLOAD_FILE;
+ </#if>
             break;
         }
-            
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>            
         case SYS_OTA_VERIFY_SLOT_DIGEST:
         {
             uint8_t result = -1;
@@ -1940,7 +1984,7 @@ static void SYS_OTA_File_Download_Tasks
             }
             break;
         }
-            
+ </#if>           
         case SYS_OTA_DOWNLOAD_FILE:
             if(g_SysFileData.error == false)
             {
@@ -1948,7 +1992,7 @@ static void SYS_OTA_File_Download_Tasks
                 break;
             }
             break;
-            
+<#if SYS_OTA_FILE_DIGEST_ENABLE == true>           
         case SYS_OTA_VERIFY_DIGEST:
         {
             uint8_t result = -1;
@@ -1961,7 +2005,12 @@ static void SYS_OTA_File_Download_Tasks
                 }
                 if(g_secure_download == true)
                 {
+ <#if SYS_OTA_FILE_SIGNATURE_ENABLE == true> 				
                     File_Dnld_Status = SYS_OTA_VERIFY_SIGNATURE;
+<#else>
+					File_Dnld_Status = SYS_OTA_PARSE_JSON;
+					g_SysFileData.file_index++;
+ </#if>
                     g_secure_download = false;
                     break;
                 }
@@ -1981,7 +2030,8 @@ static void SYS_OTA_File_Download_Tasks
             }
             break;
         }
-        
+ </#if>
+ <#if SYS_OTA_FILE_SIGNATURE_ENABLE == true> 
         case SYS_OTA_VERIFY_SIGNATURE:
                 
             if( SYS_OTA_SIGNATURE_VERIFICATION_SUCCESS == SYS_OTA_Verify_File_Signature())
@@ -1994,10 +2044,10 @@ static void SYS_OTA_File_Download_Tasks
             
             File_Dnld_Status = SYS_OTA_FILE_DOWNLOAD_ERROR;
             break;
-            
+ </#if>            
         case SYS_OTA_DOWNLOAD_DONE:
         {
-            SYS_CONSOLE_PRINT("SYS_OTA_FILE : Files Downloaded Successfully\r\n");
+            SYS_CONSOLE_PRINT(TERM_GREEN"SYS_OTA_FILE : Files Downloaded Successfully\r\n"TERM_RESET);
             g_SysFileData.error = false;
             g_SysFileData.file_index = 0;
 			File_Dnld_Status = SYS_OTA_PARSE_JSON;
