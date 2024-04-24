@@ -1,253 +1,169 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
-<meta name="DC.rights.owner" content="(C) Copyright 2023" />
-<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
-<meta name="DC.title" content="SYS_MQTT_Connect Function" />
-<meta name="DC.relation" scheme="URI" content="GUID-B5FCF623-E7FF-4626-AA04-20BCC3916E44.html" />
-<meta name="DC.format" content="XHTML" />
-<meta name="DC.identifier" content="sys-mqtt-connect-function" />
-<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
-<title>SYS_MQTT_Connect Function</title>
-<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-sys-mqtt-connect-function" />
-<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
-<meta name="Microsoft.Help.TocOrder" content="0" />
-<meta name="Microsoft.Help.Locale" content="en-US" />
-<meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
-<script language="javascript">
-       
-       if (window.parent.location.protocol != 'file:') {
-				document.addEventListener('click', function(e) {
-				    if (e.target) {
-               if (e.target.nodeName == "A" ) {
-                    if (!e.target.target) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                              
-                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
-                      if (origUrl.length === 0) {
-                          origUrl = window.parent.location.href;
-                      }
-                      var href= e.target.getAttribute("href");
-                      var parts = href.split("#");
-          
-                      var url = "";
-                      if (parts.length == 2 ) {
-                        if (!parts[0].length) {
-                            url = window.parent.location.search.replace('?','')
-                        } else {
-                            url = parts[0].replace('.html','');
-                        }
-                      } else {
-                        url = parts[0].replace('.html','');
-                      }
-
-                      if (parts.length == 2) {
-                          url += "#" + parts[1];
-                      }
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="SYS_MODULE_OBJSYS_MODULE_OBJ* SYS_MQTT_Connect(SYS_MQTT_Config *cfg, SYS_MQTT_CALLBACK fn MqttFn, void *cookie); Connects to the configured MQTT Broker. This function opens a new instance and connects ..."/><meta name="copyright" content="(C) Copyright 2024"/><meta name="generator" content="DITA-OT"/><title>1.2.3.15 SYS_MQTT_Connect Function</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\4z4pndcjubb\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;sys-mqtt-connect-function&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;SYS_MQTT_Connect Function&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:1;184:15&#34;/&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-467967A5-7B76-4A1E-A884-DAA8F4B7AA2B&#34; xtrc=&#34;topicref:19;6:2903&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-EEBE80E3-91A8-4343-911B-99DEF57A78D3.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-B5FCF623-E7FF-4626-AA04-20BCC3916E44.md&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:4;6:559&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-EEBE80E3-91A8-4343-911B-99DEF57A78D3.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;MQTT System Service Interface&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;C&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;codeblock:1;184:15&#34;&gt;SYS_MODULE_OBJSYS_MODULE_OBJ* SYS_MQTT_Connect(SYS_MQTT_Config *cfg, SYS_MQTT_CALLBACK fn MqttFn, void *cookie);&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;summary&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;Summary&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:3;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;Connects to the configured MQTT Broker.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;description&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:4;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:4;184:15&#34;&gt;Description&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:4;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;p:2;184:15&#34;&gt;This function opens a new instance and connects to the configured MQTT Broker.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;parameters&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:5;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:5;184:15&#34;&gt;Parameters&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:5;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;p:3;184:15&#34;&gt;cfg - Configuration based on which the Cloud Service needs to Open MqttFn - Function pointer to the Callback to be called in case of an event cookie - Cookie passed as one of the params in the Callback for the user to identify the service instance&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;returns&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:6;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:6;184:15&#34;&gt;Returns&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:6;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;p:4;184:15&#34;&gt;If successful, returns a valid handle to an object. Otherwise, it returns SYS_MODULE_OBJ_INVALID.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;example&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:7;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:7;184:15&#34;&gt;Example&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:7;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;codeblock:2;184:15&#34;&gt;SYS_MQTT_Config g_sMqttSrvcCfg; SYS_MODULE_OBJ g_MqttSrvcHandle; memset(&amp;amp;g_sMqttSrvcCfg, 0, sizeof(g_sMqttSrvcCfg)); g_sMattSrvcCfg.configBitmask |= SYS_MQTT_CONFIG_MASK_MQTT; strcpy(g_sMqttSrvcCfg.mqttConfig.brokerConfig.brokerName, &#34;test.mosquitto.org&#34;, strlen(&#34;test.mosquitto.org&#34;)); g_sMqttSrvcCfg.mqttConfig.brokerConfig.serverPort = 1883; strcpy(g_sMqttSrvcCfg.mqttConfig.brokerConfig.clientId, &#34;pic32mzw1&#34;, strlen(&#34;pic32maw1&#34;)); g_sMqttSrvcCfg.mqttConfig.brokerConfig.autoConnect = 1; g_sMqttSrvcCfg.mqttConfig.brokerConfig.tlsEnabled = 0; g_sMqttSrvcCfg.mqttConfig.subscribeCount = 1; strcpy(g_sMqttSrvcCfg.mqttConfig.subscribeConfig[0].topicName, &#34;house/temperature/first_floor/kitchen&#34;, strlen(&#34;house/temperature/first_floor/kitchen&#34;)); g_sMqttSrvcCfg.mqttConfig.subscribeConfig[0].qos = 1; g_MqttSrvcHandle = SYS_MQTT_Connect(&amp;amp;g_sMqttSrvcCfg, MqttSrvcCallback, 0); if (g_MqttSrvcHandle == SYS_MODULE_OBJ_INVALID) { // Handle error }&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;remarks&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;topic:8;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;title:8;184:15&#34;&gt;Remarks&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;body:8;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md&#34; xtrc=&#34;p:5;184:15&#34;&gt;This routine should be called only once when the user is configuring the Mqtt service&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.md"/><meta name="wh-out-relpath" content="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
     
-                      window.parent.location.href = origUrl + "?" + url;
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+    <script src="https://assets.adobedtm.com/6a72a357eb48/a636c708c7fe/launch-0b0023397020.min.js"></script><!-- Adobe Analytics -->
+</head>
 
-                      return false;
-                    }
-               }
-            }
-				});
-			}
+    <body id="sys-mqtt-connect-function" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB Harmony PIC32MZW1/WFI32 wireless system services &#xA;    "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB Harmony PIC32MZW1/WFI32 wireless system services 
+    </a></div>
+                    
+                </div>
+                
+                
+            </div>
 
-		</script><script language="javascript">
-         
-         function copyContent(content, button) {
-         
-            var textArea = document.createElement("textarea");
-            
-            // Place in the top-left corner of screen regardless of scroll position.
-            textArea.style.position = 'fixed';
-            textArea.style.top = 0;
-            textArea.style.left = 0;
-            
-            // Ensure it has a small width and height. Setting to 1px / 1em
-            // doesn't work as this gives a negative w/h on some browsers.
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            
-            // We don't need padding, reducing the size if it does flash render.
-            textArea.style.padding = 0;
-            
-            // Clean up any borders.
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            
-            // Avoid flash of the white box if rendered for any reason.
-            textArea.style.background = 'transparent';
-            
-            textArea.value = content;
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-               var successful = document.execCommand('copy');
-               var msg = successful ? 'successful' : 'unsuccessful';
-               if (!button.classList.contains("copied")){
-                  button.textContent = "Copied";
-                  button.classList.add("copied");
-                  setTimeout(function(){
-                     button.textContent = "Copy";
-                     button.classList.remove("copied");
-                  },1000);
-               }
-            } catch (err) {
-               console.log('Oops, unable to copy');
-            }
-            
-            document.body.removeChild(textArea);
-         }
-         
-         function cpy(id, button) {
-            var element = document.getElementById(id);
-            var content = element.getAttribute("content");
-            
-            copyContent(content, button);
-         }
-         
-         document.addEventListener("DOMContentLoaded", function(event) {
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.style.position = "relative";
-               var copy = document.createElement("button");
-               copy.textContent = "Copy";
-               copy.setAttribute("class", "copy-code");
-               
-               var content = elem.textContent;
-               
-               copy.addEventListener("click", function(){
-                  copyContent(content, copy);
-               });
-               
-               elem.addEventListener("mouseenter", function(evt){
-                  elem.prepend(copy);
-               });
-            });
-            
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.addEventListener("mouseleave", function(evt){
-                  document.querySelector(".copy-code").remove();
-               });
-            });
-         });
-         
-      </script><script language="javascript">
-          
-          // Add the MathML namespace to html
-          var html = document.getElementsByTagName("html")[0],
-          head = document.getElementsByTagName("head")[0];
-          
-          var mathJax = document.createElement("script");
-          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
-          head.appendChild(mathJax);
-          
-          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
-          
-          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
-          
-          if (!inIframe()) { 
-          
-          var Default = "index.html?GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F"; 
-          
-          var displaylocation = "value" + window.location.href;
-          
-          var GUIDS = displaylocation.split('GUID');          
-          
-          if (displaylocation.indexOf('#GUID') != -1) {            
-          var First = GUIDS[1].split('.html');  
-          if (GUIDS[3]){First = GUIDS[2].split('.html');}
-          if (GUIDS[4]){First = GUIDS[3].split('.html');}
-          if (GUIDS[5]){First = GUIDS[4].split('.html');}
-          
-          var Second = GUIDS[2].split('#');   
-          if (GUIDS[3]){Second = GUIDS[3].split('#');}
-          if (GUIDS[4]){Second = GUIDS[4].split('#');}
-          if (GUIDS[5]){Second = GUIDS[5].split('#');}
-          
-          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
-          }                    
-          window.top.location = Default;
-          }       
-          
-        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
-        
-          button.copy-code{
-            display:none;
-            padding:0.7em 1.4em;
-            margin:0 0.3em 0.3em 0;
-            border-radius:0.15em;
-            box-sizing: border-box;
-            text-decoration:none;
-            font-family:'Roboto',sans-serif;
-            text-transform:uppercase;
-            font-weight:400;
-            color:#FFFFFF;
-            background-color:#9c9c9c;
-            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
-            text-align:center;
-            position:relative;
-            border: 0;
-            float: right;
-            border-radius: .5em;
-            cursor: pointer;
-          }
-          button.copy-code:active{
-            top:0.1em;
-          }
-          
-          pre:hover button.copy-code{
-            display: inline-block !important;
-          }
-          button.copy-code.copied {
-            cursor: default !important;
-          }
-          
-          
-          @media all and (max-width:30em){
-            button.copy-code{
-              display:block;
-              margin:0.4em auto;
-            }
-          }
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
         
         
-      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
-<body id="sys-mqtt-connect-function">
-<h1 class="title topictitle1" id="ariaid-title1" style="">SYS_MQTT_Connect Function</h1><div class="body"></div>
-<div class="related-links">
-<div class="familylinks">
-<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-B5FCF623-E7FF-4626-AA04-20BCC3916E44.html">MQTT System Service Interface</a></div>
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="title topictitle2" id="ariaid-title2" style="">C</h2><div class="body"><pre class="pre codeblock c">SYS_MODULE_OBJSYS_MODULE_OBJ* SYS_MQTT_Connect(SYS_MQTT_Config *cfg,
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services"><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div></li><li><div class="topicref" data-id="mqtt-system-service"><div class="title"><a href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2</ph>
+MQTT System Service</a></div></div></li><li><div class="topicref" data-id="mqtt-system-service-interface"><div class="title"><a href="GUID-B5FCF623-E7FF-4626-AA04-20BCC3916E44.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3</ph>
+MQTT System Service Interface</a></div></div></li><li class="active"><div class="topicref" data-id="sys-mqtt-connect-function"><div class="title"><a href="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.15</ph>
+SYS_MQTT_Connect Function</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            <div class="row" style="margin-top: -1em;"><div class="col-lg-7 col-md-7 col-sm-12 offset-lg-3 offset-md-3 text-right border-bottom mb-1"><h2 class="text-dark header_title">
+    </h2></div></div>
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem" aria-expanded="true"><div data-tocid="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11" class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html" id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="app-debug-system-service-d1416e19" class="topicref" data-id="app-debug-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action app-debug-system-service-d1416e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-172B28B0-8A47-4C93-8023-8886A08BCD06.html" id="app-debug-system-service-d1416e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.1</ph>
+App Debug System Service</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="mqtt-system-service-d1416e204" class="topicref" data-id="mqtt-system-service" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mqtt-system-service-d1416e204-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" id="mqtt-system-service-d1416e204-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2</ph>
+MQTT System Service</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="mqtt-system-service-usage-d1416e212" class="topicref" data-id="mqtt-system-service-usage" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-0B818BAA-AF92-41F7-B4C1-7516ADA6F4A5.html" id="mqtt-system-service-usage-d1416e212-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.1</ph>
+MQTT System Service Usage</a></div></div></li><li role="treeitem"><div data-tocid="mqtt-system-service-configuration-d1416e220" class="topicref" data-id="mqtt-system-service-configuration" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-226069A1-E832-4560-8457-6363E3A0EB83.html" id="mqtt-system-service-configuration-d1416e220-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.2</ph>
+MQTT System Service Configuration</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="mqtt-system-service-interface-d1416e228" class="topicref" data-id="mqtt-system-service-interface" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mqtt-system-service-interface-d1416e228-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-B5FCF623-E7FF-4626-AA04-20BCC3916E44.html" id="mqtt-system-service-interface-d1416e228-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3</ph>
+MQTT System Service Interface</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="sys-mqtt-default-net-intf-macro-d1416e236" class="topicref" data-id="sys-mqtt-default-net-intf-macro" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-13E248BF-5C3E-4B90-A116-D708A72ECF13.html" id="sys-mqtt-default-net-intf-macro-d1416e236-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.1</ph>
+SYS_MQTT_DEFAULT_NET_INTF Macro</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-intf-ethernet-macro-d1416e244" class="topicref" data-id="sys-mqtt-intf-ethernet-macro" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B8B066C9-9D43-45BF-B3E4-F0B4D07A496A.html" id="sys-mqtt-intf-ethernet-macro-d1416e244-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.2</ph>
+SYS_MQTT_INTF_ETHERNET Macro</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-intf-wifi-macro-d1416e252" class="topicref" data-id="sys-mqtt-intf-wifi-macro" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B2F4E27B-9331-4E16-9395-7B630DF98CC0.html" id="sys-mqtt-intf-wifi-macro-d1416e252-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.3</ph>
+SYS_MQTT_INTF_WIFI Macro</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-event-type-enum-d1416e260" class="topicref" data-id="sys-mqtt-event-type-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-3E5312EC-F437-4001-870C-D02566138DE5.html" id="sys-mqtt-event-type-enum-d1416e260-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.4</ph>
+SYS_MQTT_EVENT_TYPE Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-result-enum-d1416e268" class="topicref" data-id="sys-mqtt-result-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-8C49DDF2-665A-4AE3-A68A-BBAE2C0A22DD.html" id="sys-mqtt-result-enum-d1416e268-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.5</ph>
+SYS_MQTT_RESULT Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-status-enum-d1416e276" class="topicref" data-id="sys-mqtt-status-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-E9E4CB78-3ABF-44B7-BC07-9AD7EC142A9B.html" id="sys-mqtt-status-enum-d1416e276-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.6</ph>
+SYS_MQTT_STATUS Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-publishconfig-struct-d1416e284" class="topicref" data-id="sys-mqtt-publishconfig-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-50083FB4-76EC-41B8-ADC6-A4466DE3972C.html" id="sys-mqtt-publishconfig-struct-d1416e284-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.7</ph>
+SYS_MQTT_PublishConfig Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-publishtopiccfg-struct-d1416e292" class="topicref" data-id="sys-mqtt-publishtopiccfg-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-13A901DD-DEC5-4002-95DF-E87651A5FE82.html" id="sys-mqtt-publishtopiccfg-struct-d1416e292-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.8</ph>
+SYS_MQTT_PublishTopicCfg Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-config-struct-d1416e300" class="topicref" data-id="sys-mqtt-config-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-01230F94-41B8-4AF4-A81B-FFE243BAB213.html" id="sys-mqtt-config-struct-d1416e300-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.9</ph>
+SYS_MQTT_Config Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-subscribeconfig-struct-d1416e308" class="topicref" data-id="sys-mqtt-subscribeconfig-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-31D8837E-9521-4C37-820E-BC817E1A525D.html" id="sys-mqtt-subscribeconfig-struct-d1416e308-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.10</ph>
+SYS_MQTT_SubscribeConfig Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-brokerconfig-struct-d1416e317" class="topicref" data-id="sys-mqtt-brokerconfig-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-4756B92F-E53F-41CB-BA7F-2FDC1FBC85AC.html" id="sys-mqtt-brokerconfig-struct-d1416e317-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.11</ph>
+SYS_MQTT_BrokerConfig Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-callback-function-d1416e325" class="topicref" data-id="sys-mqtt-callback-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-28A59856-E897-40FA-B089-39C8C84D27CD.html" id="sys-mqtt-callback-function-d1416e325-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.12</ph>
+SYS_MQTT_CALLBACK Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-deinitialize-function-d1416e333" class="topicref" data-id="sys-mqtt-deinitialize-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-C19B77FE-63FC-469F-A9C0-95D41B59DBE1.html" id="sys-mqtt-deinitialize-function-d1416e333-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.13</ph>
+SYS_MQTT_Deinitialize Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-initialize-function-d1416e341" class="topicref" data-id="sys-mqtt-initialize-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-31BDD8EE-0AB5-4542-BB67-A14746424248.html" id="sys-mqtt-initialize-function-d1416e341-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.14</ph>
+SYS_MQTT_Initialize Function</a></div></div></li><li role="treeitem" class="active"><div data-tocid="sys-mqtt-connect-function-d1416e349" class="topicref" data-id="sys-mqtt-connect-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-4B38DADA-4E4A-4820-B0C5-6F4E3A99D44F.html" id="sys-mqtt-connect-function-d1416e349-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.15</ph>
+SYS_MQTT_Connect Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-disconnect-function-d1416e357" class="topicref" data-id="sys-mqtt-disconnect-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-FF17C85E-72C4-4E0B-A7D5-A7B71C1DA84E.html" id="sys-mqtt-disconnect-function-d1416e357-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.16</ph>
+SYS_MQTT_Disconnect Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-getstatus-function-d1416e365" class="topicref" data-id="sys-mqtt-getstatus-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B0DCC36D-84BA-4AF0-8048-81D0E773F6BA.html" id="sys-mqtt-getstatus-function-d1416e365-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.17</ph>
+SYS_MQTT_GetStatus Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-publish-function-d1416e373" class="topicref" data-id="sys-mqtt-publish-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-E459CCF2-499A-4FA1-8CD3-59A216415FD1.html" id="sys-mqtt-publish-function-d1416e373-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.18</ph>
+SYS_MQTT_Publish Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-subscribe-function-d1416e381" class="topicref" data-id="sys-mqtt-subscribe-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-1FC1E3CD-9E78-4C97-ADD7-B04DBE255FC2.html" id="sys-mqtt-subscribe-function-d1416e381-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.19</ph>
+SYS_MQTT_Subscribe Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-unsubscribe-function-d1416e389" class="topicref" data-id="sys-mqtt-unsubscribe-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-69ABE7A5-0098-4C34-B9AA-72DDB247C7F5.html" id="sys-mqtt-unsubscribe-function-d1416e389-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.20</ph>
+SYS_MQTT_Unsubscribe Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-mqtt-task-function-d1416e397" class="topicref" data-id="sys-mqtt-task-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-0785F012-1F1A-4AA4-9167-58736B812C00.html" id="sys-mqtt-task-function-d1416e397-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.3.21</ph>
+SYS_MQTT_Task Function</a></div></div></li></ul></li><li role="treeitem"><div data-tocid="mqtt-system-service-developers-guide-d1416e405" class="topicref" data-id="mqtt-system-service-developers-guide" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-114BB7C8-BE5C-46B0-84F4-6A459FC0A9A7.html" id="mqtt-system-service-developers-guide-d1416e405-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2.4</ph>
+MQTT System Service Developer's Guide</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="net-system-service-d1416e413" class="topicref" data-id="net-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action net-system-service-d1416e413-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" id="net-system-service-d1416e413-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.3</ph>
+Net System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-system-service-d1416e695" class="topicref" data-id="wi-fi-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-system-service-d1416e695-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" id="wi-fi-system-service-d1416e695-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-provisioning-system-service-d1416e872" class="topicref" data-id="wi-fi-provisioning-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-provisioning-system-service-d1416e872-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6C1BB28E-7F9B-4582-8E74-E301F89C58AC.html" id="wi-fi-provisioning-system-service-d1416e872-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.5</ph>
+Wi-Fi provisioning System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="over-the-air-ota-firmware-update-system-service-d1416e1025" class="topicref" data-id="over-the-air-ota-firmware-update-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action over-the-air-ota-firmware-update-system-service-d1416e1025-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" id="over-the-air-ota-firmware-update-system-service-d1416e1025-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="web-socket-server-wss-system-service-d1416e1154" class="topicref" data-id="web-socket-server-wss-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action web-socket-server-wss-system-service-d1416e1154-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" id="web-socket-server-wss-system-service-d1416e1154-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.7</ph>
+Web Socket Server (WSS) System Service</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388" class="topicref backmatter backmatter_parent" data-id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B.html" id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link">Microchip Information</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">1.2.3.15 SYS_MQTT_Connect Function</h1><div class="- topic/body body"></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> C</h2><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock c">SYS_MODULE_OBJSYS_MODULE_OBJ* SYS_MQTT_Connect(SYS_MQTT_Config *cfg,
 SYS_MQTT_CALLBACK fn MqttFn,
-<strong class="hl-keyword">void</strong> *cookie);</pre></div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="title topictitle2" id="ariaid-title3" style="">Summary</h2><div class="body"><p class="p">Connects to the configured MQTT Broker.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="title topictitle2" id="ariaid-title4" style="">Description</h2><div class="body"><p class="p">This function opens a new instance and connects to the configured
-MQTT Broker.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title5" id="parameters"><h2 class="title topictitle2" id="ariaid-title5" style="">Parameters</h2><div class="body"><p class="p">cfg 		- Configuration based on which the Cloud Service needs to Open  MqttFn 	- Function pointer to the Callback to be called in case of an event  cookie		- Cookie passed as one of the params in the Callback for the user to identify the service instance</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title6" id="returns"><h2 class="title topictitle2" id="ariaid-title6" style="">Returns</h2><div class="body"><p class="p">If successful, returns a valid handle to an object. Otherwise, it returns SYS_MODULE_OBJ_INVALID.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title7" id="example"><h2 class="title topictitle2" id="ariaid-title7" style="">Example</h2><div class="body"><pre class="pre codeblock c">SYS_MQTT_Config 	g_sMqttSrvcCfg;
+<strong class="hl-keyword">void</strong> *cookie);</pre></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="- topic/title title topictitle2" id="ariaid-title3" style=""> Summary</h2><div class="- topic/body body"><p class="- topic/p p">Connects to the configured MQTT Broker.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="- topic/title title topictitle2" id="ariaid-title4" style=""> Description</h2><div class="- topic/body body"><p class="- topic/p p">This function opens a new instance and connects to the configured
+MQTT Broker.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title5" id="parameters"><h2 class="- topic/title title topictitle2" id="ariaid-title5" style=""> Parameters</h2><div class="- topic/body body"><p class="- topic/p p">cfg 		- Configuration based on which the Cloud Service needs to Open  MqttFn 	- Function pointer to the Callback to be called in case of an event  cookie		- Cookie passed as one of the params in the Callback for the user to identify the service instance</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title6" id="returns"><h2 class="- topic/title title topictitle2" id="ariaid-title6" style=""> Returns</h2><div class="- topic/body body"><p class="- topic/p p">If successful, returns a valid handle to an object. Otherwise, it returns SYS_MODULE_OBJ_INVALID.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title7" id="example"><h2 class="- topic/title title topictitle2" id="ariaid-title7" style=""> Example</h2><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock c">SYS_MQTT_Config 	g_sMqttSrvcCfg;
 SYS_MODULE_OBJ 			g_MqttSrvcHandle;
 
 memset(&amp;g_sMqttSrvcCfg, <span class="hl-number">0</span>, <strong class="hl-keyword">sizeof</strong>(g_sMqttSrvcCfg));
@@ -278,10 +194,158 @@ g_MqttSrvcHandle = SYS_MQTT_Connect(&amp;g_sMqttSrvcCfg, MqttSrvcCallback, <span
 <strong class="hl-keyword">if</strong> (g_MqttSrvcHandle == SYS_MODULE_OBJ_INVALID)
 {
     <em class="hl-comment">// Handle error</em>
-}</pre></div>
+}</pre></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title8" id="remarks"><h2 class="- topic/title title topictitle2" id="ariaid-title8" style=""> Remarks</h2><div class="- topic/body body"><p class="- topic/p p">This routine should be called only once when the user is configuring the Mqtt service</p></div></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#c" data-tocid="c"> C</a></li><li class="topic-item"><a href="#summary" data-tocid="summary"> Summary</a></li><li class="topic-item"><a href="#description" data-tocid="description"> Description</a></li><li class="topic-item"><a href="#parameters" data-tocid="parameters"> Parameters</a></li><li class="topic-item"><a href="#returns" data-tocid="returns"> Returns</a></li><li class="topic-item"><a href="#example" data-tocid="example"> Example</a></li><li class="topic-item"><a href="#remarks" data-tocid="remarks"> Remarks</a></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+  
+  <script type="text/javascript">_satellite.pageBottom();</script><!-- Adobe Analytics -->
+  <script type="text/javascript" src="mchp-js/prepend.js"></script><!-- Package for viewing PDFs on mobile devices -->
+  
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title8" id="remarks"><h2 class="title topictitle2" id="ariaid-title8" style="">Remarks</h2><div class="body"><p class="p">This routine should be called only once when the user is configuring the Mqtt service</p>
-</div>
-</div>
-</body>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+       
+        </body>
 </html>

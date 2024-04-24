@@ -1,303 +1,297 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
-<meta name="DC.rights.owner" content="(C) Copyright 2023" />
-<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
-<meta name="DC.title" content="OTA System Service Configuration" />
-<meta name="DC.relation" scheme="URI" content="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" />
-<meta name="DC.format" content="XHTML" />
-<meta name="DC.identifier" content="ota-system-service-configuration" />
-<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
-<title>OTA System Service Configuration</title>
-<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-ota-system-service-configuration" />
-<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
-<meta name="Microsoft.Help.TocOrder" content="0" />
-<meta name="Microsoft.Help.Locale" content="en-US" />
-<meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
-<script language="javascript">
-       
-       if (window.parent.location.protocol != 'file:') {
-				document.addEventListener('click', function(e) {
-				    if (e.target) {
-               if (e.target.nodeName == "A" ) {
-                    if (!e.target.target) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                              
-                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
-                      if (origUrl.length === 0) {
-                          origUrl = window.parent.location.href;
-                      }
-                      var href= e.target.getAttribute("href");
-                      var parts = href.split("#");
-          
-                      var url = "";
-                      if (parts.length == 2 ) {
-                        if (!parts[0].length) {
-                            url = window.parent.location.search.replace('?','')
-                        } else {
-                            url = parts[0].replace('.html','');
-                        }
-                      } else {
-                        url = parts[0].replace('.html','');
-                      }
-
-                      if (parts.length == 2) {
-                          url += "#" + parts[1];
-                      }
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="The OTA System Service library should be configured through the MHC ( MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System ..."/><meta name="copyright" content="(C) Copyright 2024"/><meta name="generator" content="DITA-OT"/><title>1.6.2 OTA System Service Configuration</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\4z4pndcjubb\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;ota-system-service-configuration&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;OTA System Service Configuration&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;body:1;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;The OTA System Service library should be configured through the MHC ( &lt;i class=&#34;+ topic/ph hi-d/i &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;i:1;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:1;184:15&#34;&gt;MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System Service Interface&lt;/b&gt;&lt;/i&gt; ). When user selects the OTA System Service library, all the required dependencies components are added automatically in the MHC configuration.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:2;184:15&#34;&gt;The following figure shows the MHC configuration window for configuring the OTA System Service and a brief description of various configuration options.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:3;184:15&#34;&gt;1.Open the MHC 3&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:4;184:15&#34;&gt;2.Drag the OTA Service Module into the Active components from the Available components.&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-EB36963A-A6D4-49BC-A78F-461F15031AB8-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:1;184:15&#34; dita-ot:image-width=&#34;293&#34; dita-ot:image-height=&#34;585&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:1;184:15&#34;&gt;ota_service_MHC&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:5;184:15&#34;&gt;3.Configure the various parameters&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-63897CE4-6840-406B-82A9-F56C5AEC9FE1-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:2;184:15&#34; dita-ot:image-width=&#34;700&#34; dita-ot:image-height=&#34;602&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:2;184:15&#34;&gt;ota_config&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:6;184:15&#34;&gt;4.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:2;184:15&#34;&gt;Auto reset&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-511FAF9D-2A70-4A8C-82DF-5C0677765B47-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:3;184:15&#34; dita-ot:image-width=&#34;682&#34; dita-ot:image-height=&#34;585&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:3;184:15&#34;&gt;ota_config_autoreset&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:7;184:15&#34;&gt;By default this option will be enabled . System will reset automatically after successful download of OTA image to load new image into the system and run, without any notifications to the current application.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:8;184:15&#34;&gt;If it is disabled by user , system will not go for reset automatically. Instead, it will be waiting for user trigger for system reset.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:9;184:15&#34;&gt;5.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:3;184:15&#34;&gt;server URL&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-B9FF72A6-4CCB-4474-8E28-991670DE743C-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:4;184:15&#34; dita-ot:image-width=&#34;682&#34; dita-ot:image-height=&#34;585&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:4;184:15&#34;&gt;ota_config_serverurl&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:10;184:15&#34;&gt;User need to provide the server url where the manifest file in &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:1;184:15&#34;&gt;json&lt;/codeph&gt; format is available.&lt;?linebreak?&gt;OTA service will use this url to connect to server and download &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:2;184:15&#34;&gt;json&lt;/codeph&gt; file to check for updates.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:11;184:15&#34;&gt;6.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:4;184:15&#34;&gt;supported Interface&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-D00A9226-971A-4445-880C-23AA2EEEB0F5-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:5;184:15&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:5;184:15&#34;&gt;OTA_Intf_supp&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:12;184:15&#34;&gt;User can select the preferred interface for the OTA operation.OTA can be performed either over Wi-Fi interface or over Ethernet interface. By default, Wi-Fi interface will be selected. If the user select to have the Ethernet interface for the OTA operation, then the required components for enabling the Ethernet interface will be added to the configuration automatically. The user need to ensure that the added ETHMAC gets connected to the netConfig MAC instance(System Configuration) as shown in the below image.&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-A88C02E1-33CB-439D-BC62-036CB89D2526-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:6;184:15&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:6;184:15&#34;&gt;OTA_eth_netconf&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:13;184:15&#34;&gt;7.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:5;184:15&#34;&gt;Auto OTA update&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-8DA19CE5-1D03-4191-84B7-765DCC81DDC7-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:7;184:15&#34; dita-ot:image-width=&#34;682&#34; dita-ot:image-height=&#34;585&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:7;184:15&#34;&gt;ota_config_autoupdate&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:14;184:15&#34;&gt;By default this option will be enabled.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:15;184:15&#34;&gt;If it is enabled , OTA service will not wait for user trigger to initiate OTA process. It will automatically start OTA process if new update is available in the server.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:16;184:15&#34;&gt;If it is disabled , OTA service will wait for user trigger to initiate OTA process. User will be notified about new update availability via user defined callbacks.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:17;184:15&#34;&gt;8.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:6;184:15&#34;&gt;Periodic OTA check&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-276D2B42-78EF-4EF5-9FDD-7B60A792CA36-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:8;184:15&#34; dita-ot:image-width=&#34;524&#34; dita-ot:image-height=&#34;589&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:8;184:15&#34;&gt;ota_config_periodiccheck&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:18;184:15&#34;&gt;By default this option will be configured to 60 seconds.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:19;184:15&#34;&gt;When enabled, OTA service will periodically download the manifest file to check for update availability at the user defined interval.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:20;184:15&#34;&gt;If it is disabled, OTA service will be checking for update availability on user trigger via the control message API.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:21;184:15&#34;&gt;9.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:7;184:15&#34;&gt;Application version&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-2BFEC2AC-400F-44FB-A3E4-86BD5D340EDC-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:9;184:15&#34; dita-ot:image-width=&#34;524&#34; dita-ot:image-height=&#34;589&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:9;184:15&#34;&gt;ota_config_appversion&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:22;184:15&#34;&gt;User must ensure to provide correct integer version while generating OTA image.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:23;184:15&#34;&gt;This version number should be also be mentioned in the manifest file in OTA server. OTA upgrade will be triggered when a version with numerically higher version number is identified in the manifest file.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:24;184:15&#34;&gt;10.configure &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:8;184:15&#34;&gt;Advanced Configuration&lt;/b&gt;:&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-10D7CF65-EACE-4291-8ABD-4DB8A3558629-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:10;184:15&#34; dita-ot:image-width=&#34;798&#34; dita-ot:image-height=&#34;625&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:10;184:15&#34;&gt;Advanced_config_new&lt;/alt&gt;&lt;/image&gt;&lt;ul class=&#34;- topic/ul &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;ul:1;184:15&#34;&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:1;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:25;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:9;184:15&#34;&gt;Number of images:&lt;/b&gt; This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:2;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:26;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:10;184:15&#34;&gt;Set JSON file size in bytes:&lt;/b&gt; Maximum size (in bytes) of the &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:3;184:15&#34;&gt;json&lt;/codeph&gt; file present in the server.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:3;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:27;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:11;184:15&#34;&gt;Enable TLS:&lt;/b&gt; By default this option will be disabled. If it is enabled by user, service will support TLS connection.Based on the server URL prefix (&lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:4;184:15&#34;&gt;http://&lt;/codeph&gt; / &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:5;184:15&#34;&gt;https://&lt;/codeph&gt;)mentioned by user, the system will try to download the manifest file. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:4;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:28;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:12;184:15&#34;&gt;Enforce TLS:&lt;/b&gt; By default this option will be disabled. If it is enabled by user, service will enforce TLS connection irrespective of the server URL prefix (&lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:6;184:15&#34;&gt;http://&lt;/codeph&gt; / &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:7;184:15&#34;&gt;https://&lt;/codeph&gt;)mentioned by user. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:29;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:13;184:15&#34;&gt;NOTE : If disabled service will automatically detect and go for http or https connection, by looking into server URL mentioned by user&lt;/b&gt;&lt;/p&gt;&lt;ul class=&#34;- topic/ul &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;ul:2;184:15&#34;&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:5;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:30;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:14;184:15&#34;&gt;Disk space check:&lt;/b&gt; By default this option will be disabled. If enable, free sector check will be done, in ext flash before download starts.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:6;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:31;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:15;184:15&#34;&gt;Enable Patch Functionality:&lt;/b&gt; By default this option will be disabled. If enabled by user ,OTA service will enable code to support &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:8;184:15&#34;&gt;patch&lt;/codeph&gt; functionality.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:7;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:32;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:16;184:15&#34;&gt;Enable Secure OTA Functionality:&lt;/b&gt; By default this option will be disabled. If enabled by user ,OTA service will enable code to support &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:9;184:15&#34;&gt;Secure OTA&lt;/codeph&gt; functionality.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:8;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:33;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:17;184:15&#34;&gt;Enable File Download :&lt;/b&gt; By default this option will be disabled. The user can download any file or image into internal flash memory by enabling this option.&lt;/p&gt;&lt;ul class=&#34;- topic/ul &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;ul:3;184:15&#34;&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:9;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:34;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:18;184:15&#34;&gt;File/img Download - NVM Start Address :&lt;/b&gt; This parameter specifies the Program flash start address where the downloaded files/images should be stored. The default value is 0x000F8000. Based on the project size user has to adjust this address value with not overlapping with code area.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:10;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:35;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:19;184:15&#34;&gt;Number of Slots :&lt;/b&gt; : This defines the number of slots to be created in the Program flash memory. By default this &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:20;184:15&#34;&gt;Number of Slots&lt;/b&gt; is set to 1. Maximum number of slots which can be configured is 3.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:11;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:36;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:21;184:15&#34;&gt;Size in bytes of Slot X :&lt;/b&gt; These variables store the size of each slot in Program flash. The number of slot size variables generated depends on the Number of Slots mentioned. The default size is 4096 and the size of each slot can be in-between 4096 and 61440.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:37;184:15&#34;&gt;Design Guideline : if customer wants to include multiple files into a single slot, then user has to make a unified file by including multiple files and parse those files accordingly into OTA service.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:12;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:38;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:22;184:15&#34;&gt;Enable Digest Verification :&lt;/b&gt; By default this option will be disabled. If enabled by the user, then it will perform the SHA256 Digest verification of the downloaded file.&lt;/p&gt;&lt;ul class=&#34;- topic/ul &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;ul:4;184:15&#34;&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:13;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:39;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:23;184:15&#34;&gt;Enable Signature Verification :&lt;/b&gt; By default this option will be disabled. If enabled by the user, then it will verify the downloaded file with signature.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:14;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:40;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:24;184:15&#34;&gt;Enable Jump Address :&lt;/b&gt; This enables the application to jump to this address after all the files are downloaded. This is only applicable if the user is downloading file as an image. User should enable the macro &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:10;184:15&#34;&gt;SYS_OTA_FILE_JUMP_ENABLE&lt;/codeph&gt; in the Bootloader project, &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:11;184:15&#34;&gt;ota_booloader_wolfcrypt&lt;/codeph&gt;.Also, user should update the jump address of the new image &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:12;184:15&#34;&gt;APP_IMG_BOOT_ADDR_2&lt;/codeph&gt; in the &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:13;184:15&#34;&gt;ota_config.h&lt;/codeph&gt; file of Bootloader project &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:14;184:15&#34;&gt;ota_booloader_wolfcrypt&lt;/codeph&gt;.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:41;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:25;184:15&#34;&gt;Note&lt;/b&gt; : This feature has very high dependency on the available memory on the device. Enabling the feature is strictly constrained to the memory availability.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;li:15;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:42;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:26;184:15&#34;&gt;Use External Memory on OTA :&lt;/b&gt; The option decides, if OTA feature will be using External Memory along with File System. The user can disable the usage of File System if required. Currently, this feature will be available only with the bootloader &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:15;184:15&#34;&gt;ota_booloader_wolfcrypt&lt;/codeph&gt;. The user should undefine the macro &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:16;184:15&#34;&gt;SYS_OTA_FS_ENABLED&lt;/codeph&gt; in Bootloader project also. The Patch update feature will not be supported without File System. By default, &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:17;184:15&#34;&gt;Use External Memory on OTA&lt;/codeph&gt; feature will be enabled in both application and bootloader.&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:43;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:27;184:15&#34;&gt;All of the required files are automatically added into the MPLAB X IDE project by the MHC when the OTA Service is selected for use.&lt;/b&gt;&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:44;184:15&#34;&gt;11.Generate code using &#34;Generate&#34; button in MHC :&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-90157A96-7171-4DC8-BDAB-1CACE8395898-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:11;184:15&#34; dita-ot:image-width=&#34;295&#34; dita-ot:image-height=&#34;662&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:11;184:15&#34;&gt;ota_mhc_generate&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:45;184:15&#34;&gt;12.In case you are creating a factory image, include the bootloader project from the apps folder of this repo as a &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;codeph:18;184:15&#34;&gt;loadable project&lt;/codeph&gt; into the application :&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-E3F0AB13-BEE8-4E93-B331-E8CCA7E34BEE-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;image:12;184:15&#34; dita-ot:image-width=&#34;700&#34; dita-ot:image-height=&#34;400&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;alt:12;184:15&#34;&gt;resized_ota_add_loadables&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:46;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:28;184:15&#34;&gt;NOTE: Please open bootloader project in MPLABx IDE and compile separately, before loading&lt;/b&gt;&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:47;184:15&#34;&gt;13.Build the project to get the unified hex and load the same on device.&lt;/p&gt;&lt;/body&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-467967A5-7B76-4A1E-A884-DAA8F4B7AA2B&#34; xtrc=&#34;topicref:3;6:402&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BCD37AC0-D5B0-48A5-8880-67AA3E30E5EA.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.md&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:1;6:99&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BCD37AC0-D5B0-48A5-8880-67AA3E30E5EA.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;Over The Air (OTA) firmware update System Service&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;building-custom-logic&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;Building custom logic&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:48;184:15&#34;&gt;User can build custom logic required for own design, using configrable parameters as mentioned above. Additionally , users can also build and apply required application level logic which can be included in &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:29;184:15&#34;&gt;app.c&lt;/b&gt; file.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;easily-registering-user-callbacks&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;Easily registering user callbacks&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;body:3;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;p:49;184:15&#34;&gt;For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:30;184:15&#34;&gt;app_ota.c&lt;/b&gt; file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in &lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md&#34; xtrc=&#34;b:31;184:15&#34;&gt;OTA System Service Interface&lt;/b&gt; section.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.md"/><meta name="wh-out-relpath" content="GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
     
-                      window.parent.location.href = origUrl + "?" + url;
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+    <script src="https://assets.adobedtm.com/6a72a357eb48/a636c708c7fe/launch-0b0023397020.min.js"></script><!-- Adobe Analytics -->
+</head>
 
-                      return false;
-                    }
-               }
-            }
-				});
-			}
+    <body id="ota-system-service-configuration" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB Harmony PIC32MZW1/WFI32 wireless system services &#xA;    "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB Harmony PIC32MZW1/WFI32 wireless system services 
+    </a></div>
+                    
+                </div>
+                
+                
+            </div>
 
-		</script><script language="javascript">
-         
-         function copyContent(content, button) {
-         
-            var textArea = document.createElement("textarea");
-            
-            // Place in the top-left corner of screen regardless of scroll position.
-            textArea.style.position = 'fixed';
-            textArea.style.top = 0;
-            textArea.style.left = 0;
-            
-            // Ensure it has a small width and height. Setting to 1px / 1em
-            // doesn't work as this gives a negative w/h on some browsers.
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            
-            // We don't need padding, reducing the size if it does flash render.
-            textArea.style.padding = 0;
-            
-            // Clean up any borders.
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            
-            // Avoid flash of the white box if rendered for any reason.
-            textArea.style.background = 'transparent';
-            
-            textArea.value = content;
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-               var successful = document.execCommand('copy');
-               var msg = successful ? 'successful' : 'unsuccessful';
-               if (!button.classList.contains("copied")){
-                  button.textContent = "Copied";
-                  button.classList.add("copied");
-                  setTimeout(function(){
-                     button.textContent = "Copy";
-                     button.classList.remove("copied");
-                  },1000);
-               }
-            } catch (err) {
-               console.log('Oops, unable to copy');
-            }
-            
-            document.body.removeChild(textArea);
-         }
-         
-         function cpy(id, button) {
-            var element = document.getElementById(id);
-            var content = element.getAttribute("content");
-            
-            copyContent(content, button);
-         }
-         
-         document.addEventListener("DOMContentLoaded", function(event) {
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.style.position = "relative";
-               var copy = document.createElement("button");
-               copy.textContent = "Copy";
-               copy.setAttribute("class", "copy-code");
-               
-               var content = elem.textContent;
-               
-               copy.addEventListener("click", function(){
-                  copyContent(content, copy);
-               });
-               
-               elem.addEventListener("mouseenter", function(evt){
-                  elem.prepend(copy);
-               });
-            });
-            
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.addEventListener("mouseleave", function(evt){
-                  document.querySelector(".copy-code").remove();
-               });
-            });
-         });
-         
-      </script><script language="javascript">
-          
-          // Add the MathML namespace to html
-          var html = document.getElementsByTagName("html")[0],
-          head = document.getElementsByTagName("head")[0];
-          
-          var mathJax = document.createElement("script");
-          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
-          head.appendChild(mathJax);
-          
-          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
-          
-          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
-          
-          if (!inIframe()) { 
-          
-          var Default = "index.html?GUID-44230E49-6079-4901-9D7C-F71412C3B9EA"; 
-          
-          var displaylocation = "value" + window.location.href;
-          
-          var GUIDS = displaylocation.split('GUID');          
-          
-          if (displaylocation.indexOf('#GUID') != -1) {            
-          var First = GUIDS[1].split('.html');  
-          if (GUIDS[3]){First = GUIDS[2].split('.html');}
-          if (GUIDS[4]){First = GUIDS[3].split('.html');}
-          if (GUIDS[5]){First = GUIDS[4].split('.html');}
-          
-          var Second = GUIDS[2].split('#');   
-          if (GUIDS[3]){Second = GUIDS[3].split('#');}
-          if (GUIDS[4]){Second = GUIDS[4].split('#');}
-          if (GUIDS[5]){Second = GUIDS[5].split('#');}
-          
-          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
-          }                    
-          window.top.location = Default;
-          }       
-          
-        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
-        
-          button.copy-code{
-            display:none;
-            padding:0.7em 1.4em;
-            margin:0 0.3em 0.3em 0;
-            border-radius:0.15em;
-            box-sizing: border-box;
-            text-decoration:none;
-            font-family:'Roboto',sans-serif;
-            text-transform:uppercase;
-            font-weight:400;
-            color:#FFFFFF;
-            background-color:#9c9c9c;
-            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
-            text-align:center;
-            position:relative;
-            border: 0;
-            float: right;
-            border-radius: .5em;
-            cursor: pointer;
-          }
-          button.copy-code:active{
-            top:0.1em;
-          }
-          
-          pre:hover button.copy-code{
-            display: inline-block !important;
-          }
-          button.copy-code.copied {
-            cursor: default !important;
-          }
-          
-          
-          @media all and (max-width:30em){
-            button.copy-code{
-              display:block;
-              margin:0.4em auto;
-            }
-          }
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
         
         
-      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
-<body id="ota-system-service-configuration">
-<h1 class="title topictitle1" id="ariaid-title1" style="">OTA System Service Configuration</h1><div class="body"><p class="p">The OTA System Service library should be configured through the MHC ( <em class="ph i"><strong class="ph b">MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System Service Interface</strong></em> ). When user selects the OTA System Service library, all the required dependencies components are added automatically in the MHC configuration.</p>
-<p class="p">The following figure shows the MHC configuration window for configuring the OTA System Service and a brief description of various configuration options.</p>
-<p class="p">1.Open the MHC 3</p>
-<p class="p">2.Drag the OTA Service Module into the Active components from the Available components.</p>
-<br /><img class="image" src="GUID-EB36963A-A6D4-49BC-A78F-461F15031AB8-low.png" alt="ota_service_MHC" /><br /><p class="p">3.Configure the various parameters</p>
-<br /><img class="image" src="GUID-63897CE4-6840-406B-82A9-F56C5AEC9FE1-low.png" alt="ota_config" /><br /><p class="p">4.configure <strong class="ph b">Auto reset</strong>:</p>
-<br /><img class="image" src="GUID-511FAF9D-2A70-4A8C-82DF-5C0677765B47-low.png" alt="ota_config_autoreset" /><br /><p class="p">By default this option will be enabled . System will reset automatically after successful download of OTA image to load new image into the system and run, without any notifications to the current application.</p>
-<p class="p">If it is disabled by user , system will not go for reset automatically. Instead, it will be waiting for user trigger for system reset.</p>
-<p class="p">5.configure <strong class="ph b">server URL</strong>:</p>
-<br /><img class="image" src="GUID-B9FF72A6-4CCB-4474-8E28-991670DE743C-low.png" alt="ota_config_serverurl" /><br /><p class="p">User need to provide the server url where the manifest file in <code class="ph codeph">json</code> format is available.OTA service will use this url to connect to server and download <code class="ph codeph">json</code> file to check for updates.</p>
-<p class="p">6.configure <strong class="ph b">supported Interface</strong>:</p>
-<br /><img class="image" src="GUID-D00A9226-971A-4445-880C-23AA2EEEB0F5-low.png" alt="OTA_Intf_supp" /><br /><p class="p">User can select the preferred interface for the OTA operation.OTA can be performed either over Wi-Fi interface or over Ethernet interface. By default, Wi-Fi interface will be selected. If the user select to have the Ethernet interface for the OTA operation, then the required components for enabling the Ethernet interface will be added to the configuration automatically. The user need to ensure that the added ETHMAC gets connected to the netConfig MAC instance(System Configuration) as shown in the below image.</p>
-<br /><img class="image" src="GUID-A88C02E1-33CB-439D-BC62-036CB89D2526-low.png" alt="OTA_eth_netconf" /><br /><p class="p">7.configure <strong class="ph b">Auto OTA update</strong>:</p>
-<br /><img class="image" src="GUID-8DA19CE5-1D03-4191-84B7-765DCC81DDC7-low.png" alt="ota_config_autoupdate" /><br /><p class="p">By default this option will be enabled.</p>
-<p class="p">If it is enabled , OTA service will not wait for user trigger to initiate OTA process. It will automatically start OTA process if new update is available in the server.</p>
-<p class="p">If it is disabled , OTA service will wait for user trigger to initiate OTA process. User will be notified about new update availability via user defined callbacks.</p>
-<p class="p">8.configure <strong class="ph b">Periodic OTA check</strong>:</p>
-<br /><img class="image" src="GUID-276D2B42-78EF-4EF5-9FDD-7B60A792CA36-low.png" alt="ota_config_periodiccheck" /><br /><p class="p">By default this option will be configured to 60 seconds.</p>
-<p class="p">When enabled, OTA service will periodically download the manifest file to check for update availability at the user defined interval.</p>
-<p class="p">If it is disabled, OTA service will be checking for update availability on user trigger via the control message API.</p>
-<p class="p">9.configure <strong class="ph b">Application version</strong>:</p>
-<br /><img class="image" src="GUID-2BFEC2AC-400F-44FB-A3E4-86BD5D340EDC-low.png" alt="ota_config_appversion" /><br /><p class="p">User must ensure to provide correct integer version while generating OTA image.</p>
-<p class="p">This version number should be also be mentioned in the manifest file in OTA server. OTA upgrade will be triggered when a version with numerically higher version number is identified in the manifest file.</p>
-<p class="p">10.configure <strong class="ph b">Advanced Configuration</strong>:</p>
-<br /><img class="image" src="GUID-EDC946BB-7AAC-4F0D-9FE6-E5F6F6B7C64B-low.png" alt="ota_adv_config" /><br /><ul class="ul"><li class="li"><p class="p"><strong class="ph b">Number of images:</strong>  This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Set JSON file size in bytes:</strong> Maximum size (in bytes) of the <code class="ph codeph">json</code> file present in the server.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Enable TLS:</strong> By default this option will be disabled.
-If it is enabled by user, service will support TLS connection.Based on the server URL prefix (<code class="ph codeph">http://</code> / <code class="ph codeph">https://</code>)mentioned by user, the system will try to download the manifest file. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Enforce TLS:</strong> By default this option will be disabled.
-If it is enabled by user, service will enforce TLS connection irrespective of the server URL prefix (<code class="ph codeph">http://</code> / <code class="ph codeph">https://</code>)mentioned by user. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.</p>
-</li>
-</ul>
-<p class="p"><strong class="ph b">NOTE : If disabled service will automatically detect and go for http or https connection, by looking into server URL mentioned by user</strong></p>
-<ul class="ul"><li class="li"><p class="p"><strong class="ph b">Disk space check:</strong> By default this option will be disabled. If enable, free sector check will be done, in ext flash before download starts.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Enable Patch Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">patch</code> functionality.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Enable Secure OTA Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="ph codeph">Secure OTA</code> functionality.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Enable File Download :</strong> By default this option will be disabled. The user can download any file or image into internal flash memory by enabling this option.</p>
-<ul class="ul"><li class="li"><p class="p"><strong class="ph b">File/img Download - NVM Start Address :</strong> This parameter specifies the Program flash start address where the downloaded files/images should be stored. The default value is 0x000F8000. Based on the project size user has to adjust this address value with not overlapping with code area.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Number of Slots :</strong> : This defines the number of slots to be created in the Program flash memory. By default this <strong class="ph b">Number of Slots</strong> is set to 1. Maximum number of slots which can be configured is 3.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Size in bytes of Slot X :</strong> These variables store the size of each slot in Program flash. The number of slot size variables generated depends on the Number of Slots mentioned. The default size is 4096 and the size of each slot can be in-between 4096 and 20480.</p>
-<p class="p">Design Guideline : if customer wants to include multiple files into a single slot, then user has to make a unified file by including multiple files and parse those files accordingly into OTA service.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Enable Jump Address :</strong> This enables the application to jump to this address after all the files are downloaded. This is only applicable if the user is downloading file as an image. User should enable the macro <code class="ph codeph">SYS_OTA_FILE_JUMP_ENABLE</code> in the Bootloader project, <code class="ph codeph">ota_booloader_wolfcrypt</code>.Also, user should update the jump address of the new image <code class="ph codeph">APP_IMG_BOOT_ADDR_2</code> in the <code class="ph codeph">ota_config.h</code> file of Bootloader project <code class="ph codeph">ota_booloader_wolfcrypt</code>.</p>
-<p class="p"><strong class="ph b">Note</strong> : This feature has very high dependency on the available memory on the device. Enabling the feature is strictly constrained to the memory availability.</p>
-</li>
-<li class="li"><p class="p"><strong class="ph b">Use External Memory on OTA :</strong>  The option decides, if OTA feature will be using External Memory along with File System. The user can disable the usage of File System if required. Currently, this feature will be available only with the bootloader <code class="ph codeph">ota_booloader_wolfcrypt</code>. The user should undefine the macro <code class="ph codeph">SYS_OTA_FS_ENABLED</code> in Bootloader project also. The Patch update feature will not be supported without File System. By default, <code class="ph codeph">Use External Memory on OTA</code> feature will be enabled in both application and bootloader.</p>
-</li>
-</ul>
-</li>
-</ul>
-<p class="p"><strong class="ph b">All of the required files are automatically added into the MPLAB X IDE project by the MHC when the OTA Service is selected for use.</strong></p>
-<p class="p">11.Generate code using "Generate" button in MHC :</p>
-<br /><img class="image" src="GUID-90157A96-7171-4DC8-BDAB-1CACE8395898-low.png" alt="ota_mhc_generate" /><br /><p class="p">12.In case you are creating a factory image, include the bootloader project from the apps folder of this repo as a <code class="ph codeph">loadable project</code> into the application :</p>
-<br /><img class="image" src="GUID-E3F0AB13-BEE8-4E93-B331-E8CCA7E34BEE-low.png" alt="resized_ota_add_loadables" /><br /><p class="p"><strong class="ph b">NOTE: Please open bootloader project in MPLABx IDE and compile separately, before loading</strong></p>
-<p class="p">13.Build the project to get the unified hex and load the same on device.</p>
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
 </div>
-<div class="related-links">
-<div class="familylinks">
-<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html">Over The Air (OTA) firmware update System Service</a></div>
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services"><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div></li><li><div class="topicref" data-id="over-the-air-ota-firmware-update-system-service"><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div></li><li class="active"><div class="topicref" data-id="ota-system-service-configuration"><div class="title"><a href="GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.2</ph>
+OTA System Service Configuration</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            <div class="row" style="margin-top: -1em;"><div class="col-lg-7 col-md-7 col-sm-12 offset-lg-3 offset-md-3 text-right border-bottom mb-1"><h2 class="text-dark header_title">
+    </h2></div></div>
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem" aria-expanded="true"><div data-tocid="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11" class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html" id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="app-debug-system-service-d1416e19" class="topicref" data-id="app-debug-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action app-debug-system-service-d1416e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-172B28B0-8A47-4C93-8023-8886A08BCD06.html" id="app-debug-system-service-d1416e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.1</ph>
+App Debug System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="mqtt-system-service-d1416e204" class="topicref" data-id="mqtt-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action mqtt-system-service-d1416e204-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" id="mqtt-system-service-d1416e204-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2</ph>
+MQTT System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="net-system-service-d1416e413" class="topicref" data-id="net-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action net-system-service-d1416e413-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" id="net-system-service-d1416e413-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.3</ph>
+Net System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-system-service-d1416e695" class="topicref" data-id="wi-fi-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-system-service-d1416e695-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" id="wi-fi-system-service-d1416e695-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-provisioning-system-service-d1416e872" class="topicref" data-id="wi-fi-provisioning-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-provisioning-system-service-d1416e872-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6C1BB28E-7F9B-4582-8E74-E301F89C58AC.html" id="wi-fi-provisioning-system-service-d1416e872-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.5</ph>
+Wi-Fi provisioning System Service</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="over-the-air-ota-firmware-update-system-service-d1416e1025" class="topicref" data-id="over-the-air-ota-firmware-update-system-service" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action over-the-air-ota-firmware-update-system-service-d1416e1025-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" id="over-the-air-ota-firmware-update-system-service-d1416e1025-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="ota-system-service-usage-d1416e1033" class="topicref" data-id="ota-system-service-usage" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-E13DC21B-3F94-455C-8DB3-48F8F7163844.html" id="ota-system-service-usage-d1416e1033-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.1</ph>
+OTA System Service Usage</a></div></div></li><li role="treeitem" class="active"><div data-tocid="ota-system-service-configuration-d1416e1041" class="topicref" data-id="ota-system-service-configuration" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.html" id="ota-system-service-configuration-d1416e1041-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.2</ph>
+OTA System Service Configuration</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="ota-system-service-interface-d1416e1049" class="topicref" data-id="ota-system-service-interface" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action ota-system-service-interface-d1416e1049-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F8A21576-2DFD-406F-9736-CEFDE7AD5207.html" id="ota-system-service-interface-d1416e1049-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.3</ph>
+OTA System Service Interface</a></div></div></li><li role="treeitem"><div data-tocid="ota-system-service-developers-guide-d1416e1146" class="topicref" data-id="ota-system-service-developers-guide" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.html" id="ota-system-service-developers-guide-d1416e1146-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.4</ph>
+OTA System Service Developer's Guide</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="web-socket-server-wss-system-service-d1416e1154" class="topicref" data-id="web-socket-server-wss-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action web-socket-server-wss-system-service-d1416e1154-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" id="web-socket-server-wss-system-service-d1416e1154-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.7</ph>
+Web Socket Server (WSS) System Service</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388" class="topicref backmatter backmatter_parent" data-id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B.html" id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link">Microchip Information</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">1.6.2 OTA System Service Configuration</h1><div class="- topic/body body"><p class="- topic/p p">The OTA System Service library should be configured through the MHC ( <em class="+ topic/ph hi-d/i ph i"><strong class="+ topic/ph hi-d/b ph b">MHC configuration is initial configuration, some of parameters can be changed runtime using respective APIs - follow OTA System Service Interface</strong></em> ). When user selects the OTA System Service library, all the required dependencies components are added automatically in the MHC configuration.</p><p class="- topic/p p">The following figure shows the MHC configuration window for configuring the OTA System Service and a brief description of various configuration options.</p><p class="- topic/p p">1.Open the MHC 3</p><p class="- topic/p p">2.Drag the OTA Service Module into the Active components from the Available components.</p><div class=""><img class="- topic/image image break break" src="GUID-EB36963A-A6D4-49BC-A78F-461F15031AB8-low.png" alt="ota_service_MHC"/></div><p class="- topic/p p">3.Configure the various parameters</p><div class=""><img class="- topic/image image break break" src="GUID-63897CE4-6840-406B-82A9-F56C5AEC9FE1-low.png" alt="ota_config"/></div><p class="- topic/p p">4.configure <strong class="+ topic/ph hi-d/b ph b">Auto reset</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-511FAF9D-2A70-4A8C-82DF-5C0677765B47-low.png" alt="ota_config_autoreset"/></div><p class="- topic/p p">By default this option will be enabled . System will reset automatically after successful download of OTA image to load new image into the system and run, without any notifications to the current application.</p><p class="- topic/p p">If it is disabled by user , system will not go for reset automatically. Instead, it will be waiting for user trigger for system reset.</p><p class="- topic/p p">5.configure <strong class="+ topic/ph hi-d/b ph b">server URL</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-B9FF72A6-4CCB-4474-8E28-991670DE743C-low.png" alt="ota_config_serverurl"/></div><p class="- topic/p p">User need to provide the server url where the manifest file in <code class="+ topic/ph pr-d/codeph ph codeph">json</code> format is available.OTA service will use this url to connect to server and download <code class="+ topic/ph pr-d/codeph ph codeph">json</code> file to check for updates.</p><p class="- topic/p p">6.configure <strong class="+ topic/ph hi-d/b ph b">supported Interface</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-D00A9226-971A-4445-880C-23AA2EEEB0F5-low.png" alt="OTA_Intf_supp"/></div><p class="- topic/p p">User can select the preferred interface for the OTA operation.OTA can be performed either over Wi-Fi interface or over Ethernet interface. By default, Wi-Fi interface will be selected. If the user select to have the Ethernet interface for the OTA operation, then the required components for enabling the Ethernet interface will be added to the configuration automatically. The user need to ensure that the added ETHMAC gets connected to the netConfig MAC instance(System Configuration) as shown in the below image.</p><div class=""><img class="- topic/image image break break" src="GUID-A88C02E1-33CB-439D-BC62-036CB89D2526-low.png" alt="OTA_eth_netconf"/></div><p class="- topic/p p">7.configure <strong class="+ topic/ph hi-d/b ph b">Auto OTA update</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-8DA19CE5-1D03-4191-84B7-765DCC81DDC7-low.png" alt="ota_config_autoupdate"/></div><p class="- topic/p p">By default this option will be enabled.</p><p class="- topic/p p">If it is enabled , OTA service will not wait for user trigger to initiate OTA process. It will automatically start OTA process if new update is available in the server.</p><p class="- topic/p p">If it is disabled , OTA service will wait for user trigger to initiate OTA process. User will be notified about new update availability via user defined callbacks.</p><p class="- topic/p p">8.configure <strong class="+ topic/ph hi-d/b ph b">Periodic OTA check</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-276D2B42-78EF-4EF5-9FDD-7B60A792CA36-low.png" alt="ota_config_periodiccheck"/></div><p class="- topic/p p">By default this option will be configured to 60 seconds.</p><p class="- topic/p p">When enabled, OTA service will periodically download the manifest file to check for update availability at the user defined interval.</p><p class="- topic/p p">If it is disabled, OTA service will be checking for update availability on user trigger via the control message API.</p><p class="- topic/p p">9.configure <strong class="+ topic/ph hi-d/b ph b">Application version</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-2BFEC2AC-400F-44FB-A3E4-86BD5D340EDC-low.png" alt="ota_config_appversion"/></div><p class="- topic/p p">User must ensure to provide correct integer version while generating OTA image.</p><p class="- topic/p p">This version number should be also be mentioned in the manifest file in OTA server. OTA upgrade will be triggered when a version with numerically higher version number is identified in the manifest file.</p><p class="- topic/p p">10.configure <strong class="+ topic/ph hi-d/b ph b">Advanced Configuration</strong>:</p><div class=""><img class="- topic/image image break break" src="GUID-10D7CF65-EACE-4291-8ABD-4DB8A3558629-low.png" alt="Advanced_config_new"/></div><ul class="- topic/ul ul"><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Number of images:</strong>  This configuration controlled the number of OTA images to be stored in the filesystem. If number of images downloaded via OTA process exceeds this number, user will be notified with a console message and the oldest image in the database will be replaced with newly downloaded image automatically. This count excludes the factory reset image that will be backed-up to the filesystem by the bootloader at first boot.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Set JSON file size in bytes:</strong> Maximum size (in bytes) of the <code class="+ topic/ph pr-d/codeph ph codeph">json</code> file present in the server.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable TLS:</strong> By default this option will be disabled.
+If it is enabled by user, service will support TLS connection.Based on the server URL prefix (<code class="+ topic/ph pr-d/codeph ph codeph">http://</code> / <code class="+ topic/ph pr-d/codeph ph codeph">https://</code>)mentioned by user, the system will try to download the manifest file. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enforce TLS:</strong> By default this option will be disabled.
+If it is enabled by user, service will enforce TLS connection irrespective of the server URL prefix (<code class="+ topic/ph pr-d/codeph ph codeph">http://</code> / <code class="+ topic/ph pr-d/codeph ph codeph">https://</code>)mentioned by user. Server certificate verification will not be done fo TLS connection, if required user needs to explicitly add lines of code for same.</p></li></ul><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">NOTE : If disabled service will automatically detect and go for http or https connection, by looking into server URL mentioned by user</strong></p><ul class="- topic/ul ul"><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Disk space check:</strong> By default this option will be disabled. If enable, free sector check will be done, in ext flash before download starts.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable Patch Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="+ topic/ph pr-d/codeph ph codeph">patch</code> functionality.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable Secure OTA Functionality:</strong> By default this option will be disabled. If enabled by user ,OTA service will enable code to support <code class="+ topic/ph pr-d/codeph ph codeph">Secure OTA</code> functionality.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable File Download :</strong> By default this option will be disabled. The user can download any file or image into internal flash memory by enabling this option.</p><ul class="- topic/ul ul"><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">File/img Download - NVM Start Address :</strong> This parameter specifies the Program flash start address where the downloaded files/images should be stored. The default value is 0x000F8000. Based on the project size user has to adjust this address value with not overlapping with code area.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Number of Slots :</strong> : This defines the number of slots to be created in the Program flash memory. By default this <strong class="+ topic/ph hi-d/b ph b">Number of Slots</strong> is set to 1. Maximum number of slots which can be configured is 3.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Size in bytes of Slot X :</strong> These variables store the size of each slot in Program flash. The number of slot size variables generated depends on the Number of Slots mentioned. The default size is 4096 and the size of each slot can be in-between 4096 and 61440.</p><p class="- topic/p p">Design Guideline : if customer wants to include multiple files into a single slot, then user has to make a unified file by including multiple files and parse those files accordingly into OTA service.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable Digest Verification :</strong> By default this option will be disabled. If enabled by the user, then it will perform the SHA256 Digest verification of the downloaded file.</p><ul class="- topic/ul ul"><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable Signature Verification :</strong> By default this option will be disabled. If enabled by the user, then it will verify the downloaded file with signature.</p></li></ul></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Enable Jump Address :</strong> This enables the application to jump to this address after all the files are downloaded. This is only applicable if the user is downloading file as an image. User should enable the macro <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_FILE_JUMP_ENABLE</code> in the Bootloader project, <code class="+ topic/ph pr-d/codeph ph codeph">ota_booloader_wolfcrypt</code>.Also, user should update the jump address of the new image <code class="+ topic/ph pr-d/codeph ph codeph">APP_IMG_BOOT_ADDR_2</code> in the <code class="+ topic/ph pr-d/codeph ph codeph">ota_config.h</code> file of Bootloader project <code class="+ topic/ph pr-d/codeph ph codeph">ota_booloader_wolfcrypt</code>.</p><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Note</strong> : This feature has very high dependency on the available memory on the device. Enabling the feature is strictly constrained to the memory availability.</p></li><li class="- topic/li li"><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Use External Memory on OTA :</strong>  The option decides, if OTA feature will be using External Memory along with File System. The user can disable the usage of File System if required. Currently, this feature will be available only with the bootloader <code class="+ topic/ph pr-d/codeph ph codeph">ota_booloader_wolfcrypt</code>. The user should undefine the macro <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_FS_ENABLED</code> in Bootloader project also. The Patch update feature will not be supported without File System. By default, <code class="+ topic/ph pr-d/codeph ph codeph">Use External Memory on OTA</code> feature will be enabled in both application and bootloader.</p></li></ul></li></ul><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">All of the required files are automatically added into the MPLAB X IDE project by the MHC when the OTA Service is selected for use.</strong></p><p class="- topic/p p">11.Generate code using "Generate" button in MHC :</p><div class=""><img class="- topic/image image break break" src="GUID-90157A96-7171-4DC8-BDAB-1CACE8395898-low.png" alt="ota_mhc_generate"/></div><p class="- topic/p p">12.In case you are creating a factory image, include the bootloader project from the apps folder of this repo as a <code class="+ topic/ph pr-d/codeph ph codeph">loadable project</code> into the application :</p><div class=""><img class="- topic/image image break break" src="GUID-E3F0AB13-BEE8-4E93-B331-E8CCA7E34BEE-low.png" alt="resized_ota_add_loadables"/></div><p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">NOTE: Please open bootloader project in MPLABx IDE and compile separately, before loading</strong></p><p class="- topic/p p">13.Build the project to get the unified hex and load the same on device.</p></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="building-custom-logic"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> Building custom logic</h2><div class="- topic/body body"><p class="- topic/p p">User can build custom logic required for own design, using configrable parameters as mentioned above. Additionally , users can also build and apply required application level logic which can be included in <strong class="+ topic/ph hi-d/b ph b">app.c</strong> file.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title3" id="easily-registering-user-callbacks"><h2 class="- topic/title title topictitle2" id="ariaid-title3" style=""> Easily registering user callbacks</h2><div class="- topic/body body"><p class="- topic/p p">For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  <strong class="+ topic/ph hi-d/b ph b">app_ota.c</strong> file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in <strong class="+ topic/ph hi-d/b ph b">OTA System Service Interface</strong> section.</p></div></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#building-custom-logic" data-tocid="building-custom-logic"> Building custom logic</a></li><li class="topic-item"><a href="#easily-registering-user-callbacks" data-tocid="easily-registering-user-callbacks"> Easily registering user callbacks</a></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+  
+  <script type="text/javascript">_satellite.pageBottom();</script><!-- Adobe Analytics -->
+  <script type="text/javascript" src="mchp-js/prepend.js"></script><!-- Package for viewing PDFs on mobile devices -->
+  
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="building-custom-logic"><h2 class="title topictitle2" id="ariaid-title2" style="">Building custom logic</h2><div class="body"><p class="p">User can build custom logic required for own design, using configrable parameters as mentioned above. Additionally , users can also build and apply required application level logic which can be included in <strong class="ph b">app.c</strong> file.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="easily-registering-user-callbacks"><h2 class="title topictitle2" id="ariaid-title3" style="">Easily registering user callbacks</h2><div class="body"><p class="p">For making it more flexible and easy for users to register OTA service callbacks, OTA service will generate the  <strong class="ph b">app_ota.c</strong> file, which contains a skeleton of the callback function definition that can be used to implement business-logic. The file also provides an easy to use initialization function that can be invoked from the user application to register these callbacks in case you decide to use them. For more details please follow the instructions in <strong class="ph b">OTA System Service Interface</strong> section.</p>
-</div>
-</div>
-</body>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+       
+        </body>
 </html>

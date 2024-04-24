@@ -5,6 +5,43 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
+
+## Harmony 3 Wireless system services for the PIC32MZW1/WFI32 family **v3.9.0**
+
+### New Features
+
+- Device support added for PIC32MZ2051W104132/WFI32E03. 
+  - To migrate the existing applications of PIC32MZ1025W104132, follow the steps mentioned in the section "Migration guide from PIC32MZ1025W104132/WFI32E01/WFI32E02 to PIC32MZ2051W104132/WFI32E03" of [PIC32MZ-W1 / WFI32E0x Application Developer's Guide](https://onlinedocs.microchip.com/oxy/GUID-83859130-3660-4EE8-8AEB-4D161F595226-en-US-2/index.html).
+  
+-  [OTA] Added MCC configuration to Enable/disable the Digest and Signature Verification. 
+
+
+### Bug fixes and Improvements
+
+### Known Issues and Limitations
+
+-   In Secure OTA, system console read buffer size should be atleast 200 bytes.
+
+-   Web socket server will support only upto 500 bytes in a single message.
+
+-   Web socket server will not honour optional header fields like `Sec-WebSocket-Protocol` and `Sec-WebSocket-Extensions`
+
+
+### Development Tools
+
+-   [MPLAB® X IDE v6.20](https://www.microchip.com/mplab/mplab-x-ide)
+
+-   MPLAB® X IDE plug-ins:
+
+    -   MPLAB® Code Configurator (MCC) v5.5.0
+
+-   [MPLAB® XC32 C/C++ Compiler v4.35](https://www.microchip.com/mplab/compilers)
+
+-   **DFP 1.8.326**
+
+
+
+
 ## Harmony 3 Wireless system services for the PIC32MZW1/WFI32 family **v3.8.0**
 
 ### New Features

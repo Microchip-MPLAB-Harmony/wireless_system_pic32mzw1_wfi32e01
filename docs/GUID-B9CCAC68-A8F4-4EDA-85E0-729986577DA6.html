@@ -1,242 +1,144 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
-<meta name="DC.rights.owner" content="(C) Copyright 2023" />
-<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
-<meta name="DC.title" content="Wi-Fi System Service Configuration" />
-<meta name="DC.relation" scheme="URI" content="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" />
-<meta name="DC.format" content="XHTML" />
-<meta name="DC.identifier" content="wi-fi-system-service-configuration" />
-<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
-<title>Wi-Fi System Service Configuration</title>
-<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-wi-fi-system-service-configuration" />
-<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
-<meta name="Microsoft.Help.TocOrder" content="0" />
-<meta name="Microsoft.Help.Locale" content="en-US" />
-<meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
-<script language="javascript">
-       
-       if (window.parent.location.protocol != 'file:') {
-				document.addEventListener('click', function(e) {
-				    if (e.target) {
-               if (e.target.nodeName == "A" ) {
-                    if (!e.target.target) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                              
-                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
-                      if (origUrl.length === 0) {
-                          origUrl = window.parent.location.href;
-                      }
-                      var href= e.target.getAttribute("href");
-                      var parts = href.split("#");
-          
-                      var url = "";
-                      if (parts.length == 2 ) {
-                        if (!parts[0].length) {
-                            url = window.parent.location.search.replace('?','')
-                        } else {
-                            url = parts[0].replace('.html','');
-                        }
-                      } else {
-                        url = parts[0].replace('.html','');
-                      }
-
-                      if (parts.length == 2) {
-                          url += "#" + parts[1];
-                      }
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="The Wi-Fi System Service library should be configured through MHC(MPLAB Harmony Configurator). The following figure shows the MHC configuration window for configuring the Wi-Fi System Service and a ..."/><meta name="copyright" content="(C) Copyright 2024"/><meta name="generator" content="DITA-OT"/><title>1.4.2 Wi-Fi System Service Configuration</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\4z4pndcjubb\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;wi-fi-system-service-configuration&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;Wi-Fi System Service Configuration&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:1;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;The Wi-Fi System Service library should be configured through MHC(MPLAB Harmony Configurator). The following figure shows the MHC configuration window for configuring the Wi-Fi System Service and a brief description of various configuration options.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;p:2;184:15&#34;&gt;When user select the Wi-Fi System Service library, all the required dependencies are added automatically into the MHC configuration. In the Wi-Fi System Service library, user can select the operating device mode as station(STA) or access point(AP) and make a required changes in the selected mode.&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-FD1A97E7-DD4E-4A04-9079-82E45CA60758-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;image:1;184:15&#34; dita-ot:image-width=&#34;1139&#34; dita-ot:image-height=&#34;580&#34; dita-ot:horizontal-dpi=&#34;120&#34; dita-ot:vertical-dpi=&#34;120&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;alt:1;184:15&#34;&gt;Wi-Fi_service_MHC&lt;/alt&gt;&lt;/image&gt;&lt;/body&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-467967A5-7B76-4A1E-A884-DAA8F4B7AA2B&#34; xtrc=&#34;topicref:3;6:402&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B32A01DC-88D9-4514-B375-C0723D6C7453.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.md&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:1;6:99&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B32A01DC-88D9-4514-B375-C0723D6C7453.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;Wi-Fi System Service&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;configuration-options&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;Configuration Options:&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;p:3;184:15&#34;&gt;Using MHC menu,user can select required device mode as a station(STA) or access point(AP).&lt;/p&gt;&lt;/body&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;device-mode&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;Device Mode:&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:3;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;codeblock:1;184:15&#34;&gt;Indicates the device operation mode(STA/AP).&amp;#xD;&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;sta-mode&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:4;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:4;184:15&#34;&gt;STA Mode:&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:4;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;codeblock:2;184:15&#34;&gt;SSID: &amp;#xD; Access Point (AP/Router) SSID to connect.&amp;#xD; &amp;#xD; Security type :&amp;#xD; Indicates the security being used by the AP with which device should connect - OPEN / WPA2 / WPAWPA2 (Mixed)/ WPA3 / WPAWPA2 Enterprise / WPA2 Enterprise / WPA2WPA3 Enterprise / WPA3 Enterprise. &amp;#xD; &amp;#xD; When User Select Enterprise TLS method, below configuration options are enable:&amp;#xD; User Name : User name that has been added in the Radius Server&amp;#xD; Username and Domainname : Provide EAP Identity info( username@domainname or domainname/username )&amp;#xD; Server Domain Name SAN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&amp;#xD; Server Domain Name CN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&amp;#xD; Certificate Date : Enter a date between the date of certificate creation and date of expiration of certificate in UTC time format. &amp;#xD; CA Certificate Format : Indicates the format of the CA Certificate that is used – PEM / DER&amp;#xD; CA Certificate File Name : Indicates the name of the header file that has to be included which contains the CA Certificate in the form of a hex array and the size of the hex array.&amp;#xD; CA Certificate Module Name : Indicates the name of the array within the header file.&amp;#xD; Private Certificate Format : Indicates the format of the Private Certificate that is used – PEM / DER&amp;#xD; Private Certificate File Name : Indicates the name of the header file that has to be included which contains the Private Certificate in the form of a hex array and the size of the hex array.&amp;#xD; Private Certificate Module Name : Indicates the name of the array within the header file.&amp;#xD; Private Key Format : Indicates the format of the Private Key that is used – PEM / DER&amp;#xD; Private Key File Name : Indicates the name of the header file that has to be included which contains the Private Key in the form of a hex array and the size of the hex array.&amp;#xD; Private Key Module Name : Indicates the name of the array within the header file.&amp;#xD; - Make sure that the date provided is within the validity period of the certificate.&amp;#xD; - Make sure that the header files provided are imported into the project to avoid compilation error of missing file.&amp;#xD; - More information can be found in &#34;WFI32 Enterprise Security Application Note&#34; Salesforce knowledge base article.&amp;#xD; &amp;#xD; &amp;#xD; When User Select Enterprise TTLS method, below configuration options are enable:&amp;#xD; User Name : User name that has been added in the Radius Server&amp;#xD; Username and Domainname : Provide EAP Identity info( username@domainname or domainname/username )&amp;#xD; Server Domain Name SAN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&amp;#xD; Server Domain Name CN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&amp;#xD; Certificate Date : Enter a date between the date of certificate creation and date of expiration of certificate in UTC time format. &amp;#xD; CA Certificate Format : Indicates the format of the CA Certificate that is used – PEM / DER&amp;#xD; CA Certificate File Name : Indicates the name of the header file that has to be included which contains the CA Certificate in the form of a hex array and the size of the hex array.&amp;#xD; CA Certificate Module Name : Indicates the name of the array within the header file.&amp;#xD; TTLS Username : Indicates the MSCHAPV2 username&amp;#xD; TTLS Password : Indicates the MSCHAPV2 password&amp;#xD; &amp;#xD; &amp;#xD; Password:&amp;#xD; Password to be used while connecting to the AP. &amp;#xD; This is mandatory if security mode is set to anything other than OPEN. &amp;#xD; It will be ignored if security mode is set to OPEN.&amp;#xD; &amp;#xD; Auto Connect:&amp;#xD; Indicate whether to auto connect to AP (enable) or wait for user input (disable).&amp;#xD;&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;ap-mode&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:5;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:5;184:15&#34;&gt;AP Mode:&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:5;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;codeblock:3;184:15&#34;&gt;SSID:&amp;#xD; Indicate AP mode SSID.&amp;#xD; &amp;#xD; Security:&amp;#xD; Indicate AP mode security: &amp;#xD; - OPEN&amp;#xD; - WPA2&amp;#xD; - WPAWPA2(Mixed)&amp;#xD; - WPA3&amp;#xD; &amp;#xD; Password:&amp;#xD; Indicate AP mode password(passphrase).&amp;#xD; &amp;#xD; SSID Visibility:&amp;#xD; Indicate AP mode SSID visibility.&amp;#xD; &amp;#xD; Channel:&amp;#xD; Indicate operating channel of AP mode.&amp;#xD;&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;advanced-configuration&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:6;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:6;184:15&#34;&gt;Advanced configuration:&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:6;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;codeblock:4;184:15&#34;&gt;Country code:&amp;#xD; Regulatory domain country code configuration:&amp;#xD; - GEN - General&amp;#xD; - USA - North America&amp;#xD; - EMEA - Europe&amp;#xD; - JPN - Japan&amp;#xD; &amp;#xD; Number of Clients:&amp;#xD; Indicates the maximum number of clients user can register.&amp;#xD; &amp;#xD; Enable Wi-Fi Provisioning service:&amp;#xD; Enables/Disables Wi-Fi Provisioning System Service functionality along with Wi-Fi System Service.&amp;#xD; &amp;#xD; Enable Power Save:&amp;#xD; Enables/Disables Power Save functionality.&amp;#xD; &amp;#xD; Set PIC Power Save Mode:&amp;#xD; XDS - Extreme Deep Sleep mode&amp;#xD; DS - Deep Sleep Mode&amp;#xD; SLEEP - Sleep Mode&amp;#xD; DREAM - Dream Mode&amp;#xD; IDLE - Idle mode&amp;#xD; &amp;#xD; Set PIC Wi-Fi Correlation Mode:&amp;#xD; SYNC - Synchronous mode &amp;#xD; ASYNC - Asynchronous mode&amp;#xD; &amp;#xD; Set PIC Wi-Fi Power Save Mode:&amp;#xD; RUN - Wi-Fi Subsystem in Run Mode&amp;#xD; WSM - Wi-Fi Subsystem in Wi-Fi Sleep Mode(WSM) &amp;#xD; WDS - Wi-Fi Subsystem in Wi-Fi Deep Sleep Mode(WDS) &amp;#xD; WOFF - Wi-Fi Subsystem in Wi-Fi Power off Mode(WOFF) &amp;#xD; &amp;#xD; Set PIC Wi-Fi Power Save Mode:&amp;#xD; RUN - Wi-Fi Subsystem in Run Mode&amp;#xD; WSM - Wi-Fi Subsystem in Wi-Fi Sleep Mode(WSM) &amp;#xD; WDS - Wi-Fi Subsystem in Wi-Fi Deep Sleep Mode(WDS) &amp;#xD; WOFF - Wi-Fi Subsystem in Wi-Fi Power off Mode(WOFF) &amp;#xD; &amp;#xD; Set PIC Wi-Fi Wakeup Source:&amp;#xD; LISTEN INTERVAL - Wi-Fi Listern interval&amp;#xD; Set Wi-Fi Listen Interval:&amp;#xD; Set Wi-Fi Listen Interval Value&amp;#xD; Set Wi-Fi Sleep Inactivity Threshould/Limit Value:&amp;#xD; Set Wi-Fi Sleep Inactivity when Wi-Fi Subsystem should wakeup.It can same as Association timeout.&amp;#xD; DTIM - Enable Delivery Traffic Indication Message (DTIM) Wakeup&amp;#xD; - More details of the Low Power Mode is available in the Datasheet.&amp;#xD; - The Wi-Fi System Service library only generate code, which needed before Wi-Fi connection.Please check low power &#34;Paho MQTT Client Power Save&#34; application for complete implemetation.&amp;#xD; - The WSM/WDS is Connected Sleep mode.&amp;#xD; &amp;#xD; Enable Wi-Fi Scanning:&amp;#xD; Enables/Disables Wi-Fi Scan functionality of Wi-Fi System Service.&amp;#xD; &amp;#xD; Channel Number:&amp;#xD; Values of Scan Channel Number: &amp;#xD; 0 - scan all the channels&amp;#xD; 1 to 13 - - scan on specified channel&amp;#xD; &amp;#xD; Scan Mode:&amp;#xD; ACTIVE : Requst Active Scan&amp;#xD; PASSIVE : Request Passive Scan&amp;#xD; &amp;#xD; SSID List(Active Scan Only):&amp;#xD; User preferred SSIDs list for scanning.&amp;#xD; Maximum 4 SSIDs of maximum 32 characters allowed. &amp;#xD; e.g. DEMO_AP1,DEMO_AP2,DEMO_AP3,DEMO_AP4).&amp;#xD; This field is only applicable for Active Scan.&amp;#xD; &amp;#xD; SSID List Delimiter character:&amp;#xD; Delimiter used for separating names in the &#34;SSID List(Active Scan Only)&#34; field.&amp;#xD; &amp;#xD; Bitwise Channel Scan Mask:&amp;#xD; - 0x3fff : All 2.4GHZ channels&amp;#xD; - 0x07ff : 2.4GHz channels 1 through 11 (USA)&amp;#xD; - 0x1fff : 2.4GHz channels 1 through 13 (Europe)&amp;#xD; - 0x3fff : 2.4GHz channels 1 through 14(Asia)&amp;#xD; - 0x0001 : 2.4GHz (2412 MHz) channel 1&amp;#xD; - 0x0002 : 2.4GHz (2412 MHz) channel 2&amp;#xD; - User can find more details of mask value in the WDRV_PIC32MZW_CHANNEL24_MASK&amp;#xD; &amp;#xD; Number Of Slots:&amp;#xD; The number of scan slots per channel.&amp;#xD; &amp;#xD; Active Slot Time:&amp;#xD; Time(in milliseconds) spent on each active channel to send the probe requests to find near by BSS's.&amp;#xD; &amp;#xD; Passive Slot Time:&amp;#xD; Time(in milliseconds) spent on each passive channel listening for beacons.&amp;#xD; &amp;#xD; Number Of Probes:&amp;#xD; Number of probe requests to be sent for each scan slot when &#34;SSID List&#34; field is empty.&amp;#xD; Number of probe requests to be sent for each ssid to scan in each scan slot when preferred &#34;SSID List&#34; is configured.&amp;#xD; This field is only applicable for Active Scan.&amp;#xD; &amp;#xD; Scan Match Mode:&amp;#xD; FIND_ALL: Scan for all matches&amp;#xD; STOP_ON_FIRST : Stop scan on first match&amp;#xD; &amp;#xD; IP Type: &amp;#xD; IPv4 ONLY : Enable IPv4 support &amp;#xD; IPv4 &amp;amp; IPv6 : Enable both IPv4 &amp;amp; IPv6 support &amp;#xD; Enable Debug Logs:&amp;#xD; Enables/Disables Wi-Fi and Wi-Fi Provisioning System Service flows and levels.&amp;#xD; Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-&amp;gt; System Service-&amp;gt; App Debug Service.&amp;#xD;&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;enabling-wi-fi-system-service&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;topic:7;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;title:7;184:15&#34;&gt;Enabling Wi-Fi System Service&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;body:7;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md&#34; xtrc=&#34;p:4;184:15&#34;&gt;All of the required files are automatically added into the MPLAB X IDE project by the MHC when the library is selected for use.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.md"/><meta name="wh-out-relpath" content="GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
     
-                      window.parent.location.href = origUrl + "?" + url;
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+    <script src="https://assets.adobedtm.com/6a72a357eb48/a636c708c7fe/launch-0b0023397020.min.js"></script><!-- Adobe Analytics -->
+</head>
 
-                      return false;
-                    }
-               }
-            }
-				});
-			}
+    <body id="wi-fi-system-service-configuration" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB Harmony PIC32MZW1/WFI32 wireless system services &#xA;    "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB Harmony PIC32MZW1/WFI32 wireless system services 
+    </a></div>
+                    
+                </div>
+                
+                
+            </div>
 
-		</script><script language="javascript">
-         
-         function copyContent(content, button) {
-         
-            var textArea = document.createElement("textarea");
-            
-            // Place in the top-left corner of screen regardless of scroll position.
-            textArea.style.position = 'fixed';
-            textArea.style.top = 0;
-            textArea.style.left = 0;
-            
-            // Ensure it has a small width and height. Setting to 1px / 1em
-            // doesn't work as this gives a negative w/h on some browsers.
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            
-            // We don't need padding, reducing the size if it does flash render.
-            textArea.style.padding = 0;
-            
-            // Clean up any borders.
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            
-            // Avoid flash of the white box if rendered for any reason.
-            textArea.style.background = 'transparent';
-            
-            textArea.value = content;
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-               var successful = document.execCommand('copy');
-               var msg = successful ? 'successful' : 'unsuccessful';
-               if (!button.classList.contains("copied")){
-                  button.textContent = "Copied";
-                  button.classList.add("copied");
-                  setTimeout(function(){
-                     button.textContent = "Copy";
-                     button.classList.remove("copied");
-                  },1000);
-               }
-            } catch (err) {
-               console.log('Oops, unable to copy');
-            }
-            
-            document.body.removeChild(textArea);
-         }
-         
-         function cpy(id, button) {
-            var element = document.getElementById(id);
-            var content = element.getAttribute("content");
-            
-            copyContent(content, button);
-         }
-         
-         document.addEventListener("DOMContentLoaded", function(event) {
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.style.position = "relative";
-               var copy = document.createElement("button");
-               copy.textContent = "Copy";
-               copy.setAttribute("class", "copy-code");
-               
-               var content = elem.textContent;
-               
-               copy.addEventListener("click", function(){
-                  copyContent(content, copy);
-               });
-               
-               elem.addEventListener("mouseenter", function(evt){
-                  elem.prepend(copy);
-               });
-            });
-            
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.addEventListener("mouseleave", function(evt){
-                  document.querySelector(".copy-code").remove();
-               });
-            });
-         });
-         
-      </script><script language="javascript">
-          
-          // Add the MathML namespace to html
-          var html = document.getElementsByTagName("html")[0],
-          head = document.getElementsByTagName("head")[0];
-          
-          var mathJax = document.createElement("script");
-          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
-          head.appendChild(mathJax);
-          
-          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
-          
-          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
-          
-          if (!inIframe()) { 
-          
-          var Default = "index.html?GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6"; 
-          
-          var displaylocation = "value" + window.location.href;
-          
-          var GUIDS = displaylocation.split('GUID');          
-          
-          if (displaylocation.indexOf('#GUID') != -1) {            
-          var First = GUIDS[1].split('.html');  
-          if (GUIDS[3]){First = GUIDS[2].split('.html');}
-          if (GUIDS[4]){First = GUIDS[3].split('.html');}
-          if (GUIDS[5]){First = GUIDS[4].split('.html');}
-          
-          var Second = GUIDS[2].split('#');   
-          if (GUIDS[3]){Second = GUIDS[3].split('#');}
-          if (GUIDS[4]){Second = GUIDS[4].split('#');}
-          if (GUIDS[5]){Second = GUIDS[5].split('#');}
-          
-          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
-          }                    
-          window.top.location = Default;
-          }       
-          
-        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
-        
-          button.copy-code{
-            display:none;
-            padding:0.7em 1.4em;
-            margin:0 0.3em 0.3em 0;
-            border-radius:0.15em;
-            box-sizing: border-box;
-            text-decoration:none;
-            font-family:'Roboto',sans-serif;
-            text-transform:uppercase;
-            font-weight:400;
-            color:#FFFFFF;
-            background-color:#9c9c9c;
-            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
-            text-align:center;
-            position:relative;
-            border: 0;
-            float: right;
-            border-radius: .5em;
-            cursor: pointer;
-          }
-          button.copy-code:active{
-            top:0.1em;
-          }
-          
-          pre:hover button.copy-code{
-            display: inline-block !important;
-          }
-          button.copy-code.copied {
-            cursor: default !important;
-          }
-          
-          
-          @media all and (max-width:30em){
-            button.copy-code{
-              display:block;
-              margin:0.4em auto;
-            }
-          }
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
         
         
-      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
-<body id="wi-fi-system-service-configuration">
-<h1 class="title topictitle1" id="ariaid-title1" style="">Wi-Fi System Service Configuration</h1><div class="body"><p class="p">The Wi-Fi System Service library should be configured through MHC(MPLAB Harmony Configurator). The following figure shows the MHC configuration window for configuring the Wi-Fi System Service and a brief description of various configuration options.</p>
-<p class="p">When user select the Wi-Fi System Service library, all the required dependencies are added automatically into the MHC configuration. In the Wi-Fi System Service library, user can select the operating device mode as station(STA) or access point(AP) and make a required changes in the selected mode.</p>
-<br /><img class="image" src="GUID-FD1A97E7-DD4E-4A04-9079-82E45CA60758-low.png" alt="Wi-Fi_service_MHC" /><br /></div>
-<div class="related-links">
-<div class="familylinks">
-<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html">Wi-Fi System Service</a></div>
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="configuration-options"><h2 class="title topictitle2" id="ariaid-title2" style="">Configuration Options:</h2><div class="body"><p class="p">Using MHC menu,user can select required device mode as a station(STA) or access point(AP).</p>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title3" id="device-mode"><h3 class="title topictitle3" id="ariaid-title3" style="">Device Mode:</h3><div class="body"><pre class="pre codeblock"><code id="d41268e34" content="Indicates the device operation mode(STA/AP).&#xD;">Indicates the device operation mode(STA/AP).&#xD;</code></pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title4" id="sta-mode"><h3 class="title topictitle3" id="ariaid-title4" style="">STA Mode:</h3><div class="body"><pre class="pre codeblock"><code id="d41268e40" content="SSID: &#xD;&#xA;    Access Point (AP/Router) SSID to connect.&#xD;&#xA;&#xD;&#xA;Security type :&#xD;&#xA;    Indicates the security being used by the AP with which device should connect - OPEN / WPA2 / WPAWPA2 (Mixed)/ WPA3 / WPAWPA2 Enterprise / WPA2 Enterprise / WPA2WPA3 Enterprise / WPA3 Enterprise.    &#xD;&#xA;    &#xD;&#xA;    When User Select Enterprise TLS method, below configuration options are enable:&#xD;&#xA;    User Name : User name that has been added in the Radius Server&#xD;&#xA;    Username and Domainname : Provide EAP Identity info( username@domainname or domainname/username )&#xD;&#xA;    Server Domain Name SAN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&#xD;&#xA;    Server Domain Name CN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&#xD;&#xA;    Certificate Date : Enter a date between the date of certificate creation and date of expiration of certificate in UTC time format. &#xD;&#xA;    CA Certificate Format : Indicates the format of the CA Certificate that is used – PEM / DER&#xD;&#xA;    CA Certificate File Name : Indicates the name of the header file that has to be included which contains the CA Certificate in the form of a hex array and the size of the hex array.&#xD;&#xA;    CA Certificate Module Name : Indicates the name of the array within the header file.&#xD;&#xA;    Private Certificate Format : Indicates the format of the Private Certificate that is used – PEM / DER&#xD;&#xA;    Private Certificate File Name : Indicates the name of the header file that has to be included which contains the Private Certificate in the form of a hex array and the size of the hex array.&#xD;&#xA;    Private Certificate Module Name : Indicates the name of the array within the header file.&#xD;&#xA;    Private Key Format : Indicates the format of the Private Key that is used – PEM / DER&#xD;&#xA;    Private Key File Name : Indicates the name of the header file that has to be included which contains the Private Key in the form of a hex array and the size of the hex array.&#xD;&#xA;    Private Key Module Name : Indicates the name of the array within the header file.&#xD;&#xA;    - Make sure that the date provided is within the validity period of the certificate.&#xD;&#xA;    - Make sure that the header files provided are imported into the project to avoid compilation error of missing file.&#xD;&#xA;    - More information can be found in &#34;WFI32 Enterprise Security Application Note&#34; Salesforce knowledge base article.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;    When User Select Enterprise TTLS method, below configuration options are enable:&#xD;&#xA;    User Name : User name that has been added in the Radius Server&#xD;&#xA;    Username and Domainname : Provide EAP Identity info( username@domainname or domainname/username )&#xD;&#xA;    Server Domain Name SAN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&#xD;&#xA;    Server Domain Name CN : Server domain name against which either server certificate's subject alternative name(SAN) or common name(CN) shall be matched for successful enterprise connection&#xD;&#xA;    Certificate Date : Enter a date between the date of certificate creation and date of expiration of certificate in UTC time format. &#xD;&#xA;    CA Certificate Format : Indicates the format of the CA Certificate that is used – PEM / DER&#xD;&#xA;    CA Certificate File Name : Indicates the name of the header file that has to be included which contains the CA Certificate in the form of a hex array and the size of the hex array.&#xD;&#xA;    CA Certificate Module Name : Indicates the name of the array within the header file.&#xD;&#xA;    TTLS Username : Indicates the MSCHAPV2 username&#xD;&#xA;    TTLS Password : Indicates the MSCHAPV2 password&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Password:&#xD;&#xA;    Password to be used while connecting to the AP. &#xD;&#xA;    This is mandatory if security mode is set to anything other than OPEN. &#xD;&#xA;    It will be ignored if security mode is set to OPEN.&#xD;&#xA;&#xD;&#xA;Auto Connect:&#xD;&#xA;    Indicate whether to auto connect to AP (enable) or wait for user input (disable).&#xD;">SSID: &#xD;
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services"><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div></li><li><div class="topicref" data-id="wi-fi-system-service"><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div></li><li class="active"><div class="topicref" data-id="wi-fi-system-service-configuration"><div class="title"><a href="GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.2</ph>
+Wi-Fi System Service Configuration</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            <div class="row" style="margin-top: -1em;"><div class="col-lg-7 col-md-7 col-sm-12 offset-lg-3 offset-md-3 text-right border-bottom mb-1"><h2 class="text-dark header_title">
+    </h2></div></div>
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem" aria-expanded="true"><div data-tocid="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11" class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html" id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="app-debug-system-service-d1416e19" class="topicref" data-id="app-debug-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action app-debug-system-service-d1416e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-172B28B0-8A47-4C93-8023-8886A08BCD06.html" id="app-debug-system-service-d1416e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.1</ph>
+App Debug System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="mqtt-system-service-d1416e204" class="topicref" data-id="mqtt-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action mqtt-system-service-d1416e204-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" id="mqtt-system-service-d1416e204-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2</ph>
+MQTT System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="net-system-service-d1416e413" class="topicref" data-id="net-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action net-system-service-d1416e413-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" id="net-system-service-d1416e413-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.3</ph>
+Net System Service</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="wi-fi-system-service-d1416e695" class="topicref" data-id="wi-fi-system-service" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action wi-fi-system-service-d1416e695-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" id="wi-fi-system-service-d1416e695-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="wi-fi-system-service-usage-d1416e703" class="topicref" data-id="wi-fi-system-service-usage" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-81C737BC-9E73-407C-ACAC-5B6795B77394.html" id="wi-fi-system-service-usage-d1416e703-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.1</ph>
+Wi-Fi System Service Usage</a></div></div></li><li role="treeitem" class="active"><div data-tocid="wi-fi-system-service-configuration-d1416e711" class="topicref" data-id="wi-fi-system-service-configuration" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.html" id="wi-fi-system-service-configuration-d1416e711-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.2</ph>
+Wi-Fi System Service Configuration</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-system-service-interface-d1416e719" class="topicref" data-id="wi-fi-system-service-interface" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-system-service-interface-d1416e719-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-B9C73D51-5039-4573-A452-176603C18703.html" id="wi-fi-system-service-interface-d1416e719-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3</ph>
+Wi-Fi System Service Interface</a></div></div></li><li role="treeitem"><div data-tocid="wi-fi-system-service-developers-guide-d1416e864" class="topicref" data-id="wi-fi-system-service-developers-guide" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-C171D15D-DC5E-4D98-BD34-F95338A640A7.html" id="wi-fi-system-service-developers-guide-d1416e864-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.4</ph>
+Wi-Fi System Service Developer's Guide</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-provisioning-system-service-d1416e872" class="topicref" data-id="wi-fi-provisioning-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-provisioning-system-service-d1416e872-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6C1BB28E-7F9B-4582-8E74-E301F89C58AC.html" id="wi-fi-provisioning-system-service-d1416e872-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.5</ph>
+Wi-Fi provisioning System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="over-the-air-ota-firmware-update-system-service-d1416e1025" class="topicref" data-id="over-the-air-ota-firmware-update-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action over-the-air-ota-firmware-update-system-service-d1416e1025-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" id="over-the-air-ota-firmware-update-system-service-d1416e1025-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="web-socket-server-wss-system-service-d1416e1154" class="topicref" data-id="web-socket-server-wss-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action web-socket-server-wss-system-service-d1416e1154-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" id="web-socket-server-wss-system-service-d1416e1154-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.7</ph>
+Web Socket Server (WSS) System Service</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388" class="topicref backmatter backmatter_parent" data-id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B.html" id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link">Microchip Information</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">1.4.2 Wi-Fi System Service Configuration</h1><div class="- topic/body body"><p class="- topic/p p">The Wi-Fi System Service library should be configured through MHC(MPLAB Harmony Configurator). The following figure shows the MHC configuration window for configuring the Wi-Fi System Service and a brief description of various configuration options.</p><p class="- topic/p p">When user select the Wi-Fi System Service library, all the required dependencies are added automatically into the MHC configuration. In the Wi-Fi System Service library, user can select the operating device mode as station(STA) or access point(AP) and make a required changes in the selected mode.</p><div class=""><img class="- topic/image image break break" src="GUID-FD1A97E7-DD4E-4A04-9079-82E45CA60758-low.png" alt="Wi-Fi_service_MHC"/></div></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="configuration-options"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> Configuration Options:</h2><div class="- topic/body body"><p class="- topic/p p">Using MHC menu,user can select required device mode as a station(STA) or access point(AP).</p></div><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title3" id="device-mode"><h3 class="- topic/title title topictitle3" id="ariaid-title3" style=""> Device Mode:</h3><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>Indicates the device operation mode(STA/AP).&#xD;</code></pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title4" id="sta-mode"><h3 class="- topic/title title topictitle3" id="ariaid-title4" style=""> STA Mode:</h3><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>SSID: &#xD;
     Access Point (AP/Router) SSID to connect.&#xD;
 &#xD;
 Security type :&#xD;
@@ -281,9 +183,7 @@ Password:&#xD;
     It will be ignored if security mode is set to OPEN.&#xD;
 &#xD;
 Auto Connect:&#xD;
-    Indicate whether to auto connect to AP (enable) or wait for user input (disable).&#xD;</code></pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title5" id="ap-mode"><h3 class="title topictitle3" id="ariaid-title5" style="">AP Mode:</h3><div class="body"><pre class="pre codeblock"><code id="d41268e46" content="SSID:&#xD;&#xA;    Indicate AP mode SSID.&#xD;&#xA;&#xD;&#xA;Security:&#xD;&#xA;    Indicate AP mode security: &#xD;&#xA;        - OPEN&#xD;&#xA;        - WPA2&#xD;&#xA;        - WPAWPA2(Mixed)&#xD;&#xA;        - WPA3&#xD;&#xA;        &#xD;&#xA;Password:&#xD;&#xA;    Indicate AP mode password(passphrase).&#xD;&#xA;&#xD;&#xA;SSID Visibility:&#xD;&#xA;    Indicate AP mode SSID visibility.&#xD;&#xA;&#xD;&#xA;Channel:&#xD;&#xA;    Indicate operating channel of AP mode.&#xD;">SSID:&#xD;
+    Indicate whether to auto connect to AP (enable) or wait for user input (disable).&#xD;</code></pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title5" id="ap-mode"><h3 class="- topic/title title topictitle3" id="ariaid-title5" style=""> AP Mode:</h3><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>SSID:&#xD;
     Indicate AP mode SSID.&#xD;
 &#xD;
 Security:&#xD;
@@ -300,9 +200,7 @@ SSID Visibility:&#xD;
     Indicate AP mode SSID visibility.&#xD;
 &#xD;
 Channel:&#xD;
-    Indicate operating channel of AP mode.&#xD;</code></pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title6" id="advanced-configuration"><h3 class="title topictitle3" id="ariaid-title6" style="">Advanced configuration:</h3><div class="body"><pre class="pre codeblock"><code id="d41268e52" content="Country code:&#xD;&#xA;  Regulatory domain country code configuration:&#xD;&#xA;    - GEN - General&#xD;&#xA;    - USA - North America&#xD;&#xA;    - EMEA - Europe&#xD;&#xA;    - JPN - Japan&#xD;&#xA;&#xD;&#xA;Number of Clients:&#xD;&#xA;    Indicates the maximum number of clients user can register.&#xD;&#xA;&#xD;&#xA;Enable Wi-Fi Provisioning service:&#xD;&#xA;    Enables/Disables Wi-Fi Provisioning System Service  functionality along with Wi-Fi System Service.&#xD;&#xA;&#xD;&#xA;Enable Power Save:&#xD;&#xA;    Enables/Disables Power Save functionality.&#xD;&#xA;&#xD;&#xA;    Set PIC Power Save Mode:&#xD;&#xA;       XDS - Extreme Deep Sleep mode&#xD;&#xA;       DS - Deep Sleep Mode&#xD;&#xA;       SLEEP - Sleep Mode&#xD;&#xA;       DREAM - Dream Mode&#xD;&#xA;       IDLE - Idle mode&#xD;&#xA;&#xD;&#xA;    Set PIC Wi-Fi Correlation Mode:&#xD;&#xA;       SYNC - Synchronous mode &#xD;&#xA;       ASYNC - Asynchronous mode&#xD;&#xA;&#xD;&#xA;    Set PIC Wi-Fi Power Save Mode:&#xD;&#xA;       RUN - Wi-Fi Subsystem in Run Mode&#xD;&#xA;       WSM - Wi-Fi Subsystem in Wi-Fi Sleep Mode(WSM) &#xD;&#xA;       WDS - Wi-Fi Subsystem in  Wi-Fi Deep Sleep Mode(WDS) &#xD;&#xA;       WOFF - Wi-Fi Subsystem in  Wi-Fi Power off Mode(WOFF)         &#xD;&#xA;&#xD;&#xA;    Set PIC Wi-Fi Power Save Mode:&#xD;&#xA;       RUN - Wi-Fi Subsystem in Run Mode&#xD;&#xA;       WSM - Wi-Fi Subsystem in Wi-Fi Sleep Mode(WSM) &#xD;&#xA;       WDS - Wi-Fi Subsystem in  Wi-Fi Deep Sleep Mode(WDS) &#xD;&#xA;       WOFF - Wi-Fi Subsystem in  Wi-Fi Power off Mode(WOFF)   &#xD;&#xA;&#xD;&#xA;    Set PIC Wi-Fi Wakeup Source:&#xD;&#xA;       LISTEN INTERVAL - Wi-Fi Listern interval&#xD;&#xA;          Set Wi-Fi Listen Interval:&#xD;&#xA;             Set Wi-Fi Listen Interval Value&#xD;&#xA;          Set Wi-Fi Sleep Inactivity Threshould/Limit Value:&#xD;&#xA;             Set Wi-Fi Sleep Inactivity when Wi-Fi Subsystem should wakeup.It can same as Association timeout.&#xD;&#xA;       DTIM - Enable Delivery Traffic Indication Message (DTIM) Wakeup&#xD;&#xA;    - More details of the Low Power Mode is available in the Datasheet.&#xD;&#xA;    - The Wi-Fi System Service library only generate code, which needed before Wi-Fi connection.Please check low power &#34;Paho MQTT Client Power Save&#34; application for complete implemetation.&#xD;&#xA;    - The WSM/WDS is Connected Sleep mode.&#xD;&#xA;&#xD;&#xA;Enable Wi-Fi Scanning:&#xD;&#xA;    Enables/Disables Wi-Fi Scan functionality of Wi-Fi System Service.&#xD;&#xA;    &#xD;&#xA;    Channel Number:&#xD;&#xA;       Values of Scan Channel Number:  &#xD;&#xA;       0 - scan all the channels&#xD;&#xA;       1 to 13 - - scan on specified channel&#xD;&#xA;&#xD;&#xA;    Scan Mode:&#xD;&#xA;      ACTIVE  : Requst Active Scan&#xD;&#xA;      PASSIVE : Request Passive Scan&#xD;&#xA;&#xD;&#xA;    SSID List(Active Scan Only):&#xD;&#xA;      User preferred SSIDs list for scanning.&#xD;&#xA;      Maximum 4 SSIDs of maximum 32 characters allowed. &#xD;&#xA;        e.g. DEMO_AP1,DEMO_AP2,DEMO_AP3,DEMO_AP4).&#xD;&#xA;      This field is only applicable for Active Scan.&#xD;&#xA;&#xD;&#xA;    SSID List Delimiter character:&#xD;&#xA;      Delimiter used for separating names in the &#34;SSID List(Active Scan Only)&#34; field.&#xD;&#xA;&#xD;&#xA;    Bitwise Channel Scan Mask:&#xD;&#xA;      - 0x3fff : All 2.4GHZ channels&#xD;&#xA;      - 0x07ff : 2.4GHz channels 1 through 11 (USA)&#xD;&#xA;      - 0x1fff : 2.4GHz channels 1 through 13 (Europe)&#xD;&#xA;      - 0x3fff : 2.4GHz channels 1 through 14(Asia)&#xD;&#xA;      - 0x0001 : 2.4GHz (2412 MHz) channel 1&#xD;&#xA;      - 0x0002 : 2.4GHz (2412 MHz) channel 2&#xD;&#xA;      - User can find more details of mask value in the   WDRV_PIC32MZW_CHANNEL24_MASK&#xD;&#xA;&#xD;&#xA;    Number Of Slots:&#xD;&#xA;      The number of scan slots per channel.&#xD;&#xA;      &#xD;&#xA;    Active Slot Time:&#xD;&#xA;      Time(in milliseconds) spent on each active channel to send the probe requests to find near by BSS's.&#xD;&#xA;    &#xD;&#xA;    Passive Slot Time:&#xD;&#xA;      Time(in milliseconds) spent on each passive channel listening for beacons.&#xD;&#xA;        &#xD;&#xA;    Number Of Probes:&#xD;&#xA;      Number of probe requests to be sent for each scan slot when &#34;SSID List&#34; field is empty.&#xD;&#xA;      Number of probe requests to be sent for each ssid to scan in each scan slot when preferred &#34;SSID List&#34; is configured.&#xD;&#xA;      This field is only applicable for Active Scan.&#xD;&#xA;&#xD;&#xA;    Scan Match Mode:&#xD;&#xA;      FIND_ALL: Scan for all matches&#xD;&#xA;      STOP_ON_FIRST : Stop scan on first match&#xD;&#xA;&#xD;&#xA;IP Type: &#xD;&#xA;  IPv4 ONLY : Enable IPv4 support &#xD;&#xA;  IPv4 &amp; IPv6 : Enable both IPv4 &amp; IPv6 support &#xD;&#xA;Enable Debug Logs:&#xD;&#xA;    Enables/Disables Wi-Fi and Wi-Fi Provisioning System Service flows and levels.&#xD;&#xA;    Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-&gt; System Service-&gt; App Debug Service.&#xD;">Country code:&#xD;
+    Indicate operating channel of AP mode.&#xD;</code></pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title6" id="advanced-configuration"><h3 class="- topic/title title topictitle3" id="ariaid-title6" style=""> Advanced configuration:</h3><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>Country code:&#xD;
   Regulatory domain country code configuration:&#xD;
     - GEN - General&#xD;
     - USA - North America&#xD;
@@ -405,12 +303,159 @@ IP Type: &#xD;
   IPv4 &amp; IPv6 : Enable both IPv4 &amp; IPv6 support &#xD;
 Enable Debug Logs:&#xD;
     Enables/Disables Wi-Fi and Wi-Fi Provisioning System Service flows and levels.&#xD;
-    Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-&gt; System Service-&gt; App Debug Service.&#xD;</code></pre></div>
+    Note: In case the user enables debug logs, user needs to manually add the 'App Debug Service' component from Wireless-&gt; System Service-&gt; App Debug Service.&#xD;</code></pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title7" id="enabling-wi-fi-system-service"><h3 class="- topic/title title topictitle3" id="ariaid-title7" style=""> Enabling Wi-Fi System Service</h3><div class="- topic/body body"><p class="- topic/p p">All of the required files are automatically added into the MPLAB X IDE
+project by the MHC when the library is selected for use.</p></div></article></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#configuration-options" data-tocid="configuration-options"> Configuration Options:</a><ul><li class="topic-item"><a href="#device-mode" data-tocid="device-mode"> Device Mode:</a></li><li class="topic-item"><a href="#sta-mode" data-tocid="sta-mode"> STA Mode:</a></li><li class="topic-item"><a href="#ap-mode" data-tocid="ap-mode"> AP Mode:</a></li><li class="topic-item"><a href="#advanced-configuration" data-tocid="advanced-configuration"> Advanced configuration:</a></li><li class="topic-item"><a href="#enabling-wi-fi-system-service" data-tocid="enabling-wi-fi-system-service"> Enabling Wi-Fi System Service</a></li></ul></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+  
+  <script type="text/javascript">_satellite.pageBottom();</script><!-- Adobe Analytics -->
+  <script type="text/javascript" src="mchp-js/prepend.js"></script><!-- Package for viewing PDFs on mobile devices -->
+  
 </div>
-<div class="topic nested2" aria-labelledby="ariaid-title7" id="enabling-wi-fi-system-service"><h3 class="title topictitle3" id="ariaid-title7" style="">Enabling Wi-Fi System Service</h3><div class="body"><p class="p">All of the required files are automatically added into the MPLAB X IDE
-project by the MHC when the library is selected for use.</p>
-</div>
-</div>
-</div>
-</body>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+       
+        </body>
 </html>

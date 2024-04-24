@@ -1,236 +1,162 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
-<meta name="DC.rights.owner" content="(C) Copyright 2023" />
-<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
-<meta name="DC.title" content="SYS_WIFI_STA_APP_INFO Struct" />
-<meta name="DC.relation" scheme="URI" content="GUID-B9C73D51-5039-4573-A452-176603C18703.html" />
-<meta name="DC.format" content="XHTML" />
-<meta name="DC.identifier" content="sys-wifi-sta-app-info-struct" />
-<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
-<title>SYS_WIFI_STA_APP_INFO Struct</title>
-<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-sys-wifi-sta-app-info-struct" />
-<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
-<meta name="Microsoft.Help.TocOrder" content="0" />
-<meta name="Microsoft.Help.Locale" content="en-US" />
-<meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
-<script language="javascript">
-       
-       if (window.parent.location.protocol != 'file:') {
-				document.addEventListener('click', function(e) {
-				    if (e.target) {
-               if (e.target.nodeName == "A" ) {
-                    if (!e.target.target) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                              
-                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
-                      if (origUrl.length === 0) {
-                          origUrl = window.parent.location.href;
-                      }
-                      var href= e.target.getAttribute("href");
-                      var parts = href.split("#");
-          
-                      var url = "";
-                      if (parts.length == 2 ) {
-                        if (!parts[0].length) {
-                            url = window.parent.location.search.replace('?','')
-                        } else {
-                            url = parts[0].replace('.html','');
-                        }
-                      } else {
-                        url = parts[0].replace('.html','');
-                      }
-
-                      if (parts.length == 2) {
-                          url += "#" + parts[1];
-                      }
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="typedef struct { /* IP Address of the station */ IPV4_ADDR ipAddr; /* MAC Address of the station */ uint8_t macAddr[ 6 ]; } SYS_WIFI_STA_APP_INFO; Information related to connected station shared with ..."/><meta name="copyright" content="(C) Copyright 2024"/><meta name="generator" content="DITA-OT"/><title>1.4.3.11 SYS_WIFI_STA_APP_INFO Struct</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\4z4pndcjubb\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;sys-wifi-sta-app-info-struct&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;SYS_WIFI_STA_APP_INFO Struct&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;body:1;184:15&#34;/&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-467967A5-7B76-4A1E-A884-DAA8F4B7AA2B&#34; xtrc=&#34;topicref:15;6:2275&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B32A01DC-88D9-4514-B375-C0723D6C7453.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-B9C73D51-5039-4573-A452-176603C18703.md&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:4;6:559&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-B32A01DC-88D9-4514-B375-C0723D6C7453.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;Wi-Fi System Service Interface&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;C&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;codeblock:1;184:15&#34;&gt;typedef struct { /* IP Address of the station */ IPV4_ADDR ipAddr; /* MAC Address of the station */ uint8_t macAddr[6]; } SYS_WIFI_STA_APP_INFO; &lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;summary&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;Summary&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;body:3;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;Information related to connected station shared with Application.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;description&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;topic:4;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;title:4;184:15&#34;&gt;Description&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;body:4;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;p:2;184:15&#34;&gt;Information (MAC Address, IP Address) related to connected station.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;remarks&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;topic:5;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;title:5;184:15&#34;&gt;Remarks&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;body:5;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md&#34; xtrc=&#34;p:3;184:15&#34;&gt;None.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.md"/><meta name="wh-out-relpath" content="GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
     
-                      window.parent.location.href = origUrl + "?" + url;
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+    <script src="https://assets.adobedtm.com/6a72a357eb48/a636c708c7fe/launch-0b0023397020.min.js"></script><!-- Adobe Analytics -->
+</head>
 
-                      return false;
-                    }
-               }
-            }
-				});
-			}
+    <body id="sys-wifi-sta-app-info-struct" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB Harmony PIC32MZW1/WFI32 wireless system services &#xA;    "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB Harmony PIC32MZW1/WFI32 wireless system services 
+    </a></div>
+                    
+                </div>
+                
+                
+            </div>
 
-		</script><script language="javascript">
-         
-         function copyContent(content, button) {
-         
-            var textArea = document.createElement("textarea");
-            
-            // Place in the top-left corner of screen regardless of scroll position.
-            textArea.style.position = 'fixed';
-            textArea.style.top = 0;
-            textArea.style.left = 0;
-            
-            // Ensure it has a small width and height. Setting to 1px / 1em
-            // doesn't work as this gives a negative w/h on some browsers.
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            
-            // We don't need padding, reducing the size if it does flash render.
-            textArea.style.padding = 0;
-            
-            // Clean up any borders.
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            
-            // Avoid flash of the white box if rendered for any reason.
-            textArea.style.background = 'transparent';
-            
-            textArea.value = content;
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-               var successful = document.execCommand('copy');
-               var msg = successful ? 'successful' : 'unsuccessful';
-               if (!button.classList.contains("copied")){
-                  button.textContent = "Copied";
-                  button.classList.add("copied");
-                  setTimeout(function(){
-                     button.textContent = "Copy";
-                     button.classList.remove("copied");
-                  },1000);
-               }
-            } catch (err) {
-               console.log('Oops, unable to copy');
-            }
-            
-            document.body.removeChild(textArea);
-         }
-         
-         function cpy(id, button) {
-            var element = document.getElementById(id);
-            var content = element.getAttribute("content");
-            
-            copyContent(content, button);
-         }
-         
-         document.addEventListener("DOMContentLoaded", function(event) {
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.style.position = "relative";
-               var copy = document.createElement("button");
-               copy.textContent = "Copy";
-               copy.setAttribute("class", "copy-code");
-               
-               var content = elem.textContent;
-               
-               copy.addEventListener("click", function(){
-                  copyContent(content, copy);
-               });
-               
-               elem.addEventListener("mouseenter", function(evt){
-                  elem.prepend(copy);
-               });
-            });
-            
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.addEventListener("mouseleave", function(evt){
-                  document.querySelector(".copy-code").remove();
-               });
-            });
-         });
-         
-      </script><script language="javascript">
-          
-          // Add the MathML namespace to html
-          var html = document.getElementsByTagName("html")[0],
-          head = document.getElementsByTagName("head")[0];
-          
-          var mathJax = document.createElement("script");
-          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
-          head.appendChild(mathJax);
-          
-          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
-          
-          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
-          
-          if (!inIframe()) { 
-          
-          var Default = "index.html?GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833"; 
-          
-          var displaylocation = "value" + window.location.href;
-          
-          var GUIDS = displaylocation.split('GUID');          
-          
-          if (displaylocation.indexOf('#GUID') != -1) {            
-          var First = GUIDS[1].split('.html');  
-          if (GUIDS[3]){First = GUIDS[2].split('.html');}
-          if (GUIDS[4]){First = GUIDS[3].split('.html');}
-          if (GUIDS[5]){First = GUIDS[4].split('.html');}
-          
-          var Second = GUIDS[2].split('#');   
-          if (GUIDS[3]){Second = GUIDS[3].split('#');}
-          if (GUIDS[4]){Second = GUIDS[4].split('#');}
-          if (GUIDS[5]){Second = GUIDS[5].split('#');}
-          
-          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
-          }                    
-          window.top.location = Default;
-          }       
-          
-        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
-        
-          button.copy-code{
-            display:none;
-            padding:0.7em 1.4em;
-            margin:0 0.3em 0.3em 0;
-            border-radius:0.15em;
-            box-sizing: border-box;
-            text-decoration:none;
-            font-family:'Roboto',sans-serif;
-            text-transform:uppercase;
-            font-weight:400;
-            color:#FFFFFF;
-            background-color:#9c9c9c;
-            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
-            text-align:center;
-            position:relative;
-            border: 0;
-            float: right;
-            border-radius: .5em;
-            cursor: pointer;
-          }
-          button.copy-code:active{
-            top:0.1em;
-          }
-          
-          pre:hover button.copy-code{
-            display: inline-block !important;
-          }
-          button.copy-code.copied {
-            cursor: default !important;
-          }
-          
-          
-          @media all and (max-width:30em){
-            button.copy-code{
-              display:block;
-              margin:0.4em auto;
-            }
-          }
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
         
         
-      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
-<body id="sys-wifi-sta-app-info-struct">
-<h1 class="title topictitle1" id="ariaid-title1" style="">SYS_WIFI_STA_APP_INFO Struct</h1><div class="body"></div>
-<div class="related-links">
-<div class="familylinks">
-<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-B9C73D51-5039-4573-A452-176603C18703.html">Wi-Fi System Service Interface</a></div>
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="title topictitle2" id="ariaid-title2" style="">C</h2><div class="body"><pre class="pre codeblock c"><strong class="hl-keyword">typedef</strong> <strong class="hl-keyword">struct</strong>
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services"><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div></li><li><div class="topicref" data-id="wi-fi-system-service"><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div></li><li><div class="topicref" data-id="wi-fi-system-service-interface"><div class="title"><a href="GUID-B9C73D51-5039-4573-A452-176603C18703.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3</ph>
+Wi-Fi System Service Interface</a></div></div></li><li class="active"><div class="topicref" data-id="sys-wifi-sta-app-info-struct"><div class="title"><a href="GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.11</ph>
+SYS_WIFI_STA_APP_INFO Struct</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            <div class="row" style="margin-top: -1em;"><div class="col-lg-7 col-md-7 col-sm-12 offset-lg-3 offset-md-3 text-right border-bottom mb-1"><h2 class="text-dark header_title">
+    </h2></div></div>
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem" aria-expanded="true"><div data-tocid="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11" class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html" id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="app-debug-system-service-d1416e19" class="topicref" data-id="app-debug-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action app-debug-system-service-d1416e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-172B28B0-8A47-4C93-8023-8886A08BCD06.html" id="app-debug-system-service-d1416e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.1</ph>
+App Debug System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="mqtt-system-service-d1416e204" class="topicref" data-id="mqtt-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action mqtt-system-service-d1416e204-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" id="mqtt-system-service-d1416e204-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2</ph>
+MQTT System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="net-system-service-d1416e413" class="topicref" data-id="net-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action net-system-service-d1416e413-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" id="net-system-service-d1416e413-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.3</ph>
+Net System Service</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="wi-fi-system-service-d1416e695" class="topicref" data-id="wi-fi-system-service" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action wi-fi-system-service-d1416e695-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" id="wi-fi-system-service-d1416e695-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="wi-fi-system-service-usage-d1416e703" class="topicref" data-id="wi-fi-system-service-usage" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-81C737BC-9E73-407C-ACAC-5B6795B77394.html" id="wi-fi-system-service-usage-d1416e703-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.1</ph>
+Wi-Fi System Service Usage</a></div></div></li><li role="treeitem"><div data-tocid="wi-fi-system-service-configuration-d1416e711" class="topicref" data-id="wi-fi-system-service-configuration" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B9CCAC68-A8F4-4EDA-85E0-729986577DA6.html" id="wi-fi-system-service-configuration-d1416e711-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.2</ph>
+Wi-Fi System Service Configuration</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="wi-fi-system-service-interface-d1416e719" class="topicref" data-id="wi-fi-system-service-interface" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action wi-fi-system-service-interface-d1416e719-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-B9C73D51-5039-4573-A452-176603C18703.html" id="wi-fi-system-service-interface-d1416e719-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3</ph>
+Wi-Fi System Service Interface</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="sys-wifi-status-enum-d1416e727" class="topicref" data-id="sys-wifi-status-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-41A54E26-7261-45CA-AF4A-A0175CBE303E.html" id="sys-wifi-status-enum-d1416e727-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.1</ph>
+SYS_WIFI_STATUS Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-mode-enum-d1416e735" class="topicref" data-id="sys-wifi-mode-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-C7194E88-A1DC-4EFA-8FCE-B3127970E193.html" id="sys-wifi-mode-enum-d1416e735-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.2</ph>
+SYS_WIFI_MODE Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-ctrlmsg-enum-d1416e743" class="topicref" data-id="sys-wifi-ctrlmsg-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-5905E9EC-4C85-42AD-AC7C-90E41923D709.html" id="sys-wifi-ctrlmsg-enum-d1416e743-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.3</ph>
+SYS_WIFI_CTRLMSG Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-result-enum-d1416e751" class="topicref" data-id="sys-wifi-result-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-3684FF88-AC4A-45AB-8857-49E1C46FDC61.html" id="sys-wifi-result-enum-d1416e751-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.4</ph>
+SYS_WIFI_RESULT Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-scan-modes-enum-d1416e759" class="topicref" data-id="sys-wifi-scan-modes-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-2BE63079-2FCD-4C89-9C2D-1ED1A506A66B.html" id="sys-wifi-scan-modes-enum-d1416e759-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.5</ph>
+SYS_WIFI_SCAN_MODES Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-auth-enum-d1416e767" class="topicref" data-id="sys-wifi-auth-enum" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-B8650787-4731-48E9-B342-55EAFCC5496B.html" id="sys-wifi-auth-enum-d1416e767-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.6</ph>
+SYS_WIFI_AUTH Enum</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-ap-config-struct-d1416e775" class="topicref" data-id="sys-wifi-ap-config-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-BA16CF18-DCA0-4AA8-8A17-18EAC7380EF5.html" id="sys-wifi-ap-config-struct-d1416e775-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.7</ph>
+SYS_WIFI_AP_CONFIG Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-config-struct-d1416e783" class="topicref" data-id="sys-wifi-config-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-BFAB8833-E678-457A-9C14-AEC9CA4B05B3.html" id="sys-wifi-config-struct-d1416e783-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.8</ph>
+SYS_WIFI_CONFIG Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-sta-config-struct-d1416e791" class="topicref" data-id="sys-wifi-sta-config-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-1802D445-0432-4C05-83C5-8DF39FCC41DF.html" id="sys-wifi-sta-config-struct-d1416e791-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.9</ph>
+SYS_WIFI_STA_CONFIG Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-scan-config-struct-d1416e799" class="topicref" data-id="sys-wifi-scan-config-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-3410AB90-8C90-4B2A-9A36-081663B2F794.html" id="sys-wifi-scan-config-struct-d1416e799-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.10</ph>
+SYS_WIFI_SCAN_CONFIG Struct</a></div></div></li><li role="treeitem" class="active"><div data-tocid="sys-wifi-sta-app-info-struct-d1416e808" class="topicref" data-id="sys-wifi-sta-app-info-struct" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-BE00844E-71BA-4BD6-BB06-7FFA362A0833.html" id="sys-wifi-sta-app-info-struct-d1416e808-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.11</ph>
+SYS_WIFI_STA_APP_INFO Struct</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-callback-typedef-d1416e816" class="topicref" data-id="sys-wifi-callback-typedef" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-65C429E8-E63B-4FF1-8939-C80E558E0F29.html" id="sys-wifi-callback-typedef-d1416e816-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.12</ph>
+SYS_WIFI_CALLBACK Typedef</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-ctrlmsg-function-d1416e824" class="topicref" data-id="sys-wifi-ctrlmsg-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-86C7B809-3344-4813-95FE-24B5894EEC7C.html" id="sys-wifi-ctrlmsg-function-d1416e824-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.13</ph>
+SYS_WIFI_CtrlMsg Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-deinitialize-function-d1416e832" class="topicref" data-id="sys-wifi-deinitialize-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-17C14258-CDD3-4FBE-B2D5-528666AB0D33.html" id="sys-wifi-deinitialize-function-d1416e832-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.14</ph>
+SYS_WIFI_Deinitialize Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-getstatus-function-d1416e840" class="topicref" data-id="sys-wifi-getstatus-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-F3CF23C1-1804-4A3D-AE91-4EDD8A565D37.html" id="sys-wifi-getstatus-function-d1416e840-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.15</ph>
+SYS_WIFI_GetStatus Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-initialize-function-d1416e848" class="topicref" data-id="sys-wifi-initialize-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-6528061F-6F04-4A18-85C3-8B7839B8E235.html" id="sys-wifi-initialize-function-d1416e848-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.16</ph>
+SYS_WIFI_Initialize Function</a></div></div></li><li role="treeitem"><div data-tocid="sys-wifi-tasks-function-d1416e856" class="topicref" data-id="sys-wifi-tasks-function" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-61F4CED4-8E5E-421C-881E-A6BEAE2B392F.html" id="sys-wifi-tasks-function-d1416e856-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.3.17</ph>
+SYS_WIFI_Tasks Function</a></div></div></li></ul></li><li role="treeitem"><div data-tocid="wi-fi-system-service-developers-guide-d1416e864" class="topicref" data-id="wi-fi-system-service-developers-guide" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-C171D15D-DC5E-4D98-BD34-F95338A640A7.html" id="wi-fi-system-service-developers-guide-d1416e864-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4.4</ph>
+Wi-Fi System Service Developer's Guide</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-provisioning-system-service-d1416e872" class="topicref" data-id="wi-fi-provisioning-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-provisioning-system-service-d1416e872-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6C1BB28E-7F9B-4582-8E74-E301F89C58AC.html" id="wi-fi-provisioning-system-service-d1416e872-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.5</ph>
+Wi-Fi provisioning System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="over-the-air-ota-firmware-update-system-service-d1416e1025" class="topicref" data-id="over-the-air-ota-firmware-update-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action over-the-air-ota-firmware-update-system-service-d1416e1025-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" id="over-the-air-ota-firmware-update-system-service-d1416e1025-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="web-socket-server-wss-system-service-d1416e1154" class="topicref" data-id="web-socket-server-wss-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action web-socket-server-wss-system-service-d1416e1154-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" id="web-socket-server-wss-system-service-d1416e1154-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.7</ph>
+Web Socket Server (WSS) System Service</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388" class="topicref backmatter backmatter_parent" data-id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B.html" id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link">Microchip Information</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">1.4.3.11 SYS_WIFI_STA_APP_INFO Struct</h1><div class="- topic/body body"></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="c"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> C</h2><div class="- topic/body body"><pre class="+ topic/pre pr-d/codeblock pre codeblock c"><strong class="hl-keyword">typedef</strong> <strong class="hl-keyword">struct</strong>
 {
     <em class="hl-comment">/* IP Address of the station */</em>
     IPV4_ADDR ipAddr;
@@ -238,16 +164,158 @@
     <em class="hl-comment">/* MAC Address of the station */</em>
     uint8_t macAddr[<span class="hl-number">6</span>];
 } SYS_WIFI_STA_APP_INFO;
-</pre></div>
+</pre></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="- topic/title title topictitle2" id="ariaid-title3" style=""> Summary</h2><div class="- topic/body body"><p class="- topic/p p">Information related to connected station shared with Application.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="- topic/title title topictitle2" id="ariaid-title4" style=""> Description</h2><div class="- topic/body body"><p class="- topic/p p">Information (MAC Address, IP Address) related to connected station.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title5" id="remarks"><h2 class="- topic/title title topictitle2" id="ariaid-title5" style=""> Remarks</h2><div class="- topic/body body"><p class="- topic/p p">None.</p></div></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#c" data-tocid="c"> C</a></li><li class="topic-item"><a href="#summary" data-tocid="summary"> Summary</a></li><li class="topic-item"><a href="#description" data-tocid="description"> Description</a></li><li class="topic-item"><a href="#remarks" data-tocid="remarks"> Remarks</a></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+  
+  <script type="text/javascript">_satellite.pageBottom();</script><!-- Adobe Analytics -->
+  <script type="text/javascript" src="mchp-js/prepend.js"></script><!-- Package for viewing PDFs on mobile devices -->
+  
 </div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="summary"><h2 class="title topictitle2" id="ariaid-title3" style="">Summary</h2><div class="body"><p class="p">Information related to connected station shared with Application.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title4" id="description"><h2 class="title topictitle2" id="ariaid-title4" style="">Description</h2><div class="body"><p class="p">Information (MAC Address, IP Address) related to connected station.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title5" id="remarks"><h2 class="title topictitle2" id="ariaid-title5" style="">Remarks</h2><div class="body"><p class="p">None.</p>
-</div>
-</div>
-</body>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+       
+        </body>
 </html>

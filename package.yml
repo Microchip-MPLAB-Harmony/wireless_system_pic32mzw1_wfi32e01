@@ -3,7 +3,7 @@ package:
   name: "wireless_system_pic32mzw1_wfi32e01"
   type: "application"
   status: "production"
-  required: true
+  required: false
   version: "v3.9.0"
 
   dependencies:
@@ -36,7 +36,7 @@ package:
       version: "v5.4.0"
     - name: "CMSIS-FreeRTOS"
       type: "package"
-      version: "v10.4.6"
+      version: "v11.0.1"
     - name: "paho.mqtt.embedded-c"
       type: "package"
       version: "v1.2.3"

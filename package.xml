@@ -2,7 +2,7 @@
 <Package name="wireless_system_pic32mzw1_wfi32e01">
     <Dependencies>
         <Dependency name="bsp" version="v3.18.0"/>
-        <Dependency name="CMSIS-FreeRTOS" version="v10.4.6"/>
+        <Dependency name="CMSIS-FreeRTOS" version="v11.0.1"/>
         <Dependency name="core" version="v3.13.3"/>
         <Dependency name="crypto" version="v3.8.1"/>
         <Dependency name="cryptoauthlib" version="v3.7.4"/>

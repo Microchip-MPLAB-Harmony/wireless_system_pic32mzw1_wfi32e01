@@ -1,249 +1,144 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" /><meta name="copyright" content="(C) Copyright 2023" />
-<meta name="DC.rights.owner" content="(C) Copyright 2023" />
-<meta name="generator" content="DITA-OT" /><meta name="DC.type" content="topic" />
-<meta name="DC.title" content="OTA System Service Developer's Guide" />
-<meta name="DC.relation" scheme="URI" content="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" />
-<meta name="DC.format" content="XHTML" />
-<meta name="DC.identifier" content="ota-system-service-developers-guide" />
-<link rel="stylesheet" type="text/css" href="stylesheets/atmel.css" />
-<title>OTA System Service Developer's Guide</title>
-<meta name="Microsoft.Help.Id" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917-ota-system-service-developers-guide" />
-<meta name="Microsoft.Help.TocParent" content="GUID-2B8E373F-A339-4F88-A864-07460CC2D917" />
-<meta name="Microsoft.Help.TocOrder" content="0" />
-<meta name="Microsoft.Help.Locale" content="en-US" />
-<meta name="Microsoft.Help.TopicLocale" content="en-US" />
-<meta name="Microsoft.Help.DisplayVersion" content="MPLAB Harmony PIC32MZW1/WFI32 wireless system services Reference A 03/2023" />
-<script language="javascript">
-       
-       if (window.parent.location.protocol != 'file:') {
-				document.addEventListener('click', function(e) {
-				    if (e.target) {
-               if (e.target.nodeName == "A" ) {
-                    if (!e.target.target) {
-                      e.preventDefault();
-                      e.stopPropagation();
-                              
-                      var origUrl = window.parent.location.href.substr(0, window.parent.location.href.indexOf("?"));
-                      if (origUrl.length === 0) {
-                          origUrl = window.parent.location.href;
-                      }
-                      var href= e.target.getAttribute("href");
-                      var parts = href.split("#");
-          
-                      var url = "";
-                      if (parts.length == 2 ) {
-                        if (!parts[0].length) {
-                            url = window.parent.location.search.replace('?','')
-                        } else {
-                            url = parts[0].replace('.html','');
-                        }
-                      } else {
-                        url = parts[0].replace('.html','');
-                      }
-
-                      if (parts.length == 2) {
-                          url += "#" + parts[1];
-                      }
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-us" lang="en-us" data-whc_version="24.1">
+    <head><link rel="shortcut icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><link rel="icon" href="oxygen-webhelp\template\resources/images/favicon.ico"/><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><meta name="description" content="Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process. Image Downloading is processed by the OTA service that is integrated ..."/><meta name="copyright" content="(C) Copyright 2024"/><meta name="generator" content="DITA-OT"/><title>1.6.4 OTA System Service Developer's Guide</title><!--  Generated with Oxygen version 24.1, build number 2022062014.  --><meta name="wh-path2root" content=""/><meta name="wh-toc-id" content="&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;?workdir /D:\InfoShare\Data\Publish\Data\4z4pndcjubb\work\temp?&gt;&lt;?workdir-uri file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/temp/?&gt;&lt;?path2project?&gt;&lt;?path2project-uri ./?&gt;&lt;?path2rootmap-uri ./?&gt;&lt;topic xmlns:dita-ot=&#34;http://dita-ot.sourceforge.net/ns/201007/dita-ot&#34; xmlns:ditaarch=&#34;http://dita.oasis-open.org/architecture/2005/&#34; class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;ota-system-service-developers-guide&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:1;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:1;184:15&#34;&gt;OTA System Service Developer's Guide&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:1;184:15&#34;/&gt;&lt;related-links class=&#34;- topic/related-links &#34;&gt;&lt;linkpool class=&#34;- topic/linkpool &#34; mapkeyref=&#34;GUID-467967A5-7B76-4A1E-A884-DAA8F4B7AA2B&#34; xtrc=&#34;topicref:16;6:2443&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BCD37AC0-D5B0-48A5-8880-67AA3E30E5EA.ditamap&#34;&gt;&lt;link class=&#34;- topic/link &#34; format=&#34;dita&#34; href=&#34;GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.md&#34; mapclass=&#34;- map/topicref &#34; role=&#34;parent&#34; scope=&#34;local&#34; type=&#34;topic&#34; xtrc=&#34;topicref:1;6:99&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-BCD37AC0-D5B0-48A5-8880-67AA3E30E5EA.ditamap&#34;&gt;&lt;?ditaot usertext?&gt;&lt;linktext class=&#34;- topic/linktext &#34;&gt;&lt;?ditaot gentext?&gt;Over The Air (OTA) firmware update System Service&lt;/linktext&gt;&lt;/link&gt;&lt;/linkpool&gt;&lt;/related-links&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;ota-service-architecture-overview&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:2;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:2;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:1;184:15&#34;&gt;OTA Service Architecture Overview&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:2;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:1;184:15&#34;&gt;Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process.&lt;/p&gt;&lt;ol class=&#34;- topic/ol &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;ol:1;184:15&#34;&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;li:1;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:2;184:15&#34;&gt;Image Downloading is processed by the OTA service that is integrated with your application code.&lt;/p&gt;&lt;/li&gt;&lt;li class=&#34;- topic/li &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;li:2;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:3;184:15&#34;&gt;Image Programming is processed by the OTA bootloader.&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:4;184:15&#34;&gt;For detailed information about OTA service architecture, please refer to the &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:1;184:15&#34;&gt;Architecture Overview&lt;/codeph&gt; section in &lt;xref class=&#34;- topic/xref &#34; href=&#34;usage.md#using-the-library&#34; format=&#34;html&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;xref:1;184:15&#34;&gt;&lt;?ditaot usertext?&gt;Using the library&lt;/xref&gt; of the OTA documentation.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;code-modificationimplementation-guide-for-common-use-cases&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:3;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:3;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:2;184:15&#34;&gt;Code modification/implementation guide for common use cases&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:3;184:15&#34;/&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;registering-a-user-defined-callback-for-ota-system-service&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:4;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:4;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:3;184:15&#34;&gt;Registering a user defined callback for OTA system service&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:4;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:5;184:15&#34;&gt;Developer may register a callback function to receive callback from the OTA system service for pre-defined scenarios.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:6;184:15&#34;&gt;For registering callback developer may follow any one of below mentioned methods.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:7;184:15&#34;&gt;a. Using the built-in function &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:2;184:15&#34;&gt;ota_app_reg_cb()&lt;/codeph&gt; wrapper, defined in &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:3;184:15&#34;&gt;app_ota.c&lt;/codeph&gt; . Please see the code snippet below for reference:&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:1;184:15&#34;&gt; /* Check the application's current state. */ switch ( appData.state ) { /* Application's initial state. */ case APP_STATE_INIT: { if(true == ota_app_reg_cb()) appData.state = APP_STATE_SERVICE_TASKS; appData.state = APP_STATE_SERVICE_TASKS; break; } case APP_STATE_SERVICE_TASKS: { break; } /* TODO: implement your application state machine.*/ default: { /* TODO: Handle error in application's state machine. */ break; } }&lt;/codeblock&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:8;184:15&#34;&gt;The template of a callback handler function, &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:4;184:15&#34;&gt;sys_ota_cb()&lt;/codeph&gt; is implemented in &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:5;184:15&#34;&gt;app_ota.c&lt;/codeph&gt; with all the potential events from the OTA system service. Developer can modify this template to build their own custom logic as per system/application requirements.&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:2;184:15&#34;&gt; void sys_ota_cb(uint32_t event, void * data, void *cookie) { switch (event) { case SYS_OTA_UPDATE_CHECK_START: { /*OTA update check start . Customer can build their own custom logic */ SYS_CONSOLE_PRINT(&#34;SYS_OTA_UPDATE_CHECK_START\r\n&#34;); break; } case SYS_OTA_UPDATE_CHECK_FAILED: { /*OTA update check failed . Customer can build their own custom logic */ SYS_CONSOLE_PRINT(&#34;SYS_OTA_UPDATE_CHECK_FAILED\r\n&#34;); break; } case SYS_OTA_UPDATE_AVAILABLE: { /*OTA update available . Customer can build their own custom logic */ SYS_CONSOLE_PRINT(&#34;SYS_OTA_UPDATE_AVAILABLE\r\n&#34;); break; } case SYS_OTA_UPDATE_NOTAVAILABLE: { /*OTA update not available. Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_UPDATE_NOTAVAILABLE\r\n&#34;); break; } case SYS_OTA_TRIGGER_OTA_FAILED: { /*OTA trigger failed . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_TRIGGER_OTA_FAILED\r\n&#34;); break; } case SYS_OTA_FACTORY_RESET_SUCCESS: { /*OTA Factory reset success . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_FACTORY_RESET_SUCCESS\r\n&#34;); break; } case SYS_OTA_FACTORY_RESET_FAILED: { /*OTA Factory reset failed . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_FACTORY_RESET_FAILED\r\n&#34;); break; } case SYS_OTA_ROLLBACK_SUCCESS: { /*OTA rollback success . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_ROLLBACK_SUCCESS\r\n&#34;); break; } case SYS_OTA_ROLLBACK_FAILED: { /*OTA rollback failed . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_ROLLBACK_FAILED\r\n&#34;); break; } case SYS_OTA_DOWNLOAD_START: { /*OTA image download start . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_DOWNLOAD_START\r\n&#34;); break; } case SYS_OTA_DOWNLOAD_SUCCESS: { /*OTA image download success . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_DOWNLOAD_SUCCESS\r\n&#34;); break; } case SYS_OTA_DOWNLOAD_FAILED: { /*OTA image download failed . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_DOWNLOAD_FAILED\r\n&#34;); break; } case SYS_OTA_IMAGE_DIGEST_VERIFY_START: { /*OTA image digest verify start . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_IMAGE_DIGEST_VERIFY_START\r\n&#34;); break; } case SYS_OTA_IMAGE_DIGEST_VERIFY_SUCCESS: { /*OTA image digest verify success . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_IMAGE_DIGEST_VERIFY_SUCCESS\r\n&#34;); break; } case SYS_OTA_IMAGE_DIGEST_VERIFY_FAILED: { /*OTA image digest verify failed . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_IMAGE_VERIFICATION_FAILED\r\n&#34;); break; } case SYS_OTA_DB_ENTRY_SUCCESS: { /*OTA database entry successful . Customer can build their own custom logic*/ /*For Manual reset, user must trigger system reset, after system reach this state only*/ /*Do not use API call from here. Use variables to get the status*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_DB_ENTRY_SUCCESS\r\n&#34;); ota_complete = true; break; } case SYS_OTA_IMAGE_ERASE_FAILED: { /*OTA image erase failed . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_IMAGE_ERASE_FAILED\r\n&#34;); break; } case SYS_OTA_IMAGE_ERASED: { /*OTA image erase success . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_IMAGE_ERASED\r\n&#34;); break; } case SYS_OTA_IMAGE_DATABASE_FULL: { /*OTA image database full . Customer can build their own custom logic*/ SYS_CONSOLE_PRINT(&#34;SYS_OTA_IMAGE_DATABASE_FULL\r\n&#34;); break; } default: { /*unknown state*/ break; } }&lt;/codeblock&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:9;184:15&#34;&gt;b. Alternately developers may use &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:6;184:15&#34;&gt;SYS_OTA_CtrlMsg()&lt;/codeph&gt; API to register their own callback function. Please follow below code snippet for reference :&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:3;184:15&#34;&gt; if (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_REGCALLBACK, sys_ota_cb, sizeof (uint8_t *))) { /*Callback register request success*/ } else { /*Callback register request fail*/ } &lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;check-for-updates-on-a-custom-trigger-trigger-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:5;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:5;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:4;184:15&#34;&gt;&lt;i class=&#34;+ topic/ph hi-d/i &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;i:1;184:15&#34;&gt;Check&lt;/i&gt; for updates on a custom trigger trigger :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:5;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:10;184:15&#34;&gt;Your system design may have requirements to check, update image availability, in OTA server only during specific particular conditions (e.g : Switch pressed or when a MQTT message received on a specific topic). System should then initiate an OTA check in the image server.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:11;184:15&#34;&gt;Under such condition to initiate update check on user trigger , user may follow below steps:&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:12;184:15&#34;&gt;1.Disable &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:7;184:15&#34;&gt;Periodic OTA check&lt;/codeph&gt; option, in MHC configuration.&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-4A97F9CB-49B5-4D5F-A768-E148C22AB591-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;image:1;184:15&#34; dita-ot:image-width=&#34;700&#34; dita-ot:image-height=&#34;400&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;alt:1;184:15&#34;&gt;resized_disable_periodic_ota&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:13;184:15&#34;&gt;2.Generate code.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:14;184:15&#34;&gt;3.Modify application code to initiate update check using control API &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:8;184:15&#34;&gt;SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) &lt;/codeph&gt;, when trigger condition is fulfilled (e.g. when a switch is pressed ).&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:4;184:15&#34;&gt;```c&amp;#xD; if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&amp;#xD; { &amp;#xD; SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,NULL);&amp;#xD; }&amp;#xD; ``` &amp;#xD;&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;initiate-ota-on-user-trigger-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:6;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:6;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:5;184:15&#34;&gt;Initiate OTA on user trigger :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:6;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:15;184:15&#34;&gt;System design may have requirements to trigger an OTA &lt;i class=&#34;+ topic/ph hi-d/i &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;i:2;184:15&#34;&gt;update&lt;/i&gt; only once a condition only is met. (e.g : Switch pressed or when a MQTT message received from MQTT server).&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:16;184:15&#34;&gt;Under such condition to trigger OTA manually, user may follow below steps:&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:17;184:15&#34;&gt;1.Disable &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:9;184:15&#34;&gt;Auto OTA update&lt;/codeph&gt; and &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:10;184:15&#34;&gt;Periodic OTA check&lt;/codeph&gt; options, in MHC configuration.&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-309A49D2-3681-48F1-8244-9FDFBD46972A-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;image:2;184:15&#34; dita-ot:image-width=&#34;418&#34; dita-ot:image-height=&#34;401&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;alt:2;184:15&#34;&gt;manual_trigger_disable_mhc_option&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:18;184:15&#34;&gt;2.Generate code.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:19;184:15&#34;&gt;3.Developer should provide server URL, OTA image version number present in OTA server and digest of OTA image using API &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:11;184:15&#34;&gt;SYS_OTA_SET_PARAMETERS(char *url, uint8_t version, char *digest)&lt;/codeph&gt;&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:5;184:15&#34;&gt;1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&amp;#xD; 2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&amp;#xD;&lt;/codeblock&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:20;184:15&#34;&gt;4.Modify application code to trigger OTA using control API &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:12;184:15&#34;&gt;SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) &lt;/codeph&gt;, when trigger condition is fulfilled (e.g. when a switch is pressed ).&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:6;184:15&#34;&gt;```c&amp;#xD; /* Check the application's current state. */&amp;#xD; switch ( appData.state )&amp;#xD; {&amp;#xD; /* Application's initial state. */&amp;#xD; case APP_STATE_INIT:&amp;#xD; {&amp;#xD; if(ota_app_reg_cb() == true)&amp;#xD; {&amp;#xD; uint8_t version = 2;&amp;#xD; char *digest = &#34;ef90bf8bf7fd96205c3240c31e1a378430e7a8f053a300e5c91ebe64fefea197&#34;;&amp;#xD; SYS_OTA_SET_PARAMETERS(&#34;http://192.168.43.173:8000/wifi_ota_demo.bin&#34;, version , digest);&amp;#xD; appData.state = APP_STATE_SERVICE_TASKS;&amp;#xD; }&amp;#xD; break;&amp;#xD; }&amp;#xD; case APP_STATE_SERVICE_TASKS:&amp;#xD; {&amp;#xD; if((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;amp;&amp;amp; (ota_initiated == false))&amp;#xD; { &amp;#xD; ota_initiated = true;&amp;#xD; if(SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_INITIATE_OTA,NULL,NULL))&amp;#xD; appData.state = APP_STATE_OTA_INITIATE_SUCCESS;&amp;#xD; else &amp;#xD; ota_initiated = false;&amp;#xD; }&amp;#xD; break;&amp;#xD; }&amp;#xD; case APP_STATE_OTA_INITIATE_SUCCESS:&amp;#xD; {&amp;#xD; break;&amp;#xD; }&amp;#xD; /* TODO: implement your application state machine.*/&amp;#xD; default:&amp;#xD; {&amp;#xD; /* TODO: Handle error in application's state machine. */&amp;#xD; break;&amp;#xD; }&amp;#xD; }&amp;#xD;&lt;/codeblock&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:7;184:15&#34;&gt; ### **Initiate Factory Reset on user trigger :** Factory Reset is a functionality using which user may get the system back to its original state, meaning, the Factory image will be programmed to internal flash (Program memory) and all other OTA images will be erased from external flash storage along with OTA database if it exist. User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` control message as shown in the code snippet below. ```c if(SWITCH1_Get() == SWITCH1_STATE_PRESSED ) { SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_FACTORY_RESET,NULL,NULL); }&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:7;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:7;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:6;184:15&#34;&gt;How to trigger system reset (from application) on successful OTA completion, with &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:13;184:15&#34;&gt;Autoreset&lt;/codeph&gt; option disabled in MHC :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:7;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:21;184:15&#34;&gt;Developer may choose to disable &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:14;184:15&#34;&gt;Autoreset&lt;/codeph&gt; option in MHC and may have requirement to build custom logic for application, deciding when to go for system reset after successful OTA download. This will enable the system/application to complete important tasks before triggering a system reset.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:22;184:15&#34;&gt;Developer may easily develop such custom logic using &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:15;184:15&#34;&gt;SYS_OTA_CtrlMsg()&lt;/codeph&gt; API for system reset.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:23;184:15&#34;&gt;Please follow below code snippet for reference :&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:8;184:15&#34;&gt;if (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_SYSTEM_RESET, NULL, NULL)) { /*System reset request success.*/ } else { /*System reset request fail*/ }&lt;/codeblock&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:24;184:15&#34;&gt;Please note that &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:16;184:15&#34;&gt;SYS_OTA_CtrlMsg()&lt;/codeph&gt; will return &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:17;184:15&#34;&gt;SYS_OTA_SUCCESS&lt;/codeph&gt;, if the request is successful. System will reset only if OTA download has completed successfully. User can check for &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:18;184:15&#34;&gt;SYS_OTA_DB_ENTRY_SUCCESS&lt;/codeph&gt; system callback state, to trigger manual reset.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;how-to-limit-periodic-ota-check-for-a-definite-number-of-times-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:8;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:8;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:7;184:15&#34;&gt;How to limit &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:19;184:15&#34;&gt;periodic OTA check&lt;/codeph&gt; for a definite number of times :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:8;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:25;184:15&#34;&gt;Developer may have requirement to limit &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:20;184:15&#34;&gt;periodic OTA check&lt;/codeph&gt; to a definite number of times.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:26;184:15&#34;&gt;For example, OTA service should go to idle state until next reset after checking update availability for &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:21;184:15&#34;&gt;3&lt;/codeph&gt; times consecutively. For this, developer may add below lines of code in &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:22;184:15&#34;&gt;sys_ota.c&lt;/codeph&gt; file:&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:9;184:15&#34;&gt; if(update_check_counter++ &amp;gt;= 3) // `update_check_counter` is an extern variable, defined by developer { SYS_CONSOLE_PRINT(&#34;Update availability check completed for 3 times, no update found\n\r&#34;); sys_otaData.state = SYS_OTA_IDLE; break; }&lt;/codeblock&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-0FB45991-06A9-4FC6-9BA9-16168B553FD8-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;image:3;184:15&#34; dita-ot:image-width=&#34;700&#34; dita-ot:image-height=&#34;400&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;alt:3;184:15&#34;&gt;resized_limit_periodic_check&lt;/alt&gt;&lt;/image&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:9;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:9;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:8;184:15&#34;&gt;What will happen if an image is downloaded successfully but image digest verify fails :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:9;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:27;184:15&#34;&gt;With default logic, the downloaded image will be erased if digest verify fails. OTA system service will disable auto update check, provide user callback and go to IDLE mode.&lt;/p&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:10;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:10;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:9;184:15&#34;&gt;How developer can trigger periodic update check , when a user defined condition is satisfied (e.g. : switch pressed) :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:10;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:28;184:15&#34;&gt;Developer may have the requirement to trigger periodic update check, only when a user defined condition is satisfied .&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:29;184:15&#34;&gt;Let us assume a scenario , in which application should trigger periodic update check, when user press a switch. To develop this particular requirement user may follow below steps :&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:30;184:15&#34;&gt;1.Disable &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:23;184:15&#34;&gt;Periodic OTA Check&lt;/codeph&gt; option in MHC.&lt;/p&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-98F754E1-13BA-441E-8CE5-DA82DD59C05C-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;image:4;184:15&#34; dita-ot:image-width=&#34;486&#34; dita-ot:image-height=&#34;494&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;alt:4;184:15&#34;&gt;disable_periodic_check&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:31;184:15&#34;&gt;2.Generate code using MHC.&lt;/p&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:32;184:15&#34;&gt;3.Add below lines of code at the beginning of &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:24;184:15&#34;&gt;case SYS_OTA_SERVER_UPDATE_CHECK&lt;/codeph&gt; in &lt;codeph class=&#34;+ topic/ph pr-d/codeph &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeph:25;184:15&#34;&gt;sys_ota.c&lt;/codeph&gt; file.&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:10;184:15&#34;&gt; g_SysOtaConfig.ota_periodic_check = true; sys_otaData.state = SYS_OTA_AUTO_CONFIGURATION_CHECK; break;&lt;/codeblock&gt;&lt;image class=&#34;- topic/image &#34; href=&#34;GUID-4B178D1E-30B6-4E31-8009-8D8AB6396316-low.png&#34; placement=&#34;break&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;image:5;184:15&#34; dita-ot:image-width=&#34;681&#34; dita-ot:image-height=&#34;219&#34; dita-ot:horizontal-dpi=&#34;96&#34; dita-ot:vertical-dpi=&#34;96&#34;&gt;&lt;alt class=&#34;- topic/alt &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;alt:5;184:15&#34;&gt;periodic_check_on_user_trigger&lt;/alt&gt;&lt;/image&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:33;184:15&#34;&gt;4.Write custom logic in application file &#34;app.c&#34;.&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:11;184:15&#34;&gt; if((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;amp;&amp;amp; (ota_initiated == false)) { ota_initiated = true; if(SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,0)) appData.state = APP_STATE_OTA_INITIATE_SUCCESS; else ota_initiated = false; }&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;topic class=&#34;- topic/topic &#34; ditaarch:DITAArchVersion=&#34;2.0&#34; specializations=&#34;@props/audience @props/deliveryTarget @props/otherprops @props/platform @props/product&#34; id=&#34;how-to-get-download-status-during-ota-update-&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;topic:11;184:15&#34; domains=&#34;a(props audience) a(props deliveryTarget) a(props otherprops) a(props platform) a(props product)&#34;&gt;&lt;title class=&#34;- topic/title &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;title:11;184:15&#34;&gt;&lt;b class=&#34;+ topic/ph hi-d/b &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;b:10;184:15&#34;&gt;How to get download status during OTA update :&lt;/b&gt;&lt;/title&gt;&lt;body class=&#34;- topic/body &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;body:11;184:15&#34;&gt;&lt;p class=&#34;- topic/p &#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;p:34;184:15&#34;&gt;Application Developer may want to get the download status during OTA update, for certain application logic development.&lt;?linebreak?&gt;They may easily extract download status using below lines of code :&lt;/p&gt;&lt;codeblock class=&#34;+ topic/pre pr-d/codeblock &#34; xml:space=&#34;preserve&#34; outputclass=&#34;c&#34; xtrf=&#34;file:/D:/InfoShare/Data/Publish/Data/4z4pndcjubb/work/3/en-US/GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md&#34; xtrc=&#34;codeblock:12;184:15&#34;&gt; { OTA_GetDownloadStatus(&amp;amp;ota_params);//ota_params should be defined as : OTA_PARAMS ota_params; SYS_CONSOLE_PRINT(&#34;*******************************************\n\r&#34;); SYS_CONSOLE_PRINT(&#34;Total data to download : %d bytes\n\r&#34;, ota_params.server_image_length); SYS_CONSOLE_PRINT(&#34;Data downloaded : %d bytes \r\n&#34;, ota_params.total_data_downloaded); SYS_CONSOLE_PRINT(&#34;*******************************************\n\r&#34;); }&lt;/codeblock&gt;&lt;/body&gt;&lt;/topic&gt;&lt;/topic&gt;&lt;/topic&gt;"/><meta name="wh-source-relpath" content="GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.md"/><meta name="wh-out-relpath" content="GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.html"/>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/lib/bootstrap/css/bootstrap.min.css"/>
     
-                      window.parent.location.href = origUrl + "?" + url;
+    <link rel="stylesheet" href="./oxygen-webhelp/lib/jquery-ui/jquery-ui.min.css"/>
+    
+    <!-- Template default styles  -->
+    <link rel="stylesheet" type="text/css" href="./oxygen-webhelp/app/topic-page.css?buildId=2022062014"/>
+    
+    
+    <script src="./oxygen-webhelp/lib/jquery/jquery-3.5.1.min.js"></script>
+    
+    <script data-main="./oxygen-webhelp/app/topic-page.js" src="./oxygen-webhelp/lib/requirejs/require.js"></script>
+<link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/microchip.css?buildId=2022062014"/><link rel="stylesheet" type="text/css" href="oxygen-webhelp/template/notes.css?buildId=2022062014"/>
+<script src="mchp-context-help.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,300" rel="stylesheet" type="text/css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async="" type="text/javascript"></script>
+    <script src="https://assets.adobedtm.com/6a72a357eb48/a636c708c7fe/launch-0b0023397020.min.js"></script><!-- Adobe Analytics -->
+</head>
 
-                      return false;
-                    }
-               }
-            }
-				});
-			}
+    <body id="ota-system-service-developers-guide" class="wh_topic_page frmBody">
+        <a href="#wh_topic_body" class="sr-only sr-only-focusable">
+            Jump to main content
+        </a>
+        
+        
+        
+        
+        <header class="navbar navbar-default wh_header">
+    <div class="container-fluid">
+        <div class="wh_header_flex_container navbar-nav navbar-expand-md navbar-dark">
+            <div class="wh_logo_and_publication_title_container">
+                <div class="wh_logo_and_publication_title">
+                    
+                    <a href="index.html" class=" wh_logo d-none d-sm-block "><img src="oxygen-webhelp\template\resources/images/microchip.png" alt="MPLAB Harmony PIC32MZW1/WFI32 wireless system services &#xA;    "/></a>
+                    <div class=" wh_publication_title "><a href="index.html">MPLAB Harmony PIC32MZW1/WFI32 wireless system services 
+    </a></div>
+                    
+                </div>
+                
+                
+            </div>
 
-		</script><script language="javascript">
-         
-         function copyContent(content, button) {
-         
-            var textArea = document.createElement("textarea");
-            
-            // Place in the top-left corner of screen regardless of scroll position.
-            textArea.style.position = 'fixed';
-            textArea.style.top = 0;
-            textArea.style.left = 0;
-            
-            // Ensure it has a small width and height. Setting to 1px / 1em
-            // doesn't work as this gives a negative w/h on some browsers.
-            textArea.style.width = '2em';
-            textArea.style.height = '2em';
-            
-            // We don't need padding, reducing the size if it does flash render.
-            textArea.style.padding = 0;
-            
-            // Clean up any borders.
-            textArea.style.border = 'none';
-            textArea.style.outline = 'none';
-            textArea.style.boxShadow = 'none';
-            
-            // Avoid flash of the white box if rendered for any reason.
-            textArea.style.background = 'transparent';
-            
-            textArea.value = content;
-            
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            
-            try {
-               var successful = document.execCommand('copy');
-               var msg = successful ? 'successful' : 'unsuccessful';
-               if (!button.classList.contains("copied")){
-                  button.textContent = "Copied";
-                  button.classList.add("copied");
-                  setTimeout(function(){
-                     button.textContent = "Copy";
-                     button.classList.remove("copied");
-                  },1000);
-               }
-            } catch (err) {
-               console.log('Oops, unable to copy');
-            }
-            
-            document.body.removeChild(textArea);
-         }
-         
-         function cpy(id, button) {
-            var element = document.getElementById(id);
-            var content = element.getAttribute("content");
-            
-            copyContent(content, button);
-         }
-         
-         document.addEventListener("DOMContentLoaded", function(event) {
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.style.position = "relative";
-               var copy = document.createElement("button");
-               copy.textContent = "Copy";
-               copy.setAttribute("class", "copy-code");
-               
-               var content = elem.textContent;
-               
-               copy.addEventListener("click", function(){
-                  copyContent(content, copy);
-               });
-               
-               elem.addEventListener("mouseenter", function(evt){
-                  elem.prepend(copy);
-               });
-            });
-            
-            document.querySelectorAll(".codeblock").forEach(function(elem) {
-               elem.addEventListener("mouseleave", function(evt){
-                  document.querySelector(".copy-code").remove();
-               });
-            });
-         });
-         
-      </script><script language="javascript">
-          
-          // Add the MathML namespace to html
-          var html = document.getElementsByTagName("html")[0],
-          head = document.getElementsByTagName("head")[0];
-          
-          var mathJax = document.createElement("script");
-          mathJax.src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML";
-          head.appendChild(mathJax);
-          
-          html.setAttribute("xmlns:m","http://www.w3.org/1998/Math/MathML");
-          
-          function inIframe() { try { return window.self !== window.top; } catch (e) { return true; } }
-          
-          if (!inIframe()) { 
-          
-          var Default = "index.html?GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2"; 
-          
-          var displaylocation = "value" + window.location.href;
-          
-          var GUIDS = displaylocation.split('GUID');          
-          
-          if (displaylocation.indexOf('#GUID') != -1) {            
-          var First = GUIDS[1].split('.html');  
-          if (GUIDS[3]){First = GUIDS[2].split('.html');}
-          if (GUIDS[4]){First = GUIDS[3].split('.html');}
-          if (GUIDS[5]){First = GUIDS[4].split('.html');}
-          
-          var Second = GUIDS[2].split('#');   
-          if (GUIDS[3]){Second = GUIDS[3].split('#');}
-          if (GUIDS[4]){Second = GUIDS[4].split('#');}
-          if (GUIDS[5]){Second = GUIDS[5].split('#');}
-          
-          Default = "index.html?" + "GUID" + First[0] + "GUID" + Second[0];     
-          }                    
-          window.top.location = Default;
-          }       
-          
-        </script><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /><style xml:space="">
-        
-          button.copy-code{
-            display:none;
-            padding:0.7em 1.4em;
-            margin:0 0.3em 0.3em 0;
-            border-radius:0.15em;
-            box-sizing: border-box;
-            text-decoration:none;
-            font-family:'Roboto',sans-serif;
-            text-transform:uppercase;
-            font-weight:400;
-            color:#FFFFFF;
-            background-color:#9c9c9c;
-            box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
-            text-align:center;
-            position:relative;
-            border: 0;
-            float: right;
-            border-radius: .5em;
-            cursor: pointer;
-          }
-          button.copy-code:active{
-            top:0.1em;
-          }
-          
-          pre:hover button.copy-code{
-            display: inline-block !important;
-          }
-          button.copy-code.copied {
-            cursor: default !important;
-          }
-          
-          
-          @media all and (max-width:30em){
-            button.copy-code{
-              display:block;
-              margin:0.4em auto;
-            }
-          }
+            <div class="wh_top_menu_and_indexterms_link collapse navbar-collapse" id="wh_top_menu_and_indexterms_link">
+                
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</header>
         
         
-      </style><link rel="stylesheet" type="text/css" href="syntax-highlight.css" /></head>
-<body id="ota-system-service-developers-guide">
-<h1 class="title topictitle1" id="ariaid-title1" style="">OTA System Service Developer's Guide</h1><div class="body"></div>
-<div class="related-links">
-<div class="familylinks">
-<div class="parentlink"><strong>Parent topic:</strong> <a class="link" href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html">Over The Air (OTA) firmware update System Service</a></div>
+         
+        
+        <div class=" wh_search_input navbar-form wh_topic_page_search search " role="form">
+            
+            
+            
+            <form id="searchForm" method="get" role="search" action="search.html"><div class="d-flex justify-contents-around"><div class="flex-grow-1"></div><div class="position-relative flex-grow-1"><input type="search" placeholder="Search " class="wh_search_textfield" id="textToSearch" name="searchQuery" aria-label="Search query" required="required"/><button type="submit" class="wh_search_button" aria-label="Search"><span class="search_input_text">Search</span></button></div><div class="align-self-center flex-grow-1 ml-2"></div></div></form>
+            
+            <div class="mchp-color-stripe-grid-container">
+  <div class="mchp-main-bar mchp-orange-bar"></div>
+  <div class="mchp-main-bar mchp-blue-bar"></div>
+  <div class="mchp-main-bar mchp-green-bar"></div>
 </div>
-</div><div class="topic nested1" aria-labelledby="ariaid-title2" id="ota-service-architecture-overview"><h2 class="title topictitle2" id="ariaid-title2" style=""><strong class="ph b">OTA Service Architecture Overview</strong></h2><div class="body"><p class="p">Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process.</p>
-<ol class="ol"><li class="li"><span class="indent-level-default">1.</span><p class="p">Image Downloading is processed by the OTA service that is integrated with your application code.</p>
-</li>
-<li class="li"><span class="indent-level-default">2.</span><p class="p">Image Programming is processed by the OTA bootloader.</p>
-</li>
-</ol>
-<p class="p">For detailed information about OTA service architecture, please refer to the <code class="ph codeph">Architecture Overview</code> section in <a class="xref" href="usage.md#using-the-library">Using the library</a> of the OTA documentation.</p>
-</div>
-</div>
-<div class="topic nested1" aria-labelledby="ariaid-title3" id="code-modificationimplementation-guide-for-common-use-cases"><h2 class="title topictitle2" id="ariaid-title3" style=""><strong class="ph b">Code modification/implementation guide for common use cases</strong></h2><div class="body"></div>
-<div class="topic nested2" aria-labelledby="ariaid-title4" id="registering-a-user-defined-callback-for-ota-system-service"><h3 class="title topictitle3" id="ariaid-title4" style=""><strong class="ph b">Registering a user defined callback for OTA system service</strong></h3><div class="body"><p class="p">Developer may register a callback function to receive callback from the OTA system service for pre-defined scenarios.</p>
-<p class="p">For registering callback developer may follow any one of below mentioned methods.</p>
-<p class="p">a. Using the built-in function <code class="ph codeph">ota_app_reg_cb()</code> wrapper, defined in <code class="ph codeph">app_ota.c</code> . Please see the code snippet below for reference:</p>
-<pre class="pre codeblock c">     <em class="hl-comment">/* Check the application's current state. */</em>
+            
+        </div>
+        
+        <div class="container-fluid" id="wh_topic_container">
+            <div class="row">
+
+                <nav class="wh_tools d-print-none navbar-expand-md" aria-label="Tools">
+                    
+                    <div data-tooltip-position="bottom" class=" wh_breadcrumb "><ol class="d-print-none"><li><span class="home"><a href="index.html"><span>Home</span></a></span></li><li><div class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services"><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div></li><li><div class="topicref" data-id="over-the-air-ota-firmware-update-system-service"><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div></li><li class="active"><div class="topicref" data-id="ota-system-service-developers-guide"><div class="title"><a href="GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.html"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.4</ph>
+OTA System Service Developer's Guide</a></div></div></li></ol></div>
+                    
+                    
+                    
+                    <div class="wh_right_tools">
+                        <button class="wh_hide_highlight" aria-label="Toggle search highlights" title="Toggle search highlights"></button>
+                        <button class="webhelp_expand_collapse_sections" data-next-state="collapsed" aria-label="Collapse sections" title="Collapse sections"></button>
+                        
+                        
+                        
+                        
+                        <div class=" wh_print_link print d-none d-md-inline-block "><button onClick="window.print()" title="Print this page" aria-label="Print this page"></button></div>
+                        
+                        <button type="button" id="wh_toc_button" class="custom-toggler navbar-toggler collapsed wh_toggle_button navbar-light" aria-expanded="false" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    
+                </nav>
+            </div>
+            
+            <div class="row" style="margin-top: -1em;"><div class="col-lg-7 col-md-7 col-sm-12 offset-lg-3 offset-md-3 text-right border-bottom mb-1"><h2 class="text-dark header_title">
+    </h2></div></div>
+            
+            
+            <div class="wh_content_area">
+                <div class="row">
+                    
+                        <nav id="wh_publication_toc" class="col-lg-3 col-md-3 col-sm-12 d-md-block d-none d-print-none" aria-label="Table of Contents Container">
+                            <div id="wh_publication_toc_content">
+		                        
+                            	<div class=" wh_publication_toc " data-tooltip-position="right"><span class="expand-button-action-labels"><span id="button-expand-action" role="button" aria-label="Expand"></span><span id="button-collapse-action" role="button" aria-label="Collapse"></span><span id="button-pending-action" role="button" aria-label="Pending"></span></span><ul role="tree" aria-label="Table of Contents"><li role="treeitem" aria-expanded="true"><div data-tocid="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11" class="topicref" data-id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-653E183F-71C9-4BD2-9698-4D4BB2A2992A.html" id="mplab-harmony-3-pic32mzw1wfi32-wireless-system-services-d1416e11-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1</ph>
+MPLAB® Harmony 3 PIC32MZW1/WFI32 wireless system services</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem" aria-expanded="false"><div data-tocid="app-debug-system-service-d1416e19" class="topicref" data-id="app-debug-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action app-debug-system-service-d1416e19-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-172B28B0-8A47-4C93-8023-8886A08BCD06.html" id="app-debug-system-service-d1416e19-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.1</ph>
+App Debug System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="mqtt-system-service-d1416e204" class="topicref" data-id="mqtt-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action mqtt-system-service-d1416e204-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6D4A7590-A5FE-418D-8A39-4F13DF7618BD.html" id="mqtt-system-service-d1416e204-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.2</ph>
+MQTT System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="net-system-service-d1416e413" class="topicref" data-id="net-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action net-system-service-d1416e413-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F15AF9B8-740F-41C4-BFC2-850D793F858B.html" id="net-system-service-d1416e413-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.3</ph>
+Net System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-system-service-d1416e695" class="topicref" data-id="wi-fi-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-system-service-d1416e695-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6EA44F54-91D8-42F6-A226-793CA7D06695.html" id="wi-fi-system-service-d1416e695-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.4</ph>
+Wi-Fi System Service</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="wi-fi-provisioning-system-service-d1416e872" class="topicref" data-id="wi-fi-provisioning-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action wi-fi-provisioning-system-service-d1416e872-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-6C1BB28E-7F9B-4582-8E74-E301F89C58AC.html" id="wi-fi-provisioning-system-service-d1416e872-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.5</ph>
+Wi-Fi provisioning System Service</a></div></div></li><li role="treeitem" aria-expanded="true"><div data-tocid="over-the-air-ota-firmware-update-system-service-d1416e1025" class="topicref" data-id="over-the-air-ota-firmware-update-system-service" data-state="expanded"><span role="button" tabindex="0" aria-labelledby="button-collapse-action over-the-air-ota-firmware-update-system-service-d1416e1025-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-AF87F0BB-E319-4436-A302-357BFA7E193E.html" id="over-the-air-ota-firmware-update-system-service-d1416e1025-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6</ph>
+Over The Air (OTA) firmware update System Service</a></div></div><ul role="group" class="navbar-nav nav-list"><li role="treeitem"><div data-tocid="ota-system-service-usage-d1416e1033" class="topicref" data-id="ota-system-service-usage" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-E13DC21B-3F94-455C-8DB3-48F8F7163844.html" id="ota-system-service-usage-d1416e1033-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.1</ph>
+OTA System Service Usage</a></div></div></li><li role="treeitem"><div data-tocid="ota-system-service-configuration-d1416e1041" class="topicref" data-id="ota-system-service-configuration" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-44230E49-6079-4901-9D7C-F71412C3B9EA.html" id="ota-system-service-configuration-d1416e1041-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.2</ph>
+OTA System Service Configuration</a></div></div></li><li role="treeitem" aria-expanded="false"><div data-tocid="ota-system-service-interface-d1416e1049" class="topicref" data-id="ota-system-service-interface" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action ota-system-service-interface-d1416e1049-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-F8A21576-2DFD-406F-9736-CEFDE7AD5207.html" id="ota-system-service-interface-d1416e1049-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.3</ph>
+OTA System Service Interface</a></div></div></li><li role="treeitem" class="active"><div data-tocid="ota-system-service-developers-guide-d1416e1146" class="topicref" data-id="ota-system-service-developers-guide" data-state="leaf"><span role="button" class="wh-expand-btn"></span><div class="title"><a href="GUID-C340E1A4-6E08-4399-8480-E07BA98EDFB2.html" id="ota-system-service-developers-guide-d1416e1146-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.6.4</ph>
+OTA System Service Developer's Guide</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="web-socket-server-wss-system-service-d1416e1154" class="topicref" data-id="web-socket-server-wss-system-service" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action web-socket-server-wss-system-service-d1416e1154-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-097A4209-8474-480E-A141-6C8FC60A7671.html" id="web-socket-server-wss-system-service-d1416e1154-link"><ph xmlns="http://www.oxygenxml.com/ns/webhelp/toc">1.7</ph>
+Web Socket Server (WSS) System Service</a></div></div></li></ul></li><li role="treeitem" aria-expanded="false"><div data-tocid="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388" class="topicref backmatter backmatter_parent" data-id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B" data-state="not-ready"><span role="button" tabindex="0" aria-labelledby="button-expand-action GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link" class="wh-expand-btn"></span><div class="title"><a href="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B.html" id="GUID-0FB3F908-88EE-45CE-94F5-E97AF9049C9B-d1416e1388-link">Microchip Information</a></div></div></li></ul></div>
+		                        
+                            </div>
+                        </nav>
+                    
+                    
+                    <div class="col-lg-7 col-md-9 col-sm-12" id="wh_topic_body">
+                        <button id="wh_close_publication_toc_button" class="close-toc-button d-none" aria-label="Toggle publishing table of content" aria-controls="wh_publication_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        <button id="wh_close_topic_toc_button" class="close-toc-button d-none" aria-label="Toggle topic table of content" aria-controls="wh_topic_toc" aria-expanded="true">
+                            <span class="close-toc-icon-container">
+                                <span class="close-toc-icon"></span>     
+                            </span>
+                        </button>
+                        
+                        <div class=" wh_topic_content body "><main role="main"><article role="article" aria-labelledby="ariaid-title1"><h1 class="- topic/title title topictitle1" id="ariaid-title1" style="">1.6.4 OTA System Service Developer's Guide</h1><div class="- topic/body body"></div><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title2" id="ota-service-architecture-overview"><h2 class="- topic/title title topictitle2" id="ariaid-title2" style=""> <strong class="+ topic/ph hi-d/b ph b">OTA Service Architecture Overview</strong></h2><div class="- topic/body body"><p class="- topic/p p">Over the Air (OTA) firmware upgrade feature is designed with a two step process, Image Downloading and Image Programming process.</p><ol class="- topic/ol ol"><li class="- topic/li li"><p class="- topic/p p">Image Downloading is processed by the OTA service that is integrated with your application code.</p></li><li class="- topic/li li"><p class="- topic/p p">Image Programming is processed by the OTA bootloader.</p></li></ol><p class="- topic/p p">For detailed information about OTA service architecture, please refer to the <code class="+ topic/ph pr-d/codeph ph codeph">Architecture Overview</code> section in <a class="- topic/xref xref" href="usage.md#using-the-library">Using the library</a> of the OTA documentation.</p></div></article><article class="- topic/topic topic nested1" aria-labelledby="ariaid-title3" id="code-modificationimplementation-guide-for-common-use-cases"><h2 class="- topic/title title topictitle2" id="ariaid-title3" style=""> <strong class="+ topic/ph hi-d/b ph b">Code modification/implementation guide for common use cases</strong></h2><div class="- topic/body body"></div><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title4" id="registering-a-user-defined-callback-for-ota-system-service"><h3 class="- topic/title title topictitle3" id="ariaid-title4" style=""> <strong class="+ topic/ph hi-d/b ph b">Registering a user defined callback for OTA system service</strong></h3><div class="- topic/body body"><p class="- topic/p p">Developer may register a callback function to receive callback from the OTA system service for pre-defined scenarios.</p><p class="- topic/p p">For registering callback developer may follow any one of below mentioned methods.</p><p class="- topic/p p">a. Using the built-in function <code class="+ topic/ph pr-d/codeph ph codeph">ota_app_reg_cb()</code> wrapper, defined in <code class="+ topic/ph pr-d/codeph ph codeph">app_ota.c</code> . Please see the code snippet below for reference:</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">     <em class="hl-comment">/* Check the application's current state. */</em>
     <strong class="hl-keyword">switch</strong> ( appData.state )
     {
         <em class="hl-comment">/* Application's initial state. */</em>
@@ -265,8 +160,7 @@
             <em class="hl-comment">/* TODO: Handle error in application's state machine. */</em>
             <strong class="hl-keyword">break</strong>;
         }
-    }</pre><p class="p">The template of a callback handler function, <code class="ph codeph">sys_ota_cb()</code> is implemented in <code class="ph codeph">app_ota.c</code> with all the potential events from the OTA system service. Developer can modify this template to build their own custom logic as per system/application requirements.</p>
-<pre class="pre codeblock c">    <strong class="hl-keyword">void</strong> <span class="hl-functions">sys_ota_cb</span>(uint32_t event, <strong class="hl-keyword">void</strong> * data, <strong class="hl-keyword">void</strong> *cookie) {
+    }</pre><p class="- topic/p p">The template of a callback handler function, <code class="+ topic/ph pr-d/codeph ph codeph">sys_ota_cb()</code> is implemented in <code class="+ topic/ph pr-d/codeph ph codeph">app_ota.c</code> with all the potential events from the OTA system service. Developer can modify this template to build their own custom logic as per system/application requirements.</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">    <strong class="hl-keyword">void</strong> <span class="hl-functions">sys_ota_cb</span>(uint32_t event, <strong class="hl-keyword">void</strong> * data, <strong class="hl-keyword">void</strong> *cookie) {
     <strong class="hl-keyword">switch</strong> (event) {
         
         <strong class="hl-keyword">case</strong> SYS_OTA_UPDATE_CHECK_START:
@@ -391,8 +285,7 @@
             <em class="hl-comment">/*unknown state*/</em>
             <strong class="hl-keyword">break</strong>;
         }
-    }</pre><p class="p">b. Alternately developers may use <code class="ph codeph">SYS_OTA_CtrlMsg()</code> API to register their own callback function. Please follow below code snippet for reference :</p>
-<pre class="pre codeblock c">   <strong class="hl-keyword">if</strong> (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_REGCALLBACK, sys_ota_cb, <strong class="hl-keyword">sizeof</strong> (uint8_t *)))
+    }</pre><p class="- topic/p p">b. Alternately developers may use <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_CtrlMsg()</code> API to register their own callback function. Please follow below code snippet for reference :</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">   <strong class="hl-keyword">if</strong> (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_REGCALLBACK, sys_ota_cb, <strong class="hl-keyword">sizeof</strong> (uint8_t *)))
    {
       <em class="hl-comment">/*Callback register request success*/</em>
    } 
@@ -400,28 +293,13 @@
    {
       <em class="hl-comment">/*Callback register request fail*/</em>
    }
-</pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title5" id="check-for-updates-on-a-custom-trigger-trigger-"><h3 class="title topictitle3" id="ariaid-title5" style=""><strong class="ph b"><em class="ph i">Check</em> for updates on a custom trigger trigger :</strong></h3><div class="body"><p class="p">Your system design may have requirements to check, update image availability, in OTA server only during specific particular conditions  (e.g : Switch pressed or when a MQTT message received on a specific topic). System should then initiate an OTA check in the image server.</p>
-<p class="p">Under such condition to initiate update check on user trigger , user may follow below steps:</p>
-<p class="p">1.Disable <code class="ph codeph">Periodic OTA check</code> option, in MHC configuration.</p>
-<br /><img class="image" src="GUID-4A97F9CB-49B5-4D5F-A768-E148C22AB591-low.png" alt="resized_disable_periodic_ota" /><br /><p class="p">2.Generate code.</p>
-<p class="p">3.Modify application code to initiate update check using control API <code class="ph codeph">SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) </code>, when trigger condition is fulfilled (e.g. when a switch is pressed ).</p>
-<pre class="pre codeblock"><code id="d28072e107" content="```c&#xD;&#xA;    if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xD;&#xA;    {          &#xD;&#xA;        SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,NULL);&#xD;&#xA;    }&#xD;&#xA;```  &#xD;">```c&#xD;
+</pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title5" id="check-for-updates-on-a-custom-trigger-trigger-"><h3 class="- topic/title title topictitle3" id="ariaid-title5" style=""> <strong class="+ topic/ph hi-d/b ph b"><em class="+ topic/ph hi-d/i ph i">Check</em> for updates on a custom trigger trigger :</strong></h3><div class="- topic/body body"><p class="- topic/p p">Your system design may have requirements to check, update image availability, in OTA server only during specific particular conditions  (e.g : Switch pressed or when a MQTT message received on a specific topic). System should then initiate an OTA check in the image server.</p><p class="- topic/p p">Under such condition to initiate update check on user trigger , user may follow below steps:</p><p class="- topic/p p">1.Disable <code class="+ topic/ph pr-d/codeph ph codeph">Periodic OTA check</code> option, in MHC configuration.</p><div class=""><img class="- topic/image image break break" src="GUID-4A97F9CB-49B5-4D5F-A768-E148C22AB591-low.png" alt="resized_disable_periodic_ota"/></div><p class="- topic/p p">2.Generate code.</p><p class="- topic/p p">3.Modify application code to initiate update check using control API <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) </code>, when trigger condition is fulfilled (e.g. when a switch is pressed ).</p><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>```c&#xD;
     if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xD;
     {          &#xD;
         SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,NULL);&#xD;
     }&#xD;
-```  &#xD;</code></pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title6" id="initiate-ota-on-user-trigger-"><h3 class="title topictitle3" id="ariaid-title6" style=""><strong class="ph b">Initiate OTA on user trigger :</strong></h3><div class="body"><p class="p">System design may have requirements to trigger an OTA <em class="ph i">update</em> only once a condition only is met. (e.g : Switch pressed or when a MQTT message received from MQTT server).</p>
-<p class="p">Under such condition to trigger OTA manually, user may follow below steps:</p>
-<p class="p">1.Disable <code class="ph codeph">Auto OTA update</code> and <code class="ph codeph">Periodic OTA check</code> options, in MHC configuration.</p>
-<br /><img class="image" src="GUID-309A49D2-3681-48F1-8244-9FDFBD46972A-low.png" alt="manual_trigger_disable_mhc_option" /><br /><p class="p">2.Generate code.</p>
-<p class="p">3.Developer should provide server URL, OTA image version number present in OTA server and digest of OTA image using API <code class="ph codeph">SYS_OTA_SET_PARAMETERS(char *url, uint8_t version, char *digest)</code></p>
-<pre class="pre codeblock"><code id="d28072e138" content="1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;&#xA;2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&#xD;">1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;
-2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&#xD;</code></pre><p class="p">4.Modify application code to trigger OTA using control API <code class="ph codeph">SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) </code>, when trigger condition is fulfilled (e.g. when a switch is pressed ).</p>
-<pre class="pre codeblock"><code id="d28072e145" content="```c&#xD;&#xA;/* Check the application's current state. */&#xD;&#xA;switch ( appData.state )&#xD;&#xA;{&#xD;&#xA;    /* Application's initial state. */&#xD;&#xA;    case APP_STATE_INIT:&#xD;&#xA;    {&#xD;&#xA;        if(ota_app_reg_cb() == true)&#xD;&#xA;        {&#xD;&#xA;            uint8_t version = 2;&#xD;&#xA;            char *digest = &#34;ef90bf8bf7fd96205c3240c31e1a378430e7a8f053a300e5c91ebe64fefea197&#34;;&#xD;&#xA;            SYS_OTA_SET_PARAMETERS(&#34;http://192.168.43.173:8000/wifi_ota_demo.bin&#34;, version , digest);&#xD;&#xA;            appData.state = APP_STATE_SERVICE_TASKS;&#xD;&#xA;        }&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    case APP_STATE_SERVICE_TASKS:&#xD;&#xA;    {&#xD;&#xA;        if((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;&amp; (ota_initiated == false))&#xD;&#xA;        {          &#xD;&#xA;            ota_initiated = true;&#xD;&#xA;            if(SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_INITIATE_OTA,NULL,NULL))&#xD;&#xA;                appData.state = APP_STATE_OTA_INITIATE_SUCCESS;&#xD;&#xA;            else   &#xD;&#xA;                ota_initiated = false;&#xD;&#xA;        }&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    case APP_STATE_OTA_INITIATE_SUCCESS:&#xD;&#xA;    {&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;    /* TODO: implement your application state machine.*/&#xD;&#xA;    default:&#xD;&#xA;    {&#xD;&#xA;        /* TODO: Handle error in application's state machine. */&#xD;&#xA;        break;&#xD;&#xA;    }&#xD;&#xA;}&#xD;">```c&#xD;
+```  &#xD;</code></pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title6" id="initiate-ota-on-user-trigger-"><h3 class="- topic/title title topictitle3" id="ariaid-title6" style=""> <strong class="+ topic/ph hi-d/b ph b">Initiate OTA on user trigger :</strong></h3><div class="- topic/body body"><p class="- topic/p p">System design may have requirements to trigger an OTA <em class="+ topic/ph hi-d/i ph i">update</em> only once a condition only is met. (e.g : Switch pressed or when a MQTT message received from MQTT server).</p><p class="- topic/p p">Under such condition to trigger OTA manually, user may follow below steps:</p><p class="- topic/p p">1.Disable <code class="+ topic/ph pr-d/codeph ph codeph">Auto OTA update</code> and <code class="+ topic/ph pr-d/codeph ph codeph">Periodic OTA check</code> options, in MHC configuration.</p><div class=""><img class="- topic/image image break break" src="GUID-309A49D2-3681-48F1-8244-9FDFBD46972A-low.png" alt="manual_trigger_disable_mhc_option"/></div><p class="- topic/p p">2.Generate code.</p><p class="- topic/p p">3.Developer should provide server URL, OTA image version number present in OTA server and digest of OTA image using API <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_SET_PARAMETERS(char *url, uint8_t version, char *digest)</code></p><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>1.The parameters should be sent to the device out of band. E.g: The payload of an MQTT message.&#xD;
+2.It would be user responsibility to provide correct image version number, as OTA service will not be doing any verion check of ota image. It will simply download the image from user defined server and store the parameter details as provided into OTA database.&#xD;</code></pre><p class="- topic/p p">4.Modify application code to trigger OTA using control API <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_CtrlMsg(uint32_t event, void *buffer, uint32_t length) </code>, when trigger condition is fulfilled (e.g. when a switch is pressed ).</p><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>```c&#xD;
 /* Check the application's current state. */&#xD;
 switch ( appData.state )&#xD;
 {&#xD;
@@ -459,7 +337,7 @@ switch ( appData.state )&#xD;
         /* TODO: Handle error in application's state machine. */&#xD;
         break;&#xD;
     }&#xD;
-}&#xD;</code></pre><pre class="pre codeblock"><code id="d28072e147" content="&#xA;### **Initiate Factory Reset on user trigger :**&#xA;&#xA;Factory Reset is a functionality using which user may get the system back to its original state, meaning, the Factory image will be programmed to internal flash (Program memory) and all other OTA images will be erased from external flash storage along with OTA database if it exist.  &#xA;&#xA;User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` control message as shown in the code snippet below.  &#xA;&#xA;```c&#xA;  if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )&#xA;  {          &#xA;    SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_FACTORY_RESET,NULL,NULL);&#xA;  }">
+}&#xD;</code></pre><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>
 ### **Initiate Factory Reset on user trigger :**
 
 Factory Reset is a functionality using which user may get the system back to its original state, meaning, the Factory image will be programmed to internal flash (Program memory) and all other OTA images will be erased from external flash storage along with OTA database if it exist.  
@@ -470,60 +348,186 @@ User may initiate Factory reset using the `SYS_OTA_TRIGGER_FACTORY_RESET` contro
   if(SWITCH1_Get() == SWITCH1_STATE_PRESSED )
   {          
     SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_FACTORY_RESET,NULL,NULL);
-  }</code></pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title7" id="how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-"><h3 class="title topictitle3" id="ariaid-title7" style=""><strong class="ph b">How to trigger system reset (from application) on successful OTA completion, with <code class="ph codeph">Autoreset</code> option disabled in MHC :</strong></h3><div class="body"><p class="p">Developer may choose to disable <code class="ph codeph">Autoreset</code> option in MHC and may have requirement to build custom logic for application, deciding when to go for system reset after successful OTA download. This will enable the system/application to complete important tasks before triggering a system reset.</p>
-<p class="p">Developer may easily develop such custom logic using <code class="ph codeph">SYS_OTA_CtrlMsg()</code> API for system reset.</p>
-<p class="p">Please follow below code snippet for reference :</p>
-<pre class="pre codeblock c"><strong class="hl-keyword">if</strong> (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_SYSTEM_RESET, NULL, NULL))
+  }</code></pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title7" id="how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-"><h3 class="- topic/title title topictitle3" id="ariaid-title7" style=""> <strong class="+ topic/ph hi-d/b ph b">How to trigger system reset (from application) on successful OTA completion, with <code class="+ topic/ph pr-d/codeph ph codeph">Autoreset</code> option disabled in MHC :</strong></h3><div class="- topic/body body"><p class="- topic/p p">Developer may choose to disable <code class="+ topic/ph pr-d/codeph ph codeph">Autoreset</code> option in MHC and may have requirement to build custom logic for application, deciding when to go for system reset after successful OTA download. This will enable the system/application to complete important tasks before triggering a system reset.</p><p class="- topic/p p">Developer may easily develop such custom logic using <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_CtrlMsg()</code> API for system reset.</p><p class="- topic/p p">Please follow below code snippet for reference :</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c"><strong class="hl-keyword">if</strong> (SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_TRIGGER_SYSTEM_RESET, NULL, NULL))
      {
         <em class="hl-comment">/*System reset request success.*/</em>
      } 
      <strong class="hl-keyword">else</strong> 
      {
         <em class="hl-comment">/*System reset request fail*/</em>
-     }</pre><p class="p">Please note that <code class="ph codeph">SYS_OTA_CtrlMsg()</code> will return <code class="ph codeph">SYS_OTA_SUCCESS</code>, if the request is successful. System will reset only if OTA download has completed successfully. User can check for <code class="ph codeph">SYS_OTA_DB_ENTRY_SUCCESS</code> system callback state, to trigger manual reset.</p>
-</div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title8" id="how-to-limit-periodic-ota-check-for-a-definite-number-of-times-"><h3 class="title topictitle3" id="ariaid-title8" style=""><strong class="ph b">How to limit <code class="ph codeph">periodic OTA check</code> for a definite number of times :</strong></h3><div class="body"><p class="p">Developer may have requirement to limit <code class="ph codeph">periodic OTA check</code> to a definite number of times.</p>
-<p class="p">For example, OTA service should go to idle state until next reset after checking update availability for <code class="ph codeph">3</code> times consecutively. For this, developer may add below lines of code in <code class="ph codeph">sys_ota.c</code> file:</p>
-<pre class="pre codeblock c">   <strong class="hl-keyword">if</strong>(update_check_counter++ &gt;= <span class="hl-number">3</span>) <em class="hl-comment">// `update_check_counter` is an extern variable, defined by developer</em>
+     }</pre><p class="- topic/p p">Please note that <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_CtrlMsg()</code> will return <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_SUCCESS</code>, if the request is successful. System will reset only if OTA download has completed successfully. User can check for <code class="+ topic/ph pr-d/codeph ph codeph">SYS_OTA_DB_ENTRY_SUCCESS</code> system callback state, to trigger manual reset.</p></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title8" id="how-to-limit-periodic-ota-check-for-a-definite-number-of-times-"><h3 class="- topic/title title topictitle3" id="ariaid-title8" style=""> <strong class="+ topic/ph hi-d/b ph b">How to limit <code class="+ topic/ph pr-d/codeph ph codeph">periodic OTA check</code> for a definite number of times :</strong></h3><div class="- topic/body body"><p class="- topic/p p">Developer may have requirement to limit <code class="+ topic/ph pr-d/codeph ph codeph">periodic OTA check</code> to a definite number of times.</p><p class="- topic/p p">For example, OTA service should go to idle state until next reset after checking update availability for <code class="+ topic/ph pr-d/codeph ph codeph">3</code> times consecutively. For this, developer may add below lines of code in <code class="+ topic/ph pr-d/codeph ph codeph">sys_ota.c</code> file:</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">   <strong class="hl-keyword">if</strong>(update_check_counter++ &gt;= <span class="hl-number">3</span>) <em class="hl-comment">// `update_check_counter` is an extern variable, defined by developer</em>
                 {
                     SYS_CONSOLE_PRINT(<span class="hl-string">"Update availability check completed for 3 times, no update found\n\r"</span>);
                     sys_otaData.state = SYS_OTA_IDLE;
                     <strong class="hl-keyword">break</strong>;
-                }</pre><br /><img class="image" src="GUID-0FB45991-06A9-4FC6-9BA9-16168B553FD8-low.png" alt="resized_limit_periodic_check" /><br /></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title9" id="what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-"><h3 class="title topictitle3" id="ariaid-title9" style=""><strong class="ph b">What will happen if an image is downloaded successfully but image digest verify fails :</strong></h3><div class="body"><p class="p">With default logic, the downloaded image will be erased if digest verify fails. OTA system service will disable auto update check, provide user callback and go to IDLE mode.</p>
-</div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title10" id="how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-"><h3 class="title topictitle3" id="ariaid-title10" style=""><strong class="ph b">How developer can trigger periodic update check , when a user defined condition is satisfied (e.g. : switch pressed) :</strong></h3><div class="body"><p class="p">Developer may have the requirement to trigger periodic update check, only when a user defined condition is satisfied .</p>
-<p class="p">Let us assume a scenario , in which application should trigger periodic update check, when user press a switch. To develop this particular requirement user may follow below steps :</p>
-<p class="p">1.Disable <code class="ph codeph">Periodic OTA Check</code> option in MHC.</p>
-<br /><img class="image" src="GUID-98F754E1-13BA-441E-8CE5-DA82DD59C05C-low.png" alt="disable_periodic_check" /><br /><p class="p">2.Generate code using MHC.</p>
-<p class="p">3.Add below lines of code at the beginning of <code class="ph codeph">case SYS_OTA_SERVER_UPDATE_CHECK</code> in <code class="ph codeph">sys_ota.c</code> file.</p>
-<pre class="pre codeblock c">    g_SysOtaConfig.ota_periodic_check = true;
+                }</pre><div class=""><img class="- topic/image image break break" src="GUID-0FB45991-06A9-4FC6-9BA9-16168B553FD8-low.png" alt="resized_limit_periodic_check"/></div></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title9" id="what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-"><h3 class="- topic/title title topictitle3" id="ariaid-title9" style=""> <strong class="+ topic/ph hi-d/b ph b">What will happen if an image is downloaded successfully but image digest verify fails :</strong></h3><div class="- topic/body body"><p class="- topic/p p">With default logic, the downloaded image will be erased if digest verify fails. OTA system service will disable auto update check, provide user callback and go to IDLE mode.</p></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title10" id="how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-"><h3 class="- topic/title title topictitle3" id="ariaid-title10" style=""> <strong class="+ topic/ph hi-d/b ph b">How developer can trigger periodic update check , when a user defined condition is satisfied (e.g. : switch pressed) :</strong></h3><div class="- topic/body body"><p class="- topic/p p">Developer may have the requirement to trigger periodic update check, only when a user defined condition is satisfied .</p><p class="- topic/p p">Let us assume a scenario , in which application should trigger periodic update check, when user press a switch. To develop this particular requirement user may follow below steps :</p><p class="- topic/p p">1.Disable <code class="+ topic/ph pr-d/codeph ph codeph">Periodic OTA Check</code> option in MHC.</p><div class=""><img class="- topic/image image break break" src="GUID-98F754E1-13BA-441E-8CE5-DA82DD59C05C-low.png" alt="disable_periodic_check"/></div><p class="- topic/p p">2.Generate code using MHC.</p><p class="- topic/p p">3.Add below lines of code at the beginning of <code class="+ topic/ph pr-d/codeph ph codeph">case SYS_OTA_SERVER_UPDATE_CHECK</code> in <code class="+ topic/ph pr-d/codeph ph codeph">sys_ota.c</code> file.</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">    g_SysOtaConfig.ota_periodic_check = true;
     sys_otaData.state = SYS_OTA_AUTO_CONFIGURATION_CHECK;
-    <strong class="hl-keyword">break</strong>;</pre><br /><img class="image" src="GUID-4B178D1E-30B6-4E31-8009-8D8AB6396316-low.png" alt="periodic_check_on_user_trigger" /><br /><p class="p">4.Write custom logic in application file "app.c".</p>
-<pre class="pre codeblock c">    <strong class="hl-keyword">if</strong>((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;&amp; (ota_initiated == false))
+    <strong class="hl-keyword">break</strong>;</pre><div class=""><img class="- topic/image image break break" src="GUID-4B178D1E-30B6-4E31-8009-8D8AB6396316-low.png" alt="periodic_check_on_user_trigger"/></div><p class="- topic/p p">4.Write custom logic in application file "app.c".</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">    <strong class="hl-keyword">if</strong>((SWITCH1_Get() == SWITCH1_STATE_PRESSED) &amp;&amp; (ota_initiated == false))
             {          
                 ota_initiated = true;
                 <strong class="hl-keyword">if</strong>(SYS_OTA_SUCCESS == SYS_OTA_CtrlMsg(SYS_OTA_UPDATECHCK,NULL,<span class="hl-number">0</span>))
                     appData.state = APP_STATE_OTA_INITIATE_SUCCESS;
                 <strong class="hl-keyword">else</strong>   
                     ota_initiated = false;
-            }</pre></div>
-</div>
-<div class="topic nested2" aria-labelledby="ariaid-title11" id="how-to-get-download-status-during-ota-update-"><h3 class="title topictitle3" id="ariaid-title11" style=""><strong class="ph b">How to get download status during OTA update :</strong></h3><div class="body"><p class="p">Application Developer may want to get the download status during OTA update, for certain application logic development.They may easily extract download status using below lines of code :</p>
-<pre class="pre codeblock c">   {
+            }</pre></div></article><article class="- topic/topic topic nested2" aria-labelledby="ariaid-title11" id="how-to-get-download-status-during-ota-update-"><h3 class="- topic/title title topictitle3" id="ariaid-title11" style=""> <strong class="+ topic/ph hi-d/b ph b">How to get download status during OTA update :</strong></h3><div class="- topic/body body"><p class="- topic/p p">Application Developer may want to get the download status during OTA update, for certain application logic development.They may easily extract download status using below lines of code :</p><pre class="+ topic/pre pr-d/codeblock pre codeblock c">   {
        OTA_GetDownloadStatus(&amp;ota_params);<em class="hl-comment">//ota_params should be defined as : OTA_PARAMS ota_params;</em>
        SYS_CONSOLE_PRINT(<span class="hl-string">"*******************************************\n\r"</span>);
        
        SYS_CONSOLE_PRINT(<span class="hl-string">"Total data to download : %d bytes\n\r"</span>, ota_params.server_image_length);
        SYS_CONSOLE_PRINT(<span class="hl-string">"Data downloaded : %d bytes \r\n"</span>, ota_params.total_data_downloaded);
        SYS_CONSOLE_PRINT(<span class="hl-string">"*******************************************\n\r"</span>);
-   }</pre></div>
+   }</pre></div></article></article></article></main></div>
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                        <nav role="navigation" id="wh_topic_toc" aria-label="On this page" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
+                            <div id="wh_topic_toc_content">
+		                        
+	                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="topic-item"><a href="#ota-service-architecture-overview" data-tocid="ota-service-architecture-overview"> <strong class="+ topic/ph hi-d/b ph b">OTA Service Architecture Overview</strong></a></li><li class="topic-item"><a href="#code-modificationimplementation-guide-for-common-use-cases" data-tocid="code-modificationimplementation-guide-for-common-use-cases"> <strong class="+ topic/ph hi-d/b ph b">Code modification/implementation guide for common use cases</strong></a><ul><li class="topic-item"><a href="#registering-a-user-defined-callback-for-ota-system-service" data-tocid="registering-a-user-defined-callback-for-ota-system-service"> <strong class="+ topic/ph hi-d/b ph b">Registering a user defined callback for OTA system service</strong></a></li><li class="topic-item"><a href="#check-for-updates-on-a-custom-trigger-trigger-" data-tocid="check-for-updates-on-a-custom-trigger-trigger-"> <strong class="+ topic/ph hi-d/b ph b"><em class="+ topic/ph hi-d/i ph i">Check</em> for updates on a custom trigger trigger :</strong></a></li><li class="topic-item"><a href="#initiate-ota-on-user-trigger-" data-tocid="initiate-ota-on-user-trigger-"> <strong class="+ topic/ph hi-d/b ph b">Initiate OTA on user trigger :</strong></a></li><li class="topic-item"><a href="#how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-" data-tocid="how-to-trigger-system-reset-from-application-on-successful-ota-completion-with-autoreset-option-disabled-in-mhc-"> <strong class="+ topic/ph hi-d/b ph b">How to trigger system reset (from application) on successful OTA completion, with <code class="+ topic/ph pr-d/codeph ph codeph">Autoreset</code> option disabled in MHC :</strong></a></li><li class="topic-item"><a href="#how-to-limit-periodic-ota-check-for-a-definite-number-of-times-" data-tocid="how-to-limit-periodic-ota-check-for-a-definite-number-of-times-"> <strong class="+ topic/ph hi-d/b ph b">How to limit <code class="+ topic/ph pr-d/codeph ph codeph">periodic OTA check</code> for a definite number of times :</strong></a></li><li class="topic-item"><a href="#what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-" data-tocid="what-will-happen-if-an-image-is-downloaded-successfully-but-image-digest-verify-fails-"> <strong class="+ topic/ph hi-d/b ph b">What will happen if an image is downloaded successfully but image digest verify fails :</strong></a></li><li class="topic-item"><a href="#how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-" data-tocid="how-developer-can-trigger-periodic-update-check--when-a-user-defined-condition-is-satisfied-eg--switch-pressed-"> <strong class="+ topic/ph hi-d/b ph b">How developer can trigger periodic update check , when a user defined condition is satisfied (e.g. : switch pressed) :</strong></a></li><li class="topic-item"><a href="#how-to-get-download-status-during-ota-update-" data-tocid="how-to-get-download-status-during-ota-update-"> <strong class="+ topic/ph hi-d/b ph b">How to get download status during OTA update :</strong></a></li></ul></li></ul></div>
+	                        	
+                        	</div>
+                        </nav>
+                    
+                </div>
+            </div>
+            
+            
+            
+        </div> 
+        <footer class="navbar navbar-default wh_footer">
+  <div class=" footer-container mx-auto ">
+    <div class="footer">
+  <div class="mchp-wh-footer">
+    <div class="mchp-footer">
+      <div class="mchp-footer-tier1">
+        <div class="spacer"></div>
+        <div class="mchp-footer-container">
+          <div class="mchp-footer-links mchp-social-media-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.facebook.com/pages/Microchip-Technology-Inc/20320981741" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Facebook" src="oxygen-webhelp/template/resources/images/201016-corp-facebook.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.linkedin.com/company/microchip-technology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip LinkedIn" src="oxygen-webhelp/template/resources/images/201016-corp-linkedin.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://twitter.com/MicrochipTech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Twitter" src="oxygen-webhelp/template/resources/images/201016-corp-twitter.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.youtube.com/user/MicrochipTechnology" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip YouTube" src="oxygen-webhelp/template/resources/images/201016-corp-youtube.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.instagram.com/microchiptechnologyinc/" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Instagram" src="oxygen-webhelp/template/resources/images/201016-corp-instagram.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.weibo.com/microchiptech" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Weibo" src="oxygen-webhelp/template/resources/images/201016-corp-weibo.png"/>
+                </a>
+              </div>
+              <div class="mchp-component-item">
+                <a class="cmp-image__link" href="https://www.microchip.com/en-us/about/blog" target="_blank">
+                  <img class="cmp-image__image" alt="Microchip Blog" src="oxygen-webhelp/template/resources/images/201016-corp-blog.png"/>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-links">
+            <div class="mchp-component-items">
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://www.microchip.com/about-us/contact-us" class="mchp-link__link">Contact</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information" class="mchp-link__link">Legal</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/privacy-policy" class="mchp-link__link">Privacy Policy</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item ">
+                <div class="link">
+                  <a href="https://www.microchip.com/en-us/about/legal-information/microchip-cookie-statement" class="mchp-link__link">Cookies</a>
+                  <span class="mchp-link__separator">|</span>
+                </div>
+              </div>
+              <div class="mchp-component-item">
+                <div class="link">
+                  <a href="https://careers.microchip.com/" class="mchp-link__link">Careers</a>
+                  <span class="mchp-link__separator"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mchp-footer-newsletter">
+            <div class="cmp-text">
+              <p>Stay on the leading edge with our blog</p>
+            </div>
+            <div class="mchp-button-wrapper">
+              <a role="button" href="https://www.microchip.com/en-us/about/blog" class="mchp-button mchp-button-regular solid">
+                <span class="mchp-button__span">MicroSolutions</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="graphic">
+          <img src="oxygen-webhelp/template/resources/images/footer-graphic.png"/>
+        </div>
+      </div>
+      <div class="mchp-footer-tier2">
+        <p class="mchp-copyright">© Copyright 1998-2022 Microchip Technology Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async="true" src="https://www.googletagmanager.com/gtag/js?id=UA-2724382-19"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];  
+    function gtag(){dataLayer.push(arguments);}  
+    gtag('js', new Date());   
+    gtag('config', 'UA-2724382-19');
+  </script>
+  
+  <script type="text/javascript">_satellite.pageBottom();</script><!-- Adobe Analytics -->
+  <script type="text/javascript" src="mchp-js/prepend.js"></script><!-- Package for viewing PDFs on mobile devices -->
+  
 </div>
-</div>
-</body>
+  </div>
+</footer>
+        
+        <div id="go2top" class="d-print-none">
+            <span class="oxy-icon oxy-icon-up"></span>
+        </div>
+        
+        <div id="modal_img_large" class="modal">
+            <span class="close oxy-icon oxy-icon-remove"></span>
+            <div id="modal_img_container"></div>
+            <div id="caption"></div>
+        </div>
+        
+        
+        
+       
+        </body>
 </html>
