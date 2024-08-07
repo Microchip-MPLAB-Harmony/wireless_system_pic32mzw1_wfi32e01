@@ -479,8 +479,11 @@ def mqttIntfAutoMenu(symbol, event):
 def finalizeComponent(mqttComponent):
     res = Database.activateComponents(["sysNetPic32mzw1"])
     res = Database.activateComponents(["lib_pahomqtt"],"System Configuration", True)
-    if(sysMqttPic32mzw1.SYS_MQTT_ENABLE_APP_CODE_GENERATION == True):
+    if(Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_ENABLE_APP_CODE_GENERATION") == True):
+        print("Mqtt Code Generation ENABLED")
         Hccomponent = Database.getComponentByID("HarmonyCore")
         fileSymb = Hccomponent.getSymbolByID("APP0_C")
         fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
+    else:
+        print("Mqtt Code Generation Disabled")
         
