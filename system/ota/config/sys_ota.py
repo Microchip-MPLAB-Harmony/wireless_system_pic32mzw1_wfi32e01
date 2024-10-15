@@ -227,6 +227,17 @@ def instantiateComponent(sysOTAPic32mzw1Component):
     symbol_secure_ota_enabling.setDefaultValue(False)
     symbol_secure_ota_enabling.setDescription("To Enable Secure OTA functionality support")
     
+    # Enable/Disable the Wi-Fi Service dependent code
+    symbol_wifiservice_ota = sysOTAPic32mzw1Component.createBooleanSymbol("SYS_OTA_WIFI_SERVICE_ENABLE", symbol)
+    symbol_wifiservice_ota.setLabel("Enable WiFi Service")
+    symbol_wifiservice_ota.setVisible(False)
+    symbol_wifiservice_ota.setDescription("Enabling WiFi Service")
+    wifi_serv_comp = Database.getComponentByID("sysWifiPic32mzw1")
+    if(wifi_serv_comp is not None):
+        symbol_wifiservice_ota.setDefaultValue(True)
+    else:
+        symbol_wifiservice_ota.setDefaultValue(False)
+    
     ###-------------Files/Img Download Menu----------------###
 
     # Enable Support for File Download ? 
@@ -777,6 +788,12 @@ def finalizeComponent(sysOTAPic32mzw1Component):
     
     Database.activateComponents(["sysNetPic32mzw1"])
     
+def setWifiServiceAvailability(symbol, event):
+    wifi_serv_comp = Database.getComponentByID("sysWifiPic32mzw1")
+    if(wifi_serv_comp is not None):
+        setValue("sysOTAPic32mzw1Component", "SYS_OTA_WIFI_SERVICE_ENABLE", 1)
+    else:
+        setValue("sysOTAPic32mzw1Component", "SYS_OTA_WIFI_SERVICE_ENABLE", 0)
 
 def sysotaSetIntf(symbol,event):
     if (event["value"] == "SYS_OTA_WIFI"):

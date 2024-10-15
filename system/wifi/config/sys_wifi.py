@@ -83,7 +83,7 @@ def instantiateComponent(syswifiComponent):
     syswifistaSsid.setDescription("Enter STA Mode SSID.The maximum length is 32 characters.")
     syswifistaSsid.setDefaultValue("DEMO_AP")
 
-    syswifistaAuth = syswifiComponent.createComboSymbol("SYS_WIFI_STA_AUTH", syswifistaEnable, ["OPEN", "WPA2","WPA2WPA3","WPA3","WPAWPA2-Enterprise","WPA2-Enterprise","WPA2WPA3-Enterprise","WPA3-Enterprise"])
+    syswifistaAuth = syswifiComponent.createComboSymbol("SYS_WIFI_STA_AUTH", syswifistaEnable, ["OPEN", "WPA2","WPAWPA2(Mixed)","WPA2WPA3","WPA3","WPAWPA2-Enterprise","WPA2-Enterprise","WPA2WPA3-Enterprise","WPA3-Enterprise"])
     syswifistaAuth.setLabel("Security type")
     syswifistaAuth.setHelp(wifi_helpkeyword)
     syswifistaAuth.setDescription("Enter STA Mode Security type")
@@ -1064,7 +1064,7 @@ def syswifiSTAautoMenu(symbol, event):
         if(Database.getSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DNS_CLIENT") != True):
            Database.setSymbolValue("tcpip_apps_config", "TCPIP_AUTOCONFIG_ENABLE_DNS_CLIENT", True)
         if(Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_STA_ENABLE") == True):
-           if(Database.getSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE" == 1100 )):
+           if(Database.getSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE") == 1100 ):
                Database.clearSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE")
                Database.setSymbolValue("tcpipSntp", "TCPIP_NTP_TASK_TICK_RATE", 10)
            if(Database.getSymbolValue("HarmonyCore", "SELECT_RTOS") != "BareMetal"):

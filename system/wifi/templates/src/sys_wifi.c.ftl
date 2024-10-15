@@ -701,6 +701,9 @@ static void SYS_WIFI_APConnCallBack
             psStaConnInfo = SYS_WIFI_FindStaConnInfo(assocHandle);
             if(psStaConnInfo != NULL)
             {
+                SYS_CONSOLE_PRINT("\r\nDisconnected STA MAC Address=%x:%x:%x:%x:%x:%x", psStaConnInfo->wifiSrvcStaAppInfo.macAddr[0], psStaConnInfo->wifiSrvcStaAppInfo.macAddr[1], psStaConnInfo->wifiSrvcStaAppInfo.macAddr[2], psStaConnInfo->wifiSrvcStaAppInfo.macAddr[3], psStaConnInfo->wifiSrvcStaAppInfo.macAddr[4], psStaConnInfo->wifiSrvcStaAppInfo.macAddr[5]);
+                TCPIP_NET_HANDLE netHdl = TCPIP_STACK_NetHandleGet("PIC32MZW1");
+                TCPIP_DHCPS_LeaseEntryRemove(netHdl, (TCPIP_MAC_ADDR*)psStaConnInfo->wifiSrvcStaAppInfo.macAddr);
                 /* Update the application on receiving Disconnect event */
                 SYS_WIFI_CallBackFun(SYS_WIFI_DISCONNECT, psStaConnInfo->wifiSrvcStaAppInfo.macAddr, g_wifiSrvcCookie);
 
@@ -1144,8 +1147,7 @@ static SYS_WIFI_RESULT SYS_WIFI_SetScan (void)
 
         if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindSetScanMatchMode(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.matchMode))
         {
-            if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindSetEnabledChannels24(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.chan24Mask))
-            {
+            
                 if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindSetScanParameters(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.numSlots, g_wifiSrvcScanConfig.activeSlotTime, g_wifiSrvcScanConfig.passiveSlotTime, g_wifiSrvcScanConfig.numProbes))
                 {
                     if (WDRV_PIC32MZW_STATUS_OK == WDRV_PIC32MZW_BSSFindFirst(g_wifiSrvcObj.wifiSrvcDrvHdl, g_wifiSrvcScanConfig.channel, g_wifiSrvcScanConfig.mode, pSSIDList, (WDRV_PIC32MZW_BSSFIND_NOTIFY_CALLBACK) g_wifiSrvcScanConfig.pNotifyCallback))   
@@ -1165,13 +1167,7 @@ static SYS_WIFI_RESULT SYS_WIFI_SetScan (void)
                     SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_SCAN, "Set Scan Parameters failed!\r\n");
                 }
 </#if>                
-            }
-<#if SYS_WIFI_APPDEBUG_ENABLE  == true>
-            else
-            {
-                SYS_APPDEBUG_ERR_PRINT(g_wifiSrvcAppDebugHdl, WIFI_SCAN, "Set Scan Channel Mask failed!\r\n");
-            }
-</#if>
+
         }
 <#if SYS_WIFI_APPDEBUG_ENABLE  == true>
         else

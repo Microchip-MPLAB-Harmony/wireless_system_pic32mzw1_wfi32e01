@@ -6,6 +6,50 @@
 # Microchip MPLAB® Harmony 3 Release Notes
 
 
+## Harmony 3 Wireless system services for the PIC32MZW1/WFI32 family **v3.9.1**
+
+
+### New Features
+
+### Bug fixes and Improvements
+
+-   [Wi-Fi] Added support to retrive the IP address after "Forget Network"
+
+-   [WebSocket] Removed the dependency of "string.h" for using compiler XC32 v4.45
+
+-   [OTA] Removed the dependency of Wi-Fi Service
+
+-   [Wi-Fi] Updated the system service to resolve the mismatch in security type
+
+-   [MQTT] Updated the system service to resolve the issue with the generation of application code. 
+
+
+
+### Known Issues and Limitations
+
+-   In Secure OTA, system console read buffer size should be atleast 200 bytes.
+
+-   Web socket server will support only upto 500 bytes in a single message.
+
+-   Web socket server will not honour optional header fields like `Sec-WebSocket-Protocol` and `Sec-WebSocket-Extensions`
+
+
+### Development Tools
+
+-   [MPLAB® X IDE v6.20](https://www.microchip.com/mplab/mplab-x-ide)
+
+-   MPLAB® X IDE plug-ins:
+
+    -   MPLAB® Code Configurator (MCC) v5.5.1
+
+-   [MPLAB® XC32 C/C++ Compiler v4.45](https://www.microchip.com/mplab/compilers)
+
+-   **DFP 1.8.326**
+
+
+
+
+
 ## Harmony 3 Wireless system services for the PIC32MZW1/WFI32 family **v3.9.0**
 
 ### New Features

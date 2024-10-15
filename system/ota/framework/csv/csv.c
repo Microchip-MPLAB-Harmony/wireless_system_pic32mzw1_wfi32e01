@@ -44,7 +44,11 @@ void *csv_realloc(void *ptr, size_t len)
         if(ptr != NULL)
             memcpy(new_ptr, ptr, len);
     }
-    OSAL_Free(ptr);
+    if(ptr != NULL)
+    {
+        OSAL_Free(ptr);
+		ptr = NULL;
+    }
     return (new_ptr);
 }
 int add_char(char **string, int *c, char ch) {

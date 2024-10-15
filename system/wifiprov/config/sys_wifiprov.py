@@ -91,10 +91,12 @@ def instantiateComponent(syswifiprovComponent):
 
     syswifiprovdebugEnable = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_APPDEBUG_ENABLE", None)
     syswifiprovdebugEnable.setVisible(False)
+    syswifiprovdebugEnable.setDefaultValue(False)
     syswifiprovdebugEnable.setHelp(wifi_prov_helpkeyword)
-    syswifiprovdebugEnable.setDefaultValue((Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_APPDEBUG_ENABLE") == True))
-    syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_APPDEBUG_ENABLE"])
-    syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_PROVISION_ENABLE"])
+    # syswifiprovdebugEnable.setDefaultValue((Database.getSymbolValue("sysWifiPic32mzw1", "SYS_WIFI_APPDEBUG_ENABLE") == True))
+    # syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_APPDEBUG_ENABLE"])
+    # syswifiprovdebugEnable.setDependencies(syswifiprovCustomSet, ["sysWifiPic32mzw1.SYS_WIFI_PROVISION_ENABLE"])
+    
 
     syswifiprovSave = syswifiprovComponent.createBooleanSymbol("SYS_WIFIPROV_SAVECONFIG", syswifiprovConfigMenu)
     syswifiprovSave.setLabel("Save Configuration in NVM")

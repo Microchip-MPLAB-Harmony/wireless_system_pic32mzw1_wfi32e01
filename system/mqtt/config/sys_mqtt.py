@@ -481,9 +481,16 @@ def finalizeComponent(mqttComponent):
     res = Database.activateComponents(["lib_pahomqtt"],"System Configuration", True)
     if(Database.getSymbolValue("sysMqttPic32mzw1", "SYS_MQTT_ENABLE_APP_CODE_GENERATION") == True):
         print("Mqtt Code Generation ENABLED")
+<<<<<<< HEAD
+        if (Database.getComponentByID("HarmonyCore") != None ):
+            Hccomponent = Database.getComponentByID("HarmonyCore")
+            fileSymb = Hccomponent.getSymbolByID("APP0_C")
+            fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
+=======
         Hccomponent = Database.getComponentByID("HarmonyCore")
         fileSymb = Hccomponent.getSymbolByID("APP0_C")
         fileSymb.setSourcePath("../wireless_system_pic32mzw1_wfi32e01/system/mqtt/templates/app.c.ftl")
+>>>>>>> 4234e6b188d32ca7b6302bf7fa98b14c7a85ef9a
     else:
         print("Mqtt Code Generation Disabled")
         
